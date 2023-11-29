@@ -62,7 +62,7 @@ Structure of the `src` folder is inspired by [this](https://blog.webdevsimplifie
   * `form` to store components specifically used in forms such as checkboxes, inputs, date pickers, etc.
   * `layout` to store reusable layout components such as sidebars, navigation bars, containers, etc.
 
-* `configs` contains application configurations.
+* `configs` contains _interfaces_ to application configurations; the configurations themselves are passed into Vite as [environment variables](https://vitejs.dev/guide/env-and-mode).
 
 * `data` is used to store data assets such as JSON files.
 
