@@ -23,7 +23,7 @@ const router = createRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import("@/pages/Home.vue"),
+      component: () => import("@/pages/User.vue"),
       beforeEnter: userOnly
     }
   ]
