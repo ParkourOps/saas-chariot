@@ -75,9 +75,8 @@ Structure of the `src` folder is inspired by [this](https://blog.webdevsimplifie
 
 * `plugins` contains Vue plugins; Vue plugins are always applied globally.
 
-* `pages` contains one folder for each page in the application. In each folder:
-  * `<component-name>.vue` is the SFC that represents the page.
-  * other files (including SFC components) only ever used in the page should be placed here.
+* `pages` contains SFCs, each SFC represents a unique page (`<page-name>.vue`).
+  * If the page SFC must use other SFCs that will only be used on the page, create a folder called `<page-name>`, store the page SFC as `index.vue` and others as `<component-name>.vue`.
 
 * `services` contains code used to interface with external APIs (instead of litering rest of application codebase with API interaction code).
 
