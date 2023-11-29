@@ -1,0 +1,152 @@
+# SaaS Chariot
+
+SaaS Chariot is an opinionated rapid development framework for SaaS projects.
+
+## Features
+
+### Framework
+
+* _TypeScript_ is used to ensure consistency in the structure of data and the interfaces to runtime components that use data.
+
+* _Vue 3_ is used as the overall framework to implement the Single Page Application (SPA).
+
+* _Daisy UI_ is used as the primary styling framework; it provides a level of abstraction (and therefore consistency) over _Tailwind CSS_.
+
+* _SCSS_ is used to create and manage custom styling via dynamic stylesheets.
+
+### Analytics and Logging
+
+* _MixPanel_ is the primary solution for user analytics.
+* _Google Analytics_ is also supported in parallel.
+
+### Authentication
+
+* _Firebase Authentication_ is used to manage federated sign in.
+
+### Data Storage
+
+* _Firestore Database_ is used to store data in document collections.
+
+### File Storage
+
+* _Firebase Storage_ is used to store files. It is a wrapper over _Google Cloud Storage_, a managed cloud object storage service.
+
+### Customer Feedback
+
+* _Tawk.to_ is used to capture user feedback and chat with visitors in realtime.
+
+### Subscription and Billing
+
+* _Firebase Functions_ are used to automatically create user 
+
+### User Alerts
+
+Saas Chariot uses a number of ways to notify users about an event.
+
+* In-App Notifications.
+
+## Folder Structure
+
+Application source code is stored in the `src` folder.
+
+Structure of the `src` folder is inspired by [this](https://blog.webdevsimplified.com/2022-07/react-folder-structure/) guide:
+
+* `assets` contains anything that isn't code:
+  * `images`
+  * `icons`
+  * `fonts`
+  * `styles` is where SCSS stylesheets are stored. Make sure to `@import` all global stylesheets in `main.scss`.
+
+* `components` contains SFCs used across the project, organised into the following subfolders:
+  * `ui` to store UI components like cards, modals, and buttons.
+  * `form` to store components specifically used in forms such as checkboxes, inputs, date pickers, etc.
+  * `layout` to store reusable layout components such as sidebars, navigation bars, containers, etc.
+
+* `configs` contains application configurations.
+
+* `data` is used to store data assets such as JSON files.
+
+* `state` is used to store global state in the form of Pinia stores.
+
+* `features` contains one folder for each feature in the application. Each feature folder may contain:
+  * (any folders listed here, apart from global folders such as `features`, `plugins` and `state`.)
+
+* `libraries` contains facades/abstractions for the various different libraries used in the project. Using facades means libraries don't have to be directly imported into rest of application codebase multiple times, making it easier to update/replace library or customise it for own use.
+
+* `plugins` contains Vue plugins; Vue plugins are always applied globally.
+
+* `pages` contains one folder for each page in the application. In each folder:
+  * `<component-name>.vue` is the SFC that represents the page.
+  * other files (including SFC components) only ever used in the page should be placed here.
+
+* `services` contains code used to interface with external APIs (instead of litering rest of application codebase with API interaction code).
+
+* `utilities` contains files that export simple [pure functions](https://blog.webdevsimplified.com/2020-09/pure-functions) such as formatters that do not cause side effects.
+
+## Recommended IDE Setup
+
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+
+## Type Support for `.vue` Imports in TS
+
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+
+If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+
+1. Disable the built-in TypeScript Extension
+    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
+    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Type-Check, Compile and Minify for Production
+
+```sh
+npm run build
+```
+
+### Run Unit Tests with [Vitest](https://vitest.dev/)
+
+```sh
+npm run test:unit
+```
+
+### Run End-to-End Tests with [Playwright](https://playwright.dev)
+
+```sh
+# Install browsers for the first run
+npx playwright install
+
+# When testing on CI, must build the project first
+npm run build
+
+# Runs the end-to-end tests
+npm run test:e2e
+# Runs the tests only on Chromium
+npm run test:e2e -- --project=chromium
+# Runs the tests of a specific file
+npm run test:e2e -- tests/example.spec.ts
+# Runs the tests in debug mode
+npm run test:e2e -- --debug
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
+```
