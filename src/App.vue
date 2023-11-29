@@ -1,34 +1,54 @@
 <script setup lang="ts">
   import { RouterView } from 'vue-router'
-  import { useToastNotification } from './state/toasts';
+  import { useToastNotification } from './state/toast-notifications';
   import { useAlerts } from './state/alerts';
+  import Spinner from '@/components/ui/Spinner.vue';
+  import { useBusyStatus } from './state/busy-status';
 
   const notifications = useToastNotification();
   const alerts = useAlerts();
-
-  function addToast() {
-    alerts.push({
-      message: "test",
-      type: 'success'
-    })
-  }
+  const busyStatus = useBusyStatus();
 </script>
 
 <template>
   <RouterView />
-  <button class="btn" @click="addToast">Asd</button>
+
   <!-- Toast Notifications -->
   <div class="toast toast-top toast-end">
-    <div :class="[`alert`, `alert-${n.colour}`]" v-for="n in notifications.notifications" :key="n.id">
+    <div 
+      v-for="n in notifications.notifications" :key="n.id"
+      :class="[
+        `alert`, 
+        { 'alert-info': n.colour === 'primary' },
+        { 'alert-success': n.colour === 'secondary' },
+        { 'alert-warning': n.colour === 'accent' },
+        { 'alert-error': n.colour === 'neutral' },
+        { 'alert-info': n.colour === 'info' },
+        { 'alert-success': n.colour === 'success' },
+        { 'alert-warning': n.colour === 'warning' },
+        { 'alert-error': n.colour === 'error' }
+      ]" 
+    >
       <div>
         <p class="font-semibold text-sm">{{ n.title }}</p>
         <p>{{ n.message }}</p>
       </div>
     </div>
   </div>
+
   <!-- Alerts -->
   <div class="absolute bottom-0 p-4 flex flex-col gap-4 w-full">
-    <div role="alert" :class="[`alert`, `alert-${a.type}`]" v-for="a in alerts.alerts" :key="a.id">
+    <div 
+      v-for="a in alerts.alerts" :key="a.id"
+      role="alert" 
+      :class="[
+        `alert`, 
+        { 'alert-info': a.type === 'info' },
+        { 'alert-success': a.type === 'success' },
+        { 'alert-warning': a.type === 'warning' },
+        { 'alert-error': a.type === 'error' }
+      ]"
+    >
       <!-- alert icon -->
       <svg 
         v-if="a.type === 'warning'"
@@ -68,4 +88,10 @@
     </div>      
   </div>
   
+  <!-- -->
+  <div class="bg-base-content/80 fixed h-screen w-screen top-0 flex flex-col justify-center items-center pb-16" v-if="busyStatus.busy">
+      <Spinner />
+  </div>
 </template>
+
+
