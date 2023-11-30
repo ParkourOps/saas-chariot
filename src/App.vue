@@ -89,9 +89,12 @@
   </div>
   
   <!-- -->
-  <div class="bg-base-content/80 fixed h-screen w-screen top-0 flex flex-col justify-center items-center pb-16" v-if="busyStatus.busy">
+  <div class="bg-base/80 fixed h-screen w-screen top-0 flex flex-col justify-center items-center pb-16" v-if="busyStatus.busy">
       <Spinner />
   </div>
+
+  <!-- Modal Manager -->
+  <ModalStack />
 </template>
 
 
