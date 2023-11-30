@@ -37,7 +37,7 @@
   </div>
 
   <!-- Alerts -->
-  <div class="absolute bottom-0 p-4 flex flex-col gap-4 w-full">
+  <div class="absolute top-0 p-4 flex flex-col gap-4 w-full">
     <div 
       v-for="a in alerts.alerts" :key="a.id"
       role="alert" 
