@@ -12,19 +12,27 @@ const router = createRouter({
     {
       path: '/',
       name: 'getSignInLink',
-      component: () => import("@/pages/SignIn/GetSignInLink.vue"),
+      component: () => import("@/pages/sign-in/GetSignInLink.vue"),
       beforeEnter: guestOnly
     },
     {
       path: '/sign-in',
       name: 'processSignIn',
-      component: () => import("@/pages/SignIn/ProcessSignIn.vue")
+      component: () => import("@/pages/sign-in/ProcessSignIn.vue")
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: () => import("@/pages/User.vue"),
-      beforeEnter: userOnly
+      path: '/user',
+      name: 'user',
+      component: () => import("@/pages/user/User.vue"),
+      beforeEnter: userOnly,
+      redirect: { name: 'modal-demo' },
+      children: [
+        {
+          path: 'modal-demo',
+          name: 'modal-demo',
+          component: () => import("@/pages/user/ModalDemo.vue"),
+        }
+      ]
     }
   ]
 });

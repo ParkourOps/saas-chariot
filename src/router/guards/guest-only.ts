@@ -12,7 +12,7 @@ const navigationGuard : NavigationGuardWithThis<undefined> = (to, from, next) =>
         if (!auth.activeUser) {
             next();
         } else {
-            next({ name: 'dashboard' });
+            next({ name: 'user' });
         }
     }
 

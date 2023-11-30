@@ -5,8 +5,8 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
     const router = useRouter();
-    async function goToDashboard() {
-        await router.push({name: 'dashboard'});
+    async function goToUserHome() {
+        await router.push({name: 'user'});
     }
     async function goToSignInPage() {
         await router.push({name: 'getSignInLink'});
@@ -20,7 +20,7 @@ import { useRouter } from 'vue-router';
         busyStatus.increment();
         try {
             await auth.catchLoginAttempt();
-            await goToDashboard();
+            await goToUserHome();
         } catch (e) {
             console.error(e);
             if (!auth.activeUser) {
@@ -28,7 +28,7 @@ import { useRouter } from 'vue-router';
                 await goToSignInPage();
             } else {
                 // rescue the app if user is still signed in from previous attempt
-                await goToDashboard();
+                await goToUserHome();
             }
         } finally {
             busyStatus.decrement();

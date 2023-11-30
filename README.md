@@ -57,7 +57,7 @@ Structure of the `src` folder is inspired by [this](https://blog.webdevsimplifie
   * `fonts`
   * `styles` is where SCSS stylesheets are stored. Make sure to `@import` all global stylesheets in `main.scss`.
 
-* `components` contains SFCs used across the project, organised into the following subfolders:
+* `components` contains SFCs (`<component-name>.vue`, where `<component-name>` is in PascalCase") used across the project, organised into the following subfolders:
   * `ui` to store UI components like cards, modals, and buttons.
   * `form` to store components specifically used in forms such as checkboxes, inputs, date pickers, etc.
   * `layouts` to store reusable layout components such as sidebars, navigation bars, containers, etc.
@@ -76,8 +76,9 @@ Structure of the `src` folder is inspired by [this](https://blog.webdevsimplifie
 
 * `plugins` contains Vue plugins; Vue plugins are always applied globally.
 
-* `pages` contains SFCs, each SFC represents a unique page (`<page-name>.vue`).
-  * If the page SFC must use other SFCs that will only be used on the page, create a folder called `<page-name>`, store the page SFC as `index.vue` and others as `<component-name>.vue`.
+* `pages` contains SFCs, each SFC represents a unique page (`<page-name>.vue`) where `<page-name>` is in "PascalCase".
+  * If the page SFC must use other SFCs that will only be used on the page, create a folder called `<page-name>`, store the page SFC as `<page-name>.vue` and others as `<component-name>.vue`.
+  * It may be helpful to organise pages into arbitrary folders, in which case the name of such a folder must abide by the generic "kebab-case" used throughout the project (with exception of Vue components including pages).
 
 * `services` contains code used to interface with external APIs (instead of litering rest of application codebase with API interaction code).
 
