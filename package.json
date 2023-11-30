@@ -1,8 +1,9 @@
 {
-  "name": "SaaS Chariot",
+  "name": "saas-chariot",
   "description": "An opinionated rapid development framework for SaaS projects.",
   "version": "0.1.0",
   "private": true,
+  "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
