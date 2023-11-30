@@ -1,6 +1,7 @@
 {
-  "name": "single-page-app-vue",
-  "version": "0.0.0",
+  "name": "SaaS Chariot",
+  "description": "An opinionated rapid development framework for SaaS projects.",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "vite",
