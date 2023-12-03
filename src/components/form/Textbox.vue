@@ -7,7 +7,8 @@
         centered?: boolean,
         disabled?: boolean,
         modelValue?: string,
-        schema?: ZodString
+        schema?: ZodString,
+        type?: "text" | "password"
     }>();
 
     const emits = defineEmits<{
@@ -38,7 +39,7 @@
 
     watch(valid, (val)=>{
         emits("update:valid", val);
-    })
+    }, {immediate: true})
 
     defineExpose({
         valid
@@ -47,7 +48,7 @@
 
 <template>
     <input 
-        type="text" 
+        :type="type ?? 'text'" 
         :placeholder="placeholder" 
         class="input input-bordered" 
         :class="[{'text-center': centered}]" 
