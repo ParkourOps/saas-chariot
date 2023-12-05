@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { RouterView, useRouter } from 'vue-router'
-  import { useToastNotification } from './state/toast-notifications';
-  import { useAlerts } from './state/alerts';
+  import { useToasts } from './libraries/toasts';
+  import { useAlerts } from './libraries/alerts';
   import Spinner from '@/components/ui/Spinner.vue';
   import { useBusyStatus } from './state/busy-status';
   import { useAuth } from './libraries/firebase/use-auth';
@@ -9,7 +9,7 @@
   import { useAnalytics } from './libraries/use-analytics';
   import Footer from './components/layouts/Footer.vue';
   
-  const notifications = useToastNotification();
+  const toasts = useToasts();
   const alerts = useAlerts();
   const busyStatus = useBusyStatus();
 
@@ -39,17 +39,13 @@
   <!-- Toast Notifications -->
   <div class="toast toast-top toast-end">
     <div 
-      v-for="n in notifications.notifications" :key="n.id"
+      v-for="n in toasts.toasts" :key="n.id"
       :class="[
-        `alert`, 
-        { 'alert-info': n.colour === 'primary' },
-        { 'alert-success': n.colour === 'secondary' },
-        { 'alert-warning': n.colour === 'accent' },
-        { 'alert-error': n.colour === 'neutral' },
-        { 'alert-info': n.colour === 'info' },
-        { 'alert-success': n.colour === 'success' },
-        { 'alert-warning': n.colour === 'warning' },
-        { 'alert-error': n.colour === 'error' }
+        `alert`,
+        { 'alert-info': n.type === 'info' },
+        { 'alert-success': n.type === 'success' },
+        { 'alert-warning': n.type === 'warning' },
+        { 'alert-error': n.type === 'error' }
       ]" 
     >
       <div>
@@ -60,12 +56,12 @@
   </div>
 
   <!-- Alerts -->
-  <div class="absolute top-0 p-4 flex flex-col gap-4 w-full">
+  <div class="toast toast-top w-full">
     <div 
       v-for="a in alerts.alerts" :key="a.id"
       role="alert" 
       :class="[
-        `alert`, 
+        `alert transition-all`, 
         { 'alert-info': a.type === 'info' },
         { 'alert-success': a.type === 'success' },
         { 'alert-warning': a.type === 'warning' },

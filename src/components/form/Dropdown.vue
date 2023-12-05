@@ -5,8 +5,7 @@ import { computed } from 'vue';
     const props = defineProps<{
         options: Array<T>,
         modelValue?: T,
-        label: string,
-        classes?: string | Array<string>
+        buttonClass?: string | Array<string>
     }>();
 
     const emits = defineEmits<{
@@ -37,15 +36,14 @@ import { computed } from 'vue';
 <template>
     <details class="dropdown" ref="dropdown">
     
-        <summary class="mb-1 btn" :class="classes">
-            <p v-if="!value">
-                {{ props.label }}
-            </p>
-            <slot v-else name="selectedOption" :option="value">
+        <summary class="mb-1 btn" :class="buttonClass">
+            <slot v-if="!value" name="unselected">
+            </slot>
+            <slot v-else name="selected" :option="value">
             </slot>
         </summary>
 
-        <ul class="dropdown-content z-[1] card card-compact rounded-t-none shadow bg-base-100 ">
+        <ul class="dropdown-content z-[1] card card-compact rounded-t-none shadow bg-base-100">
             <div class="border-b border-base-200">
                 <slot name="filter"></slot>
             </div>

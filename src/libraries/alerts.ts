@@ -1,13 +1,10 @@
-import type { Colour } from "@/types/colour";
+import type { NotificationType } from "@/types/notification-type";
 import makeUUID from "@/utilities/makeUUID";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
 type Alert = {
-    type?:  "info"      |
-            "success"   |
-            "warning"   |
-            "error"     ;
+    type?: NotificationType;
     message: string;
     autoDismiss?: boolean;
 }
@@ -18,7 +15,7 @@ type AlertRecord = Alert & {
 
 const DURATION_MS = 3000;
 
-export const useAlerts = defineStore("Alerts", ()=>{
+export const useAlerts = defineStore("Pop-Up Alerts", ()=>{
     const alerts = ref<AlertRecord[]>([]);
     
     function pop(id: string) {

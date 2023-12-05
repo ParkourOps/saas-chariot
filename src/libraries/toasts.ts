@@ -1,10 +1,10 @@
-import type { Colour } from "@/types/colour";
+import type { NotificationType } from "@/types/notification-type";
 import makeUUID from "@/utilities/makeUUID";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
 type ToastNotification = {
-    colour?: Colour,
+    type?: NotificationType,
     title?: string,
     message: string
 }
@@ -15,16 +15,16 @@ type ToastNotificationRecord = ToastNotification & {
 
 const DURATION_MS = 3000;
 
-export const useToastNotification = defineStore("Toast Notification", ()=>{
-    const notifications = ref<ToastNotificationRecord[]>([]);
+export const useToasts = defineStore("Toast Notifications", ()=>{
+    const toasts = ref<ToastNotificationRecord[]>([]);
     
     function pop(id: string) {
-        notifications.value = notifications.value.filter((n) => n.id !== id);
+        toasts.value = toasts.value.filter((n) => n.id !== id);
     }
 
     function push(notification: ToastNotification) {
         const id = makeUUID();
-        notifications.value.push({
+        toasts.value.push({
             id,
             ...notification
         });
@@ -34,7 +34,7 @@ export const useToastNotification = defineStore("Toast Notification", ()=>{
     }
 
     return {
-        notifications,
+        toasts,
         pop,
         push
     }

@@ -25,12 +25,22 @@ const router = createRouter({
       name: 'user',
       component: () => import("@/pages/user/User.vue"),
       beforeEnter: userOnly,
-      redirect: { name: 'modal-demo' },
+      redirect: { name: 'user-dashboard' },
       children: [
         {
-          path: 'modal-demo',
-          name: 'modal-demo',
-          component: () => import("@/pages/user/ModalDemo.vue"),
+          path: 'dashboard',
+          name: 'user-dashboard',
+          component: () => import("@/pages/user/UserDashboard.vue"),
+        },
+        {
+          path: 'profile',
+          name: 'user-profile',
+          component: () => import("@/pages/user/DemoUserInfo.vue"),
+        },
+        {
+          path: 'notifications',
+          name: 'user-notifications',
+          component: () => import("@/pages/user/DemoNotifications.vue"),
         }
       ]
     }

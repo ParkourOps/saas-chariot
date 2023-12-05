@@ -4,7 +4,7 @@ import { useAuth } from '@/libraries/firebase/use-auth';
 import { ref } from 'vue';
 import Email from "@/models/Email";
 import Password from "@/models/Password"; 
-import { useAlerts } from '@/state/alerts';
+import { useAlerts } from '@/libraries/alerts';
 import { useBusyStatus } from '@/state/busy-status';
 import { FirebaseError } from 'firebase/app';
 import { useRouter } from 'vue-router';
@@ -171,3 +171,4 @@ import { useRouter } from 'vue-router';
 
     </div>
 </template>
+@/libraries/alerts
