@@ -12,5 +12,17 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'sign-in': [
+            './src/pages/sign-in/GetSignInLink.vue',
+            './src/pages/sign-in/ProcessSignIn.vue'
+          ]
+        }
+      }
+    }
   }
 })
