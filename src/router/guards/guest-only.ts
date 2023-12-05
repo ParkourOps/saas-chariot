@@ -1,4 +1,4 @@
-import { useAuth } from "@/libraries/firebase";
+import { useAuth } from "@/libraries/firebase/use-auth";
 import { useBusyStatus } from "@/state/busy-status";
 import type { NavigationGuardWithThis } from "vue-router";
 

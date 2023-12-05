@@ -1,14 +1,13 @@
 import getFullPathOfRoute from "@/utilities/getFullPathOfRoute";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { useRouter, type RouteLocationRaw } from "vue-router";
-import { type User, isSignInWithEmailLink, onAuthStateChanged, sendSignInLinkToEmail, signInWithEmailLink, signOut } from "firebase/auth";
+import { type RouteLocationRaw } from "vue-router";
+import { type User, isSignInWithEmailLink, onAuthStateChanged, sendSignInLinkToEmail, signInWithEmailLink, signOut, signInWithEmailAndPassword, sendPasswordResetEmail, createUserWithEmailAndPassword } from "firebase/auth";
 import firebase from "./firebase";
 
 const auth = firebase.auth;
 
 export const useAuth = defineStore("Auth", ()=>{
-    const router = useRouter();
     const activeUser = ref<User>();
     const LOCAL_STORAGE_KEY_EMAIL = "emailForSignIn";
 
@@ -43,7 +42,18 @@ export const useAuth = defineStore("Auth", ()=>{
     
     async function logout() {
         await signOut(auth);
-        await router.push({name: 'getSignInLink'})
+    }
+
+    async function signInWithPassword(email: string, password: string) {
+        await signInWithEmailAndPassword(firebase.auth, email, password);
+    }
+
+    async function sendPasswordResetLink(email: string) {
+        await sendPasswordResetEmail(firebase.auth, email);
+    }
+
+    async function createUserWithPassword(email: string, password: string) {
+        await createUserWithEmailAndPassword(firebase.auth, email, password);
     }
 
     // Subscribe to changes
@@ -59,8 +69,15 @@ export const useAuth = defineStore("Auth", ()=>{
     
     return {
         activeUser,
-        sendLoginLink,
-        catchLoginAttempt,
+        signInWithLink: {
+            sendLoginLink,
+            catchLoginAttempt
+        },
+        signInWithPassword: {
+            createUserWithPassword,
+            signInWithPassword,
+            sendPasswordResetLink
+        },
         logout
     }
 });

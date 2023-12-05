@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAuth } from '@/libraries/firebase';
+import { useAuth } from '@/libraries/firebase/use-auth';
 import { useBusyStatus } from '@/state/busy-status';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -9,7 +9,7 @@ import { useRouter } from 'vue-router';
         await router.push({name: 'user'});
     }
     async function goToSignInPage() {
-        await router.push({name: 'getSignInLink'});
+        await router.push({name: 'signIn'});
     }
 
     const auth = useAuth();
@@ -19,7 +19,7 @@ import { useRouter } from 'vue-router';
     onMounted(async ()=>{
         busyStatus.increment();
         try {
-            await auth.catchLoginAttempt();
+            await auth.signInWithLink.catchLoginAttempt();
             await goToUserHome();
         } catch (e) {
             console.error(e);

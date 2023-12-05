@@ -11,7 +11,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'getSignInLink',
+      name: 'signIn',
       component: () => import("@/pages/sign-in/GetSignInLink.vue"),
       beforeEnter: guestOnly
     },

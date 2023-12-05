@@ -1,4 +1,4 @@
-import { useAuth } from "@/libraries/firebase";
+import { useAuth } from "@/libraries/firebase/use-auth";
 import { useBusyStatus } from "@/state/busy-status";
 import type { NavigationGuardWithThis } from "vue-router";
 
@@ -12,7 +12,7 @@ const navigationGuard : NavigationGuardWithThis<undefined> = (to, from, next) =>
         if (auth.activeUser) {
             next();
         } else {
-            next({ name: 'getSignInLink' });
+            next({ name: 'signIn' });
         }
     }
     setTimeout(check, 500);

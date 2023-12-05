@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
-import { useAuth } from "..";
-import firebase from "../firebase";
-import {collection, onSnapshot, type Unsubscribe} from "firebase/firestore";
+import { useAuth } from "./use-auth";
+import firebase from "./firebase";
+import {doc, onSnapshot, type Unsubscribe} from "firebase/firestore";
 import { z, ZodObject } from "zod";
 import { ref, watch } from "vue";
 
@@ -15,7 +15,7 @@ import { ref, watch } from "vue";
  * @param pathFromUser 
  * @returns 
  */
-export function subscribeToCollection<
+export function subscribeToDoc<
     A extends z.ZodRawShape,
     B extends z.UnknownKeysParam,
     C extends z.ZodTypeAny,
@@ -29,32 +29,28 @@ export function subscribeToCollection<
     type EntityType = z.infer<typeof schema>;
 
     const store = defineStore(storeName, ()=>{
-        const documents = ref<Array<EntityType>>();
+        const document = ref<EntityType>();
         let unsubscribe : Unsubscribe | undefined;
         watch(()=>auth.activeUser, (user)=>{
             if (!user) {
-                documents.value = undefined;
+                document.value = undefined;
                 if (unsubscribe) {
                     unsubscribe();
                 }
             } else {
                 const path = pathFromUser ? `user/${user.uid}/${pathFromUser}` : `user/${user.uid}`;
-                const colRef = collection(firebase.db, path);
-                unsubscribe = onSnapshot(colRef, (snapshot)=>{
-                    const result : Array<EntityType> = [];
-                    snapshot.docs.forEach((doc)=>{
-                        if (doc.exists()) {
-                            result.push(doc.data() as D); // force infer
-                        }
-                    });
-                    console.log(result);
-                    documents.value = result;
+                const docRef = doc(firebase.db, path);
+                unsubscribe = onSnapshot(docRef, (snapshot)=>{
+                    if (snapshot.exists()) {
+                        document.value = snapshot.data() as D; // force infer
+                        console.log(snapshot.data());
+                    }
                 });
             }
         }, { immediate: true });
 
         return {
-            documents
+            document
         }
     });
 

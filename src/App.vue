@@ -1,17 +1,40 @@
 <script setup lang="ts">
-  import { RouterView } from 'vue-router'
+  import { RouterView, useRouter } from 'vue-router'
   import { useToastNotification } from './state/toast-notifications';
   import { useAlerts } from './state/alerts';
   import Spinner from '@/components/ui/Spinner.vue';
   import { useBusyStatus } from './state/busy-status';
-
+  import { useAuth } from './libraries/firebase/use-auth';
+  import { watch } from 'vue';
+  import { useAnalytics } from './libraries/use-analytics';
+  import Footer from './components/layouts/Footer.vue';
+  
   const notifications = useToastNotification();
   const alerts = useAlerts();
   const busyStatus = useBusyStatus();
+
+    // on activeUser change
+    const router = useRouter();
+    const auth = useAuth();
+    const analytics = useAnalytics();
+    watch(()=>auth.activeUser, async (user)=>{
+      if (!user) {
+        analytics.identify();
+        await router.push({name: 'signIn'});
+      } else {
+        analytics.identify(user.uid);
+      }
+    });
 </script>
 
 <template>
-  <RouterView />
+  <!-- Foreground Layer -->
+  <div class="flex flex-col min-h-screen">
+    <div class="grow">
+      <RouterView/>
+    </div>
+    <Footer class="grow-0"/>
+  </div>
 
   <!-- Toast Notifications -->
   <div class="toast toast-top toast-end">
@@ -89,12 +112,10 @@
   </div>
   
   <!-- -->
-  <div class="bg-base/80 fixed h-screen w-screen top-0 flex flex-col justify-center items-center pb-16" v-if="busyStatus.busy">
+  <div class="bg-base-100/90 fixed h-screen w-screen top-0 flex flex-col justify-center items-center pb-16" v-if="busyStatus.busy">
       <Spinner />
   </div>
 
   <!-- Modal Manager -->
   <ModalStack />
 </template>
-
-

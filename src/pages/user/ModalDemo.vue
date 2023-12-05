@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAuth } from '@/libraries/firebase';
+import { useAuth } from '@/libraries/firebase/use-auth';
     
     const auth = useAuth();
 </script>
