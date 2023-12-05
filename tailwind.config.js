@@ -18,6 +18,7 @@ module.exports = {
     */
     themes: [
       {
+        // https://coolors.co/153243-2d6286-f26419-f5f8ff-ece6df-bee0f4
         mytheme: {
           "primary": "#153243",
           "secondary": "#2D6286",
