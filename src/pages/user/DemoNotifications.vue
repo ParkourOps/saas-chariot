@@ -1,14 +1,13 @@
 <script setup lang="ts">
-    import {useToasts} from "../../libraries/toasts";
-    import {useAlerts} from "../../libraries/alerts";
+import {useToasts} from "../../libraries/toasts";
+import { usePopupAlerts } from '../../libraries/popup-alerts';
 import Dropdown from "@/components/form/Dropdown.vue";
-import { ref } from "vue";
-import type { NotificationType } from "@/types/notification-type";
 import Textbox from "@/components/form/Textbox.vue";
 import { z } from "zod";
 import { reactive } from "vue";
+import Page from "@/components/layouts/Page.vue";
     const toasts = useToasts();
-    const alerts = useAlerts();
+    const alerts = usePopupAlerts();
 
     const notificationTypes = [
         "(none)",
@@ -66,9 +65,9 @@ import { reactive } from "vue";
 </script>
 
 <template>
-    <div class="max-w-prose mx-auto mt-12 px-4 sm:px-0">
+    <Page>
         <!-- Toasts Factory -->
-        <div class="card max-w-sm bg-neutral shadow-xl mx-auto mb-12">
+        <div class="card max-w-sm bg-neutral shadow-xl mx-auto">
             <div class="card-body">
                 <p class="text-lg font-semibold text-primary">
                     Toast Notifications
@@ -107,7 +106,7 @@ import { reactive } from "vue";
         </div>
 
         <!-- Alerts Factory -->
-        <div class="card max-w-sm bg-neutral shadow-xl mx-auto mb-8">
+        <div class="card max-w-sm bg-neutral shadow-xl mx-auto">
             <div class="card-body">
                 <p class="text-lg font-semibold text-primary">
                     Pop-Up Alerts
@@ -144,7 +143,5 @@ import { reactive } from "vue";
                 <button class="btn btn-secondary" @click="showAlert">SHOW</button>
             </div>
         </div>
-        
-        
-    </div>
+    </Page>
 </template>

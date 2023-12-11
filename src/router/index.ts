@@ -41,6 +41,16 @@ const router = createRouter({
           path: 'notifications',
           name: 'user-notifications',
           component: () => import("@/pages/user/DemoNotifications.vue"),
+        },
+        {
+          path: 'modals',
+          name: 'user-modals',
+          component: () => import("@/pages/user/DemoModals.vue"),
+        },
+        {
+          path: 'menus',
+          name: 'user-menus',
+          component: () => import("@/pages/user/DemoMenus.vue"),
         }
       ]
     }

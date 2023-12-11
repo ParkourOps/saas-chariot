@@ -1,13 +1,19 @@
-<script setup lang="ts">
-import { ref } from 'vue';
+<script setup lang="ts" generic="ReturnType">
 import { onMounted } from 'vue';
+import { ref } from 'vue';
 
     const emits = defineEmits<{
+        "done": [value?: ReturnType],
         "hidden": [],
-        "visible": []
+        "visible": []        
     }>();
 
     const dialog = ref<HTMLDialogElement>();
+
+    function done(value?: ReturnType) {
+        emits("done", value);
+        hide();
+    }
 
     function show() {
         if (dialog.value) {
@@ -23,20 +29,15 @@ import { onMounted } from 'vue';
         }
     }
 
-    defineExpose({
-        show,
-        hide
-    });
-
     onMounted(()=>{
         show();
     })
 </script>
 
 <template>
-    <dialog ref="dialog" class="modal modal-top sm:modal-middle">
-        <div class="modal-box overflow-visible">
-            <slot :hideModal="hide" />
-        </div>
-    </dialog>
+        <dialog ref="dialog" class="modal modal-top sm:modal-middle">
+            <div class="modal-box overflow-visible">
+                <slot :done="done" />
+            </div>
+        </dialog>
 </template>

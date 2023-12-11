@@ -7,36 +7,50 @@ type ComponentProps<C extends Component> = C extends new (...args: any) => any
   ? Omit<InstanceType<C>['$props'], keyof VNodeProps | keyof AllowedComponentProps>
   : never;
 
+type Modal = Component;
+
 const modalStack = reactive(new Map<string, {
-    component: Component,
-    props: any
+    component: Modal,
+    props: any,
+    resolve: (value?: unknown) => void
 }>())
 
-type ComponentArg<T> = T | (()=>Promise<{default: T}>);
+type ComponentArg<C extends Modal> = C | (()=>Promise<{default: C}>);
 
-async function showModal<T extends Component>(component: ComponentArg<T>, props: ComponentProps<T>) {
+async function showModal<C extends Modal>(component: ComponentArg<C>, props: ComponentProps<C>) {
+    let _component : Modal;
     if (typeof component === "function") {
-        const imported = await (component as ()=>Promise<{default: T}>)();
-        modalStack.set(makeUUID(), {
-            component: markRaw(imported.default),
-            props
-        }); 
+        // dynamic import (returns promise)
+        const imported = await (component as ()=>Promise<{default: C}>)();
+        _component = markRaw(imported.default);
     } else {
-        modalStack.set(makeUUID(), {
-            component: markRaw(component),
-            props
-        }); 
+        // regular import
+        _component = markRaw(component)
     }
+
+    return new Promise((resolve)=>{
+        modalStack.set(makeUUID(), {
+            component: _component,
+            props,
+            resolve: (value?: unknown) => resolve(value)
+        }); 
+    });
 }
 
-function hideModal(id: string) {
+function concludeModal(id: string, value?: any) {
+    const modalContext = modalStack.get(id);
+    if (!modalContext) {
+        console.error(`Could not conclude modal; did not find: ${id}`);
+        return;
+    };
+    modalContext.resolve(value);
     modalStack.delete(id);
 }
 
 export function useModalStack() {
     return {
         showModal,
-        hideModal,
+        concludeModal,
         modalStack,
     }
 }
@@ -48,13 +62,11 @@ export default {
             .component("Modal", ModalVue)
         ;
         app.config.globalProperties.$showModal = showModal;
-        app.config.globalProperties.$hideModal = hideModal;
     }
 }
 
 declare module 'vue' {
     interface ComponentCustomProperties {
         $showModal: typeof showModal
-        $hideModal: typeof hideModal
     }
 }
