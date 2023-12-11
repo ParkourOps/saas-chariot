@@ -1,17 +1,20 @@
 <script setup lang="ts">
   import { RouterView, useRouter } from 'vue-router'
   import { useToasts } from './libraries/toasts';
-  import { useAlerts } from './libraries/alerts';
+  import { usePopupAlerts } from './libraries/popup-alerts';
   import Spinner from '@/components/ui/Spinner.vue';
   import { useBusyStatus } from './state/busy-status';
   import { useAuth } from './libraries/firebase/use-auth';
   import { watch } from 'vue';
   import { useAnalytics } from './libraries/use-analytics';
   import Footer from './components/layouts/Footer.vue';
-  
+  import Alert from './components/ui/Alert.vue';
+  import { useOverlay } from './state/overlay';
+
   const toasts = useToasts();
-  const alerts = useAlerts();
+  const alerts = usePopupAlerts();
   const busyStatus = useBusyStatus();
+  const overlay = useOverlay();
 
     // on activeUser change
     const router = useRouter();
@@ -25,28 +28,30 @@
         analytics.identify(user.uid);
       }
     });
+
 </script>
 
 <template>
   <!-- Foreground Layer -->
   <div class="flex flex-col min-h-screen">
-    <div class="grow">
-      <RouterView/>
+    <div class="grow overflow-hidden">
+      <RouterView />
     </div>
     <Footer class="grow-0"/>
   </div>
 
   <!-- Toast Notifications -->
-  <div class="toast toast-top toast-end">
+  <div class="toast toast-top toast-end cursor-pointer">
     <div 
       v-for="n in toasts.toasts" :key="n.id"
       :class="[
-        `alert`,
+        `alert shadow-2xl`,
         { 'alert-info': n.type === 'info' },
         { 'alert-success': n.type === 'success' },
         { 'alert-warning': n.type === 'warning' },
         { 'alert-error': n.type === 'error' }
-      ]" 
+      ]"
+      @click="toasts.pop(n.id)"
     >
       <div>
         <p class="font-semibold text-sm">{{ n.title }}</p>
@@ -55,62 +60,32 @@
     </div>
   </div>
 
-  <!-- Alerts -->
+  <!-- Popup Alerts -->
   <div class="toast toast-top w-full">
-    <div 
+    <Alert 
       v-for="a in alerts.alerts" :key="a.id"
-      role="alert" 
-      :class="[
-        `alert transition-all`, 
-        { 'alert-info': a.type === 'info' },
-        { 'alert-success': a.type === 'success' },
-        { 'alert-warning': a.type === 'warning' },
-        { 'alert-error': a.type === 'error' }
-      ]"
+      :type="a.type"
+      :on-dismiss="() => alerts.pop(a.id)"
+      show
     >
-      <!-- alert icon -->
-      <svg 
-        v-if="a.type === 'warning'"
-        xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-      </svg>
-      <svg 
-        v-else-if="a.type === 'success'"
-        xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      <svg 
-        v-else-if="a.type === 'error'"
-        xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>      
-      <svg
-        v-else
-        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-      </svg>
-      <p>
-        <!-- alert title -->
-        <span class="font-semibold" v-if="a.type === 'error'">
-          Error!
-        </span>
-        <span class="font-semibold" v-else-if="a.type === 'warning'">
-          Warning!
-        </span>
-        <span class="font-semibold" v-else-if="a.type === 'success'">
-          Success!
-        </span>
-        <!-- alert message -->
-        {{ a.message }}
-      </p>
-      <div class="flex w-full justify-end">
-        <button class="btn btn-sm btn-ghost" @click="alerts.pop(a.id)">
-          Dismiss
-        </button>
-      </div>
-    </div>      
+      {{ a.message }}
+    </Alert>
+   
   </div>
   
   <!-- -->
-  <div class="bg-base-100/90 fixed h-screen w-screen top-0 flex flex-col justify-center items-center pb-16" v-if="busyStatus.busy">
-      <Spinner />
-  </div>
+  <Transition
+    enter-active-class="ease-in-out duration-500 sm:duration-700"
+    enter-from-class="opacity-0"
+    enter-to-class="opacity-1"
+    leave-active-class="ease-in-out duration-500 sm:duration-700"
+    leave-from-class="opacity-1"
+    leave-to-class="opacity-0"
+  >
+    <div class="bg-base-100/80 fixed h-screen w-screen top-0 flex flex-col justify-center items-center pb-16" v-if="overlay.overlay || busyStatus.busy">
+        <Spinner v-if="busyStatus.busy" />
+    </div>
+  </Transition>
 
   <!-- Modal Manager -->
   <ModalStack />

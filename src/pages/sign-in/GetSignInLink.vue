@@ -4,14 +4,14 @@ import { useAuth } from '@/libraries/firebase/use-auth';
 import { ref } from 'vue';
 import Email from "@/models/Email";
 import Password from "@/models/Password"; 
-import { useAlerts } from '@/libraries/alerts';
+import { usePopupAlerts } from '@/libraries/popup-alerts';
 import { useBusyStatus } from '@/state/busy-status';
 import { FirebaseError } from 'firebase/app';
 import { useRouter } from 'vue-router';
     
     const router = useRouter();
     const auth = useAuth();
-    const alerts = useAlerts();
+    const alerts = usePopupAlerts();
     const busyStatus = useBusyStatus();
 
     const signInOption = ref<"password" | "link">("password");
@@ -171,4 +171,4 @@ import { useRouter } from 'vue-router';
 
     </div>
 </template>
-@/libraries/alerts
+@/libraries/alerts@/libraries/popup-alerts

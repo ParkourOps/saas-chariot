@@ -15,7 +15,7 @@ type AlertRecord = Alert & {
 
 const DURATION_MS = 3000;
 
-export const useAlerts = defineStore("Pop-Up Alerts", ()=>{
+export const usePopupAlerts = defineStore("Popup Alerts", ()=>{
     const alerts = ref<AlertRecord[]>([]);
     
     function pop(id: string) {
