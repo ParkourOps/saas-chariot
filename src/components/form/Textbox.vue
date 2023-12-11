@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import { ref } from 'vue';
     import { computed, watch } from 'vue';
     import { type ZodString } from "zod";
 
@@ -13,7 +14,8 @@
 
     const emits = defineEmits<{
         "update:modelValue": [value?: string],
-        "update:valid": [value: boolean]
+        "update:valid": [value: boolean],
+        "update:touched": [value: boolean],
     }>();
 
     const value = computed({
@@ -35,14 +37,19 @@
             const parseResult = props.schema.safeParse(value.value) 
             return parseResult.success;
         }
-    });
-
+    });    
     watch(valid, (val)=>{
         emits("update:valid", val);
     }, {immediate: true})
 
+    const touched = ref(false);
+    watch(touched, (val)=>{
+        emits("update:touched", val);
+    }, {immediate: true});
+
     defineExpose({
-        valid
+        valid,
+        touched
     });
 </script>
 
@@ -54,5 +61,6 @@
         :class="[{'text-center': centered}]" 
         :disabled="disabled"
         v-model="value"
+        @focusout="touched = true"
     />
 </template>
