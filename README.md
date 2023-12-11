@@ -17,7 +17,7 @@ SaaS Chariot is an opinionated rapid development framework for SaaS projects.
 ### Analytics and Logging
 
 * _MixPanel_ is the primary solution for user analytics.
-* _Google Analytics_ is also supported in parallel.
+* _Hotjar_ is the primary solution for user analytics.
 
 ### Authentication
 
@@ -37,13 +37,15 @@ SaaS Chariot is an opinionated rapid development framework for SaaS projects.
 
 ### Subscription and Billing
 
-* _Firebase Functions_ are used to automatically create user 
+* _Firebase Functions_ are used to automatically create a user profile in the database.
 
 ### User Alerts
 
-Saas Chariot uses a number of ways to notify users about an event.
+Saas Chariot uses a number of ways to notify users about an event:
 
-* In-App Notifications.
+* In-App Notifications:
+  * Popup Alerts
+  * Toast Notifications
 
 ## Folder Structure
 
