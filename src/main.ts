@@ -14,6 +14,7 @@ app.use(router)
 app.use(modalStack)
 
 // add tawk.to (Tawk messenger)
+// @ts-ignore
 import TawkMessenger from '@tawk.to/tawk-messenger-vue-3';
 import tawkConfigs from './configs/tawk'
 app.use(TawkMessenger, {

@@ -22,6 +22,7 @@
     "firebase": "^10.7.0",
     "mixpanel-browser": "^2.48.1",
     "pinia": "^2.1.6",
+    "tawk-messenger-vue-3-ts": "^1.0.1",
     "uuid": "^9.0.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
