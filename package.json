@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@hotjar/browser": "^1.0.9",
+    "@tawk.to/tawk-messenger-vue-3": "^1.0.3",
     "dayjs": "^1.11.10",
     "firebase": "^10.7.0",
     "mixpanel-browser": "^2.48.1",
