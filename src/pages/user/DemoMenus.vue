@@ -39,7 +39,7 @@ import { z } from 'zod';
                             <p>{{ option }}</p>
                         </template>
                         <template #default="{option}">
-                            <p class="w-full">{{ option }}</p>
+                            <p>{{ option }}</p>
                         </template>
                 </Dropdown>
 

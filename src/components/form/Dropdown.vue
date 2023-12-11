@@ -43,7 +43,7 @@ import { computed } from 'vue';
             </slot>
         </summary>
 
-        <ul class="dropdown-content z-[1] card card-compact rounded-t-none shadow bg-base-100">
+        <ul class="dropdown-content z-[1] card card-compact rounded-t-none shadow bg-base-100 w-full">
             <div class="border-b border-base-200">
                 <slot name="filter"></slot>
             </div>

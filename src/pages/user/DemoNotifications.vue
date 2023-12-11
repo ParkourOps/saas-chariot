@@ -86,7 +86,7 @@ import Page from "@/components/layouts/Page.vue";
                             <p>{{ option }}</p>
                         </template>
                         <template #default="{option}">
-                            <p class="mr-4">{{ option }}</p>
+                            <p>{{ option }}</p>
                         </template>
                     </Dropdown>
 
@@ -125,7 +125,7 @@ import Page from "@/components/layouts/Page.vue";
                             <p>{{ option }}</p>
                         </template>
                         <template #default="{option}">
-                            <p class="mr-4">{{ option }}</p>
+                            <p>{{ option }}</p>
                         </template>
                     </Dropdown>
 
