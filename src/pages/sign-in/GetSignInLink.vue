@@ -8,6 +8,7 @@ import { usePopupAlerts } from '@/libraries/use-popup-alerts';
 import { useBusyStatus } from '@/state/busy-status';
 import { FirebaseError } from 'firebase/app';
 import { useRouter } from 'vue-router';
+import appConfigs from '@/configs/app';
     
     const router = useRouter();
     const auth = useAuth();
@@ -124,7 +125,7 @@ import { useRouter } from 'vue-router';
 <template>
     <div class="card card-compact rounded-t-none sm:rounded-t-2xl sm:w-96 shadow-xl mx-auto sm:mt-20 bg-neutral glass">
         <figure class="pt-6 px-6 pb-1">
-            <img src="@/assets/images/logo.png" alt="The 'SaaS Champion' Logo" />
+            <img src="@/assets/images/logo.png" :alt="`The '${appConfigs.appName}' Logo`" />
         </figure>
 
         <div class="join rounded-none mb-4 justify-around py-2">

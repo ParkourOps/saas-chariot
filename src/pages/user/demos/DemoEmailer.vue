@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import Page from '@/components/layouts/Page.vue';
+import appConfigs from '@/configs/app';
     import { useEmailer } from '@/libraries/use-emailer';
     import { useToastNotifications } from '@/libraries/use-toast-notifications';
     import { useUserProfile } from '@/state/user-profile';
@@ -47,8 +48,8 @@
                                   <br/>
                                   Just a little something...
                                 `,
-                    appName: "SaaS Chariot",
-                    appLink: "https://saas-chariot.web.app"
+                    appName: appConfigs.appName,
+                    appLink: appConfigs.appUrl
                 }
             });
             toasts.push({
