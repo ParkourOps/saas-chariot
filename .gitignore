@@ -33,3 +33,6 @@ playwright-report/
 # Environment variables
 .env
 .env.*
+
+# Firebase temp directories and files
+.firebase/
