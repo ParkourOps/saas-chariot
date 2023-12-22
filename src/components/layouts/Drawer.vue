@@ -50,7 +50,7 @@ import { computed } from 'vue';
             >
             <div 
                 v-if="show" 
-                class="fixed inset-y-0 z-50 shadow-2xl bg-base-100" 
+                class="fixed inset-y-0 z-50 shadow-2xl bg-neutral" 
                 :class="[
                     {'left-0': position === 'left'},
                     {'right-0': position === 'right'}

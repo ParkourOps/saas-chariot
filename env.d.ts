@@ -1,6 +1,9 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
+    // Generic
+    readonly VITE_APP_NAME: string,
+    readonly VITE_APP_URL: string,
     // Firebase
     readonly VITE_FIREBASE_API_KEY: string
     readonly VITE_FIREBASE_AUTH_DOMAIN: string
