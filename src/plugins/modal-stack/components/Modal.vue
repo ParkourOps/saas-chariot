@@ -36,7 +36,7 @@ import { ref } from 'vue';
 
 <template>
         <dialog ref="dialog" class="modal modal-top sm:modal-middle">
-            <div class="modal-box overflow-visible">
+            <div class="modal-box overflow-visible bg-neutral">
                 <slot :done="done" />
             </div>
         </dialog>
