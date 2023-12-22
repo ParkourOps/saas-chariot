@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { useToasts } from "@/libraries/use-toasts";
+    import { useToastNotifications } from "@/libraries/use-toast-notifications";
     import { usePopupAlerts } from '@/libraries/use-popup-alerts';
     import Dropdown from "@/components/form/Dropdown.vue";
     import Textbox from "@/components/form/Textbox.vue";
@@ -7,7 +7,7 @@
     import { z } from "zod";
     import { reactive } from "vue";
     
-    const toasts = useToasts();
+    const toasts = useToastNotifications();
     const alerts = usePopupAlerts();
 
     const notificationTypes = [

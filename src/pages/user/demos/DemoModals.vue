@@ -2,12 +2,12 @@
     import ErrorIcon from '@/assets/icons/ErrorIcon.vue';
     import Textbox from '@/components/form/Textbox.vue';
     import Page from '@/components/layouts/Page.vue';
-    import { useToasts } from '@/libraries/use-toasts';
+    import { useToastNotifications } from '@/libraries/use-toast-notifications';
     import { useModalStack } from '@/plugins/modal-stack';
     import { ref } from 'vue';
     import { z } from 'zod';
     const modalStack = useModalStack();
-    const toasts = useToasts();
+    const toasts = useToastNotifications();
 
 async function getBooleanResultFromModal() {
     const result = await modalStack.showModal(()=>import('@/components/modals/ConfirmationModal.vue'), {});

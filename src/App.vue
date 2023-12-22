@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { RouterView, useRouter } from 'vue-router'
-  import { useToasts } from './libraries/use-toasts';
-  import { usePopupAlerts } from './libraries/popup-alerts';
+  import { useToastNotifications } from './libraries/use-toast-notifications';
+  import { usePopupAlerts } from './libraries/use-popup-alerts';
   import Spinner from '@/components/ui/Spinner.vue';
   import { useBusyStatus } from './state/busy-status';
   import { useAuth } from './libraries/firebase/use-auth';
@@ -11,7 +11,7 @@
   import Alert from './components/ui/Alert.vue';
   import { useOverlay } from './state/overlay';
 
-  const toasts = useToasts();
+  const toasts = useToastNotifications();
   const alerts = usePopupAlerts();
   const busyStatus = useBusyStatus();
   const overlay = useOverlay();
