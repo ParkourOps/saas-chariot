@@ -15,7 +15,7 @@ export const useAnalytics = defineStore("Analytics", ()=>{
             persistence: "localStorage"
         });
         // initialise Hotjar
-        hotjar.init(hotjarConfigs.siteId, hotjarConfigs.version, {
+        hotjar.init(parseInt(hotjarConfigs.siteId), parseInt(hotjarConfigs.version), {
             debug: import.meta.env.DEV
         });
         // report success

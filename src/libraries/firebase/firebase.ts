@@ -4,6 +4,7 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import firebaseConfigs from "@/configs/firebase";
 import { getFirestore } from "firebase/firestore";
+import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -12,5 +13,14 @@ const app = initializeApp(firebaseConfigs);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const funcs = getFunctions(app);
 
-export default { app, auth, db, analytics };
+(()=>{
+    const useEmulator = import.meta.env.VITE_FIREBASE_USE_EMULATOR.toLowerCase();
+    if (/(true|yes|t|y)/.test(useEmulator)) {
+        connectFunctionsEmulator(funcs, "127.0.0.1", 5001);
+    }
+    console.log(useEmulator);
+})()
+
+export default { app, auth, db, analytics, funcs };
