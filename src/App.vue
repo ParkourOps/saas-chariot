@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { RouterView, useRouter } from 'vue-router'
-  import { useToasts } from './libraries/toasts';
+  import { useToasts } from './libraries/use-toasts';
   import { usePopupAlerts } from './libraries/popup-alerts';
   import Spinner from '@/components/ui/Spinner.vue';
   import { useBusyStatus } from './state/busy-status';
@@ -90,3 +90,4 @@
   <!-- Modal Manager -->
   <ModalStack />
 </template>
+./libraries/use-toasts
