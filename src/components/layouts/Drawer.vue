@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useOverlay } from '@/state/overlay';
-import { watch } from 'vue';
-import { computed } from 'vue';
+    import { useOverlay } from '@/state/overlay';
+    import { watch } from 'vue';
+    import { computed } from 'vue';
     const props = defineProps<{
         modelValue?: boolean,
         position: "left" | "right",
@@ -23,7 +23,7 @@ import { computed } from 'vue';
 
     const overlay = useOverlay();
     watch(show, (val)=>{
-        overlay.overlay = val;
+        overlay.overlay = val ?? false;
     }, {immediate: true});
 </script>
 
