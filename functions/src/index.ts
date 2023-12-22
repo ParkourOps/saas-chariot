@@ -1,3 +1,5 @@
+import {sendEmail as _sendEmail, sendTemplatedEmail as _sendTemplatedEmail} from "./emailer";
+import {createUserProfileOnSignUp as _createUserProfileOnSignUp} from "./user";
 /**
  * Import function triggers from their respective submodules:
  *
@@ -6,14 +8,6 @@
  *
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
-
-import * as logger from "firebase-functions/logger";
-import {user} from "firebase-functions/v1/auth";
-import {initializeApp} from "firebase-admin/app";
-import {firestore} from "firebase-admin";
-import UserProfile from "../../src/models/user/UserProfile";
-
-initializeApp();
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
@@ -35,32 +29,7 @@ initializeApp();
 //     }
 // }
 
-export const createUserProfileOnSignUp =
-    user().onCreate(async (user, context)=>{
-      // extract user information
-      const rawProfileData = {
-        userId: user.uid,
-        email: user.email,
-        signedUpAt: new Date(user.metadata.creationTime).toISOString(),
-        // lastSignInTime: new Date(user.metadata.lastSignInTime).toISOString();
-      };
-      // make profile object
-      const parseResult = UserProfile.safeParse(rawProfileData);
-      if (!parseResult.success) {
-        logger.error("Failed to parse user data from request.", {
-          input: rawProfileData,
-          zodErrors: parseResult.error.errors,
-        });
-        return;
-      }
-      // store
-      const userProfile = parseResult.data;
-      try {
-        return firestore().doc(`user/${userProfile.userId}`).set(userProfile);
-      } catch (e) {
-        logger.error("Failed to store user profile in Firestore.", {
-          error: e,
-        });
-        return;
-      }
-    });
+export const sendEmail = _sendEmail;
+export const sendTemplatedEmail = _sendTemplatedEmail;
+
+export const createUserProfileOnSignUp = _createUserProfileOnSignUp;

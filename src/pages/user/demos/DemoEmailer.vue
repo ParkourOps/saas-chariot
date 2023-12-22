@@ -1,32 +1,69 @@
 <script setup lang="ts">
     import Page from '@/components/layouts/Page.vue';
     import { useEmailer } from '@/libraries/use-emailer';
+    import { useToastNotifications } from '@/libraries/use-toast-notifications';
+    import { useUserProfile } from '@/state/user-profile';
+
     const emailer = useEmailer();
+    const toasts = useToastNotifications();
+    const userProfile = useUserProfile();
 
     async function sendEmail() {
-        const reply = await emailer.send({
-            to: "tejbirring@gmail.com",
-            from: "admin@parkourops.com",
-            subject: "Test Email",
-            text: "This is a test email.\n\nSomething.",
-        });
-        
+        if (!userProfile.document) return;
+        try {
+            await emailer.send({
+                to: userProfile.document.email,
+                from: "admin@parkourops.com",
+                subject: "Test Email",
+                text: "This is a test email.\n\nSomething.",
+            });
+            toasts.push({
+                title: "Message Sent",
+                message: "Please check your inbox.",
+                type: "success"
+            });
+        } catch (e) {
+            console.error(e);
+            toasts.push({
+                title: "Message Not Sent",
+                message: "Failed to send email.",
+                type: "error"
+            });
+        }
     }
 
     async function sendTemplatedEmail() {
-        const reply = await emailer.sendTemplated({
-            to: "tejbirring@gmail.com",
-            from: "admin@parkourops.com",
-            subject: "Test Email",
-            text: "This is a test email.\n\nSomething.",
-            templateName: "default",
-            templateSubstitution: {
-                contentHeader: "Hi, Tej!",
-                htmlContent: "This is a test email.<br/>Something.",
-                appName: "SaaS Chariot"
-            }
-        });
-        
+        if (!userProfile.document) return;
+        try {
+            await emailer.sendTemplated({
+                to: userProfile.document.email,
+                from: "admin@parkourops.com",
+                subject: "Test Email",
+                text: "This is a test email.\n\nSomething.",
+                templateName: "default",
+                templateSubstitution: {
+                    contentHeader: "Hey there!",
+                    htmlContent: `This is a test email.
+                                  <br/>
+                                  Just a little something...
+                                `,
+                    appName: "SaaS Chariot",
+                    appLink: "https://saas-chariot.web.app"
+                }
+            });
+            toasts.push({
+                title: "Message Sent",
+                message: "Please check your inbox.",
+                type: "success"
+            });
+        } catch (e) {
+            console.error(e);
+            toasts.push({
+                title: "Message Not Sent",
+                message: "Failed to send email.",
+                type: "error"
+            });
+        }
     }
 </script>
 
@@ -59,3 +96,4 @@
 
     </Page>
 </template>
+@/libraries/use-emailer/use-emailer
