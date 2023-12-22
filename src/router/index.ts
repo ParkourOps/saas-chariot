@@ -34,23 +34,28 @@ const router = createRouter({
         },
         {
           path: 'profile',
-          name: 'user-profile',
-          component: () => import("@/pages/user/DemoUserInfo.vue"),
+          name: 'user-demo-profile',
+          component: () => import("@/pages/user/demos/DemoUserInfo.vue"),
         },
         {
           path: 'notifications',
-          name: 'user-notifications',
-          component: () => import("@/pages/user/DemoNotifications.vue"),
+          name: 'user-demo-notifications',
+          component: () => import("@/pages/user/demos/DemoNotifications.vue"),
         },
         {
           path: 'modals',
-          name: 'user-modals',
-          component: () => import("@/pages/user/DemoModals.vue"),
+          name: 'user-demo-modals',
+          component: () => import("@/pages/user/demos/DemoModals.vue"),
         },
         {
           path: 'menus',
-          name: 'user-menus',
-          component: () => import("@/pages/user/DemoMenus.vue"),
+          name: 'user-demo-menus',
+          component: () => import("@/pages/user/demos/DemoMenus.vue"),
+        },
+        {
+          path: 'emailer',
+          name: 'user-demo-emails',
+          component: () => import("@/pages/user/demos/DemoEmailer.vue"),
         }
       ]
     }

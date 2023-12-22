@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import ErrorIcon from '@/assets/icons/ErrorIcon.vue';
-import Dropdown from '@/components/form/Dropdown.vue';
-import Numberbox from '@/components/form/Numberbox.vue';
-import Drawer from '@/components/layouts/Drawer.vue';
-import Page from '@/components/layouts/Page.vue';
-import { ref } from 'vue';
-import { z } from 'zod';
+    import ErrorIcon from '@/assets/icons/ErrorIcon.vue';
+    import Dropdown from '@/components/form/Dropdown.vue';
+    import Numberbox from '@/components/form/Numberbox.vue';
+    import Drawer from '@/components/layouts/Drawer.vue';
+    import Page from '@/components/layouts/Page.vue';
+    import { ref } from 'vue';
+    import { z } from 'zod';
 
     const show = ref(false);
 

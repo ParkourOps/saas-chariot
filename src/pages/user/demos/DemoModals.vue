@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import ErrorIcon from '@/assets/icons/ErrorIcon.vue';
-import Textbox from '@/components/form/Textbox.vue';
-import Page from '@/components/layouts/Page.vue';
-import Alert from '@/components/ui/Alert.vue';
-import { useToasts } from '@/libraries/toasts';
-import { useModalStack } from '@/plugins/modal-stack';
-import { ref } from 'vue';
-import { z } from 'zod';
-const modalStack = useModalStack();
-const toasts = useToasts();
+    import ErrorIcon from '@/assets/icons/ErrorIcon.vue';
+    import Textbox from '@/components/form/Textbox.vue';
+    import Page from '@/components/layouts/Page.vue';
+    import { useToasts } from '@/libraries/use-toasts';
+    import { useModalStack } from '@/plugins/modal-stack';
+    import { ref } from 'vue';
+    import { z } from 'zod';
+    const modalStack = useModalStack();
+    const toasts = useToasts();
 
 async function getBooleanResultFromModal() {
     const result = await modalStack.showModal(()=>import('@/components/modals/ConfirmationModal.vue'), {});

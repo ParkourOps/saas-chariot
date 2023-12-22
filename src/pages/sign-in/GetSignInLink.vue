@@ -2,9 +2,9 @@
 import Textbox from '@/components/form/Textbox.vue';
 import { useAuth } from '@/libraries/firebase/use-auth';
 import { ref } from 'vue';
-import Email from "@/models/Email";
-import Password from "@/models/Password"; 
-import { usePopupAlerts } from '@/libraries/popup-alerts';
+import Email from "@m/Email";
+import Password from "@m/Password"; 
+import { usePopupAlerts } from '@/libraries/use-popup-alerts';
 import { useBusyStatus } from '@/state/busy-status';
 import { FirebaseError } from 'firebase/app';
 import { useRouter } from 'vue-router';
@@ -139,7 +139,7 @@ import { useRouter } from 'vue-router';
 
                 <div>
                     <p class="text-sm mb-1 opacity-50 text-center">Email Address</p>
-                    <Textbox v-model="email" :schema="Email" v-model:valid="emailValid" centered class="bg-opacity-20 font-medium tracking-wider mb-4 w-full" />
+                    <Textbox v-model="email" :schema="Email" v-model:valid="emailValid" centered class="bg-opacity-80 font-medium tracking-wider mb-4 w-full" />
                 </div>
                 
                 
@@ -153,12 +153,12 @@ import { useRouter } from 'vue-router';
 
             <div>
                 <p class="text-sm mb-1 opacity-50 text-center">Email Address</p>
-                <Textbox v-model="email" :schema="Email" v-model:valid="emailValid" centered class="bg-opacity-20 font-medium tracking-wider w-full" />
+                <Textbox v-model="email" :schema="Email" v-model:valid="emailValid" centered class="bg-opacity-80 font-medium tracking-wider w-full" />
             </div>
             
             <div class="flex flex-col">
                 <p class="text-sm mb-1 opacity-50 text-center">Password</p>
-                <Textbox v-model="password" :schema="Password" v-model:valid="passwordValid" centered class="bg-opacity-20 font-medium tracking-wider" type="password" />
+                <Textbox v-model="password" :schema="Password" v-model:valid="passwordValid" centered class="bg-opacity-80 font-medium tracking-wider" type="password" />
                 <button class="btn btn-sm btn-link ml-auto" @click="resetPassword">Forgot password?</button>
             </div>
 
@@ -171,4 +171,3 @@ import { useRouter } from 'vue-router';
 
     </div>
 </template>
-@/libraries/alerts@/libraries/popup-alerts

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Page from '@/components/layouts/Page.vue';
-import { useAuth } from '@/libraries/firebase/use-auth';
-import { useUserProfile } from '@/state/user-profile';
-import readableDateTime from '@/utilities/readableDateTime';
-    
+    import Page from '@/components/layouts/Page.vue';
+    import { useAuth } from '@/libraries/firebase/use-auth';
+    import { useUserProfile } from '@/state/user-profile';
+    import readableDateTime from '@/utilities/readableDateTime';
+        
     const auth = useAuth();
     const userProfile = useUserProfile();
 </script>
