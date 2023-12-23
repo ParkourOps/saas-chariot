@@ -6,6 +6,7 @@
     import Page from "@/components/layouts/Page.vue";
     import { z } from "zod";
     import { reactive } from "vue";
+import Card from "@/components/layouts/Card.vue";
     
     const toasts = useToastNotifications();
     const alerts = usePopupAlerts();
@@ -67,49 +68,50 @@
 
 <template>
     <Page>
+
         <!-- Toasts Factory -->
-        <div class="card max-w-sm bg-neutral shadow-xl mx-auto">
-            <div class="card-body">
-                <p class="text-lg font-semibold text-primary">
-                    Toast Notifications
-                </p>
-                <div class="divider" />
-                    <Dropdown 
-                        button-class="btn-accent w-full"
-                        label="Select an Option" 
-                        :options="notificationTypes"
-                        v-model="userToast.type"
-                    >
-                        <template #unselected>
-                            Select a Type
-                        </template>
-                        <template #selected="{option}">
-                            <p>{{ option }}</p>
-                        </template>
-                        <template #default="{option}">
-                            <p>{{ option }}</p>
-                        </template>
-                    </Dropdown>
+        <Card class="max-w-sm mx-auto">
+            <p class="text-lg font-semibold text-primary">
+                Toast Notifications
+            </p>
 
-                    <div>
-                        <p class="text-xs mb-1 opacity-50">Title</p>
-                        <Textbox class="w-full" v-model="userToast.title" />
-                    </div>
+            <div class="divider" />
 
-                    <div>
-                        <p class="text-xs mb-1 opacity-50">Message</p>
-                        <Textbox class="w-full" v-model="userToast.message" :schema="z.string().min(1)" v-model:valid="userToast.messageValid" />
-                    </div>
+            <Dropdown 
+                button-class="btn-accent w-full"
+                label="Select an Option" 
+                :options="notificationTypes"
+                v-model="userToast.type"
+            >
+                <template #unselected>
+                    Select a Type
+                </template>
+                <template #selected="{option}">
+                    <p>{{ option }}</p>
+                </template>
+                <template #default="{option}">
+                    <p>{{ option }}</p>
+                </template>
+            </Dropdown>
 
-                <div class="divider" />
-                <button class="btn btn-secondary" @click="showToast">SHOW</button>
+            <div>
+                <p class="text-xs mb-1 opacity-50">Title</p>
+                <Textbox class="w-full" v-model="userToast.title" />
             </div>
-        </div>
+
+            <div>
+                <p class="text-xs mb-1 opacity-50">Message</p>
+                <Textbox class="w-full" v-model="userToast.message" :schema="z.string().min(1)" v-model:valid="userToast.messageValid" />
+            </div>
+
+            <div class="divider" />
+
+            <button class="btn btn-secondary" @click="showToast">SHOW</button>
+        </Card>
 
         <!-- Alerts Factory -->
-        <div class="card max-w-sm bg-neutral shadow-xl mx-auto">
-            <div class="card-body">
-                <p class="text-lg font-semibold text-primary">
+        <Card class="max-w-sm mx-auto">
+            <p class="text-lg font-semibold text-primary">
                     Pop-Up Alerts
                 </p>
                 <div class="divider" />
@@ -135,14 +137,13 @@
                         <Textbox class="w-full" v-model="userAlert.message" :schema="z.string().min(1)" v-model:valid="userAlert.messageValid" />
                     </div>
 
-                    <div>
+                    <div class="mt-1">
                         <p class="text-xs mb-1 opacity-50">Automatically Dismiss?</p>
                         <input type="checkbox" class="toggle" v-model="userAlert.autoDismiss" />
                     </div>
                     
                 <div class="divider" />
                 <button class="btn btn-secondary" @click="showAlert">SHOW</button>
-            </div>
-        </div>
+        </Card>
     </Page>
 </template>

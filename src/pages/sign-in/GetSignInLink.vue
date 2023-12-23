@@ -123,9 +123,9 @@ import appConfigs from '@/configs/app';
 </script>
 
 <template>
-    <div class="card card-compact rounded-t-none sm:rounded-t-2xl sm:w-96 shadow-xl mx-auto sm:mt-20 bg-neutral glass">
+    <div class="card card-compact rounded-t-none sm:rounded-t-2xl sm:w-96 shadow-xl mx-auto sm:mt-20 glass bg-base-100">
         <figure class="pt-6 px-6 pb-1">
-            <img src="@/assets/images/logo.png" :alt="`The '${appConfigs.appName}' Logo`" />
+            <img src="@/assets/images/logo.png" :alt="`The '${appConfigs?.appName}' Logo`" />
         </figure>
 
         <div class="join rounded-none mb-4 justify-around py-2">

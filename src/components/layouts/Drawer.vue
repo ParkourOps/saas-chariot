@@ -50,7 +50,7 @@
             >
             <div 
                 v-if="show" 
-                class="fixed inset-y-0 z-50 shadow-2xl bg-neutral" 
+                class="fixed inset-y-0 z-50 shadow-2xl bg-base-100" 
                 :class="[
                     {'left-0': position === 'left'},
                     {'right-0': position === 'right'}
@@ -61,7 +61,7 @@
             >
                 <!-- close button -->
                 <button 
-                    class="btn btn-primary btn-circle btn-outline btn-sm absolute top-0 mt-2"
+                    class="btn btn-secondary btn-circle btn-sm absolute top-0 mt-2"
                     :class="[
                         {'right-0': position === 'left'},
                         {'-mr-10': position === 'left'},

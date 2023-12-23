@@ -1,5 +1,6 @@
 <script setup lang="ts">
-    import Page from '@/components/layouts/Page.vue';
+    import Card from '@/components/layouts/Card.vue';
+import Page from '@/components/layouts/Page.vue';
     import { useAuth } from '@/libraries/firebase/use-auth';
     import { useUserProfile } from '@/state/user-profile';
     import readableDateTime from '@/utilities/readableDateTime';
@@ -10,10 +11,10 @@
 
 <template>
         <Page>
+            
             <!-- User Token Demo -->
-            <div class="card max-w-sm bg-neutral shadow-xl mx-auto overflow-hidden" v-if="auth.activeUser">
-                <div class="card-body">
-                    <p class="text-lg font-semibold text-primary">
+            <Card v-if="auth.activeUser" class="max-w-sm mx-auto overflow-hidden">
+                <p class="text-lg font-semibold text-primary">
                         User Token
                     </p>
                     <p class="text-xs text-primary">
@@ -36,13 +37,11 @@
                             </tr>
                         </tbody> 
                     </table>
-                </div>
-            </div>
+            </Card>
 
             <!-- User Profile Demo -->
-            <div class="card max-w-sm bg-neutral shadow-xl mx-auto overflow-hidden" v-if="userProfile.document">
-                <div class="card-body">
-                    <p class="text-lg font-semibold text-primary">
+            <Card v-if="userProfile.document" class="max-w-sm mx-auto overflow-hidden">
+                <p class="text-lg font-semibold text-primary">
                         User Profile
                     </p>
                     <p class="text-xs text-primary">
@@ -68,8 +67,7 @@
                                 </td>
                             </tr>
                         </tbody> 
-                    </table>
-                </div>
-            </div>
+                    </table>            
+            </Card>
     </Page>
 </template>

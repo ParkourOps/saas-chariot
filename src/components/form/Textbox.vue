@@ -57,7 +57,7 @@
     <input 
         :type="type ?? 'text'" 
         :placeholder="placeholder" 
-        class="input input-bordered" 
+        class="input input-bordered bg-neutral" 
         :class="[{'text-center': centered}]" 
         :disabled="disabled"
         v-model="value"

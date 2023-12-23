@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import appConfigs from '@/configs/app';
-import { useAuth } from '@/libraries/firebase/use-auth';
+    import appConfigs from '@/configs/app';
+    import { useAuth } from '@/libraries/firebase/use-auth';
 
     const auth = useAuth();
 </script>

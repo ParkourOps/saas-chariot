@@ -1,6 +1,7 @@
 <script setup lang="ts">
-    import Page from '@/components/layouts/Page.vue';
-import appConfigs from '@/configs/app';
+    import Card from '@/components/layouts/Card.vue';
+import Page from '@/components/layouts/Page.vue';
+    import appConfigs from '@/configs/app';
     import { useEmailer } from '@/libraries/use-emailer';
     import { useToastNotifications } from '@/libraries/use-toast-notifications';
     import { useUserProfile } from '@/state/user-profile';
@@ -71,30 +72,20 @@ import appConfigs from '@/configs/app';
 
 <template>
     <Page>
-        <div class="card bg-neutral shadow-xl">
-            <div class="card-body">
-                <p class="text-xl font-bold">
-                    Text Email
-                </p>
-                <p class="mb-4">
-                    
-                </p>                
-                <button class="btn btn-secondary" @click="sendEmail">SHOW</button>
-            </div>
-        </div>
+        <Card class="max-w-sm mx-auto">
+            <p class="text-lg font-semibold text-primary">
+                Text Email
+            </p>
+            <div class="divider" />
+            <button class="btn btn-secondary" @click="sendEmail">SHOW</button>
+        </Card>
 
-        <div class="card bg-neutral shadow-xl">
-            <div class="card-body">
-                <p class="text-xl font-bold">
-                    HTML Email
-                </p>
-                <p class="mb-4">
-                    
-                </p>                
-                <button class="btn btn-secondary" @click="sendTemplatedEmail">SHOW</button>
-            </div>
-        </div>
-
+        <Card class="max-w-sm mx-auto">
+            <p class="text-lg font-semibold text-primary">
+                HTML Email
+            </p>
+            <div class="divider" />
+            <button class="btn btn-secondary" @click="sendTemplatedEmail">SHOW</button>
+        </Card>
     </Page>
 </template>
-@/libraries/use-emailer/use-emailer

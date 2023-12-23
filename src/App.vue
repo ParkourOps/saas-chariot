@@ -33,7 +33,7 @@
 
 <template>
   <!-- Foreground Layer -->
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen bg-neutral">
     <div class="grow overflow-hidden">
       <RouterView />
     </div>
@@ -49,7 +49,8 @@
         { 'alert-info': n.type === 'info' },
         { 'alert-success': n.type === 'success' },
         { 'alert-warning': n.type === 'warning' },
-        { 'alert-error': n.type === 'error' }
+        { 'alert-error': n.type === 'error' },
+        { 'bg-base-100': n.type && !['info', 'success', 'warning', 'error'].includes(n.type) }
       ]"
       @click="toasts.pop(n.id)"
     >
@@ -90,4 +91,3 @@
   <!-- Modal Manager -->
   <ModalStack />
 </template>
-./libraries/use-toasts

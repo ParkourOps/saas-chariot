@@ -16,11 +16,12 @@ import WarningIcon from '@/assets/icons/WarningIcon.vue';
     <div
       role="alert" 
       :class="[
-        `alert transition-all shadow-2xl`, 
+        `alert transition-all shadow-2xl`,
         { 'alert-info': type === 'info' },
         { 'alert-success': type === 'success' },
         { 'alert-warning': type === 'warning' },
         { 'alert-error': type === 'error' },
+        { 'bg-base-100': type && !['info', 'success', 'warning', 'error'].includes(type) },
         { 'hidden': !show }
       ]"
     >
