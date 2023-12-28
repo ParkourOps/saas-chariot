@@ -2,7 +2,7 @@
 import Textbox from '@/components/form/Textbox.vue';
 import { useAuth } from '@/libraries/firebase/use-auth';
 import { ref } from 'vue';
-import Email from "@m/Email";
+import EmailAddress from "@m/EmailAddress";
 import Password from "@m/Password"; 
 import { usePopupAlerts } from '@/libraries/use-popup-alerts';
 import { useBusyStatus } from '@/state/busy-status';
@@ -143,7 +143,7 @@ import AwaitingActionModal from '@/components/modals/AwaitingActionModal.vue';
 
                 <div>
                     <p class="text-sm mb-1 opacity-50 text-center">Email Address</p>
-                    <Textbox v-model="email" :schema="Email" v-model:valid="emailValid" centered class="bg-opacity-80 font-medium tracking-wider mb-4 w-full" />
+                    <Textbox v-model="email" :schema="EmailAddress" v-model:valid="emailValid" centered class="bg-opacity-80 font-medium tracking-wider mb-4 w-full" />
                 </div>
                 
                 
@@ -157,7 +157,7 @@ import AwaitingActionModal from '@/components/modals/AwaitingActionModal.vue';
 
             <div>
                 <p class="text-sm mb-1 opacity-50 text-center">Email Address</p>
-                <Textbox v-model="email" :schema="Email" v-model:valid="emailValid" centered class="bg-opacity-80 font-medium tracking-wider w-full" />
+                <Textbox v-model="email" :schema="EmailAddress" v-model:valid="emailValid" centered class="bg-opacity-80 font-medium tracking-wider w-full" />
             </div>
             
             <div class="flex flex-col">
@@ -175,3 +175,4 @@ import AwaitingActionModal from '@/components/modals/AwaitingActionModal.vue';
 
     </div>
 </template>
+@m/EmailAddress
