@@ -2,6 +2,10 @@
 import { onMounted } from 'vue';
 import { ref } from 'vue';
 
+    defineProps<{
+        modalClasses?: any
+    }>();
+
     const emits = defineEmits<{
         "done": [value?: ReturnType],
         "hidden": [],
@@ -36,7 +40,7 @@ import { ref } from 'vue';
 
 <template>
         <dialog ref="dialog" class="modal modal-top sm:modal-middle">
-            <div class="modal-box overflow-visible">
+            <div class="modal-box overflow-visible" :class="modalClasses">
                 <slot :done="done" />
             </div>
         </dialog>
