@@ -53,9 +53,14 @@ const router = createRouter({
           component: () => import("@/pages/user/demos/DemoMenus.vue"),
         },
         {
-          path: 'emailer',
-          name: 'user-demo-emails',
-          component: () => import("@/pages/user/demos/DemoEmailer.vue"),
+          path: 'messaging',
+          name: 'user-demo-messaging',
+          component: () => import("@/pages/user/demos/DemoMessaging.vue"),
+        },
+        {
+          path: 'billing',
+          name: 'user-demo-billing',
+          component: () => import("@/pages/user/demos/DemoBilling.vue"),
         }
       ]
     }
