@@ -48,12 +48,12 @@ import Page from '@/components/layouts/Page.vue';
 
         <Card>
             <p class="text-xl font-bold">
-                Emailer
+                Messaging
             </p>
             <p>
-                A demonstration of transactional emailer.
+                A demonstration of the transactional emailer.
             </p>
-            <button class="mt-4 btn btn-primary" @click="$router.push({name:'user-demo-emails'})">SEE DEMO</button>
+            <button class="mt-4 btn btn-primary" @click="$router.push({name:'user-demo-messaging'})">SEE DEMO</button>
         </Card>
     </Page>
 </template>
