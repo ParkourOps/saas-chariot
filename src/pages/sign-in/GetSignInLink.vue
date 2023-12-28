@@ -9,11 +9,14 @@ import { useBusyStatus } from '@/state/busy-status';
 import { FirebaseError } from 'firebase/app';
 import { useRouter } from 'vue-router';
 import appConfigs from '@/configs/app';
+import {useModalStack} from '@/plugins/modal-stack';
+import AwaitingActionModal from '@/components/modals/AwaitingActionModal.vue';
     
     const router = useRouter();
     const auth = useAuth();
     const alerts = usePopupAlerts();
     const busyStatus = useBusyStatus();
+    const modalStack = useModalStack();
 
     const signInOption = ref<"password" | "link">("password");
 
@@ -57,10 +60,10 @@ import appConfigs from '@/configs/app';
             busyStatus.increment();
             await auth.signInWithLink.sendLoginLink(email.value, {name: "processSignIn"});
             busyStatus.decrement();
-            alerts.push({
-                type: "info",
-                message: "Please check your inbox for a sign in link."
-            })
+            modalStack.showModal(AwaitingActionModal, {
+                title: "Sign In",
+                instruction: "Please check your inbox for a sign in link."
+            });
         }
     }
 
@@ -71,7 +74,7 @@ import appConfigs from '@/configs/app';
         try {
             busyStatus.increment();
             await auth.signInWithPassword.signInWithPassword(email.value, password.value);
-            await router.push({name: 'selectProject'});
+            await router.push({name: 'user-dashboard'});
         } catch (e) {
             console.error(e);
             if (e instanceof FirebaseError && e.code === 'auth/invalid-credential') {
@@ -93,7 +96,7 @@ import appConfigs from '@/configs/app';
         try {
             busyStatus.increment();
             await auth.signInWithPassword.createUserWithPassword(email.value, password.value);
-            await router.push({name: 'selectProject'});
+            await router.push({name: 'user-dashboard'});
         } catch (e) {
             console.error(e);
             if (e instanceof FirebaseError && e.code === 'auth/email-already-in-use') {
