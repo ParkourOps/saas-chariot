@@ -2,7 +2,7 @@ import getFullPathOfRoute from "@/utilities/getFullPathOfRoute";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { type RouteLocationRaw } from "vue-router";
-import { type User, isSignInWithEmailLink, onAuthStateChanged, sendSignInLinkToEmail, signInWithEmailLink, signOut, signInWithEmailAndPassword, sendPasswordResetEmail, createUserWithEmailAndPassword } from "firebase/auth";
+import { type User, isSignInWithEmailLink, onAuthStateChanged, sendSignInLinkToEmail, signInWithEmailLink, signOut, signInWithEmailAndPassword, sendPasswordResetEmail, createUserWithEmailAndPassword, sendEmailVerification, applyActionCode as _applyActionCode } from "firebase/auth";
 import firebase from "./firebase";
 
 const auth = firebase.auth;
@@ -56,6 +56,20 @@ export const useAuth = defineStore("Auth", ()=>{
         await createUserWithEmailAndPassword(firebase.auth, email, password);
     }
 
+    async function sendEmailVerificationLink(route: RouteLocationRaw) {
+        if (!activeUser.value) {
+            console.error("User must be signed in to send email verification link.");
+            return;
+        }
+        await sendEmailVerification(activeUser.value, {
+            url: getFullPathOfRoute(route)
+        });
+    }
+
+    async function applyActionCode(actionCode: string) {
+        return await _applyActionCode(firebase.auth, actionCode);
+    }
+
     // Subscribe to changes
     onAuthStateChanged(auth, (user)=>{
         if (!user) {
@@ -78,6 +92,8 @@ export const useAuth = defineStore("Auth", ()=>{
             signInWithPassword,
             sendPasswordResetLink
         },
-        logout
+        logout,
+        sendEmailVerificationLink,
+        applyActionCode
     }
 });
