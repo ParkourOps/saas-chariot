@@ -8,24 +8,24 @@ D,
 E extends z.ZodRawShape,
 F extends z.UnknownKeysParam,
 G extends z.ZodTypeAny,
-H
+H,
 > = {
     name: string,
     description?: string,
     request: ZodObject<A,B,C,D,D>,
-    successResponse: ZodObject<E,F,G,H,H>
+    successResponse: ZodObject<E,F,G,H,H>,
+    requiresAuth?: true
 };
 
 export default function<
-    A extends z.ZodRawShape,
-    B extends z.UnknownKeysParam,
-    C extends z.ZodTypeAny,
-    D,
-    E extends z.ZodRawShape,
-    F extends z.UnknownKeysParam,
-    G extends z.ZodTypeAny,
-    H
+A extends z.ZodRawShape,
+B extends z.UnknownKeysParam,
+C extends z.ZodTypeAny,
+D,
+E extends z.ZodRawShape,
+F extends z.UnknownKeysParam,
+G extends z.ZodTypeAny,
+H
 >(args: ApiCall<A,B,C,D,E,F,G,H>) {
     return args;
 };
-

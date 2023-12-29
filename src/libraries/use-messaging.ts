@@ -1,23 +1,12 @@
-import EmailMessage from "@m/communication/EmailMessage";
-import { z } from "zod";
-import { callFunc } from "@/libraries/firebase/call-func";
-import type TemplatedEmailMessage from "@m/communication/TemplatedEmailMessage";
+import TextOnlyEmailMessage from "@m/apis/messaging/send-text-only-email";
+import TemplatedEmailMessage from "@m/apis/messaging/send-templated-email";
+import { funcCaller } from "@/libraries/firebase/functions";
 
 export function useMessaging() {    
-    async function sendTextEmail(message: z.infer<typeof EmailMessage>) {
-        return await callFunc("sendEmail", message);
-    }
-    
-    async function sendTemplatedEmail(
-        message: z.infer<typeof TemplatedEmailMessage>
-    ) {
-        return await callFunc("sendTemplatedEmail", message);
-    }
-
     return {
         email: {
-            sendTextEmail,
-            sendTemplatedEmail
+            sendTextOnlyEmail: funcCaller(TextOnlyEmailMessage),
+            sendTemplatedEmail: funcCaller(TemplatedEmailMessage)
         }
     }
 }

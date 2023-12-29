@@ -10,10 +10,10 @@
     const toasts = useToastNotifications();
     const userProfile = useUserProfile();
 
-    async function sendEmail() {
+    async function sendTextOnlyEmail() {
         if (!userProfile.document) return;
         try {
-            await messaging.email.sendTextEmail({
+            await messaging.email.sendTextOnlyEmail({
                 to: userProfile.document.email,
                 from: "admin@parkourops.com",
                 subject: "Test Email",
@@ -43,7 +43,7 @@
                 subject: "Test Email",
                 text: "This is a test email.\n\nSomething.",
                 templateName: "default",
-                templateSubstitution: {
+                templateSubstitutions: {
                     contentHeader: "Hey there!",
                     htmlContent: `This is a test email.
                                   <br/>
@@ -77,7 +77,7 @@
                 Text Email
             </p>
             <div class="divider" />
-            <button class="btn btn-secondary" @click="sendEmail">SHOW</button>
+            <button class="btn btn-secondary" @click="sendTextOnlyEmail">SHOW</button>
         </Card>
 
         <Card class="max-w-sm mx-auto">

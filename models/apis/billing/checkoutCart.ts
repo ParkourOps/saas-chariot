@@ -6,10 +6,11 @@ import URL from "@m/URL";
 export default defineApiCall({
     name: "checkout cart",
     description: "Create a Stripe URL to checkout items in a cart.",
+    requiresAuth: true,
     request: z.object({
-        cart: Cart
+        cart: Cart                  // the cart to checkout
     }),
     successResponse: z.object({
-        checkoutUrl: URL
+        checkoutUrl: URL            // the checkout URL
     })
 });

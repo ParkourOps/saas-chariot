@@ -5,7 +5,7 @@ import URL from "../URL";
 import Count from "../Count";
 import Decimal from "../Decimal";
 import Metadata from "../Metadata";
-import Boolean from "@m/Boolean";
+import Boolean from "../Boolean";
 
 const Price = z.object({
     id: NonEmptyString,

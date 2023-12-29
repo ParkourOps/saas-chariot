@@ -19,8 +19,8 @@ const funcs = getFunctions(app);
     const useEmulator = import.meta.env.VITE_FIREBASE_USE_EMULATOR.toLowerCase();
     if (/(true|yes|t|y)/.test(useEmulator)) {
         connectFunctionsEmulator(funcs, "127.0.0.1", 5001);
-    }
-    console.log(useEmulator);
+        console.debug("Connected to local Firebase emulator.");
+    }    
 })()
 
 export default { app, auth, db, analytics, funcs };
