@@ -3,13 +3,13 @@ import { ref } from "vue";
 import { computed } from "vue";
 
 const props = defineProps<{
-    options: Array<T>;
-    modelValue?: T;
-    buttonClass?: string | Array<string>;
+  options: Array<T>;
+  modelValue?: T;
+  buttonClass?: string | Array<string>;
 }>();
 
 const emits = defineEmits<{
-    "update:modelValue": [value?: T];
+  "update:modelValue": [value?: T];
 }>();
 
 const value = computed({
@@ -34,23 +34,30 @@ function selectOption(option: T) {
 </script>
 
 <template>
-    <details class="dropdown" ref="dropdown">
-        <summary class="btn mb-1" :class="buttonClass">
-            <slot v-if="!value" name="unselected"> </slot>
-            <slot v-else name="selected" :option="value"> </slot>
-        </summary>
+  <details class="dropdown" ref="dropdown">
+    <summary class="btn mb-1" :class="buttonClass">
+      <slot v-if="!value" name="unselected"> </slot>
+      <slot v-else name="selected" :option="value"> </slot>
+    </summary>
 
-        <ul class="card dropdown-content card-compact z-[1] w-full rounded-t-none bg-accent/95 shadow">
-            <div class="border-b border-base-200">
-                <slot name="filter"></slot>
-            </div>
-            <div class="max-h-[350px] overflow-y-auto">
-                <li v-for="(o, idx) in options" :key="`option-n-${idx}`" @click.stop="selectOption(o)" class="mx-2 my-1 cursor-pointer rounded-xl px-4 py-2 first:mt-3 last:mb-3 hover:bg-neutral/30">
-                    <a>
-                        <slot :option="o"> </slot>
-                    </a>
-                </li>
-            </div>
-        </ul>
-    </details>
+    <ul
+      class="card dropdown-content card-compact z-[1] w-full rounded-t-none bg-accent/95 shadow"
+    >
+      <div class="border-b border-base-200">
+        <slot name="filter"></slot>
+      </div>
+      <div class="max-h-[350px] overflow-y-auto">
+        <li
+          v-for="(o, idx) in options"
+          :key="`option-n-${idx}`"
+          @click.stop="selectOption(o)"
+          class="mx-2 my-1 cursor-pointer rounded-xl px-4 py-2 first:mt-3 last:mb-3 hover:bg-neutral/30"
+        >
+          <a>
+            <slot :option="o"> </slot>
+          </a>
+        </li>
+      </div>
+    </ul>
+  </details>
 </template>

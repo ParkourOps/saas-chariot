@@ -14,7 +14,7 @@ app.use(router);
 app.use(modalStack);
 
 // register global components
-import {registerComponents} from "@/components";
+import { registerComponents } from "@/components";
 registerComponents(app);
 
 // import configs from "@/configs";
