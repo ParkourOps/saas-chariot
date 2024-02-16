@@ -5,14 +5,11 @@ import usePopupAlerts from "@/libraries/use-popup-alerts";
 import useAnalytics from "@/libraries/use-analytics";
 import useBusyCounter from "./state/use-busy-counter";
 
-import AppFooter from "@/components/application/ApplicationFooter.vue";
-
 import useAuth from "@/libraries/firebase/use-auth";
 import { watch } from "vue";
 
 import { useOverlay } from "@/state/overlay";
 import { useModalStack } from "@/plugins/modal-stack";
-import AwaitingActionModal from "@/components/modals/AwaitingActionModal.vue";
 
 const toasts = useToastNotifications();
 const alerts = usePopupAlerts();
@@ -35,12 +32,11 @@ watch(
             analytics.setIdentity(user.uid);
             // show modal if email address not verified
             if (!user.emailVerified) {
-                modalStack.showModal(AwaitingActionModal, {
+                modalStack.showModal(() => import("./components/modals/ModalAwaitAction.vue"), {
                     title: "Email Verification Required",
                     instruction: "Please check your inbox for a verification link.",
                     async mountAction() {
                         await auth.sendEmailVerificationLink(route);
-                        console.log("Mount action!");
                     },
                 });
             }
@@ -110,9 +106,9 @@ watch(
 
     <!-- Popup Alerts -->
     <div class="fixed top-0 flex w-full flex-col gap-4 p-4 sm:gap-8 sm:p-8" v-if="alerts.alerts.length > 0">
-        <Alert v-for="a in alerts.alerts" :key="a.id" :type="a.type" @dismiss="() => alerts.pop(a.id)" show>
+        <AlertLayout v-for="a in alerts.alerts" :key="a.id" :type="a.type" @dismiss="() => alerts.pop(a.id)" show>
             <span>{{ a.message }}</span>
-        </Alert>
+        </AlertLayout>
     </div>
 
     <!-- Overlay -->
@@ -125,7 +121,7 @@ watch(
         leave-to-class="opacity-0"
     >
         <div class="fixed top-0 flex h-screen w-screen flex-col items-center justify-center bg-base-100/80 pb-16" v-if="overlay.showOverlay || busyCounter.isBusy || modalStack.modalStack.size > 0">
-            <Spinner v-if="busyCounter.isBusy" />
+            <BusySpinner v-if="busyCounter.isBusy" />
         </div>
     </Transition>
 

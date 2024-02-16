@@ -1,50 +1,35 @@
-import {
-    type AllowedComponentProps,
-    type App,
-    type Component,
-    type VNodeProps,
-    reactive,
-    markRaw,
-} from "vue";
+import { type AllowedComponentProps, type App, type Component, type VNodeProps, reactive, markRaw } from "vue";
 import ModalVue from "./components/Modal.vue";
 import ModalStackVue from "./components/ModalStack.vue";
 import uniqueId from "@/_shared_/libraries/unique-id";
 import ModalHeaderVue from "./components/ModalHeader.vue";
 import ModalActionsVue from "./components/ModalActions.vue";
 
-type ComponentProps<C extends Component> = C extends new (...args: any) => any
-  ? Omit<
-      InstanceType<C>["$props"],
-      keyof VNodeProps | keyof AllowedComponentProps
-    >
-  : never;
+type ComponentProps<C extends Component> = C extends new (...args: any) => any ? Omit<InstanceType<C>["$props"], keyof VNodeProps | keyof AllowedComponentProps> : never;
 
 type Modal = Component;
 
 const modalStack = reactive(
     new Map<
-    string,
-    {
-      component: Modal;
-      props: any;
-      resolve: (value?: unknown) => void;
-    }
-  >(),
+        string,
+        {
+            component: Modal;
+            props: any;
+            resolve: (value?: unknown) => void;
+        }
+    >(),
 );
 
 type ComponentArg<C extends Modal> = C | (() => Promise<{ default: C }>);
 
-async function showModal<C extends Modal>(
-    component: ComponentArg<C>,
-    props: ComponentProps<C>,
-) {
+async function showModal<C extends Modal>(component: ComponentArg<C>, props: ComponentProps<C>) {
     let _component: Modal;
     if (typeof component === "function") {
-    // dynamic import (returns promise)
+        // dynamic import (returns promise)
         const imported = await (component as () => Promise<{ default: C }>)();
         _component = markRaw(imported.default);
     } else {
-    // regular import
+        // regular import
         _component = markRaw(component);
     }
 
@@ -87,13 +72,13 @@ export default {
 };
 
 declare module "vue" {
-  interface ComponentCustomProperties {
-    $showModal: typeof showModal;
-  }
-  interface GlobalComponents {
-    ModalStack: typeof ModalStackVue;
-    Modal: typeof ModalVue;
-    ModalHeader: typeof ModalHeaderVue;
-    ModalActions: typeof ModalActionsVue;
-  }
+    interface ComponentCustomProperties {
+        $showModal: typeof showModal;
+    }
+    interface GlobalComponents {
+        ModalStack: typeof ModalStackVue;
+        Modal: typeof ModalVue;
+        ModalHeader: typeof ModalHeaderVue;
+        ModalActions: typeof ModalActionsVue;
+    }
 }

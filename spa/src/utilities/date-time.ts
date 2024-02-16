@@ -57,7 +57,7 @@ export function getNextDayOfWeek(targetDayOfWeek: DayOfWeek, timeZone: TimeZone 
     let dayDifference = targetDay.diff(currentDay, "day");
 
     // If the difference is negative, add 7 to get the positive difference
-    if (dayDifference < 0) {
+    if (dayDifference <= 0) {
         dayDifference += 7;
     }
 
