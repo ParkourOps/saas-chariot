@@ -1,5 +1,6 @@
 /* eslint-env node */
 // require("@rushstack/eslint-patch/modern-module-resolution");
+
 const { FlatCompat } = require("@eslint/eslintrc");
 const eslintrc = new FlatCompat({
     baseDirectory: __dirname,
@@ -33,9 +34,6 @@ module.exports = [
             "**/*.cts",
             "**/*.mts",
         ],
-        ignores: [
-            "dist/**/*",
-        ],
         rules: {
             "indent": ["error", 4],
             "quotes": ["error","double"],
@@ -43,5 +41,10 @@ module.exports = [
             "comma-dangle": ["error", "always-multiline"],
             "no-trailing-spaces": "error",
         },
+    },
+    {
+        ignores: [
+            "dist",
+        ],
     },
 ];
