@@ -12,17 +12,20 @@ const router = createRouter({
         {
             path: "/",
             name: "landing",
-            component: () => import("@/pages/landing/Landing.vue"),
+            component: () =>
+                import("@/features/landing-page/pages/LandingPage.vue"),
         },
         {
             path: "/privacy-policy",
             name: "privacyPolicy",
-            component: () => import("@/pages/PrivacyPolicy.vue"),
+            component: () =>
+                import("@/features/static-content/pages/PrivacyPolicy.vue"),
         },
         {
             path: "/terms-and-conditions",
             name: "termsAndConditions",
-            component: () => import("@/pages/TermsAndConditions.vue"),
+            component: () =>
+                import("@/features/static-content/pages/TermsAndConditions.vue"),
         },
     ],
 });
