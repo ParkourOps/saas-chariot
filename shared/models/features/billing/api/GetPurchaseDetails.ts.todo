@@ -1,0 +1,21 @@
+import {z} from "zod";
+import Url from "../../Url";
+import declareApiCall from "../declare-api-call";
+import NonEmptyString from "../../NonEmptyString";
+import EmailAddress from "../../EmailAddress";
+
+export default declareApiCall(
+    "getPurchaseDetails",
+    "Get details of a purchased item.",
+    "AUTH_REQUIRED",
+    z.object({
+        email: EmailAddress,
+    }),
+    z.object({
+        invoice: z.object({
+            id: NonEmptyString,
+            url: Url,
+        }),
+        
+    }),
+);

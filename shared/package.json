@@ -1,0 +1,14 @@
+{
+  "name": "shared",
+  "dependencies": {
+    "@parkour-ops/freeze-thaw": "^1.0.0",
+    "dayjs": "^1.11.10",
+    "hashjs": "^1.2.0",
+    "js-sha256": "^0.11.0",
+    "uuid": "^9.0.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.8"
+  }
+}
