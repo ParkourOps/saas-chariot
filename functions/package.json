@@ -1,0 +1,56 @@
+{
+  "name": "functions",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "lint:fix": "npm run lint -- --fix",
+    "build": "tsc && cp -r src/data/static lib/data/static",
+    "check": "tsc --noEmit",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && GOOGLE_APPLICATION_CREDENTIALS='service-account.json' firebase emulators:start --only functions",
+    "route-stripe-events": "stripe listen --forward-to http://127.0.0.1:5001/saas-chariot/us-central1/onStripeEvent",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@parkour-ops/application-configuration": "^1.0.1",
+    "@parkour-ops/freeze-thaw": "^1.0.0",
+    "@sendgrid/mail": "^8.1.0",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.4.4",
+    "firebase-admin": "^11.11.1",
+    "firebase-functions": "^4.7.0",
+    "fs-extra": "^11.2.0",
+    "handlebars": "^4.7.8",
+    "html-minifier": "^4.0.0",
+    "js-sha256": "^0.11.0",
+    "mjml": "^4.14.1",
+    "module-alias": "^2.2.3",
+    "stripe": "^14.10.0",
+    "uuid": "^9.0.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/html-minifier": "^4.0.5",
+    "@types/mjml": "^4.7.4",
+    "@types/uuid": "^9.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^3.1.0",
+    "ts-essentials": "^9.4.1",
+    "typescript": "^4.9.0"
+  },
+  "private": true,
+  "_moduleAliases": {
+    "@": "lib"
+  }
+}
