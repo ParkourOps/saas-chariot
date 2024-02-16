@@ -76,10 +76,14 @@ export default onRequest(async (request, response)=>{
             }
         ).send(response);
     }
-    // update clicked time
+    // append 'clicked' time, shows that link has been clicked
     await db.doc(docPath).update({
         clicked: DateTime.utcNow().toJSON(),
     });
+    // verify customer's email address
+    await db.doc(`customer/${actionLinkRecord.email}`).set({
+        emailVerified: true,
+    }, {merge: true});
     // if no actions specified, return success (it's just the right thing to do)
     if (actionLinkRecord.actionSequence.length < 1) {
         return response.redirect(actionLinkRecord.successUrl);
@@ -94,9 +98,9 @@ export default onRequest(async (request, response)=>{
             return response.redirect(actionLinkRecord.failUrl);
         }
     }
-    // all actions were successful, delete record
-    await db.doc(docPath).delete();
-    // respond with redirect
+    // if all actions were successful, delete record
+    // await db.doc(docPath).delete();
+    // success; redirect to appropriate link
     if (result && result.success && result.redirectUrl) {
         return response.redirect(result.redirectUrl);
     } else {

@@ -14,14 +14,15 @@ export default ActionLinkRequest
         secretKey: NonEmptyString,
         // when the link is created
         created: DateTime,
-        // when the link is clicked, it becomes invalid (i.e. when `clicked` is set)
+        // when the link is clicked
         clicked: DateTime.nullish(),
+        // after the link has been successfully handled
+        completed: DateTime.nullish(),
         // status
-        completed: z.object({
-            dateTime: DateTime.nullish(),
-            completedStatus: z.union([
-                z.literal("errored"),
-                z.literal("done"),
-            ]),
-        }).nullish(),
+        status: z.union([
+            z.literal("pending"),
+            // conclusion:
+            z.literal("errored"),
+            z.literal("done"),
+        ]),
     }));
