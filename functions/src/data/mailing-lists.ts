@@ -2,10 +2,10 @@ type MailingListDirectory = {
     [key: string]: {
         title: string,
         description?: string,
-    }
+    } | undefined
 }
 
-const declareMailingLists = <T extends MailingListDirectory>(arg: T) => arg;
+const declareMailingLists = (arg: MailingListDirectory) => arg;
 
 export default declareMailingLists({
     "kbozgt": {

@@ -3,10 +3,10 @@ type DeliverableResourceDirectory = {
         path: string, // the path relative to 'deliverable-resources' folder in the default storage bucket.
         title?: string,
         description?: string,
-    }
+    } | undefined
 }
 
-const declareDeliverableResources = <T extends DeliverableResourceDirectory>(arg: T) => arg;
+const declareDeliverableResources = (arg: DeliverableResourceDirectory) => arg;
 
 export default declareDeliverableResources({
     "xrbmvnmbqagf": {
