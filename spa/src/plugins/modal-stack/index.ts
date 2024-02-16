@@ -2,6 +2,8 @@ import { type AllowedComponentProps, type App, type Component, type VNodeProps, 
 import ModalVue from "./components/Modal.vue";
 import ModalStackVue from "./components/ModalStack.vue";
 import uniqueId from "@/_shared_/libraries/unique-id";
+import ModalHeaderVue from "./components/ModalHeader.vue";
+import ModalActionsVue from "./components/ModalActions.vue";
 
 type ComponentProps<C extends Component> = C extends new (...args: any) => any ? Omit<InstanceType<C>["$props"], keyof VNodeProps | keyof AllowedComponentProps> : never;
 
@@ -60,7 +62,10 @@ export function useModalStack() {
 
 export default {
     install(app: App) {
-        app.component("ModalStack", ModalStackVue).component("Modal", ModalVue);
+        app.component("ModalStack", ModalStackVue);
+        app.component("Modal", ModalVue);
+        app.component("ModalHeader", ModalHeaderVue);
+        app.component("ModalActions",  ModalActionsVue);
         app.config.globalProperties.$showModal = showModal;
     },
 };
@@ -69,4 +74,10 @@ declare module "vue" {
     interface ComponentCustomProperties {
         $showModal: typeof showModal;
     }
-}
+    interface GlobalComponents {
+        ModalStack: typeof ModalStackVue,
+        Modal: typeof ModalVue,
+        ModalHeader: typeof ModalHeaderVue,
+        ModalActions: typeof ModalActionsVue,
+    }
+};
