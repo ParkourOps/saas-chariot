@@ -1,0 +1,147 @@
+<script setup lang="ts">
+import { onBeforeMount } from 'vue';
+import getFullPathOfRoute from '@/utilities/getFullPathOfRoute';
+import { useBilling } from '@/libraries/use-billing';
+import { ref } from 'vue';
+import { z } from 'zod';
+import CatalogueItem from "../../../../models/billing/CatalogueItem";
+import { useRoute } from 'vue-router';
+import Cart from '@/components/layouts/Cart.vue';
+import { useCart } from '@/state/cart';
+import Card from '@/components/layouts/Card.vue';
+import SupportedPrice from 'models/billing/pricing/SupportedPrice';
+import type Product from 'models/billing/Product';
+import { useBusyStatus } from '@/state/busy-status';
+const cart = useCart();
+const route = useRoute();
+const billing = useBilling();
+const busyStatus = useBusyStatus();
+// type CatalogueItem = z.infer<typeof CatalogueItem>;
+    // type Product = z.infer<typeof Product>;
+    // type SupportedPrice = z.infer<typeof SupportedPrice>;
+
+    const catalogue = ref<z.infer<typeof CatalogueItem>[]>([]);
+    onBeforeMount(async ()=>{
+        busyStatus.increment();
+        catalogue.value = (await billing.getCatalogue({
+            spec: [
+                {
+                    productId: "prod_PEwxNKaIyQ68ev",
+                    behaviour: {
+                        addToCart: true,
+                        oneClickCheckout: true,
+                        allowRepurchase: false,
+                    }
+                },
+                {
+                    productId: "prod_PHD3do1U82rs1N",
+                    behaviour: {
+                        addToCart: true,
+                        oneClickCheckout: false,
+                        allowRepurchase: false,
+                    }
+                },
+                {
+                    productId: "prod_PHZfUKayl3zdvC",
+                    behaviour: {
+                        addToCart: true,
+                        oneClickCheckout: false,
+                        allowRepurchase: false,
+                    }
+                }
+            ]
+        })).catalogue;
+        busyStatus.decrement();
+    })
+
+    async function buyNow(priceId: string) {
+        const response = await billing.getCheckoutUrl({
+            cart: [
+                {
+                    priceId,
+                    quantity: 1
+                }
+            ],
+            successUrl: getFullPathOfRoute(route)
+        });
+        console.log(response);
+    }
+
+    const cartDrawer = ref<InstanceType<typeof Cart>>();
+    function addToCart(product: z.infer<typeof Product>, price: z.infer<typeof SupportedPrice>, quantity: number){
+        cart.addToCart(product, price, quantity);
+        cartDrawer.value?.show();
+    }
+
+    function itemAlreadyPurchased(product: z.infer<typeof Product>) {
+        const qtyInCart = cart.getQuantityInCart(product);
+        return qtyInCart > 1;
+    }
+</script>
+
+<template>
+    <Cart ref="cartDrawer" />
+    <button 
+        v-if="cartDrawer"
+        class="btn btn-sm btn-primary" 
+        @click="cartDrawer.show"
+    >
+        Show Cart
+    </button>
+
+    <Card v-for="item in catalogue" :key="item.id" class="mb-4" body-classes="flex flex-col gap-3">
+        <p class="font-bold text-primary text-xl">{{ item.name }}</p>
+        <p class="text-sm">{{ item.description }}</p>
+        <div v-if="item.features.length > 0">
+            <p class="font-bold mb-1">Features</p>
+            <div>
+                <p
+                    class="text-sm"
+                    v-for="(feature, idx) in item.features" 
+                    :key="`${item.id}-feature#${idx}`"
+                >
+                    —> {{ feature.name }}
+                </p>
+            </div>
+        </div>
+
+        <div class="flex flex-row" v-if="!itemAlreadyPurchased(item)">
+            <div v-for="itemPrice in item.prices" :key="itemPrice.id" class="p-4">
+                <p>
+                    {{ itemPrice }}
+                </p>
+
+                <button 
+                    v-if="item.behaviour.oneClickCheckout"
+                    class="btn btn-primary btn-sm" 
+                    @click="buyNow(itemPrice.id)"
+                >
+                    <span v-if="typeof item.behaviour.oneClickCheckout === 'object'">
+                        {{ item.behaviour.oneClickCheckout.text }}
+                    </span>
+                    <span v-if="itemPrice.type === 'one_time_fixed_price_by_given_quantity'">
+                        Buy Now
+                    </span>
+                    <span v-else-if="itemPrice.type === 'recurring_fixed_price_by_given_quantity'">
+                        Subscribe
+                    </span>
+                </button>
+
+                <button 
+                    v-if="item.behaviour.addToCart"
+                    class="btn btn-primary btn-sm" @click="addToCart(item, itemPrice, 1)"
+                >
+                    <span v-if="(typeof item.behaviour.addToCart === 'object') && item.behaviour.addToCart.text">
+                        {{ item.behaviour.addToCart.text }}
+                    </span>
+                    <span v-else>
+                        Add to Cart
+                    </span>
+                </button>
+            </div>
+        </div>
+        
+        
+    </Card>
+</template>
+../../../../functions/src/models/billing/CatalogueItemfunctions/src/models/billing/pricing/SupportedPricefunctions/src/models/billing/Product

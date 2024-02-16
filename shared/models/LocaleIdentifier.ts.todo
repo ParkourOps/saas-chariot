@@ -1,0 +1,23 @@
+import {z} from "zod";
+
+/*
+    Based On:
+        Internet Engineering Task Force (IETF)
+        BCP 47
+        https://www.rfc-editor.org/info/bcp47
+
+    Sourced From:
+        IANA (Internet Assigned Numbers Authority)
+        Language Subtag Registry (https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry)
+        Defined by: RFC 5646
+
+    Summary:
+        `<language-code>-<script code?>-<region code?>`
+
+    References:
+        – https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale
+*/
+export default z.union([
+    z.literal("en-GB"),
+    z.literal("en-US"),
+]);

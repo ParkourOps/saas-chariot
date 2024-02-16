@@ -1,0 +1,26 @@
+/*
+    Tailwind Styles:
+    
+        - https://tailwindcss.com/docs/using-with-preprocessors
+        - https://tailwindcss.com/docs/functions-and-directives
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Application of Tailwind CSS styles: */
+
+html {
+    /* Default font family: */
+    @apply font-mono;
+
+    /* Default font family, headings: */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-serif;
+    }
+}
