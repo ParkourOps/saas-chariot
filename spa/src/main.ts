@@ -14,11 +14,10 @@ app.use(router);
 app.use(modalStack);
 
 // register global components
-import registerComponents from "./components/register-components";
+import {registerComponents} from "@/components";
 registerComponents(app);
 
-import configs from "@/configs";
-
+// import configs from "@/configs";
 
 // add tawk.to (Tawk messenger)
 // import TawkMessenger from '@tawk.to/tawk-messenger-vue-3'

@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, computed } from "vue";
 import configs from "@/configs";
-import LabelWrap from "@/components/inputs/LabelWrap.vue";
-import Textbox from "@/components/inputs/Textbox.vue";
-import Textarea from "@/components/inputs/Textarea.vue";
-import ModalTitle from "@/components/layouts/ModalTitle.vue";
-import ModalActions from "@/components/layouts/ModalActions.vue";
 import { NonEmptyString, EmailAddress } from "@/_shared_/models";
 import useBusyCounter from "@/state/use-busy-counter";
 import useUserProfile from "@/state/use-user-profile";
@@ -79,20 +74,20 @@ async function sendMessage(done: () => void) {
 <template>
     <Modal>
         <template #default="{ done }">
-            <ModalTitle title="Get in Touch" icon-class="fi fi-ss-envelope" />
+            <ModalHeader title="Get in Touch" icon-class="fi fi-ss-envelope" />
 
             <div class="flex flex-col gap-4">
-                <LabelWrap label="Email" align="start">
-                    <Textbox name="email" autocomplete="email" class="w-full" :schema="EmailAddress" v-model:valid="emailValid" v-model="email" :disabled="!!user.document" />
-                </LabelWrap>
+                <InputWrap label="Email" align="start">
+                    <TextBox name="email" autocomplete="email" class="w-full" :schema="EmailAddress" v-model:valid="emailValid" v-model="email" :disabled="!!user.document" />
+                </InputWrap>
 
-                <LabelWrap label="Subject" align="start">
-                    <Textbox name="subject" autocomplete="off" class="w-full" :schema="NonEmptyString" v-model:valid="subjectValid" v-model="subject" />
-                </LabelWrap>
+                <InputWrap label="Subject" align="start">
+                    <TextBox name="subject" autocomplete="off" class="w-full" :schema="NonEmptyString" v-model:valid="subjectValid" v-model="subject" />
+                </InputWrap>
 
-                <LabelWrap label="Message" align="start">
-                    <Textarea class="w-full leading-none tracking-tighter" :schema="NonEmptyString" v-model:valid="messageValid" v-model="message" :rows="10"> </Textarea>
-                </LabelWrap>
+                <InputWrap label="Message" align="start">
+                    <TextArea class="w-full leading-none tracking-tighter" :schema="NonEmptyString" v-model:valid="messageValid" v-model="message" :rows="10" />
+                </InputWrap>
             </div>
 
             <ModalActions>

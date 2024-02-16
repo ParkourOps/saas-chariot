@@ -251,7 +251,7 @@ const props = defineProps<{
                 <i class="fi fi-ss-envelope"></i>
                 {{ configs.contact.email.address }}
             </p>
-            <button v-if="configs.contact?.email && props.showEmail === 'button'" class="btn btn-secondary lg:btn-sm" @click="$showModal(() => import('@/components/modals/GetInTouchModal.vue'), {})">
+            <button v-if="configs.contact?.email && props.showEmail === 'button'" class="btn btn-secondary lg:btn-sm" @click="$showModal(() => import('./modals/ModalContactForm.vue'), {})">
                 <i class="fi fi-ss-envelope"></i>
                 Get in Touch
             </button>

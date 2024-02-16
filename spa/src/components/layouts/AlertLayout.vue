@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import InfoIcon from "@/assets/icons/InfoIcon.vue";
-import SuccessIcon from "@/assets/icons/SuccessIcon.vue";
-import WarningIcon from "@/assets/icons/WarningIcon.vue";
-import ErrorIcon from "@/assets/icons/ErrorIcon.vue";
+import InfoIcon from "@/assets/icons/IconInfo.vue";
+import SuccessIcon from "@/assets/icons/IconSuccess.vue";
+import WarningIcon from "@/assets/icons/IconWarning.vue";
+import ErrorIcon from "@/assets/icons/IconError.vue";
 import type { NotificationType } from "@/types/notification-type";
 
 defineProps<{

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { watch } from "vue";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 type Key = string;
 type TabOption = {
