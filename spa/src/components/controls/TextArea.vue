@@ -4,25 +4,25 @@ import { computed, watch } from "vue";
 import { type ZodString } from "zod";
 
 const props = defineProps<{
-  name?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  readonly?: boolean;
-  spellcheck?: boolean;
-  wrap?: "hard" | "soft";
-  cols?: number;
-  rows?: number;
+    name?: string;
+    placeholder?: string;
+    disabled?: boolean;
+    readonly?: boolean;
+    spellcheck?: boolean;
+    wrap?: "hard" | "soft";
+    cols?: number;
+    rows?: number;
 
-  size?: "xs" | "sm" | "md" | "lg";
+    size?: "xs" | "sm" | "md" | "lg";
 
-  modelValue?: string;
-  schema?: ZodString;
+    modelValue?: string;
+    schema?: ZodString;
 }>();
 
 const emits = defineEmits<{
-  "update:modelValue": [value?: string];
-  "update:valid": [value: boolean];
-  "update:touched": [value: boolean];
+    "update:modelValue": [value?: string];
+    "update:valid": [value: boolean];
+    "update:touched": [value: boolean];
 }>();
 
 const value = computed({
@@ -68,27 +68,20 @@ defineExpose({
 </script>
 
 <template>
-  <textarea
-    :name="name"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    :readonly="readonly"
-    :spellcheck="spellcheck"
-    :wrap="wrap"
-    :cols="cols"
-    :rows="rows"
-    class="textarea textarea-bordered"
-    :class="[
-      { 'textarea-xs': size === 'xs' },
-      { 'textarea-sm': size === 'sm' },
-      { 'textarea-md': size === 'md' },
-      { 'textarea-lg': size === 'lg' },
-      { 'textarea-error border-2': touched && !valid },
-    ]"
-    v-model="value"
-    @focusout="touched = true"
-  >
+    <textarea
+        :name="name"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :readonly="readonly"
+        :spellcheck="spellcheck"
+        :wrap="wrap"
+        :cols="cols"
+        :rows="rows"
+        class="textarea textarea-bordered"
+        :class="[{ 'textarea-xs': size === 'xs' }, { 'textarea-sm': size === 'sm' }, { 'textarea-md': size === 'md' }, { 'textarea-lg': size === 'lg' }, { 'textarea-error border-2': touched && !valid }]"
+        v-model="value"
+        @focusout="touched = true"
+    >
         <slot />
-    </textarea
-  >
+    </textarea>
 </template>

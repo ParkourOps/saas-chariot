@@ -4,18 +4,18 @@ import { ref } from "vue";
 
 type Key = string;
 type TabOption = {
-  key: Key;
-  label: string;
+    key: Key;
+    label: string;
 };
 
 const props = defineProps<{
-  options: TabOption[];
-  tabClass?: string | string[];
-  modelValue?: TabOption;
+    options: TabOption[];
+    tabClass?: string | string[];
+    modelValue?: TabOption;
 }>();
 
 const emits = defineEmits<{
-  "update:modelValue": [value: TabOption];
+    "update:modelValue": [value: TabOption];
 }>();
 
 const selected = ref(props.modelValue ?? props.options[0]);
@@ -30,16 +30,9 @@ watch(
 </script>
 
 <template>
-  <div role="tablist" class="tabs-boxed tabs">
-    <a
-      v-for="option in options"
-      :key="option.key"
-      role="tab"
-      class="tab"
-      :class="[tabClass, { 'tab-active': option.key === selected.key }]"
-      @click="selected = option"
-    >
-      {{ option.label }}
-    </a>
-  </div>
+    <div role="tablist" class="tabs-boxed tabs">
+        <a v-for="option in options" :key="option.key" role="tab" class="tab" :class="[tabClass, { 'tab-active': option.key === selected.key }]" @click="selected = option">
+            {{ option.label }}
+        </a>
+    </div>
 </template>

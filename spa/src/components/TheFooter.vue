@@ -4,419 +4,330 @@ import configs from "@/configs";
 import { readableTimeForNextDayOfWeek } from "@/utilities/date-time";
 
 const props = defineProps<{
-  showEmail: "text" | "button";
-  showPhone?: boolean;
+    showEmail: "text" | "button";
+    showPhone?: boolean;
 }>();
 </script>
 
 <template>
-  <div
-    class="grid grid-cols-1 gap-8 bg-base-300 fill-secondary px-6 pb-6 pt-8 text-secondary sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:px-12"
-  >
-    <!-- App Logo, Name, Slogan -->
-    <div
-      class="lg:col-start-2"
-      :class="[
-        { 'sm:col-span-full lg:col-span-1': !configs.contact.officeHours },
-        { 'lg:row-span-2': configs.contact.officeHours },
-      ]"
-    >
-      <div class="block text-center">
-        <LogoSymbol class="mb-1 max-h-20" />
-        <p v-if="configs.application.name" class="text-xl font-bold">
-          {{ configs.application.name }}
-        </p>
-        <p
-          v-if="configs.application.slogan"
-          class="mx-auto max-w-[18rem] text-sm leading-tight tracking-tight"
-        >
-          {{ configs.application.slogan }}
-        </p>
-      </div>
-    </div>
+    <div class="grid grid-cols-1 gap-8 bg-base-300 fill-secondary px-6 pb-6 pt-8 text-secondary sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:px-12">
+        <!-- App Logo, Name, Slogan -->
+        <div class="lg:col-start-2" :class="[{ 'sm:col-span-full lg:col-span-1': !configs.contact.officeHours }, { 'lg:row-span-2': configs.contact.officeHours }]">
+            <div class="block text-center">
+                <LogoSymbol class="mb-1 max-h-20" />
+                <p v-if="configs.application.name" class="text-xl font-bold">
+                    {{ configs.application.name }}
+                </p>
+                <p v-if="configs.application.slogan" class="mx-auto max-w-[18rem] text-sm leading-tight tracking-tight">
+                    {{ configs.application.slogan }}
+                </p>
+            </div>
+        </div>
 
-    <!-- Company, Address -->
-    <div
-      v-if="configs.contact?.address"
-      class="text-center text-sm leading-tight sm:self-center lg:col-start-3 lg:self-end lg:text-right"
-    >
-      <p v-if="configs.contact?.company?.name" class="font-bold">
-        {{ configs.contact.company.name }}
-      </p>
-      <div
-        v-else
-        class="mb-2 inline-flex flex-row items-center text-base sm:mb-4 sm:text-sm sm:font-semibold lg:mb-2 lg:text-base lg:font-normal"
-      >
-        <i class="fi fi-ss-home mr-2 leading-none"></i>
-        Address
-      </div>
-      <p v-if="configs.contact?.company?.number" class="-mt-1 mb-1 opacity-70">
-        Company # {{ configs.contact.company.number }}
-      </p>
-      <p
-        v-for="(line, idx) in configs.contact.address.lines"
-        :key="`addr-l-#${idx}`"
-      >
-        {{ line }}
-      </p>
-    </div>
+        <!-- Company, Address -->
+        <div v-if="configs.contact?.address" class="text-center text-sm leading-tight sm:self-center lg:col-start-3 lg:self-end lg:text-right">
+            <p v-if="configs.contact?.company?.name" class="font-bold">
+                {{ configs.contact.company.name }}
+            </p>
+            <div v-else class="mb-2 inline-flex flex-row items-center text-base sm:mb-4 sm:text-sm sm:font-semibold lg:mb-2 lg:text-base lg:font-normal">
+                <i class="fi fi-ss-home mr-2 leading-none"></i>
+                Address
+            </div>
+            <p v-if="configs.contact?.company?.number" class="-mt-1 mb-1 opacity-70">Company # {{ configs.contact.company.number }}</p>
+            <p v-for="(line, idx) in configs.contact.address.lines" :key="`addr-l-#${idx}`">
+                {{ line }}
+            </p>
+        </div>
 
-    <!-- Office Hours -->
-    <div
-      v-if="configs.contact?.officeHours"
-      class="flex flex-col items-center justify-center sm:col-start-2 sm:row-start-2 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:justify-start lg:justify-self-start"
-    >
-      <div
-        tabindex="0"
-        class="collapse collapse-arrow w-fit bg-secondary text-neutral sm:collapse-open sm:mx-auto sm:bg-transparent sm:text-secondary"
-      >
+        <!-- Office Hours -->
+        <div v-if="configs.contact?.officeHours" class="flex flex-col items-center justify-center sm:col-start-2 sm:row-start-2 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:justify-start lg:justify-self-start">
+            <div tabindex="0" class="collapse collapse-arrow w-fit bg-secondary text-neutral sm:collapse-open sm:mx-auto sm:bg-transparent sm:text-secondary">
+                <div class="collapse-title min-h-0 rounded-box py-2 font-semibold sm:rounded-b-none sm:after:text-transparent">
+                    <div class="flex flex-row items-center justify-center text-sm leading-none">
+                        <i class="fi fi-ss-clock mr-2 leading-none"></i>
+                        <span class="hidden sm:inline-block">Office Hours</span>
+                        <span class="sm:hidden">View Office Hours</span>
+                    </div>
+                </div>
+                <div class="collapse-content rounded-b-box">
+                    <table v-if="configs.contact?.officeHours" class="mx-auto mt-2 text-sm">
+                        <tr v-if="configs.contact.officeHours.monday">
+                            <td>
+                                <p class="mr-4 font-semibold">Monday</p>
+                            </td>
+                            <td>
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Monday",
+                                        configs.contact.officeHours.monday.from.hours,
+                                        configs.contact.officeHours.monday.from.minutes,
+                                        configs.contact.officeHours.monday.from.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                                -
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Monday",
+                                        configs.contact.officeHours.monday.to.hours,
+                                        configs.contact.officeHours.monday.to.minutes,
+                                        configs.contact.officeHours.monday.to.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                        <tr v-if="configs.contact.officeHours.tuesday">
+                            <td>
+                                <p class="mr-4 font-semibold">Tuesday</p>
+                            </td>
+                            <td>
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Tuesday",
+                                        configs.contact.officeHours.tuesday.from.hours,
+                                        configs.contact.officeHours.tuesday.from.minutes,
+                                        configs.contact.officeHours.tuesday.from.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                                -
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Tuesday",
+                                        configs.contact.officeHours.tuesday.to.hours,
+                                        configs.contact.officeHours.tuesday.to.minutes,
+                                        configs.contact.officeHours.tuesday.to.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                        <tr v-if="configs.contact.officeHours.wednesday">
+                            <td>
+                                <p class="mr-4 font-semibold">Wednesday</p>
+                            </td>
+                            <td>
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Wednesday",
+                                        configs.contact.officeHours.wednesday.from.hours,
+                                        configs.contact.officeHours.wednesday.from.minutes,
+                                        configs.contact.officeHours.wednesday.from.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                                -
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Wednesday",
+                                        configs.contact.officeHours.wednesday.to.hours,
+                                        configs.contact.officeHours.wednesday.to.minutes,
+                                        configs.contact.officeHours.wednesday.to.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                        <tr v-if="configs.contact.officeHours.thursday">
+                            <td>
+                                <p class="mr-4 font-semibold">Thursday</p>
+                            </td>
+                            <td>
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Thursday",
+                                        configs.contact.officeHours.thursday.from.hours,
+                                        configs.contact.officeHours.thursday.from.minutes,
+                                        configs.contact.officeHours.thursday.from.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                                -
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Thursday",
+                                        configs.contact.officeHours.thursday.to.hours,
+                                        configs.contact.officeHours.thursday.to.minutes,
+                                        configs.contact.officeHours.thursday.to.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                        <tr v-if="configs.contact.officeHours.friday">
+                            <td>
+                                <p class="mr-4 font-semibold">Friday</p>
+                            </td>
+                            <td>
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Friday",
+                                        configs.contact.officeHours.friday.from.hours,
+                                        configs.contact.officeHours.friday.from.minutes,
+                                        configs.contact.officeHours.friday.from.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                                -
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Friday",
+                                        configs.contact.officeHours.friday.to.hours,
+                                        configs.contact.officeHours.friday.to.minutes,
+                                        configs.contact.officeHours.friday.to.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                        <tr v-if="configs.contact.officeHours.saturday">
+                            <td>
+                                <p class="mr-4 font-semibold">Saturday</p>
+                            </td>
+                            <td>
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Saturday",
+                                        configs.contact.officeHours.saturday.from.hours,
+                                        configs.contact.officeHours.saturday.from.minutes,
+                                        configs.contact.officeHours.saturday.from.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                                -
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Saturday",
+                                        configs.contact.officeHours.saturday.to.hours,
+                                        configs.contact.officeHours.saturday.to.minutes,
+                                        configs.contact.officeHours.saturday.to.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                        <tr v-if="configs.contact.officeHours.sunday">
+                            <td>
+                                <p class="mr-4 font-semibold">Sunday</p>
+                            </td>
+                            <td>
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Sunday",
+                                        configs.contact.officeHours.sunday.from.hours,
+                                        configs.contact.officeHours.sunday.from.minutes,
+                                        configs.contact.officeHours.sunday.from.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                                -
+                                {{
+                                    readableTimeForNextDayOfWeek(
+                                        "Sunday",
+                                        configs.contact.officeHours.sunday.to.hours,
+                                        configs.contact.officeHours.sunday.to.minutes,
+                                        configs.contact.officeHours.sunday.to.seconds ?? undefined,
+                                        configs.contact.timeZone,
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
         <div
-          class="collapse-title min-h-0 rounded-box py-2 font-semibold sm:rounded-b-none sm:after:text-transparent"
+            class="flex flex-col items-center justify-center gap-2 sm:row-start-2 sm:gap-4 lg:col-start-3 lg:items-end lg:gap-2"
+            :class="[{ 'sm:col-start-1': configs.contact.officeHours }, { 'sm:col-start-2': !configs.contact.officeHours }]"
         >
-          <div
-            class="flex flex-row items-center justify-center text-sm leading-none"
-          >
-            <i class="fi fi-ss-clock mr-2 leading-none"></i>
-            <span class="hidden sm:inline-block">Office Hours</span>
-            <span class="sm:hidden">View Office Hours</span>
-          </div>
+            <p v-if="configs.contact?.phone && props.showPhone">
+                <i class="fi fi-ss-phone-rotary"></i>
+                {{ configs.contact.phone }}
+            </p>
+            <p v-if="configs.contact?.email && props.showEmail === 'text'">
+                <i class="fi fi-ss-envelope"></i>
+                {{ configs.contact.email.address }}
+            </p>
+            <button v-if="configs.contact?.email && props.showEmail === 'button'" class="btn btn-secondary lg:btn-sm" @click="$showModal(() => import('./modals/ModalContactForm.vue'), {})">
+                <i class="fi fi-ss-envelope"></i>
+                Get in Touch
+            </button>
         </div>
-        <div class="collapse-content rounded-b-box">
-          <table
-            v-if="configs.contact?.officeHours"
-            class="mx-auto mt-2 text-sm"
-          >
-            <tr v-if="configs.contact.officeHours.monday">
-              <td>
-                <p class="mr-4 font-semibold">Monday</p>
-              </td>
-              <td>
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Monday",
-                    configs.contact.officeHours.monday.from.hours,
-                    configs.contact.officeHours.monday.from.minutes,
-                    configs.contact.officeHours.monday.from.seconds ??
-                      undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-                -
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Monday",
-                    configs.contact.officeHours.monday.to.hours,
-                    configs.contact.officeHours.monday.to.minutes,
-                    configs.contact.officeHours.monday.to.seconds ?? undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-              </td>
-            </tr>
-            <tr v-if="configs.contact.officeHours.tuesday">
-              <td>
-                <p class="mr-4 font-semibold">Tuesday</p>
-              </td>
-              <td>
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Tuesday",
-                    configs.contact.officeHours.tuesday.from.hours,
-                    configs.contact.officeHours.tuesday.from.minutes,
-                    configs.contact.officeHours.tuesday.from.seconds ??
-                      undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-                -
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Tuesday",
-                    configs.contact.officeHours.tuesday.to.hours,
-                    configs.contact.officeHours.tuesday.to.minutes,
-                    configs.contact.officeHours.tuesday.to.seconds ?? undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-              </td>
-            </tr>
-            <tr v-if="configs.contact.officeHours.wednesday">
-              <td>
-                <p class="mr-4 font-semibold">Wednesday</p>
-              </td>
-              <td>
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Wednesday",
-                    configs.contact.officeHours.wednesday.from.hours,
-                    configs.contact.officeHours.wednesday.from.minutes,
-                    configs.contact.officeHours.wednesday.from.seconds ??
-                      undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-                -
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Wednesday",
-                    configs.contact.officeHours.wednesday.to.hours,
-                    configs.contact.officeHours.wednesday.to.minutes,
-                    configs.contact.officeHours.wednesday.to.seconds ??
-                      undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-              </td>
-            </tr>
-            <tr v-if="configs.contact.officeHours.thursday">
-              <td>
-                <p class="mr-4 font-semibold">Thursday</p>
-              </td>
-              <td>
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Thursday",
-                    configs.contact.officeHours.thursday.from.hours,
-                    configs.contact.officeHours.thursday.from.minutes,
-                    configs.contact.officeHours.thursday.from.seconds ??
-                      undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-                -
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Thursday",
-                    configs.contact.officeHours.thursday.to.hours,
-                    configs.contact.officeHours.thursday.to.minutes,
-                    configs.contact.officeHours.thursday.to.seconds ??
-                      undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-              </td>
-            </tr>
-            <tr v-if="configs.contact.officeHours.friday">
-              <td>
-                <p class="mr-4 font-semibold">Friday</p>
-              </td>
-              <td>
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Friday",
-                    configs.contact.officeHours.friday.from.hours,
-                    configs.contact.officeHours.friday.from.minutes,
-                    configs.contact.officeHours.friday.from.seconds ??
-                      undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-                -
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Friday",
-                    configs.contact.officeHours.friday.to.hours,
-                    configs.contact.officeHours.friday.to.minutes,
-                    configs.contact.officeHours.friday.to.seconds ?? undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-              </td>
-            </tr>
-            <tr v-if="configs.contact.officeHours.saturday">
-              <td>
-                <p class="mr-4 font-semibold">Saturday</p>
-              </td>
-              <td>
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Saturday",
-                    configs.contact.officeHours.saturday.from.hours,
-                    configs.contact.officeHours.saturday.from.minutes,
-                    configs.contact.officeHours.saturday.from.seconds ??
-                      undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-                -
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Saturday",
-                    configs.contact.officeHours.saturday.to.hours,
-                    configs.contact.officeHours.saturday.to.minutes,
-                    configs.contact.officeHours.saturday.to.seconds ??
-                      undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-              </td>
-            </tr>
-            <tr v-if="configs.contact.officeHours.sunday">
-              <td>
-                <p class="mr-4 font-semibold">Sunday</p>
-              </td>
-              <td>
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Sunday",
-                    configs.contact.officeHours.sunday.from.hours,
-                    configs.contact.officeHours.sunday.from.minutes,
-                    configs.contact.officeHours.sunday.from.seconds ??
-                      undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-                -
-                {{
-                  readableTimeForNextDayOfWeek(
-                    "Sunday",
-                    configs.contact.officeHours.sunday.to.hours,
-                    configs.contact.officeHours.sunday.to.minutes,
-                    configs.contact.officeHours.sunday.to.seconds ?? undefined,
-                    configs.contact.timeZone,
-                  )
-                }}
-              </td>
-            </tr>
-          </table>
+
+        <!-- Internal Links -->
+        <div
+            class="col-span-full mb-1 flex flex-col items-center justify-center gap-4 text-sm font-semibold underline sm:mt-3 sm:flex-row sm:gap-8"
+            :class="[
+                {
+                    'lg:col-span-1 lg:row-start-1 lg:flex-col lg:items-start lg:justify-end lg:gap-4': !configs.contact.officeHours,
+                },
+                { 'lg:row-span-2': !configs.contact.officeHours && !configs.social },
+            ]"
+        >
+            <RouterLink :to="{ name: 'privacyPolicy' }">Privacy Policy</RouterLink>
+            <RouterLink :to="{ name: 'termsAndConditions' }">Terms and Conditions</RouterLink>
         </div>
-      </div>
-    </div>
 
-    <!-- Contact Info -->
-    <div
-      class="flex flex-col items-center justify-center gap-2 sm:row-start-2 sm:gap-4 lg:col-start-3 lg:items-end lg:gap-2"
-      :class="[
-        { 'sm:col-start-1': configs.contact.officeHours },
-        { 'sm:col-start-2': !configs.contact.officeHours },
-      ]"
-    >
-      <p v-if="configs.contact?.phone && props.showPhone">
-        <i class="fi fi-ss-phone-rotary"></i>
-        {{ configs.contact.phone }}
-      </p>
-      <p v-if="configs.contact?.email && props.showEmail === 'text'">
-        <i class="fi fi-ss-envelope"></i>
-        {{ configs.contact.email.address }}
-      </p>
-      <button
-        v-if="configs.contact?.email && props.showEmail === 'button'"
-        class="btn btn-secondary lg:btn-sm"
-        @click="$showModal(() => import('./modals/ModalContactForm.vue'), {})"
-      >
-        <i class="fi fi-ss-envelope"></i>
-        Get in Touch
-      </button>
+        <!-- Social Media Icons -->
+        <div
+            v-if="configs.social"
+            class="col-span-full flex flex-row flex-wrap items-center justify-center gap-3 px-4"
+            :class="[
+                {
+                    'lg:col-span-2 lg:items-end lg:justify-start lg:px-0': !configs.contact.officeHours,
+                },
+            ]"
+        >
+            <button v-if="configs.social?.gitHub" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-github text-[1.34rem]"></i>
+            </button>
+            <button v-if="configs.social?.linkedIn" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-linkedin -mr-1 text-[1.34rem]"></i>
+            </button>
+            <button v-if="configs.social?.facebook" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-facebook text-[1.34rem]"></i>
+            </button>
+            <button v-if="configs.social?.instagram" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-instagram text-[1.34rem]"></i>
+            </button>
+            <button v-if="configs.social?.youTube" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-youtube text-[1.34rem]"></i>
+            </button>
+            <button v-if="configs.social?.tikTok" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-tik-tok text-[1.34rem]"></i>
+            </button>
+            <button v-if="configs.social?.telegram" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-telegram text-[1.34rem]"></i>
+            </button>
+            <button v-if="configs.social?.x" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-twitter-alt text-[1.34rem]"></i>
+            </button>
+            <button v-if="configs.social?.pinterest" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-pinterest text-[1.34rem]"></i>
+            </button>
+            <button v-if="configs.social?.reddit" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-reddit text-[1.34rem]"></i>
+            </button>
+            <button v-if="configs.social?.discord" class="btn btn-circle btn-secondary btn-sm">
+                <i class="fi fi-brands-discord text-[1.34rem]"></i>
+            </button>
+        </div>
     </div>
-
-    <!-- Internal Links -->
-    <div
-      class="col-span-full mb-1 flex flex-col items-center justify-center gap-4 text-sm font-semibold underline sm:mt-3 sm:flex-row sm:gap-8"
-      :class="[
-        {
-          'lg:col-span-1 lg:row-start-1 lg:flex-col lg:items-start lg:justify-end lg:gap-4':
-            !configs.contact.officeHours,
-        },
-        { 'lg:row-span-2': !configs.contact.officeHours && !configs.social },
-      ]"
-    >
-      <RouterLink :to="{ name: 'privacyPolicy' }">Privacy Policy</RouterLink>
-      <RouterLink :to="{ name: 'termsAndConditions' }"
-        >Terms and Conditions</RouterLink
-      >
-    </div>
-
-    <!-- Social Media Icons -->
-    <div
-      v-if="configs.social"
-      class="col-span-full flex flex-row flex-wrap items-center justify-center gap-3 px-4"
-      :class="[
-        {
-          'lg:col-span-2 lg:items-end lg:justify-start lg:px-0':
-            !configs.contact.officeHours,
-        },
-      ]"
-    >
-      <button
-        v-if="configs.social?.gitHub"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-github text-[1.34rem]"></i>
-      </button>
-      <button
-        v-if="configs.social?.linkedIn"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-linkedin -mr-1 text-[1.34rem]"></i>
-      </button>
-      <button
-        v-if="configs.social?.facebook"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-facebook text-[1.34rem]"></i>
-      </button>
-      <button
-        v-if="configs.social?.instagram"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-instagram text-[1.34rem]"></i>
-      </button>
-      <button
-        v-if="configs.social?.youTube"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-youtube text-[1.34rem]"></i>
-      </button>
-      <button
-        v-if="configs.social?.tikTok"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-tik-tok text-[1.34rem]"></i>
-      </button>
-      <button
-        v-if="configs.social?.telegram"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-telegram text-[1.34rem]"></i>
-      </button>
-      <button
-        v-if="configs.social?.x"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-twitter-alt text-[1.34rem]"></i>
-      </button>
-      <button
-        v-if="configs.social?.pinterest"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-pinterest text-[1.34rem]"></i>
-      </button>
-      <button
-        v-if="configs.social?.reddit"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-reddit text-[1.34rem]"></i>
-      </button>
-      <button
-        v-if="configs.social?.discord"
-        class="btn btn-circle btn-secondary btn-sm"
-      >
-        <i class="fi fi-brands-discord text-[1.34rem]"></i>
-      </button>
-    </div>
-  </div>
 </template>
 
 <style scoped lang="scss">
 .collapse-title {
-  padding-inline: 0;
+    padding-inline: 0;
 }
 .collapse {
-  &:focus {
-    .collapse-title {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+    &:focus {
+        .collapse-title {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
     }
-  }
 }
 </style>

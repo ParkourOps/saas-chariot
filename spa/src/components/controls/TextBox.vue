@@ -4,23 +4,23 @@ import { computed, watch } from "vue";
 import { type ZodString } from "zod";
 
 const props = defineProps<{
-  name: string;
-  type?: "text" | "password";
-  placeholder?: string;
-  disabled?: boolean;
-  readonly?: boolean;
-  autocomplete?: string;
+    name: string;
+    type?: "text" | "password";
+    placeholder?: string;
+    disabled?: boolean;
+    readonly?: boolean;
+    autocomplete?: string;
 
-  size?: "xs" | "sm" | "md" | "lg";
+    size?: "xs" | "sm" | "md" | "lg";
 
-  modelValue?: string;
-  schema?: ZodString;
+    modelValue?: string;
+    schema?: ZodString;
 }>();
 
 const emits = defineEmits<{
-  "update:modelValue": [value?: string];
-  "update:valid": [value: boolean];
-  "update:touched": [value: boolean];
+    "update:modelValue": [value?: string];
+    "update:valid": [value: boolean];
+    "update:touched": [value: boolean];
 }>();
 
 const value = computed({
@@ -66,22 +66,16 @@ defineExpose({
 </script>
 
 <template>
-  <input
-    :name="name"
-    :type="type ?? 'text'"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    :readonly="readonly"
-    :autocomplete="autocomplete"
-    class="input input-bordered transition-all ease-in"
-    :class="[
-      { 'input-xs': size === 'xs' },
-      { 'input-sm': size === 'sm' },
-      { 'input-md': size === 'md' },
-      { 'input-lg': size === 'lg' },
-      { 'input-error border-2': touched && !valid },
-    ]"
-    v-model="value"
-    @focusout="touched = true"
-  />
+    <input
+        :name="name"
+        :type="type ?? 'text'"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :readonly="readonly"
+        :autocomplete="autocomplete"
+        class="input input-bordered transition-all ease-in"
+        :class="[{ 'input-xs': size === 'xs' }, { 'input-sm': size === 'sm' }, { 'input-md': size === 'md' }, { 'input-lg': size === 'lg' }, { 'input-error border-2': touched && !valid }]"
+        v-model="value"
+        @focusout="touched = true"
+    />
 </template>

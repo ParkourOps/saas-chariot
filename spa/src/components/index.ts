@@ -23,9 +23,8 @@ import PageHeader from "./layouts/PageHeader.vue";
 
 export function registerComponents(app: App) {
     // indicators
-    app
-        .component("BusySpinner", BusySpinner)
-    // controls
+    app.component("BusySpinner", BusySpinner)
+        // controls
         .component("KeyboardButton", KeyboardButton)
         .component("InputWrap", InputWrap)
         .component("TextBox", TextBox)
@@ -33,40 +32,40 @@ export function registerComponents(app: App) {
         .component("TextArea", TextArea)
         .component("DropDownSelect", DropDownSelect)
         .component("TabSelect", TabSelect)
-    // layout
+        // layout
         .component("AlertLayout", AlertLayout)
         .component("CardLayout", CardLayout)
         .component("SlidingDrawerLayout", SlidingDrawerLayout)
         .component("MarkdownContent", MarkdownContent)
         .component("PagePaddedContent", PagePaddedContent)
         .component("PageHeader", PageHeader)
-    // application
+        // application
         .component("TheTopBar", TheTopBar)
         .component("TheFooter", TheFooter);
 }
 
 declare module "vue" {
-  interface GlobalComponents {
-    // indicators
-    BusySpinner: typeof BusySpinner;
-    // controls
-    KeyboardButton: typeof KeyboardButton;
-    InputWrap: typeof InputWrap;
-    TextBox: typeof TextBox;
-    NumberBox: typeof NumberBox;
-    TextArea: typeof TextArea;
-    DropDownSelect: typeof DropDownSelect;
-    TabSelect: typeof TabSelect;
-    // layout
-    AlertLayout: typeof AlertLayout;
-    CardLayout: typeof CardLayout;
-    SlidingDrawerLayout: typeof SlidingDrawerLayout;
-    MarkdownContent: typeof MarkdownContent;
-    PagePaddedContent: typeof PagePaddedContent;
-    PageHeader: typeof PageHeader;
-    // application
-    TheTopBar: typeof TheTopBar;
-    TheFooter: typeof TheFooter;
-    //
-  }
+    interface GlobalComponents {
+        // indicators
+        BusySpinner: typeof BusySpinner;
+        // controls
+        KeyboardButton: typeof KeyboardButton;
+        InputWrap: typeof InputWrap;
+        TextBox: typeof TextBox;
+        NumberBox: typeof NumberBox;
+        TextArea: typeof TextArea;
+        DropDownSelect: typeof DropDownSelect;
+        TabSelect: typeof TabSelect;
+        // layout
+        AlertLayout: typeof AlertLayout;
+        CardLayout: typeof CardLayout;
+        SlidingDrawerLayout: typeof SlidingDrawerLayout;
+        MarkdownContent: typeof MarkdownContent;
+        PagePaddedContent: typeof PagePaddedContent;
+        PageHeader: typeof PageHeader;
+        // application
+        TheTopBar: typeof TheTopBar;
+        TheFooter: typeof TheFooter;
+        //
+    }
 }

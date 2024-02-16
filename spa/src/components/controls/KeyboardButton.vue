@@ -2,9 +2,9 @@
 import { computed } from "vue";
 
 const props = defineProps<{
-  variant?: "neutral" | "base" | "accent" | "primary" | "secondary";
-  size?: "xs" | "sm" | "base" | "lg" | "xl";
-  fontWeight?: "medium" | "semibold" | "bold" | "extrabold" | "black";
+    variant?: "neutral" | "base" | "accent" | "primary" | "secondary";
+    size?: "xs" | "sm" | "base" | "lg" | "xl";
+    fontWeight?: "medium" | "semibold" | "bold" | "extrabold" | "black";
 }>();
 
 const bgColourClass = computed(() => {
@@ -59,67 +59,67 @@ const sizeClass = computed(() => {
 </script>
 
 <template>
-  <button class="button" :class="[bgColourClass]">
-    <div class="button__content">
-      <p class="button__text font-bold" :class="[txtColourClass, sizeClass]">
-        <slot />
-      </p>
-    </div>
-  </button>
+    <button class="button" :class="[bgColourClass]">
+        <div class="button__content">
+            <p class="button__text font-bold" :class="[txtColourClass, sizeClass]">
+                <slot />
+            </p>
+        </div>
+    </button>
 </template>
 
 <style scoped lang="scss">
 * {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .button {
-  display: block;
-  position: relative;
-  flex-shrink: 0;
-  outline: none;
+    display: block;
+    position: relative;
+    flex-shrink: 0;
+    outline: none;
 
-  // base shadow
-  border: 2px solid #888888;
+    // base shadow
+    border: 2px solid #888888;
 
-  border-radius: 20px;
-  transition: 0.13s ease-in-out;
-  cursor: pointer;
-  &:active {
-    box-shadow: none;
-    .button__content {
-      box-shadow: none;
-      .button__text,
-      .button__icon {
-        transform: translate3d(0px, 0px, 0px);
-      }
-    }
-  }
-  &__content {
-    padding: 0.55rem 1rem;
-
-    box-shadow:
-      inset 0px -4px 0px #00000022,
-      0px -4px 0px #ffffff;
     border-radius: 20px;
     transition: 0.13s ease-in-out;
+    cursor: pointer;
+    &:active {
+        box-shadow: none;
+        .button__content {
+            box-shadow: none;
+            .button__text,
+            .button__icon {
+                transform: translate3d(0px, 0px, 0px);
+            }
+        }
+    }
+    &__content {
+        padding: 0.55rem 1rem;
 
-    z-index: 1;
-  }
+        box-shadow:
+            inset 0px -4px 0px #00000022,
+            0px -4px 0px #ffffff;
+        border-radius: 20px;
+        transition: 0.13s ease-in-out;
 
-  &__text {
-    position: relative;
+        z-index: 1;
+    }
 
-    transform: translate3d(0px, -4px, 0px);
+    &__text {
+        position: relative;
 
-    text-align: center;
-    color: transparent;
-    text-shadow: 2px 2px 3px #ffffff44;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    transition: 0.13s ease-in-out;
-  }
+        transform: translate3d(0px, -4px, 0px);
+
+        text-align: center;
+        color: transparent;
+        text-shadow: 2px 2px 3px #ffffff44;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+        transition: 0.13s ease-in-out;
+    }
 }
 </style>

@@ -29,9 +29,7 @@ watch(
     { immediate: true },
 );
 
-const valid = computed(
-    () => subjectValid.value && emailValid.value && messageValid.value,
-);
+const valid = computed(() => subjectValid.value && emailValid.value && messageValid.value);
 
 async function sendMessage(done: () => void) {
     busyCounter.increment();
@@ -53,10 +51,7 @@ async function sendMessage(done: () => void) {
                     address: email.value,
                 },
                 subject: `[Message Receipt] ${subject.value}`,
-                text:
-          `Thank you for reaching out to ${configs.application.name}.\n` +
-          "Please find a copy of your message below:\n\n\n" +
-          message.value,
+                text: `Thank you for reaching out to ${configs.application.name}.\n` + "Please find a copy of your message below:\n\n\n" + message.value,
             }),
         ]);
         done();
@@ -77,56 +72,31 @@ async function sendMessage(done: () => void) {
 </script>
 
 <template>
-  <Modal>
-    <template #default="{ done }">
-      <ModalHeader title="Get in Touch" icon-class="fi fi-ss-envelope" />
+    <Modal>
+        <template #default="{ done }">
+            <ModalHeader title="Get in Touch" icon-class="fi fi-ss-envelope" />
 
-      <div class="flex flex-col gap-4">
-        <InputWrap label="Email" align="start">
-          <TextBox
-            name="email"
-            autocomplete="email"
-            class="w-full"
-            :schema="EmailAddress"
-            v-model:valid="emailValid"
-            v-model="email"
-            :disabled="!!user.document"
-          />
-        </InputWrap>
+            <div class="flex flex-col gap-4">
+                <InputWrap label="Email" align="start">
+                    <TextBox name="email" autocomplete="email" class="w-full" :schema="EmailAddress" v-model:valid="emailValid" v-model="email" :disabled="!!user.document" />
+                </InputWrap>
 
-        <InputWrap label="Subject" align="start">
-          <TextBox
-            name="subject"
-            autocomplete="off"
-            class="w-full"
-            :schema="NonEmptyString"
-            v-model:valid="subjectValid"
-            v-model="subject"
-          />
-        </InputWrap>
+                <InputWrap label="Subject" align="start">
+                    <TextBox name="subject" autocomplete="off" class="w-full" :schema="NonEmptyString" v-model:valid="subjectValid" v-model="subject" />
+                </InputWrap>
 
-        <InputWrap label="Message" align="start">
-          <TextArea
-            class="w-full leading-none tracking-tighter"
-            :schema="NonEmptyString"
-            v-model:valid="messageValid"
-            v-model="message"
-            :rows="10"
-          />
-        </InputWrap>
-      </div>
+                <InputWrap label="Message" align="start">
+                    <TextArea class="w-full leading-none tracking-tighter" :schema="NonEmptyString" v-model:valid="messageValid" v-model="message" :rows="10" />
+                </InputWrap>
+            </div>
 
-      <ModalActions>
-        <button class="btn" @click="done">Cancel</button>
-        <button
-          class="btn btn-primary"
-          @click="sendMessage(done)"
-          :disabled="!valid"
-        >
-          <i class="fi fi-ss-paper-plane" />
-          Send
-        </button>
-      </ModalActions>
-    </template>
-  </Modal>
+            <ModalActions>
+                <button class="btn" @click="done">Cancel</button>
+                <button class="btn btn-primary" @click="sendMessage(done)" :disabled="!valid">
+                    <i class="fi fi-ss-paper-plane" />
+                    Send
+                </button>
+            </ModalActions>
+        </template>
+    </Modal>
 </template>
