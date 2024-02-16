@@ -7,7 +7,7 @@ function declareConst<
     Input
 >(
     schema: ZodType<Output, Def, Input>,
-    input: z.infer<ZodType<Output, Def>>
+    input: z.infer<ZodType<Output, Def, Input>>
 ) {
     return freeze(schema.parse(input));
 }
