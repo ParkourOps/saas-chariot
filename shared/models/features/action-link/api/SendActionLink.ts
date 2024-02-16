@@ -1,4 +1,4 @@
-import { z } from "zod";
+import {z} from "zod";
 import internalApiCall from "../../../../libraries/internal-api-call";
 import ActionLinkRequest from "../ActionLinkRequest";
 

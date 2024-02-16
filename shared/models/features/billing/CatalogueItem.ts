@@ -1,5 +1,5 @@
 import {z} from "zod";
-import { NonEmptyString, DateTime, Url, Metadata } from "../..";
+import {NonEmptyString, DateTime, Url, Metadata} from "../..";
 import PriceOption from "./PriceOption";
 
 export default z.object({

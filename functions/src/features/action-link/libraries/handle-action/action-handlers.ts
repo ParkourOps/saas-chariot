@@ -6,6 +6,7 @@ import ServerlessFunctionError from "@/libraries/serverless-function-error";
 import deliverableResources from "@/data/deliverable-resources";
 import mailingLists from "@/data/mailing-lists";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const instantiateActionHandler = <T extends ActionType>(type: T) => (handler: ActionHandler<T>) => handler;
 
 export const actionHandlerIssueResource = instantiateActionHandler("issueResource")(async (correlationId, email, action)=>{
@@ -134,3 +135,4 @@ export const actionHandlerUnsubscribeFromMailingList = instantiateActionHandler(
         };
     }
 });
+

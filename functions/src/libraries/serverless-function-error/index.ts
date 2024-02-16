@@ -52,6 +52,7 @@ export default class ServerlessFunctionError {
         );
     }
     send(response: express.Response) {
+        this.log();
         const httpsError = this.toHttpsError();
         response
             .status(httpsError.httpErrorCode.status)

@@ -1,5 +1,5 @@
-import { freeze } from "@parkour-ops/freeze-thaw";
-import { ZodType, z, type ZodTypeDef } from "zod";
+import {freeze} from "@parkour-ops/freeze-thaw";
+import {ZodType, z, type ZodTypeDef} from "zod";
 
 function declareConst<
     Output,
@@ -33,7 +33,7 @@ function validate<
     Input
 >(
     schema: ZodType<Output, Def, Input>,
-    input?: any
+    input?: unknown
 ) {
     const parseResult = schema.safeParse(input);
     return parseResult.success;

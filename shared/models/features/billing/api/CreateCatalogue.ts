@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {NonEmptyString} from "../../../"
+import {NonEmptyString} from "../../../";
 import internalApiCall from "../../../../libraries/internal-api-call";
 import CatalogueItem from "../../billing/CatalogueItem";
 

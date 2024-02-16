@@ -1,5 +1,5 @@
 import {z} from "zod";
-import { NonNegativeInteger } from "../../../";
+import {NonNegativeInteger} from "../../../";
 import FixedPriceBase from "./FixedPriceBase";
 
 export default z.object({

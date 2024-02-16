@@ -1,5 +1,5 @@
 import {z} from "zod";
-import { NonEmptyString, DateTime, EmailAddress, Boolean } from "../../";
+import {NonEmptyString, DateTime, EmailAddress, Boolean} from "../../";
 
 export default z.object({
     userId: NonEmptyString, // populated by auth, never changes

@@ -1,6 +1,6 @@
 import {z} from "zod";
 import internalApiCall from "../../../../libraries/internal-api-call";
-import { Url, NonEmptyString } from "../../../";
+import {Url, NonEmptyString} from "../../../";
 
 export default internalApiCall.declare(
     "getResource",

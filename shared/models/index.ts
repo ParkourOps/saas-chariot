@@ -13,60 +13,60 @@ export const NonEmptyString = z.string().min(1);
 export const Url = z.string().url();
 export const EmailAddress= z.string().email();
 export const ExpandedEmailAddress = z.object({
-        address: EmailAddress,
-        displayName: NonEmptyString.nullish(),
-    });
+    address: EmailAddress,
+    displayName: NonEmptyString.nullish(),
+});
 
 export const Iso8601Timestamp = z.string().datetime();
 
 export const Metadata = z.record(z.string(), z.union([
-        z.string(),
-        z.number(),
-        z.null(),
-    ]));
+    z.string(),
+    z.number(),
+    z.null(),
+]));
 
 export const Wgs84DecimalCoordinate = z.object({
-        latitude: Decimal.gte(-90).lte(90),
-        longitude: Decimal.gte(-180).lte(180),
-    });
+    latitude: Decimal.gte(-90).lte(90),
+    longitude: Decimal.gte(-180).lte(180),
+});
 
 export const DayOfWeek = z.union([
-        z.literal("Monday"),
-        z.literal("Tuesday"),
-        z.literal("Wednesday"),
-        z.literal("Thursday"),
-        z.literal("Friday"),
-        z.literal("Saturday"),
-        z.literal("Sunday"),
-    ]);
+    z.literal("Monday"),
+    z.literal("Tuesday"),
+    z.literal("Wednesday"),
+    z.literal("Thursday"),
+    z.literal("Friday"),
+    z.literal("Saturday"),
+    z.literal("Sunday"),
+]);
 
 export const Month = z.union([
-        z.literal("January"),
-        z.literal("February"),
-        z.literal("March"),
-        z.literal("April"),
-        z.literal("May"),
-        z.literal("June"),
-        z.literal("July"),
-        z.literal("August"),
-        z.literal("September"),
-        z.literal("October"),
-        z.literal("November"),
-        z.literal("December"),
-    ]);
+    z.literal("January"),
+    z.literal("February"),
+    z.literal("March"),
+    z.literal("April"),
+    z.literal("May"),
+    z.literal("June"),
+    z.literal("July"),
+    z.literal("August"),
+    z.literal("September"),
+    z.literal("October"),
+    z.literal("November"),
+    z.literal("December"),
+]);
 export const TimeZone = _TimeZone_;
 export const Date = z.object({
-        dayOfMonth: NonNegativeInteger.gte(1).lte(31),
-        month: Month,
-        year: NonNegativeInteger,
-        timeZone: TimeZone,
-    });
+    dayOfMonth: NonNegativeInteger.gte(1).lte(31),
+    month: Month,
+    year: NonNegativeInteger,
+    timeZone: TimeZone,
+});
 export const Time = z.object({
-        hours: NonNegativeInteger.lte(23),
-        minutes: NonNegativeInteger.lte(59),
-        seconds: NonNegativeInteger.lte(59).nullish(),
-        timeZone: TimeZone,
-    });
+    hours: NonNegativeInteger.lte(23),
+    minutes: NonNegativeInteger.lte(59),
+    seconds: NonNegativeInteger.lte(59).nullish(),
+    timeZone: TimeZone,
+});
 export const DateTime = Date.merge(Time);
 
 /*

@@ -1,4 +1,4 @@
-import { NonEmptyString, ExpandedEmailAddress, DateTime } from "../..";
+import {NonEmptyString, ExpandedEmailAddress, DateTime} from "../..";
 import {z} from "zod";
 
 export default z.object({

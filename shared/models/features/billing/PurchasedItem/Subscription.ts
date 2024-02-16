@@ -1,5 +1,5 @@
 import {z} from "zod";
-import { NonEmptyString, DateTime, NonNegativeInteger, Metadata } from "../../../";
+import {NonEmptyString, DateTime, NonNegativeInteger, Metadata} from "../../../";
 
 export default z.object({
     id: NonEmptyString,

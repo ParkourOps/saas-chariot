@@ -1,5 +1,9 @@
 {
   "name": "shared",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "lint:fix": "npm run lint -- --fix"
+  },
   "dependencies": {
     "@parkour-ops/freeze-thaw": "^1.0.0",
     "dayjs": "^1.11.10",
@@ -9,6 +13,11 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/uuid": "^9.0.8"
+    "@types/uuid": "^9.0.8",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "eslint": "^8.56.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.29.1"
   }
 }

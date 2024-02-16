@@ -1,6 +1,6 @@
 
 import {z} from "zod";
-import { NonEmptyString, EmailAddress, NonNegativeInteger } from "../../../";
+import {NonEmptyString, EmailAddress, NonNegativeInteger} from "../../../";
 import CatalogueItem from "../CatalogueItem";
 import PriceOption from "../PriceOption";
 import Invoice from "./Invoice";

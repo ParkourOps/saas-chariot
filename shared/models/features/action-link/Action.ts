@@ -1,5 +1,5 @@
 import {z} from "zod";
-import { NonEmptyString } from "../../";
+import {NonEmptyString} from "../../";
 
 export default z.discriminatedUnion(
     "type",

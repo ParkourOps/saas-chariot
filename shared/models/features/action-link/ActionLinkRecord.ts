@@ -1,5 +1,5 @@
 import {z} from "zod";
-import { NonEmptyString, DateTime } from "../..";
+import {NonEmptyString, DateTime} from "../..";
 import ActionLinkRequest from "./ActionLinkRequest";
 
 export default ActionLinkRequest
@@ -22,7 +22,6 @@ export default ActionLinkRequest
             completedStatus: z.union([
                 z.literal("errored"),
                 z.literal("done"),
-            ])
-        }).nullish()
-    }
-));
+            ]),
+        }).nullish(),
+    }));

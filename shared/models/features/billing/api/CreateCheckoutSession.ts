@@ -1,6 +1,6 @@
 import {z} from "zod";
 import Cart from "../../billing/Cart";
-import {Url, NonNegativeInteger} from "../../../"
+import {Url, NonNegativeInteger} from "../../../";
 import internalApiCall from "../../../../libraries/internal-api-call";
 
 export default internalApiCall.declare(
