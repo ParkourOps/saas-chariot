@@ -7,6 +7,20 @@ import handleAction from "./libraries/handle-action";
 import {ActionHandlerResult} from "./types";
 import ServerlessFunctionError from "@/libraries/serverless-function-error";
 import firestore from "@/libraries/firestore";
+import {z} from "zod";
+import withSchema from "@/_shared_/libraries/with-schema";
+
+type ActionLinkRecordStatus = z.infer<typeof ActionLinkRecord>["status"];
+async function concludeActionLinkRecord(actionLinkId: string, status: Exclude<ActionLinkRecordStatus, "pending">) {
+    const db = firestore.get();
+    const docPath = `action-link/${actionLinkId}`;
+    const UpdateActionLinkRecord = ActionLinkRecord.pick({completed: true, status: true});
+    const updateData = withSchema.declareConst(UpdateActionLinkRecord, {
+        completed: DateTime.utcNow().toJSON(),
+        status,
+    });
+    return await db.doc(docPath).update(updateData);
+}
 
 export default onRequest(async (request, response)=>{
     // generate correlation ID
@@ -48,6 +62,7 @@ export default onRequest(async (request, response)=>{
     }
     const parseResult = ActionLinkRecord.safeParse(doc);
     if (!parseResult.success) {
+        await concludeActionLinkRecord(actionLinkId, "errored");
         return ServerlessFunctionError.create(
             correlationId,
             "internal",
@@ -84,10 +99,6 @@ export default onRequest(async (request, response)=>{
     await db.doc(`customer/${actionLinkRecord.email}`).set({
         emailVerified: true,
     }, {merge: true});
-    // if no actions specified, return success (it's just the right thing to do)
-    if (actionLinkRecord.actionSequence.length < 1) {
-        return response.redirect(actionLinkRecord.successUrl);
-    }
     // if actions specified, cycle through them all
     let result: ActionHandlerResult | undefined;
     for (const a of actionLinkRecord.actionSequence) {
@@ -95,11 +106,12 @@ export default onRequest(async (request, response)=>{
         // return fail if any action fails
         if (!result.success) {
             result.error.log();
+            await concludeActionLinkRecord(actionLinkId, "errored");
             return response.redirect(actionLinkRecord.failUrl);
         }
     }
-    // if all actions were successful, delete record
-    // await db.doc(docPath).delete();
+    // if all actions were successful, conclude successful
+    await concludeActionLinkRecord(actionLinkId, "done");
     // success; redirect to appropriate link
     if (result && result.success && result.redirectUrl) {
         return response.redirect(result.redirectUrl);

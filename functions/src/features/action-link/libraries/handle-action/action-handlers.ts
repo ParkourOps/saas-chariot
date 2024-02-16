@@ -10,7 +10,8 @@ import mailingLists from "@/data/mailing-lists";
 const instantiateActionHandler = <T extends ActionType>(type: T) => (handler: ActionHandler<T>) => handler;
 
 export const actionHandlerIssueResource = instantiateActionHandler("issueResource")(async (correlationId, email, action)=>{
-    if (!Object.keys(deliverableResources).includes(action.resourceKey)) {
+    const resourceEntry = deliverableResources[action.resourceKey];
+    if (!resourceEntry) {
         return {
             success: false,
             error: ServerlessFunctionError.create(
@@ -26,7 +27,6 @@ export const actionHandlerIssueResource = instantiateActionHandler("issueResourc
             ),
         };
     }
-    const resourceEntry = deliverableResources[action.resourceKey as keyof typeof deliverableResources];
     const getDownloadLinkResult = await getDownloadLink(
         correlationId,
         resourceEntry.path,
@@ -45,7 +45,8 @@ export const actionHandlerIssueResource = instantiateActionHandler("issueResourc
 });
 
 export const actionHandlerSubscribeToMailingList = instantiateActionHandler("subscribeToMailingList")(async (correlationId, email, action)=>{
-    if (!Object.keys(mailingLists).includes(action.mailingListKey)) {
+    const mailingListEntry = mailingLists[action.mailingListKey];
+    if (!mailingListEntry) {
         return {
             success: false,
             error: ServerlessFunctionError.create(
@@ -61,7 +62,6 @@ export const actionHandlerSubscribeToMailingList = instantiateActionHandler("sub
             ),
         };
     }
-    const mailingListEntry = mailingLists[action.mailingListKey as keyof typeof mailingLists];
     const db = firestore.get();
     const docPath = `mailing-list/${action.mailingListKey}`;
     const doc = await db.doc(docPath).get();
@@ -73,6 +73,7 @@ export const actionHandlerSubscribeToMailingList = instantiateActionHandler("sub
         } else {
             await db.doc(docPath).create({
                 title: mailingListEntry.title,
+                description: mailingListEntry.description,
                 subscriberEmails: [email],
             });
         }

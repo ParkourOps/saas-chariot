@@ -33,6 +33,7 @@ export default internalApiCall.implement(SendActionLink)(async (request) => {
         created: DateTime.utcNow().toJSON(),
         successUrl: request.data.successUrl,
         failUrl: request.data.failUrl,
+        status: "pending",
     });
     const db = firestore.get();
     await db.doc(`action-link/${actionLinkRecord.id}`).set(actionLinkRecord);
