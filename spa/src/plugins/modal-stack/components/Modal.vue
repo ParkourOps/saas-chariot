@@ -4,13 +4,13 @@ import { onMounted } from "vue";
 import { ref } from "vue";
 
 defineProps<{
-  modalClass?: string | string[];
+    modalClass?: string | string[];
 }>();
 
 const emits = defineEmits<{
-  done: [value?: ReturnType];
-  hidden: [];
-  visible: [];
+    done: [value?: ReturnType];
+    hidden: [];
+    visible: [];
 }>();
 
 const dialog = ref<HTMLDialogElement>();
@@ -40,9 +40,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <dialog ref="dialog" class="modal modal-top sm:modal-middle">
-    <div class="modal-box overflow-visible" :class="modalClass">
-      <slot :done="done" />
-    </div>
-  </dialog>
+    <dialog ref="dialog" class="modal modal-top sm:modal-middle">
+        <div class="modal-box overflow-visible" :class="modalClass">
+            <slot :done="done" />
+        </div>
+    </dialog>
 </template>
