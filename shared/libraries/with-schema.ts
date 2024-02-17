@@ -1,4 +1,3 @@
-import {freeze} from "@parkour-ops/freeze-thaw";
 import {ZodType, z, type ZodTypeDef} from "zod";
 
 function declareConst<
@@ -9,7 +8,7 @@ function declareConst<
     schema: ZodType<Output, Def, Input>,
     input: z.infer<ZodType<Output, Def, Input>>
 ) {
-    return freeze(schema.parse(input));
+    return Object.freeze(schema.parse(input));
 }
 
 function declareVar<
