@@ -38,6 +38,7 @@ service-account.json
 # Firebase temp directories and files
 .firebase/
 
-# Compiled serverless functions
+# Compiled/Built
 functions/lib/
 spa/dist/
+auto-imports.d.ts
