@@ -1,4 +1,4 @@
-import firebase from "./firebase";
+import { funcs } from "./firebase";
 import { httpsCallable, type HttpsCallableOptions } from "firebase/functions";
 import { type UnknownKeysParam, type ZodRawShape, type ZodTypeAny, type objectOutputType } from "zod";
 import internalApiCall from "@/_shared_/libraries/internal-api-call";
@@ -56,12 +56,12 @@ function createCaller<
     callOptions?: HttpsCallableOptions,
 ) {
     return async function (requestData: objectOutputType<CallRequestDataShape, CallRequestDataCatchAll, CallRequestDataUnknownKeys>) {
-        const rawSuccessResponse = (await httpsCallable(firebase.funcs, apiCall.name, callOptions)(requestData)).data;
+        const rawSuccessResponse = (await httpsCallable(funcs, apiCall.name, callOptions)(requestData)).data;
         return apiCall.response.parse(rawSuccessResponse);
     };
 }
 
-export default function () {
+export function useFuncs() {
     return {
         createCaller,
     };

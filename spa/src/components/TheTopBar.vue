@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import configs from "@/configs";
-import useAuth from "@/libraries/firebase/use-auth";
+import {useAuth} from "@/libraries/firebase/auth";
 
 const auth = useAuth();
 </script>

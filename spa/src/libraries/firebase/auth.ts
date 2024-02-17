@@ -9,17 +9,18 @@ import {
     sendSignInLinkToEmail,
     signInWithEmailLink,
     signOut,
-    signInWithEmailAndPassword,
-    sendPasswordResetEmail,
-    createUserWithEmailAndPassword,
-    sendEmailVerification,
-    applyActionCode as _applyActionCode,
+    getAuth,
+    // signInWithEmailAndPassword,
+    // sendPasswordResetEmail,
+    // createUserWithEmailAndPassword,
+    // sendEmailVerification,
+    // applyActionCode as _applyActionCode,
 } from "firebase/auth";
-import firebase from "./firebase";
+import {app} from "./firebase";
 
-const auth = firebase.auth;
+export const useAuth = defineStore("Auth", () => {
+    const auth = getAuth(app);
 
-export default defineStore("Auth", () => {
     const activeUser = ref<User>();
     const LOCAL_STORAGE_KEY_EMAIL = "emailForSignIn";
 
@@ -56,31 +57,31 @@ export default defineStore("Auth", () => {
         await signOut(auth);
     }
 
-    async function signInWithPassword(email: string, password: string) {
-        await signInWithEmailAndPassword(firebase.auth, email, password);
-    }
+    // async function signInWithPassword(email: string, password: string) {
+    //     await signInWithEmailAndPassword(auth, email, password);
+    // }
 
-    async function sendPasswordResetLink(email: string) {
-        await sendPasswordResetEmail(firebase.auth, email);
-    }
+    // async function sendPasswordResetLink(email: string) {
+    //     await sendPasswordResetEmail(auth, email);
+    // }
 
-    async function createUserWithPassword(email: string, password: string) {
-        await createUserWithEmailAndPassword(firebase.auth, email, password);
-    }
+    // async function createUserWithPassword(email: string, password: string) {
+    //     await createUserWithEmailAndPassword(auth, email, password);
+    // }
 
-    async function sendEmailVerificationLink(route: RouteLocationRaw) {
-        if (!activeUser.value) {
-            console.error("User must be signed in to send email verification link.");
-            return;
-        }
-        await sendEmailVerification(activeUser.value, {
-            url: getRouteUrl(route),
-        });
-    }
+    // async function sendEmailVerificationLink(route: RouteLocationRaw) {
+    //     if (!activeUser.value) {
+    //         console.error("User must be signed in to send email verification link.");
+    //         return;
+    //     }
+    //     await sendEmailVerification(activeUser.value, {
+    //         url: getRouteUrl(route),
+    //     });
+    // }
 
-    async function applyActionCode(actionCode: string) {
-        return await _applyActionCode(firebase.auth, actionCode);
-    }
+    // async function applyActionCode(actionCode: string) {
+    //     return await _applyActionCode(auth, actionCode);
+    // }
 
     // Subscribe to changes
     onAuthStateChanged(auth, (user) => {
@@ -99,13 +100,13 @@ export default defineStore("Auth", () => {
             sendLoginLink,
             catchLoginAttempt,
         },
-        signInWithPassword: {
-            createUserWithPassword,
-            signInWithPassword,
-            sendPasswordResetLink,
-        },
+        // signInWithPassword: {
+        //     createUserWithPassword,
+        //     signInWithPassword,
+        //     sendPasswordResetLink,
+        // },
         logout,
-        sendEmailVerificationLink,
-        applyActionCode,
+        // sendEmailVerificationLink,
+        // applyActionCode,
     };
 });

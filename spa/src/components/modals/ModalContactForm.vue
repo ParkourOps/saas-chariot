@@ -5,7 +5,6 @@ import { NonEmptyString, EmailAddress } from "@/_shared_/models";
 import {useIndicators} from "@/state/indicators";
 import userData from "@/state/user-data";
 import {sendTextOnlyEmail} from "@/libraries/messaging";
-import { getCurrentInstance } from "vue";
 import { useToastNotifications } from "@/plugins/toast-notifications";
 
 const indicators = useIndicators();
