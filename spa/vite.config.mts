@@ -9,8 +9,8 @@ import remarkFrontmatter from "remark-frontmatter";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
-import AutoImport from 'unplugin-auto-import/vite'
-import { unheadVueComposablesImports } from '@unhead/vue'
+// import AutoImport from 'unplugin-auto-import/vite'
+// import { unheadVueComposablesImports } from '@unhead/vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -30,11 +30,11 @@ export default defineConfig({
                 rehypeKatex,
             ],
         }),
-        AutoImport({
-            imports: [
-                unheadVueComposablesImports
-            ]
-        })
+        // AutoImport({
+        //     imports: [
+        //         unheadVueComposablesImports,
+        //     ]
+        // })
     ],
     resolve: {
         alias: {
