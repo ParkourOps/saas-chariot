@@ -1,36 +1,38 @@
 <script setup lang="ts">
-import { RouterView, useRoute, useRouter } from "vue-router";
+import { RouterView } from "vue-router";
 
 import {useAnalytics} from "@/libraries/analytics";
-import useAuth from "@/libraries/firebase/use-auth";
-import { watch } from "vue";
-import { useModalStack } from "@/plugins/modal-stack";
-const router = useRouter();
-const route = useRoute();
-const auth = useAuth();
 const analytics = useAnalytics();
+
+// import useAuth from "@/libraries/firebase/use-auth";
+// import { watch } from "vue";
+import { useModalStack } from "@/plugins/modal-stack";
+// const router = useRouter();
+// const route = useRoute();
+// const auth = useAuth();
+
 const modalStack = useModalStack();
-watch(
-    () => auth.activeUser,
-    async (user) => {
-        if (!user) {
-            analytics.resetIdentity();
-            await router.push({ name: "signIn" });
-        } else {
-            analytics.setIdentity(user.uid);
-            // show modal if email address not verified
-            if (!user.emailVerified) {
-                modalStack.showModal(() => import("./components/modals/ModalAwaitAction.vue"), {
-                    title: "Email Verification Required",
-                    instruction: "Please check your inbox for a verification link.",
-                    async mountAction() {
-                        await auth.sendEmailVerificationLink(route);
-                    },
-                });
-            }
-        }
-    },
-);
+// watch(
+//     () => auth.activeUser,
+//     async (user) => {
+//         if (!user) {
+//             analytics.resetIdentity();
+//             await router.push({ name: "signIn" });
+//         } else {
+//             analytics.setIdentity(user.uid);
+//             // show modal if email address not verified
+//             if (!user.emailVerified) {
+//                 modalStack.showModal(() => import("./components/modals/ModalAwaitAction.vue"), {
+//                     title: "Email Verification Required",
+//                     instruction: "Please check your inbox for a verification link.",
+//                     async mountAction() {
+//                         await auth.sendEmailVerificationLink(route);
+//                     },
+//                 });
+//             }
+//         }
+//     },
+// );
 
 import { useIndicators } from "./state/indicators";
 const indicators = useIndicators();
