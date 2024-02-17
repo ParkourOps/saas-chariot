@@ -53,7 +53,7 @@ async function sendMessage(done: () => void) {
                     address: email.value,
                 },
                 subject: `[Message Receipt] ${subject.value}`,
-                text: `Thank you for reaching out to ${configs.application.name}.\n` + "Please find a copy of your message below:\n\n\n" + message.value,
+                text: `Thank you for reaching out to ${configs.application.title}.\n` + "Please find a copy of your message below:\n\n\n" + message.value,
             }),
         ]);
         done();

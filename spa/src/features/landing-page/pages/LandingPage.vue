@@ -14,6 +14,7 @@ import OfferCountdown from "../components/OfferCountdown.vue";
 
 import ShoppingBagIcon from "../assets/icons/IconShoppingBag.vue";
 import TypeScriptIcon from "../assets/icons/IconTypeScript.vue";
+import LogoStamp from "@/assets/images/LogoStamp.vue";
 
 // import { useBilling } from "@/libraries/use-billing";
 // import getRouteUrl from "@/utilities/get-route-url";
@@ -40,10 +41,7 @@ import TypeScriptIcon from "../assets/icons/IconTypeScript.vue";
 
 <template>
     <div class="flex flex-col items-center justify-center bg-primary px-4 py-14 font-serif sm:py-28">
-        <div>
-            <LogoSymbol class="mb-1 max-h-20 fill-base-100" />
-            <p class="mb-4 text-center text-2xl font-black tracking-tighter text-base-100">SaaS Chariot</p>
-        </div>
+        <LogoStamp class="mb-2" colour-class="fill-base-100 text-base-100" show-title/>
         <p class="smallcaps max-w-sm text-center text-2xl text-accent sm:max-w-screen-sm sm:text-4xl">Transform Ideas into Reality: Rapidly Build and Launch Digital Products and Services</p>
 
         <div class="mt-12 flex flex-col gap-6 sm:flex-row">

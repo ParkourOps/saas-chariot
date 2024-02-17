@@ -7,8 +7,8 @@ const DayOfficeHours = z.object({
 });
 
 const ApplicationDetails = z.object({
-    name: NonEmptyString,
-    slogan: NonEmptyString.nullish(),
+    title: NonEmptyString,
+    subtitle: NonEmptyString.nullish(),
     allowInstall: Boolean.nullish(),
     email: ExpandedEmailAddress,
 });

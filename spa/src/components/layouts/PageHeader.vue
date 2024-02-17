@@ -24,7 +24,7 @@ const props = defineProps<{
 }>();
 
 const firstSegment: PathSegment = {
-    label: configs.application.name,
+    label: configs.application.title,
     route: props.baseRoute,
 };
 

@@ -57,7 +57,7 @@ export default internalApiCall.implement(SendActionLink)(async (request) => {
             paragraph: request.data.prompt.paragraph,
             ctaText: request.data.callToActionText,
             ctaLink: url.toString(),
-            appName: appConfig.application.name,
+            appName: appConfig.application.title,
         },
         text:
 `Action Required
@@ -70,7 +70,7 @@ ${ request.data.prompt.paragraph }
 ${ url }
 
 
-Thank you for choosing ${appConfig.application.name}.
+Thank you for choosing ${appConfig.application.title}.
 `,
     });
     if (!sendTemplatedEmailResult.success) {

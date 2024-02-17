@@ -3,8 +3,8 @@ import ApplicationConfig from "../models/ApplicationConfiguration";
 
 export default withSchema.declareConst(ApplicationConfig, {
     application: {
-        name: "SaaS Chariot",
-        slogan: "Rapidly Build and Launch Digital Products and Services",
+        title: "SaaS Chariot",
+        subtitle: "Rapidly Build and Launch Digital Products and Services",
         email: {
             displayName: "SaaS Chariot",
             address: "no_reply@saaschariot.com",

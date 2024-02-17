@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LogoSymbol from "@/assets/images/LogoSymbol.vue";
+import LogoStamp from "@/assets/images/LogoStamp.vue";
 import configs from "@/configs";
 import { readableTimeForNextDayOfWeek } from "@/utilities/date-time";
 
@@ -13,15 +13,7 @@ const props = defineProps<{
     <div class="grid grid-cols-1 gap-8 bg-base-300 fill-secondary px-6 pb-6 pt-8 text-secondary sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:px-12">
         <!-- App Logo, Name, Slogan -->
         <div class="lg:col-start-2" :class="[{ 'sm:col-span-full lg:col-span-1': !configs.contact.officeHours }, { 'lg:row-span-2': configs.contact.officeHours }]">
-            <div class="block text-center">
-                <LogoSymbol class="mb-1 max-h-20" />
-                <p v-if="configs.application.name" class="text-xl font-bold">
-                    {{ configs.application.name }}
-                </p>
-                <p v-if="configs.application.slogan" class="mx-auto max-w-[18rem] text-sm leading-tight tracking-tight">
-                    {{ configs.application.slogan }}
-                </p>
-            </div>
+            <LogoStamp show-title show-subtitle />
         </div>
 
         <!-- Company, Address -->
