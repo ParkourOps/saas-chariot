@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import LogoSymbol from "@/assets/images/LogoSymbol.vue";
+import LogoStamp from "@/assets/images/LogoStamp.vue";
 
 import valuePropCatalogue from "../data/flat-catalogue-value-props";
 import featuresCatalogue from "../data/tiered-catalogue-features";
-import testimonials from "../data/testimonials";
-import offer from "../data/offer";
+import customerTestimonials from "../data/customer-testimonials";
+import offerData from "../data/offer-data";
 
 import TieredCatalogue from "../components/TieredCatalogue.vue";
 import SectionDivider from "../components/SectionDivider.vue";
@@ -14,7 +14,17 @@ import OfferCountdown from "../components/OfferCountdown.vue";
 
 import ShoppingBagIcon from "../assets/icons/IconShoppingBag.vue";
 import TypeScriptIcon from "../assets/icons/IconTypeScript.vue";
-import LogoStamp from "@/assets/images/LogoStamp.vue";
+
+import { useSeoMeta } from "@unhead/vue";
+
+useSeoMeta({
+    title: "",
+    description: "",
+    robots: {
+        index: true,
+        follow: true,
+    },
+});
 
 // import { useBilling } from "@/libraries/use-billing";
 // import getRouteUrl from "@/utilities/get-route-url";
@@ -110,10 +120,10 @@ import LogoStamp from "@/assets/images/LogoStamp.vue";
     <TieredCatalogue :catalogue="featuresCatalogue" />
 
     <SectionDivider title="What Users Say" />
-    <TestimonialsLayout :testimonials="testimonials" />
+    <TestimonialsLayout :testimonials="customerTestimonials" />
 
     <SectionDivider title="In The Offer" />
-    <OfferCountdown :offer="offer" class="mb-12" />
+    <OfferCountdown :offer="offerData" class="mb-12" />
 
     <KeyboardButton class="mx-auto w-fit font-black" variant="accent" size="xl" @click="$showModal(() => import('../components/modals/ModalJoinWaitingList.vue'), {})">
         <div class="flex items-center">
@@ -121,7 +131,7 @@ import LogoStamp from "@/assets/images/LogoStamp.vue";
             <ShoppingBagIcon fill="white" class="h-16 w-fit" />
         </div>
     </KeyboardButton>
-    <p class="mx-auto mt-1 max-w-prose text-center font-serif text-sm font-medium text-accent">One-time purchase of {{ offer.currencySymbol }}{{ offer.total }}</p>
+    <p class="mx-auto mt-1 max-w-prose text-center font-serif text-sm font-medium text-accent">One-time purchase of {{ offerData.currencySymbol }}{{ offerData.total }}</p>
     <p class="mx-auto -mt-1 max-w-prose text-center font-serif text-sm font-medium text-accent">7-day money-back guarantee included.</p>
     <div class="h-12 sm:h-24" />
 </template>
