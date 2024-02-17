@@ -1,7 +1,7 @@
 import getRouteUrl from "@/utilities/get-route-url";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { type RouteLocationRaw } from "vue-router";
+import { type RouteLocationRaw } from "vue-router/auto";
 import {
     type User,
     isSignInWithEmailLink,

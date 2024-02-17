@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TermsAndConditions from "../data/markdown/terms-and-conditions.mdx";
+import TermsAndConditions from "@/data/markdown/terms-and-conditions.mdx";
 </script>
 
 <template>
-    <PageHeader title="Terms and Conditions" :base-route="{ name: 'landing' }" />
+    <PageHeader title="Terms and Conditions" :base-route="{ name: '/' }" />
     <PagePaddedContent>
         <MarkdownContent hide-title>
             <TermsAndConditions />

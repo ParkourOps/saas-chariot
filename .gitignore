@@ -42,3 +42,4 @@ service-account.json
 functions/lib/
 spa/dist/
 auto-imports.d.ts
+typed-router.d.ts

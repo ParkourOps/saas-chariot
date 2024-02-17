@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router/auto";
 // import userOnly from './guards/user-only'
 // import guestOnly from './guards/guest-only'
 
@@ -8,23 +8,6 @@ const router = createRouter({
         // always scroll to top
         return { top: 0 };
     },
-    routes: [
-        {
-            path: "/",
-            name: "landing",
-            component: () => import("@/features/landing-page/pages/LandingPage.vue"),
-        },
-        {
-            path: "/privacy-policy",
-            name: "privacyPolicy",
-            component: () => import("@/features/static-content/pages/PrivacyPolicy.vue"),
-        },
-        {
-            path: "/terms-and-conditions",
-            name: "termsAndConditions",
-            component: () => import("@/features/static-content/pages/TermsAndConditions.vue"),
-        },
-    ],
 });
 
 export default router;

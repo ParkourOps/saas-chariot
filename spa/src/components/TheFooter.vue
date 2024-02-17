@@ -259,8 +259,8 @@ const props = defineProps<{
                 { 'lg:row-span-2': !configs.contact.officeHours && !configs.social },
             ]"
         >
-            <RouterLink :to="{ name: 'privacyPolicy' }">Privacy Policy</RouterLink>
-            <RouterLink :to="{ name: 'termsAndConditions' }">Terms and Conditions</RouterLink>
+            <RouterLink :to="{ name: '/PrivacyPolicy' }">Privacy Policy</RouterLink>
+            <RouterLink :to="{ name: '/TermsAndConditions' }">Terms and Conditions</RouterLink>
         </div>
 
         <!-- Social Media Icons -->

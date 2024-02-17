@@ -1,20 +1,32 @@
-import { fileURLToPath, URL } from "node:url";
-import mdx from "@mdx-js/rollup";
-
 import { defineConfig } from "vite";
+import { fileURLToPath, URL } from "node:url";
+
+import vueRouter from 'unplugin-vue-router/vite'
 import vue from "@vitejs/plugin-vue";
 
+import mdx from "@mdx-js/rollup";
 import remarkGfm from "remark-gfm";
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
 // import AutoImport from 'unplugin-auto-import/vite'
+// import { VueRouterAutoImports } from 'unplugin-vue-router'
 // import { unheadVueComposablesImports } from '@unhead/vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
+        // See: https://github.com/posva/unplugin-vue-router
+        vueRouter({
+            routesFolder: [
+                "src/pages",
+                {
+                    src: "src/features/landing-page/pages",
+                    path: ""
+                },
+            ]
+        }),
         vue(),
         mdx({
             jsxImportSource: "vue",

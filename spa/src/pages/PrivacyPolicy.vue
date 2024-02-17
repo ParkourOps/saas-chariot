@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import PrivacyPolicy from "../data/markdown/privacy-policy.mdx";
+import PrivacyPolicy from "@/data/markdown/privacy-policy.mdx";
 </script>
 
 <template>
-    <PageHeader title="Privacy Policy" :base-route="{ name: 'landing' }" />
+    <PageHeader title="Privacy Policy" :base-route="{ name: '/' }" />
     <PagePaddedContent>
         <MarkdownContent hide-title>
             <PrivacyPolicy />
