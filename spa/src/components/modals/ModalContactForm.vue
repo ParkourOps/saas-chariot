@@ -2,14 +2,13 @@
 import { ref, watch, computed } from "vue";
 import configs from "@/configs";
 import { NonEmptyString, EmailAddress } from "@/_shared_/models";
-import useBusyCounter from "@/state/use-busy-counter";
-import useUserProfile from "@/state/use-user-profile";
-import useMessaging from "@/libraries/use-messaging";
-import useToastNotifications from "@/libraries/use-toast-notifications";
+import {useIndicators} from "@/state/indicators";
+import userData from "@/state/user-data";
+import {sendTextOnlyEmail} from "@/libraries/messaging";
+import { getCurrentInstance } from "vue";
+import { useToastNotifications } from "@/plugins/toast-notifications";
 
-const messaging = useMessaging();
-const toasts = useToastNotifications();
-const busyCounter = useBusyCounter();
+const indicators = useIndicators();
 
 const subject = ref("");
 const subjectValid = ref(false);
@@ -20,9 +19,10 @@ const emailValid = ref(false);
 const message = ref("");
 const messageValid = ref(false);
 
-const user = useUserProfile();
+const userProfile = userData.userProfile();
+
 watch(
-    () => user.document,
+    () => userProfile.document,
     (doc) => {
         email.value = doc?.email ?? "";
     },
@@ -31,12 +31,14 @@ watch(
 
 const valid = computed(() => subjectValid.value && emailValid.value && messageValid.value);
 
+const toastNotifications = useToastNotifications();
+
 async function sendMessage(done: () => void) {
-    busyCounter.increment();
+    const token = indicators.registerPendingAction();
 
     try {
         await Promise.all([
-            messaging.email.sendTextOnlyEmail({
+            sendTextOnlyEmail({
                 from: configs.application.email, // send from no-reply email
                 to: configs.contact.email, // to front-desk email
                 replyTo: {
@@ -45,7 +47,7 @@ async function sendMessage(done: () => void) {
                 subject: `${email.value}: ${subject.value}`,
                 text: message.value,
             }),
-            messaging.email.sendTextOnlyEmail({
+            sendTextOnlyEmail({
                 from: configs.application.email,
                 to: {
                     address: email.value,
@@ -55,18 +57,18 @@ async function sendMessage(done: () => void) {
             }),
         ]);
         done();
-        toasts.push({
+        toastNotifications.show({
             type: "success",
             message: "Message sent.",
         });
     } catch (e) {
         console.error(e);
-        toasts.push({
+        toastNotifications.show({
             type: "error",
             message: "Failed to send message.",
         });
     } finally {
-        busyCounter.decrement();
+        token.unregisterPendingAction();
     }
 }
 </script>
@@ -78,7 +80,7 @@ async function sendMessage(done: () => void) {
 
             <div class="flex flex-col gap-4">
                 <InputWrap label="Email" align="start">
-                    <TextBox name="email" autocomplete="email" class="w-full" :schema="EmailAddress" v-model:valid="emailValid" v-model="email" :disabled="!!user.document" />
+                    <TextBox name="email" autocomplete="email" class="w-full" :schema="EmailAddress" v-model:valid="emailValid" v-model="email" :disabled="!!userProfile.document" />
                 </InputWrap>
 
                 <InputWrap label="Subject" align="start">

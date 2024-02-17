@@ -1,4 +1,4 @@
-import type { NotificationType } from "@/types/notification-type";
+import type { NotificationType } from "../../types/notification-type";
 import uniqueId from "@/_shared_/libraries/unique-id";
 import { defineStore } from "pinia";
 import { ref } from "vue";
@@ -15,7 +15,7 @@ type AlertRecord = Alert & {
 
 const DURATION_MS = 3000;
 
-export default defineStore("Popup Alerts", () => {
+export const usePopupAlerts = defineStore("Popup Alerts", () => {
     const alerts = ref<AlertRecord[]>([]);
 
     function pop(id: string) {

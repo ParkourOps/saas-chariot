@@ -18,14 +18,11 @@ import TypeScriptIcon from "../assets/icons/IconTypeScript.vue";
 // import { useBilling } from "@/libraries/use-billing";
 // import getRouteUrl from "@/utilities/get-route-url";
 
-import { useModalStack } from "@/plugins/modal-stack";
+// // const billing = useBilling();
 
-const modalStack = useModalStack();
-// const billing = useBilling();
-
-async function showWaitingListOffer() {
-    modalStack.showModal(() => import("../components/modals/ModalJoinWaitingList.vue"), {});
-}
+// async function showWaitingListOffer() {
+//     modalStack.showModal();
+// }
 
 // async function checkout() {
 //     const result = await billing.getCheckoutUrl({
@@ -120,7 +117,7 @@ async function showWaitingListOffer() {
     <SectionDivider title="In The Offer" />
     <OfferCountdown :offer="offer" class="mb-12" />
 
-    <KeyboardButton class="mx-auto w-fit font-black" variant="accent" size="xl" @click="showWaitingListOffer">
+    <KeyboardButton class="mx-auto w-fit font-black" variant="accent" size="xl" @click="$showModal(() => import('../components/modals/ModalJoinWaitingList.vue'), {})">
         <div class="flex items-center">
             <p class="-mb-2 mr-2 whitespace-nowrap">ACCESS NOW</p>
             <ShoppingBagIcon fill="white" class="h-16 w-fit" />

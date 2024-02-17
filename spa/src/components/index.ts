@@ -10,8 +10,6 @@ import NumberBox from "./controls/NumberBox.vue";
 import TextArea from "./controls/TextArea.vue";
 import DropDownSelect from "./controls/DropDownSelect.vue";
 import TabSelect from "./controls/TabSelect.vue";
-// layouts
-import AlertLayout from "./layouts/AlertLayout.vue";
 // application elements
 import TheTopBar from "./TheTopBar.vue";
 import TheFooter from "./TheFooter.vue";
@@ -33,7 +31,6 @@ export function registerComponents(app: App) {
         .component("DropDownSelect", DropDownSelect)
         .component("TabSelect", TabSelect)
         // layout
-        .component("AlertLayout", AlertLayout)
         .component("CardLayout", CardLayout)
         .component("SlidingDrawerLayout", SlidingDrawerLayout)
         .component("MarkdownContent", MarkdownContent)
@@ -56,8 +53,6 @@ declare module "vue" {
         TextArea: typeof TextArea;
         DropDownSelect: typeof DropDownSelect;
         TabSelect: typeof TabSelect;
-        // layout
-        AlertLayout: typeof AlertLayout;
         CardLayout: typeof CardLayout;
         SlidingDrawerLayout: typeof SlidingDrawerLayout;
         MarkdownContent: typeof MarkdownContent;

@@ -2,8 +2,7 @@
 <!-- MAKE SURE THERE IS A <div id='modals'></div> UNDER index.html's BODY TAG -->
 
 <script setup lang="ts">
-import { useModalStack } from "../";
-const { modalStack, concludeModal } = useModalStack();
+import { modalStack, concludeModal } from "../";
 </script>
 
 <template>

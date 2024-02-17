@@ -1,4 +1,4 @@
-import type { NotificationType } from "@/types/notification-type";
+import type { NotificationType } from "../../types/notification-type";
 import uniqueId from "@/_shared_/libraries/unique-id";
 import { defineStore } from "pinia";
 import { ref } from "vue";
@@ -15,7 +15,7 @@ type ToastNotificationRecord = ToastNotification & {
 
 const DURATION_MS = 3000;
 
-export default defineStore("Toast Notifications", () => {
+export const useToastNotifications = defineStore("Toast Notifications", () => {
     const toasts = ref<ToastNotificationRecord[]>([]);
 
     function pop(id: string) {

@@ -1,4 +1,4 @@
-import { type AllowedComponentProps, type App, type Component, type VNodeProps, reactive, markRaw } from "vue";
+import { type AllowedComponentProps, type App, type Component, type VNodeProps, reactive, markRaw, computed } from "vue";
 import ModalVue from "./components/Modal.vue";
 import ModalStackVue from "./components/ModalStack.vue";
 import uniqueId from "@/_shared_/libraries/unique-id";
@@ -9,7 +9,7 @@ type ComponentProps<C extends Component> = C extends new (...args: any) => any ?
 
 type Modal = Component;
 
-const modalStack = reactive(
+export const modalStack = reactive(
     new Map<
         string,
         {
@@ -42,7 +42,7 @@ async function showModal<C extends Modal>(component: ComponentArg<C>, props: Com
     });
 }
 
-function concludeModal(id: string, value?: any) {
+export function concludeModal(id: string, value?: any) {
     const modalContext = modalStack.get(id);
     if (!modalContext) {
         console.error(`Could not conclude modal; did not find: ${id}`);
@@ -52,11 +52,12 @@ function concludeModal(id: string, value?: any) {
     modalStack.delete(id);
 }
 
+const numModals = computed(()=>modalStack.size);
+
 export function useModalStack() {
     return {
         showModal,
-        concludeModal,
-        modalStack,
+        numModals
     };
 }
 

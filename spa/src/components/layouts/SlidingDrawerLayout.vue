@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, watch } from "vue";
-import { useOverlay } from "@/state/overlay";
+import { useIndicators } from "@/state/indicators";
 
 const props = defineProps<{
     modelValue?: boolean;
@@ -21,11 +21,15 @@ const show = computed({
     },
 });
 
-const overlay = useOverlay();
+const indicators = useIndicators();
 watch(
     show,
     (val) => {
-        overlay.showOverlay = val ?? false;
+        if (val) {
+            indicators.forceOverlay();
+        } else {
+            indicators.unforceOverlay();
+        }
     },
     { immediate: true },
 );

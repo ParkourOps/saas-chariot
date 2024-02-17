@@ -4,7 +4,7 @@ import configs from "@/configs";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-export default defineStore("Analytics", () => {
+export const useAnalytics = defineStore("Analytics", () => {
     const initialised = ref(false);
 
     function initialise() {

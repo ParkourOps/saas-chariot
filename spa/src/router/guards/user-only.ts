@@ -1,14 +1,14 @@
 import useAuth from "@/libraries/firebase/use-auth";
-import useBusyCounter from "@/state/use-busy-counter";
+import {useIndicators} from "@/state/indicators";
 import type { NavigationGuardWithThis } from "vue-router";
 
 const navigationGuard: NavigationGuardWithThis<undefined> = (to, from, next) => {
     const auth = useAuth();
-    const busy = useBusyCounter();
-    busy.increment();
+    const indicators = useIndicators();
+    const token = indicators.registerPendingAction();
 
     function check() {
-        busy.decrement();
+        token.unregisterPendingAction();
         if (auth.activeUser) {
             next();
         } else {
