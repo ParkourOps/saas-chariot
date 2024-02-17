@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@hotjar/browser": "^1.0.9",
+    "@unhead/vue": "^1.8.10",
     "dayjs": "^1.11.10",
     "firebase": "^10.7.0",
     "hash.js": "^1.1.7",
@@ -69,6 +70,7 @@
     "sass": "^1.69.3",
     "tailwindcss": "^3.4.1",
     "typescript": "~5.2.0",
+    "unplugin-auto-import": "^0.17.5",
     "vite": "^4.4.9",
     "vite-bundle-visualizer": "^1.0.1",
     "vitest": "^0.34.4",

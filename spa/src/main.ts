@@ -9,10 +9,14 @@ import modalStack from "@/plugins/modal-stack";
 import toastNotifications from "./plugins/toast-notifications";
 import popupAlerts from "./plugins/popup-alerts";
 
+import { createHead } from '@unhead/vue'
+const head = createHead();
+
 const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
+app.use(head);
 app.use(modalStack);
 app.use(toastNotifications);
 app.use(popupAlerts);
