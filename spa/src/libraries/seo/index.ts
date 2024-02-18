@@ -141,7 +141,7 @@ async function audio(src: AudioImport | string) {
 }
 
 // apply base SEO tags from app config
-(()=>{
+function initialise(){
     useSeoMeta({
         applicationName: configs.application.title,
         title: undefined,
@@ -188,9 +188,10 @@ async function audio(src: AudioImport | string) {
             configs.application.featuredAudio.url,
         );
     }
-})();
+};
 
 export default {
+    initialise,
     featureVideo: video,
     featureImage: image,
     featureAudio: audio,

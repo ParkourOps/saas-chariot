@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import {useAnalytics} from "@/libraries/analytics";
 const analytics = useAnalytics();
 
@@ -61,6 +60,8 @@ const indicators = useIndicators();
 //       break;
 //   }
 // });
+
+seo.initialise();
 </script>
 
 <template>
