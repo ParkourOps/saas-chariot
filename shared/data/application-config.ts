@@ -5,9 +5,16 @@ export default withSchema.declareConst(ApplicationConfig, {
     application: {
         title: "SaaS Chariot",
         subtitle: "Rapidly Build and Launch Digital Products and Services",
+        description: "Rapidly Build and Launch Digital Products and Services...",
         email: {
             displayName: "SaaS Chariot",
             address: "no_reply@saaschariot.com",
+        },
+        themeColour: "#153243",
+        preferredColourScheme: "light",
+        featuredImage: {
+            url: "https://firebasestorage.googleapis.com/v0/b/saas-chariot.appspot.com/o/seo-assets%2Fimages%2Flogo.png?alt=media&token=f78bc5f0-fe27-47e9-b12b-0735033c609d",
+            alt: "The SaaS Chariot logo.",
         },
     },
     contact: {
