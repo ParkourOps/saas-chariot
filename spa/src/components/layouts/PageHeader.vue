@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import configs from "@/configs";
 import { computed } from "vue";
-import { useRoute, type RouteLocationRaw } from "vue-router/auto";
+import type { RouteLocationRaw } from "vue-router/auto";
 const route = useRoute();
 
 type PathSegment = {

@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "mdx.d.ts", "src/**/*.ts", "src/**/*.vue", "src/**/*.mdx", "typed-router.d.ts"],
+  "include": ["env.d.ts", "mdx.d.ts", "src/**/*.ts", "src/**/*.vue", "src/**/*.mdx", "auto-imports.d.ts", "typed-router.d.ts"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "jsx": "preserve",
@@ -10,5 +10,6 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    // "types": ["vite/client"]
   }
 }

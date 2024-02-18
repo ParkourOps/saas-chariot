@@ -1,6 +1,6 @@
 import {useAuth} from "@/libraries/firebase/auth";
 import {useIndicators} from "@/state/indicators";
-import type { NavigationGuardWithThis } from "vue-router";
+import type { NavigationGuardWithThis } from "vue-router/auto";
 
 const navigationGuard: NavigationGuardWithThis<undefined> = (to, from, next) => {
     const auth = useAuth();
