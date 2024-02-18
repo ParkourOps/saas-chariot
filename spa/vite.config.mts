@@ -14,6 +14,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
 // import { unheadVueComposablesImports } from '@unhead/vue'
 
+import Unlighthouse from '@unlighthouse/vite'
+
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
@@ -52,7 +54,8 @@ export default defineConfig({
                 }
                 // unheadVueComposablesImports,
             ]
-        })
+        }),
+        Unlighthouse({})
     ],
     resolve: {
         alias: {
