@@ -1,11 +1,4 @@
-<script setup lang="ts">
-defineProps<{
-    fill?: string;
-}>();
-</script>
-
 <template>
-        <!-- style="enable-background:new 0 0 512 512;" -->
 <svg 
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -14,7 +7,6 @@ defineProps<{
     xml:space="preserve" 
     width="100%"
     height="100%"
-    :fill="fill"
 >
     <g>
         <polygon points="393.062,130.051 393.062,36.854 293.871,36.854  "/>

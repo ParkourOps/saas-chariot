@@ -1,11 +1,5 @@
-<script setup lang="ts">
-defineProps<{
-    fill?: string;
-}>();
-</script>
-
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1 512 512" height="512" width="512" :fill="fill">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1 512 512" height="100%" width="100%">
         <g>
             <g>
                 <path d="m432.555 405.36h-148.338c-4.143 0-7.5 3.357-7.5 7.5s3.357 7.5 7.5 7.5h148.338c4.143 0 7.5-3.357 7.5-7.5s-3.358-7.5-7.5-7.5z" />
