@@ -2,44 +2,11 @@
 import { computed } from "vue";
 
 const props = defineProps<{
-    variant?: "neutral" | "base" | "accent" | "primary" | "secondary";
+    backgroundColourClass?: string,
+    textBackgroundColourClass?: string,
     size?: "xs" | "sm" | "base" | "lg" | "xl";
     fontWeight?: "medium" | "semibold" | "bold" | "extrabold" | "black";
 }>();
-
-const bgColourClass = computed(() => {
-    switch (props.variant) {
-    case "base":
-        return "bg-base-100";
-    case "neutral":
-        return "bg-neutral";
-    case "accent":
-        return "bg-accent";
-    case "primary":
-        return "bg-primary";
-    case "secondary":
-        return "bg-secondary";
-    default:
-        return "bg-base-100";
-    }
-});
-
-const txtColourClass = computed(() => {
-    switch (props.variant) {
-    case "base":
-        return "bg-secondary";
-    case "neutral":
-        return "bg-secondary";
-    case "accent":
-        return "bg-neutral";
-    case "primary":
-        return "bg-base-100";
-    case "secondary":
-        return "bg-base-100";
-    default:
-        return "bg-secondary";
-    }
-});
 
 const sizeClass = computed(() => {
     switch (props.size) {
@@ -59,9 +26,9 @@ const sizeClass = computed(() => {
 </script>
 
 <template>
-    <button class="button" :class="[bgColourClass]">
+    <button class="button" :class="[backgroundColourClass]">
         <div class="button__content">
-            <p class="button__text font-bold" :class="[txtColourClass, sizeClass]">
+            <p class="button__text font-bold" :class="[textBackgroundColourClass, sizeClass]">
                 <slot />
             </p>
         </div>

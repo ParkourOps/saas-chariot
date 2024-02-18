@@ -13,6 +13,7 @@ import TestimonialsLayout from "../components/TestimonialsLayout.vue";
 import OfferCountdown from "../components/OfferCountdown.vue";
 
 import ShoppingBagIcon from "../assets/icons/IconShoppingBag.vue";
+import DiamondIcon from "../assets/icons/IconDiamond.vue";
 import TypeScriptIcon from "../assets/icons/IconTypeScript.vue";
 
 seo.allowIndex();
@@ -24,10 +25,9 @@ seo.allowIndex();
         <p class="smallcaps max-w-sm text-center text-2xl text-accent sm:max-w-screen-sm sm:text-4xl">Transform Ideas into Reality: Rapidly Build and Launch Digital Products and Services</p>
 
         <div class="mt-12 flex flex-col gap-6 sm:flex-row">
-            <KeyboardButton variant="neutral">Learn More </KeyboardButton>
+            <KeyboardButton variant="neutral" class="font-mono" background-colour-class="bg-neutral" text-background-colour-class="bg-secondary">Learn More </KeyboardButton>
             <!-- <KeyboardButton>View Demo</KeyboardButton> -->
-            <KeyboardButton>View Demo</KeyboardButton>
-            <KeyboardButton variant="accent">Buy Now</KeyboardButton>
+            <KeyboardButton variant="accent" class="font-mono" background-colour-class="bg-accent" text-background-colour-class="bg-neutral">Buy Now</KeyboardButton>
         </div>
     </div>
 
@@ -68,7 +68,7 @@ seo.allowIndex();
                         {{ item.description }}
                     </p>
                 </div>
-                <KeyboardButton v-if="item.action" class="mx-auto mt-6 w-fit" size="sm">
+                <KeyboardButton v-if="item.action" class="mx-auto mt-6 w-fit" size="sm" background-colour-class="bg-base-100" text-background-colour-class="bg-secondary">
                     {{ item.action.name }}
                 </KeyboardButton>
             </div>
@@ -94,12 +94,19 @@ seo.allowIndex();
     <SectionDivider title="In The Offer" />
     <OfferCountdown :offer="offerData" class="mb-12" />
 
-    <KeyboardButton class="mx-auto w-fit font-black" variant="accent" size="xl" @click="$showModal(() => import('../components/modals/ModalJoinWaitingList.vue'), {})">
+    <KeyboardButton
+        class="mx-auto"
+        size="xl" 
+        background-colour-class="bg-accent"
+        text-background-colour-class="bg-neutral"
+        @click="$showModal(() => import('../components/modals/ModalJoinWaitingList.vue'), {})"
+    >
         <div class="flex items-center">
-            <p class="-mb-2 mr-2 whitespace-nowrap">ACCESS NOW</p>
-            <ShoppingBagIcon fill="white" class="h-16 w-fit" />
+            <p class="whitespace-nowrap mr-6 -mb-2">ACCESS NOW</p>
+            <DiamondIcon fill="#ECE6DF" class="h-12 -mb-1" />
         </div>
     </KeyboardButton>
+
     <p class="mx-auto mt-1 max-w-prose text-center font-serif text-sm font-medium text-accent">One-time purchase of {{ offerData.currencySymbol }}{{ offerData.total }}</p>
     <p class="mx-auto -mt-1 max-w-prose text-center font-serif text-sm font-medium text-accent">7-day money-back guarantee included.</p>
     <div class="h-12 sm:h-24" />
