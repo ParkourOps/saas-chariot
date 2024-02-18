@@ -11,6 +11,9 @@
 /* Application of Tailwind CSS styles: */
 
 html {
+    /* Always smooth scroll. */
+    @apply scroll-smooth;
+
     /* Default font family: */
     @apply font-mono;
 

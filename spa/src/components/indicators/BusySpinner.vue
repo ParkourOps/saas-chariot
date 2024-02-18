@@ -1,5 +1,5 @@
 <template>
-    <div class="spinner border-[7px] border-[#00000000] border-r-primary"></div>
+    <div class="spinner border-[7px] border-[#00000000] border-r-white"></div>
 </template>
 
 <style scoped lang="scss">

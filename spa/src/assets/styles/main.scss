@@ -29,8 +29,7 @@
 
 // Application of styles independent of Tailwind CSS:
 html {
-    // Disable select and drag by default
-    // for cleaner look and feel.
+    // Disable select and drag by default for cleaner look and feel.
     @extend .no-select;
     @extend .no-drag;
 }
