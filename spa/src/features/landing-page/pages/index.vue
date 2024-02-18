@@ -15,38 +15,7 @@ import OfferCountdown from "../components/OfferCountdown.vue";
 import ShoppingBagIcon from "../assets/icons/IconShoppingBag.vue";
 import TypeScriptIcon from "../assets/icons/IconTypeScript.vue";
 
-import { useSeoMeta } from "@unhead/vue";
-
-useSeoMeta({
-    title: "",
-    description: "",
-    robots: {
-        index: true,
-        follow: true,
-    },
-});
-
-// import { useBilling } from "@/libraries/use-billing";
-// import getRouteUrl from "@/utilities/get-route-url";
-
-// // const billing = useBilling();
-
-// async function showWaitingListOffer() {
-//     modalStack.showModal();
-// }
-
-// async function checkout() {
-//     const result = await billing.getCheckoutUrl({
-//         cart: [
-//             {
-//                 priceId: "price_1Od5g0LqesARZuQ5BOfoYKTu",
-//                 quantity: 1,
-//             },
-//         ],
-//         successUrl: getRouteUrl({ name: "landingPage" }),
-//     });
-//     window.location.assign(result.checkoutUrl);
-// }
+seo.allowIndex();
 </script>
 
 <template>
