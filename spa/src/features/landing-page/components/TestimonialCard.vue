@@ -9,7 +9,7 @@ defineProps<{
 <template>
     <div class="mx-auto w-fit px-4">
         <div class="flex flex-col items-center sm:flex-row">
-            <div class="avatar order-last self-start sm:order-first sm:self-end" v-if="testimonial.avatar">
+            <div class="avatar order-last self-center sm:order-first sm:self-end" v-if="testimonial.avatar">
                 <div class="w-32 rounded-full">
                     <img :src="testimonial.avatar" />
                 </div>
@@ -22,7 +22,7 @@ defineProps<{
                 <span class="absolute bottom-0 right-0 -mb-[15rem] -mr-10 font-serif text-[20rem] leading-none opacity-10">”</span>
             </div>
         </div>
-        <div>
+        <div class="text-center sm:text-left">
             <h1 class="-mb-1 font-serif text-xl font-medium">
                 {{ testimonial.name }}
             </h1>
