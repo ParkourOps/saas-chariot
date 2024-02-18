@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RouterView } from "vue-router";
 
 import {useAnalytics} from "@/libraries/analytics";
 const analytics = useAnalytics();
