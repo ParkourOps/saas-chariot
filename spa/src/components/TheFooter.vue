@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import LogoStamp from "@/assets/images/LogoStamp.vue";
 import configs from "@/configs";
-import { readableTimeForNextDayOfWeek } from "@/utilities/date-time";
+import { getNextDateByDayOfWeek, type DayOfWeek, type TimeZone } from "@/utilities/date-time";
+import dayjs from "@/libraries/dayjs";
 
 const props = defineProps<{
     showEmail: "text" | "button";
     showPhone?: boolean;
 }>();
+
+function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: number, minutes: number, seconds: number = 0, timeZone: TimeZone = "UTC", format: string = "h:mma") {
+    let nearestDate = getNextDateByDayOfWeek(timeZone === 'UTC' ? dayjs().utc() : dayjs().tz(timeZone), dayOfWeek);
+    nearestDate = nearestDate.set("hours", hours).set("minutes", minutes).set("seconds", seconds);
+    return nearestDate.format(format);
+}
 </script>
 
 <template>
@@ -49,7 +56,7 @@ const props = defineProps<{
                             </td>
                             <td>
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Monday",
                                         configs.contact.officeHours.monday.from.hours,
                                         configs.contact.officeHours.monday.from.minutes,
@@ -59,7 +66,7 @@ const props = defineProps<{
                                 }}
                                 -
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Monday",
                                         configs.contact.officeHours.monday.to.hours,
                                         configs.contact.officeHours.monday.to.minutes,
@@ -75,7 +82,7 @@ const props = defineProps<{
                             </td>
                             <td>
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Tuesday",
                                         configs.contact.officeHours.tuesday.from.hours,
                                         configs.contact.officeHours.tuesday.from.minutes,
@@ -85,7 +92,7 @@ const props = defineProps<{
                                 }}
                                 -
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Tuesday",
                                         configs.contact.officeHours.tuesday.to.hours,
                                         configs.contact.officeHours.tuesday.to.minutes,
@@ -101,7 +108,7 @@ const props = defineProps<{
                             </td>
                             <td>
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Wednesday",
                                         configs.contact.officeHours.wednesday.from.hours,
                                         configs.contact.officeHours.wednesday.from.minutes,
@@ -111,7 +118,7 @@ const props = defineProps<{
                                 }}
                                 -
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Wednesday",
                                         configs.contact.officeHours.wednesday.to.hours,
                                         configs.contact.officeHours.wednesday.to.minutes,
@@ -127,7 +134,7 @@ const props = defineProps<{
                             </td>
                             <td>
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Thursday",
                                         configs.contact.officeHours.thursday.from.hours,
                                         configs.contact.officeHours.thursday.from.minutes,
@@ -137,7 +144,7 @@ const props = defineProps<{
                                 }}
                                 -
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Thursday",
                                         configs.contact.officeHours.thursday.to.hours,
                                         configs.contact.officeHours.thursday.to.minutes,
@@ -153,7 +160,7 @@ const props = defineProps<{
                             </td>
                             <td>
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Friday",
                                         configs.contact.officeHours.friday.from.hours,
                                         configs.contact.officeHours.friday.from.minutes,
@@ -163,7 +170,7 @@ const props = defineProps<{
                                 }}
                                 -
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Friday",
                                         configs.contact.officeHours.friday.to.hours,
                                         configs.contact.officeHours.friday.to.minutes,
@@ -179,7 +186,7 @@ const props = defineProps<{
                             </td>
                             <td>
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Saturday",
                                         configs.contact.officeHours.saturday.from.hours,
                                         configs.contact.officeHours.saturday.from.minutes,
@@ -189,7 +196,7 @@ const props = defineProps<{
                                 }}
                                 -
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Saturday",
                                         configs.contact.officeHours.saturday.to.hours,
                                         configs.contact.officeHours.saturday.to.minutes,
@@ -205,7 +212,7 @@ const props = defineProps<{
                             </td>
                             <td>
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Sunday",
                                         configs.contact.officeHours.sunday.from.hours,
                                         configs.contact.officeHours.sunday.from.minutes,
@@ -215,7 +222,7 @@ const props = defineProps<{
                                 }}
                                 -
                                 {{
-                                    readableTimeForNextDayOfWeek(
+                                    getFormattedTimeForNextDateByDayOfWeek(
                                         "Sunday",
                                         configs.contact.officeHours.sunday.to.hours,
                                         configs.contact.officeHours.sunday.to.minutes,
