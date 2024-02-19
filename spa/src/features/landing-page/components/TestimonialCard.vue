@@ -7,7 +7,8 @@ defineProps<{
 </script>
 
 <template>
-    <div class="mx-auto w-fit px-4">
+    <!-- use overflow-x-clip to prevent commas from overflowing -->
+    <div class="mx-auto w-fit px-4 overflow-x-clip">
         <div class="flex flex-col items-center sm:flex-row">
             <div class="avatar order-last self-center sm:order-first sm:self-end" v-if="testimonial.avatar">
                 <div class="w-32 rounded-full">
