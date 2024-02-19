@@ -1,40 +1,18 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import dayjs from "@/libraries/dayjs";
 import Offer from "../types/offer";
-import { ref } from "vue";
-import { readableDate, getNextDayOfWeek } from "@/utilities/date-time";
+import createCountdownToNextDateByDayOfWeek from "../utilities/create-countdown-to-next-date-by-day-of-week";
 import configs from "@/configs";
+import { onMounted } from "vue";
 
 defineProps<{
     offer: Offer;
 }>();
 
-const nextFriday = getNextDayOfWeek("Friday", configs.contact.timeZone).toDate();
-
-const hoursRemaining = ref(0);
-const minutesRemaining = ref(0);
-const secondsRemaining = ref(0);
-
-onMounted(() => {
-    setInterval(() => {
-        // Get the current date and time
-        const currentTime = new Date().getTime();
-
-        // Calculate the remaining time in milliseconds
-        const timeRemaining = nextFriday.getTime() - currentTime;
-
-        if (timeRemaining <= 0) {
-            hoursRemaining.value = 0;
-            minutesRemaining.value = 0;
-            secondsRemaining.value = 0;
-        } else {
-            // Calculate days, hours, minutes, and seconds
-            const daysRemaining = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            hoursRemaining.value = daysRemaining * 24 + Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            minutesRemaining.value = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            secondsRemaining.value = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-        }
-    }, 1000);
+// initialise and start the countdown
+const countdown = createCountdownToNextDateByDayOfWeek("Friday", configs.contact.timeZone);
+onMounted(()=>{
+    countdown.begin();
 });
 </script>
 
@@ -44,21 +22,25 @@ onMounted(() => {
             <div class="alert alert-error mx-auto mb-6 flex max-w-prose flex-col pb-5 pt-6 shadow-md">
                 <p class="max-w-[20rem] text-center font-bold leading-tight tracking-tight">
                     Prices scheduled to increase on
-                    {{ readableDate(nextFriday, "UTC", "dddd Do MMMM") }}.
+                    {{ countdown.target.format("dddd Do of MMMM") }}.
                 </p>
                 <div class="text-red-800">
                     <p class="mb-2 text-center text-base font-bold tracking-wide sm:text-xl">Time till price update:</p>
                     <div class="flex justify-center gap-3 text-center sm:gap-4">
                         <div class="flex-col">
-                            <p class="text-xl font-bold">{{ hoursRemaining }}</p>
+                            <p class="text-xl font-bold">{{ countdown.daysRemaining }}</p>
+                            <p class="font-medium">Days</p>
+                        </div>
+                        <div class="flex-col">
+                            <p class="text-xl font-bold">{{ countdown.hoursRemaining }}</p>
                             <p class="font-medium">Hours</p>
                         </div>
                         <div class="flex-col">
-                            <span class="text-xl font-bold">{{ minutesRemaining }}</span>
+                            <span class="text-xl font-bold">{{ countdown.minutesRemaining }}</span>
                             <p class="font-medium">Minutes</p>
                         </div>
                         <div class="flex-col">
-                            <span class="text-xl font-bold">{{ secondsRemaining }}</span>
+                            <span class="text-xl font-bold">{{ countdown.secondsRemaining }}</span>
                             <p class="font-medium">Seconds</p>
                         </div>
                     </div>
