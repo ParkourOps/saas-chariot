@@ -32,4 +32,8 @@ html {
     // Disable select and drag by default for cleaner look and feel.
     @extend .no-select;
     @extend .no-drag;
+    * {
+        @extend .no-select;
+        @extend .no-drag;
+    }
 }
