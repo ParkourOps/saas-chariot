@@ -3,7 +3,7 @@ import { fileURLToPath, URL } from "node:url";
 
 import vueRouter from 'unplugin-vue-router/vite'
 import vue from "@vitejs/plugin-vue";
-
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import mdx from "@mdx-js/rollup";
 import remarkGfm from "remark-gfm";
 import remarkFrontmatter from "remark-frontmatter";
@@ -30,6 +30,7 @@ export default defineConfig({
             ]
         }),
         vue(),
+        vueJsx({}),
         mdx({
             jsxImportSource: "vue",
             remarkPlugins: [
