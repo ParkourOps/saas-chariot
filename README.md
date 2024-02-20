@@ -1,6 +1,53 @@
 # SaaS Chariot
 
 SaaS Chariot is an opinionated framework to rapidly develop SaaS products.
+This repository acts as a template for a SaaS Chariot project.
+
+## Initiating a Project
+
+### How to Fork
+
+To create a new project based on this framework, do not use the 'fork' feature of GitHub. Instead, follow these steps:
+
+1. On GitHub, create a new empty repository, let's call this the _project repo_.
+
+2. `git clone` the _project repo_ locally and `cd` into it.
+
+3. Add this, the `main` branch of the _framework repo_, as an upstream remote to the _project repo_ clone, let's name this remote `framework`.:
+
+    ```bash
+
+      git remote add framework https://github.com/ParkourOps/saas-chariot
+
+    ```
+
+4. Create a local branch on the _project repo_ clone called `framework` which will reflect the `main` branch of the _framework repository_.
+
+    ```bash
+
+      git fetch framework main
+      
+      git checkout -b framework --track framework/main
+
+    ```
+
+5. Create the `main` branch on the _project repo_.
+
+    ```bash
+
+      git checkout -b main
+
+      git push -u origin main
+
+    ```
+
+6. Install the Node dependencies and get developing!
+
+    ```bash
+
+      npm install
+
+    ```
 
 ## Features
 
