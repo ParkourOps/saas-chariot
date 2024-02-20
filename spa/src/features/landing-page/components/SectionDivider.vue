@@ -14,6 +14,6 @@ defineProps<{
                     {{ title }}
                 </span>
             </h1>
-        
+
     </div>
 </template>

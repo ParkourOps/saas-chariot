@@ -5,7 +5,7 @@ import { ref } from "vue";
 export default function(targetDayOfWeek: DayOfWeek, timeZone: TimeZone = "UTC") {
     const now = timeZone === "UTC" ? dayjs().utc() : dayjs().tz(timeZone);
     const target = getNextDateByDayOfWeek(now, targetDayOfWeek);
-    
+
     const daysRemaining = ref(0);
     const hoursRemaining = ref(0);
     const minutesRemaining = ref(0);
@@ -21,10 +21,10 @@ export default function(targetDayOfWeek: DayOfWeek, timeZone: TimeZone = "UTC") 
             setInterval(() => {
                 // Get the current date and time
                 const currentTime = new Date().getTime();
-        
+
                 // Calculate the remaining time in milliseconds
                 const timeRemaining = target.toDate().getTime() - currentTime;
-        
+
                 if (timeRemaining <= 0) {
                     // Set to zero
                     daysRemaining.value = 0;
@@ -39,6 +39,6 @@ export default function(targetDayOfWeek: DayOfWeek, timeZone: TimeZone = "UTC") 
                     secondsRemaining.value = Math.floor((timeRemaining % (1000 * 60)) / 1000);
                 }
             }, 1000);
-        }
-    }
+        },
+    };
 }

@@ -2,7 +2,7 @@ type OfferItem = {
     title: string;
     subtitles?: string[];
     icon?: string;
-    price: number;
+    price: number | "FREE";
     newPrice?: number | "FREE";
     highlight?: "limitedTime";
 };
@@ -20,16 +20,27 @@ export default class Offer implements OfferData {
         this.currencySymbol = currencySymbol;
     }
     get total() {
-        return this.items.reduce((prev, curr) => {
-            if (curr.newPrice && curr.newPrice === "FREE") {
-                return prev;
-            } else if (curr.newPrice) {
-                return prev + curr.newPrice;
-            } else if (curr.price) {
+        const original = this.items.reduce((prev, curr) => {
+            if (curr.price && typeof curr.price === "number") {
                 return prev + curr.price;
             } else {
                 return prev;
             }
         }, 0);
+        const final = this.items.reduce((prev, curr) => {
+            if (curr.newPrice && curr.newPrice === "FREE") {
+                return prev;
+            } else if (curr.newPrice) {
+                return prev + curr.newPrice;
+            } else if (curr.price && typeof curr.price === "number") {
+                return prev + curr.price;
+            } else {
+                return prev;
+            }
+        }, 0);
+        return {
+            original,
+            final,
+        };
     }
 }

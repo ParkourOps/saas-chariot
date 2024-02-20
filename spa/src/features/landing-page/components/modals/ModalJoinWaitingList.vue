@@ -9,25 +9,25 @@ const emailValid = ref(false);
 
 function sendLink(done: () => void) {
     sendActionLink({
-            email: email.value,
-            actionSequence: [
-                {
-                    type: "subscribeToMailingList",
-                    mailingListKey: "kbozgt",
-                },
-                {
-                    type: "issueResource",
-                    resourceKey: "xrbmvnmbqagf",
-                },
-            ],
-            callToActionText: "Action",
-            prompt: {
-                heading: "This is a heading",
-                paragraph: "something here...",
+        email: email.value,
+        actionSequence: [
+            {
+                type: "subscribeToMailingList",
+                mailingListKey: "kbozgt",
             },
-            successUrl: getRouteUrl({ name: "landingPage" }),
-            failUrl: getRouteUrl({ name: "landingPage" }),
-        })
+            {
+                type: "issueResource",
+                resourceKey: "xrbmvnmbqagf",
+            },
+        ],
+        callToActionText: "Action",
+        prompt: {
+            heading: "This is a heading",
+            paragraph: "something here...",
+        },
+        successUrl: getRouteUrl({ name: "landingPage" }),
+        failUrl: getRouteUrl({ name: "landingPage" }),
+    })
         .then(() => {
             done();
         })

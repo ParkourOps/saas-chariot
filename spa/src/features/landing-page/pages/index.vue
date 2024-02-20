@@ -2,7 +2,8 @@
 import LogoStamp from "@/assets/images/LogoStamp.vue";
 
 import valuePropCatalogue from "../data/flat-catalogue-value-props";
-import featuresCatalogue from "../data/tiered-catalogue-features";
+// import syllabusCatalogue from "../data/tiered-catalogue-syllabus";
+import featuresCatalogue from "../data/flat-catalogue-features";
 import customerTestimonials from "../data/customer-testimonials";
 import offerData from "../data/offer-data";
 
@@ -12,7 +13,6 @@ import NumberedList from "../components/NumberedList.vue";
 import TestimonialsLayout from "../components/TestimonialsLayout.vue";
 import OfferCountdown from "../components/OfferCountdown.vue";
 
-import ShoppingBagIcon from "../assets/icons/IconShoppingBag.vue";
 import DiamondIcon from "../assets/icons/IconDiamond.vue";
 import TypeScriptIcon from "../assets/icons/IconTypeScript.vue";
 
@@ -22,43 +22,62 @@ seo.allowIndex();
 <template>
     <div class="flex flex-col items-center justify-center bg-primary px-4 py-14 font-serif sm:py-28">
         <LogoStamp class="mb-2" colour-class="fill-base-100 text-base-100" show-title/>
-        <p class="smallcaps max-w-sm text-center text-2xl text-accent sm:max-w-screen-sm sm:text-4xl">Transform Ideas into Reality: Rapidly Build and Launch Digital Products and Services</p>
+        <p class="smallcaps max-w-sm text-center text-2xl text-accent font-semibold sm:font-bold sm:max-w-screen-sm sm:text-4xl">Transform Ideas into Reality: Rapidly Build and Launch Digital Products and Services</p>
 
         <div class="mt-12 flex flex-col gap-6 sm:flex-row">
-            <KeyboardButton variant="neutral" class="font-mono" background-colour-class="bg-neutral" text-background-colour-class="bg-secondary">Learn More </KeyboardButton>
+            <KeyboardButton
+                class="font-mono"
+                background-colour-class="bg-neutral"
+                text-background-colour-class="bg-secondary"
+                @click="$router.push({name: '/', hash: '#how-it-works'})"
+            >
+                Learn More
+            </KeyboardButton>
             <!-- <KeyboardButton>View Demo</KeyboardButton> -->
-            <KeyboardButton variant="accent" class="font-mono" background-colour-class="bg-accent" text-background-colour-class="bg-neutral">Buy Now</KeyboardButton>
+            <KeyboardButton
+                class="font-mono"
+                background-colour-class="bg-accent"
+                text-background-colour-class="bg-neutral"
+            >
+                Buy Now
+            </KeyboardButton>
         </div>
     </div>
 
     <div class="bg-secondary py-14 sm:py-16">
-        <div class="mx-auto max-w-3xl px-4 text-center text-neutral sm:px-6">
-            <p class="mb-6 text-2xl font-bold sm:text-xl">Stop wasting time building products from the ground up.</p>
+        <div class="mx-auto max-w-3xl px-4 text-neutral sm:px-6">
 
-            <p class="mb-6 text-lg tracking-tighter sm:text-xl">
-                SaaS Chariot is a comprehensive product development system that streamlines commercial web application development with a modular Vue template that implements cutting-edge industry best practices so you can focus on creating
-                user value:
+            <div
+                class="mb-8 w-fit mx-auto fill-neutral text-neutral border-4 border-neutral/20 p-4 rounded-xl flex flex-col sm:grid sm:grid-cols-6 items-center"
+            >
+                <TypeScriptIcon class="h-10 mb-3 mt-1 sm:m-0" />
+                <p class="text-center sm:text-left sm:col-span-5 leading-tight max-w-sm font-semibold">
+                    Designed for individuals and teams with (elementary) knowledge of TypeScript.
+                </p>
+            </div>
+
+            <p class="mb-6 text-2xl font-bold sm:text-xl text-center">
+                Stop wasting time building products from the ground up.
             </p>
 
-            <ul class="mb-6 flex flex-col items-center gap-4 text-lg sm:text-xl">
-                <li class="w-fit bg-accent/80 px-3 py-2 font-medium text-base-100">Ship features, fast.</li>
-                <li class="w-fit bg-accent/80 px-3 py-2 font-medium text-base-100">Enhance user experience.</li>
-                <li class="w-fit bg-accent/80 px-3 py-2 font-medium text-base-100">Galvanise brand perception.</li>
-            </ul>
-            <!-- <span class="bg-accent/80 p-1 text-base-100 font-medium"></span>,
-                <span class="bg-accent/80 p-1 text-base-100 font-medium"></span>, and
-                <span class="bg-accent/80 p-1 text-base-100 font-medium"></span>. -->
+            <p class="mb-6 text-lg tracking-tighter sm:text-xl text-center">
+                SaaS Chariot is a comprehensive product development system that streamlines
+                the development of MVPs by harnessing a framework that implements cutting-edge industry best practices,
+                so you can focus on creating exceptional value for your customers.
+            </p>
 
-            <div class="mx-auto flex w-fit flex-col items-center rounded-lg border border-neutral/50 p-4 font-serif text-base font-bold sm:flex-row sm:p-3">
-                <TypeScriptIcon class="mb-1 h-12 fill-neutral sm:mb-0 sm:mr-4" />
-                <p class="max-w-sm text-center text-base sm:max-w-none sm:text-left">Designed for engineering teams with (elementary) knowledge of TypeScript.</p>
-            </div>
+            <ul class="mb-6 flex flex-col items-center gap-4 text-lg sm:text-xl text-center">
+                <li class="w-fit bg-accent/80 px-3 py-2 font-medium text-base-100 shadow-sm">Ship features fast.</li>
+                <li class="w-fit bg-accent/80 px-3 py-2 font-medium text-base-100 shadow-sm">Elevate user experience.</li>
+                <li class="w-fit bg-accent/80 px-3 py-2 font-medium text-base-100 shadow-sm">Galvanise your brand.</li>
+                <li class="w-fit bg-accent/80 px-6 py-4 text-2xl font-bold text-base-100 shadow-lg -rotate-2">Outsource the drudge.</li>
+            </ul>
         </div>
     </div>
 
     <div class="lg:py-18 mb-10 bg-neutral px-2 py-16 shadow-xl sm:px-10 sm:py-24 lg:mb-0" style="border-bottom-left-radius: calc(var(--rounded-box) * 1.5); border-bottom-right-radius: calc(var(--rounded-box) * 1.5)">
         <div class="mx-4 flex flex-col gap-10 fill-accent/70 text-center text-secondary lg:flex-row">
-            <div v-for="(item, idx) in valuePropCatalogue" :key="`value-prop#${idx}`" class="mx-auto my-10 flex max-w-sm flex-col first:mt-0 last:mb-0 lg:my-0">
+            <div v-for="(item, idx) in valuePropCatalogue($router)" :key="`value-prop#${idx}`" class="mx-auto my-10 flex max-w-sm flex-col first:mt-0 last:mb-0 lg:my-0">
                 <component :is="item.icon" class="mx-auto mb-4 h-auto w-32" />
                 <h1 class="mb-2 font-serif text-xl font-semibold text-accent">
                     {{ item.title }}
@@ -68,27 +87,57 @@ seo.allowIndex();
                         {{ item.description }}
                     </p>
                 </div>
-                <KeyboardButton v-if="item.action" class="mx-auto mt-6 w-fit" size="sm" background-colour-class="bg-base-100" text-background-colour-class="bg-secondary">
-                    {{ item.action.name }}
+                <KeyboardButton
+                    v-if="item.action"
+                    class="mx-auto mt-6 w-fit"
+                    size="sm"
+                    background-colour-class="bg-base-100"
+                    text-background-colour-class="bg-secondary"
+                    @click="item.action.function"
+                >
+                    {{ item.action.text }}
                 </KeyboardButton>
             </div>
         </div>
     </div>
 
-    <SectionDivider title="How It Works" />
+    <SectionDivider id="how-it-works" title="How It Works"/>
+    <p class="text-xl text-center w-3/4 sm:max-w-prose mx-auto text-secondary sm:mt-24 font-semibold">
+        Implement your product or service in <span class="text-nowrap">10 steps:</span>
+    </p>
     <NumberedList
+        text-size="lg"
         :items="[
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis lorem. Vestibulum ultricies massa in ex consectetur dictum. Donec et mauris eu nunc pellentesque convallis.',
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis lorem. Vestibulum ultricies massa in ex consectetur dictum. Donec et mauris eu nunc pellentesque convallis.',
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a mattis lorem. Vestibulum ultricies massa in ex consectetur dictum. Donec et mauris eu nunc pellentesque convallis.',
+            `<mark>Initiate project codebase</mark> by cloning the template.`,
+            '<mark>Create a configuration file</mark> with information about your company, the application, and necessary third-party accounts (e.g. billing and analytics).',
+            '<mark>Bring your brand to life</mark> by defining colour scheme(s), visual properties, typefaces, icon sets, transitions, and more. Add brand assets such as photographs, videos, animations, and illustrations. <mark>Implement any animation logic.</mark>',
+            '<mark>Implement static content layouts.</mark> Add functional tests to verify layout consistency.',
+            '<mark>Model and implement dynamic content layouts.</mark> Add functional tests to verify layout consistency.',
+            '<mark>Model and implement business logic;</mark> add unit tests to verify logical consistency.',
+            '<mark>Build user workflows</mark> by leveraging common application elements such as modals, pop-up alerts, notifications, transactional emails, action links, and more. Add functional tests and end-to-end tests to corroborate requirements.',
+            '<mark>Optimise project for SEO</mark> using built-in library; Make sure to <mark>check audit report</mark> for issues and possible improvements.',
+            `<mark>Deploy to staging environment;</mark> check thoroughly.`,
+            `<mark>Approve for release</mark> to production environment.`,
+            'Iterate as necessary from step 3 onwards.'
         ]"
-        class="sm:my-24"
+        class="mt-12 sm:my-24"
     />
 
-    <SectionDivider title="Syllabus" />
-    <TieredCatalogue :catalogue="featuresCatalogue" />
 
-    <SectionDivider title="What Users Say" />
+    <!--
+    <SectionDivider id="syllabus" title="Syllabus" />
+    <TieredCatalogue :catalogue="syllabusCatalogue" />
+    -->
+
+
+    <SectionDivider id="features" title="Features" />
+    <TieredCatalogue :catalogue="featuresCatalogue" expanded="" />
+    <!-- <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto w-fit gap-6 px-2">
+        <CatalogueItemCard v-for="feature in featuresCatalogue" :item="feature" />
+    </div> -->
+
+
+    <SectionDivider id="what-users-say" title="What Users Say" />
     <TestimonialsLayout :testimonials="customerTestimonials" />
 
     <SectionDivider title="In The Offer" />
@@ -96,20 +145,22 @@ seo.allowIndex();
 
     <KeyboardButton
         class="mx-auto"
-        size="xl" 
+        size="xl"
         background-colour-class="bg-accent"
         text-background-colour-class="bg-neutral"
         @click="$showModal(() => import('../components/modals/ModalJoinWaitingList.vue'), {})"
     >
-        <div class="flex items-center">
-            <p class="whitespace-nowrap mr-6 -mb-2">ACCESS NOW</p>
-            <DiamondIcon fill="#ECE6DF" class="h-12 -mb-1" />
+        <div class="flex items-center ">
+            <p class="whitespace-nowrap mr-6 -mb-1">ACCESS NOW</p>
+            <DiamondIcon class="h-12 -mb-1 fill-[#ECE6DF]" />
         </div>
     </KeyboardButton>
 
-    <p class="mx-auto mt-1 max-w-prose text-center font-serif text-sm font-medium text-accent">One-time purchase of {{ offerData.currencySymbol }}{{ offerData.total }}</p>
-    <p class="mx-auto -mt-1 max-w-prose text-center font-serif text-sm font-medium text-accent">7-day money-back guarantee included.</p>
+    <p class="mx-auto mt-1 max-w-prose text-center font-serif text-primary font-semibold">One-time purchase of <span class="font-bold">{{ offerData.currencySymbol }}{{ offerData.total.final }}</span></p>
+    <p class="mx-auto -mt-1 max-w-prose text-center font-serif text-sm text-primary/80 font-medium">30-day money-back guarantee.</p>
+
     <div class="h-12 sm:h-24" />
+    <img src="../assets/images/money-back-guarantee-large.webp" alt="30-day money-back guarantee." class="h-28 mx-auto"/>
 </template>
 
 <style scoped>

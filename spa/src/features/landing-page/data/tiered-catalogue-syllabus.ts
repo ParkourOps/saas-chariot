@@ -1,7 +1,7 @@
-import { type TieredCatalogue } from "../types/tiered-catalogue";
+import { type TieredCatalogue } from "../types/catalogue";
 import columnIcon from "../assets/icons/IconColumn.vue";
 
-const catalogue: TieredCatalogue = [
+export default <TieredCatalogue>[
     {
         title: "Foundation",
         description: "Fundamental aspects of digital product engineering.",
@@ -128,11 +128,11 @@ const catalogue: TieredCatalogue = [
                     },
                     {
                         text: "WhatsApp",
-                        badge: "comingSoon",
+                        badge: "coming-soon",
                     },
                     {
                         text: "WeChat",
-                        badge: "comingSoon",
+                        badge: "coming-soon",
                     },
                 ],
             },
@@ -172,11 +172,11 @@ const catalogue: TieredCatalogue = [
                     },
                     {
                         text: "Advanced Search and Filtering",
-                        badge: "comingSoon",
+                        badge: "coming-soon",
                     },
                     {
                         text: "User Ratings and Reviews",
-                        badge: "comingSoon",
+                        badge: "coming-soon",
                     },
                 ],
             },
@@ -196,11 +196,6 @@ const catalogue: TieredCatalogue = [
                     },
                 ],
             },
-            // {
-
-            // }
         ],
     },
 ];
-
-export default catalogue;

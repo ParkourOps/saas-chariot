@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import dayjs from "@/libraries/dayjs";
+
 import Offer from "../types/offer";
 import createCountdownToNextDateByDayOfWeek from "../utilities/create-countdown-to-next-date-by-day-of-week";
 import configs from "@/configs";
@@ -69,7 +69,9 @@ onMounted(()=>{
                                         },
                                     ]"
                                 >
-                                    <span :class="[{ 'line-through': item.newPrice }]">{{ offer.currencySymbol }}{{ item.price }}</span>
+                                    <span :class="[{ 'line-through': item.newPrice }]">
+                                        {{ item.price !== 'FREE' ? offer.currencySymbol : '' }}{{ item.price }}
+                                    </span>
                                     <span class="ml-1 font-black"
                                         ><span v-if="typeof item.newPrice === 'number'">{{ offer.currencySymbol }}</span
                                         >{{ item.newPrice }}</span
@@ -95,7 +97,10 @@ onMounted(()=>{
 
                 <div class="mx-5 mb-5">
                     <div class="sm:border-b-6 border-b-4 border-double border-primary/40" />
-                    <p class="mt-1 text-center text-2xl font-semibold sm:text-right">{{ offer.currencySymbol }}{{ offer.total }}</p>
+                    <p class="text-center text-2xl sm:text-right mt-4">
+                        <span class="text-red-600 line-through font-semibold mr-2" v-if="offer.total.original !== offer.total.final">{{ offer.currencySymbol }}{{ offer.total.original }}</span>
+                        <span class="font-semibold">{{ offer.currencySymbol }}{{ offer.total.final }}</span>
+                    </p>
                 </div>
             </div>
         </div>

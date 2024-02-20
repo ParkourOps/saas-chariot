@@ -4,26 +4,36 @@ export default new Offer(
     [
         {
             title: "SaaS Template",
-            subtitles: ["Derisked frontend and backend asd asd a application infrastructure.", "Downloadable ZIP file."],
-            highlight: "limitedTime",
-            price: 99.99,
+            price: 199.99,
         },
         {
-            title: "Knowledge Base (Engineering)",
-            price: 100.0,
+            title: "SaaS Knowledge Base",
+            highlight: "limitedTime",
+            price: 299.99,
+            newPrice: 199.99,
+            subtitles: [
+                "(Ever-Expanding) Notion Workspace",
+                "Searchable Content Library",
+            ],
+        },
+        {
+            title: "1-on-1 SaaS Strategy Consultation",
+            subtitles: [
+                "30-Minute Video Call",
+            ],
+            highlight: "limitedTime",
+            price: 49.99,
             newPrice: "FREE",
         },
         {
-            title: "Knowledge Base (B2B and B2C SaaS)",
-            price: 100.0,
-            newPrice: "FREE",
-            highlight: "limitedTime",
-        },
-        {
-            title: "Strategy Consultation",
-            highlight: "limitedTime",
-            price: 499.99,
-            newPrice: "FREE",
+            title: "SaaS Engineering Community",
+            subtitles: [
+                "*Exclusive* Slack Channel",
+                "*Exclusive* Opt-In Members Directory",
+                "*Exclusive* Live Webinars",
+                "*Exclusive* Live Interactive Workshops",
+            ],
+            price: "FREE",
         },
     ],
     "$",
