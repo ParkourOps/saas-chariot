@@ -84,10 +84,10 @@ seo.initialise();
     </div>
 
     <!-- Toast Notifications -->
-    <ToastNotifications />
+    <ToastStack />
 
     <!-- Popup Alerts -->
-    <PopupAlerts />
+    <AlertStack />
 
     <!-- Overlay -->
     <Transition

@@ -3,38 +3,40 @@ import uniqueId from "@/_shared_/libraries/unique-id";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-type ToastNotification = {
+type Alert = {
     type?: NotificationType;
-    title?: string;
     message: string;
+    autoDismiss?: boolean;
 };
 
-type ToastNotificationRecord = ToastNotification & {
+type AlertRecord = Alert & {
     id: string;
 };
 
 const DURATION_MS = 3000;
 
-export const useToastNotifications = defineStore("Toast Notifications", () => {
-    const toasts = ref<ToastNotificationRecord[]>([]);
+export const useAlertStack = defineStore("AlertStack", () => {
+    const alertStack = ref<AlertRecord[]>([]);
 
     function pop(id: string) {
-        toasts.value = toasts.value.filter((n) => n.id !== id);
+        alertStack.value = alertStack.value.filter((n) => n.id !== id);
     }
 
-    function push(notification: ToastNotification) {
+    function push(notification: Alert) {
         const id = uniqueId.create();
-        toasts.value.push({
+        alertStack.value.push({
             id,
             ...notification,
         });
-        setTimeout(() => {
-            pop(id);
-        }, DURATION_MS);
+        if (notification.autoDismiss) {
+            setTimeout(() => {
+                pop(id);
+            }, DURATION_MS);
+        }
     }
 
     return {
-        toasts,
+        alertStack,
         pop,
         push,
     };

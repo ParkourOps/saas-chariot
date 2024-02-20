@@ -5,9 +5,10 @@ import { createPinia } from "pinia";
 
 import App from "@/App.vue";
 import router from "@/router";
-import modalStack from "@/plugins/modal-stack";
-import toastNotifications from "./plugins/toast-notifications";
-import popupAlerts from "./plugins/popup-alerts";
+import modals from "@/plugins/modal-stack";
+import toasts from "./plugins/toast-stack";
+import alerts from "./plugins/alert-stack";
+import reactiveUserInterface from "./plugins/reactive-user-interface";
 
 import { createHead } from '@unhead/vue'
 const head = createHead();
@@ -17,9 +18,10 @@ const app = createApp(App);
 app.use(createPinia());
 app.use(router);
 app.use(head);
-app.use(modalStack);
-app.use(toastNotifications);
-app.use(popupAlerts);
+app.use(modals);
+app.use(toasts);
+app.use(alerts);
+app.use(reactiveUserInterface)
 
 // register global components
 import { registerComponents } from "@/components";
