@@ -57,7 +57,7 @@ const numModals = computed(()=>modalStack.size);
 export function useModalStack() {
     return {
         showModal,
-        numModals
+        numModals,
     };
 }
 

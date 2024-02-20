@@ -1,6 +1,6 @@
 <script setup lang="ts">
-    import {useToastStack} from "../state";
-    const toastStack = useToastStack();
+import {useToastStack} from "../state";
+const toastStack = useToastStack();
 </script>
 
 <template>

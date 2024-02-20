@@ -6,7 +6,7 @@ export function useToastStack() {
     const toastStack = _useToastStack();
     return {
         show: toastStack.push,
-    }
+    };
 }
 
 export default {
@@ -14,8 +14,8 @@ export default {
         const toastStack = _useToastStack();
         app.component("ToastStack", ToastStack);
         app.config.globalProperties.$showToastNotification = toastStack.push;
-    }
-}
+    },
+};
 
 declare module "vue" {
     interface ComponentCustomProperties {

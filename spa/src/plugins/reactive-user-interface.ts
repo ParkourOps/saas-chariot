@@ -12,8 +12,8 @@ export function useReactiveUserInterface() {
     return {
         innerWidthPx,
         activeBreakpoint,
-        availableBreakpoints
-    }
+        availableBreakpoints,
+    };
 };
 
 export default {
@@ -40,13 +40,13 @@ export default {
                 }
             }
         }, { immediate: true });
-        
+
         // set as custom property:
         // - accessible from template
         // - accesible from setup script using Vue's `getInstance()` method
         app.config.globalProperties.$reactiveUserInterface = useReactiveUserInterface();
-    }
-}
+    },
+};
 
 // declare type for the new custom property.
 declare module "vue" {

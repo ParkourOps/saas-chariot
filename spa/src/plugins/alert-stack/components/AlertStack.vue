@@ -1,8 +1,8 @@
 <script setup lang="ts">
-    import { useAlertStack } from '../state';
-    import Alert from './Alert.vue';
+import { useAlertStack } from "../state";
+import Alert from "./Alert.vue";
 
-    const alertStack = useAlertStack();
+const alertStack = useAlertStack();
 </script>
 
 <template>

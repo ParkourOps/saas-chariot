@@ -9,8 +9,8 @@ export default {
         app.component("AlertStack", AlertStack);
         app.component("Alert", Alert);
         app.config.globalProperties.$showPopupAlert = alertStack.push;
-    }
-}
+    },
+};
 
 declare module "vue" {
     interface ComponentCustomProperties {
