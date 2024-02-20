@@ -31,7 +31,7 @@ const gridColumnsClass = computed(()=>{
     } else if (itemsDivisibleBy2 && maxNumColumns >= 2) {
         return `grid-cols-2`;
     } else {
-        return `grid-cols-1`;
+        return maxNumColumnsClass;
     }
 });
 </script>
