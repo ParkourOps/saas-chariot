@@ -29,6 +29,20 @@ module.exports = {
                 ...defaultTheme.fontFamily.mono,
             ],
         },
+        extend: {
+            colors: {
+                /*
+            Additional Colours:
+
+              Additional colours used in the theme defined above, which are not part of the
+              default Daisy UI schema of colour variables, need to be explicitly exported:
+
+              - https://daisyui.com/blog/how-to-add-new-colors-to-daisyui/
+          */
+                "tertiary": "oklch(var(--tertiary) / <alpha-value>)",
+                "tertiary-content": "oklch(var(--tertiary-content) / <alpha-value>)",
+            },
+        },
     },
     plugins: [
     // https://daisyui.com/
@@ -62,7 +76,7 @@ module.exports = {
                     "secondary": "#2D6286",
                     "secondary-content": "#ECE6DF", // optional
 
-                    "--tertiary": "#BEE0F4",         // additional (see below)
+                    "--tertiary": "88.85% 0.045 233.82",         // additional (see below)
                     "--tertiary-content": "#153243", // additional (see below)
 
                     "accent": "#F26419",
@@ -72,6 +86,8 @@ module.exports = {
                     "neutral-content": "#2D6286", // optional
 
                     "base-100": "#F5F8FF",
+                    // "base-200": "#F5F8FF",
+                    // "base-300": "#F5F8FF",
                     "base-content": "#153243", // optional
 
                     "info": "#91FAFF",
@@ -105,17 +121,5 @@ module.exports = {
                 },
             },
         ],
-    },
-    extend: {
-        colors: {
-            /*
-        Additional Colours:
-
-          Additional colours used in the theme defined above, which are not part of the
-          default Daisy UI schema of colour variables, need to be explicitly exported:
-      */
-            "tertiary": "var(--tertiary)",
-            "tertiary-content": "var(--tertiary-content)",
-        },
     },
 };
