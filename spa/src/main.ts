@@ -10,7 +10,7 @@ import toasts from "./plugins/toast-stack";
 import alerts from "./plugins/alert-stack";
 import reactiveUserInterface from "./plugins/reactive-user-interface";
 
-import { createHead } from '@unhead/vue'
+import { createHead } from "@unhead/vue";
 const head = createHead();
 
 const app = createApp(App);
@@ -21,7 +21,7 @@ app.use(head);
 app.use(modals);
 app.use(toasts);
 app.use(alerts);
-app.use(reactiveUserInterface)
+app.use(reactiveUserInterface);
 
 // register global components
 import { registerComponents } from "@/components";

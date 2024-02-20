@@ -40,11 +40,13 @@ module.exports = [
             "semi": "error",
             "comma-dangle": ["error", "always-multiline"],
             "no-trailing-spaces": "error",
+            "vue/multi-word-component-names": "off",
         },
     },
     {
         ignores: [
             "dist",
+            ".unlighthouse",
         ],
     },
 ];

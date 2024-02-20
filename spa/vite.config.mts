@@ -1,20 +1,20 @@
 import { defineConfig } from "vite";
 import { fileURLToPath, URL } from "node:url";
 
-import vueRouter from 'unplugin-vue-router/vite'
+import vueRouter from "unplugin-vue-router/vite";
 import vue from "@vitejs/plugin-vue";
-import vueJsx from '@vitejs/plugin-vue-jsx'
+import vueJsx from "@vitejs/plugin-vue-jsx";
 import mdx from "@mdx-js/rollup";
 import remarkGfm from "remark-gfm";
 import remarkFrontmatter from "remark-frontmatter";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
-import AutoImport from 'unplugin-auto-import/vite'
-import { VueRouterAutoImports } from 'unplugin-vue-router'
+import AutoImport from "unplugin-auto-import/vite";
+import { VueRouterAutoImports } from "unplugin-vue-router";
 // import { unheadVueComposablesImports } from '@unhead/vue'
 
-import Unlighthouse from '@unlighthouse/vite'
+import Unlighthouse from "@unlighthouse/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,9 +25,9 @@ export default defineConfig({
                 "src/pages",
                 {
                     src: "src/features/landing-page/pages",
-                    path: ""
+                    path: "",
                 },
-            ]
+            ],
         }),
         vue(),
         vueJsx({}),
@@ -50,13 +50,13 @@ export default defineConfig({
                 VueRouterAutoImports,
                 {
                     "@/libraries/seo": [
-                        ["default", "seo"]
-                    ]
-                }
+                        ["default", "seo"],
+                    ],
+                },
                 // unheadVueComposablesImports,
-            ]
+            ],
         }),
-        Unlighthouse({})
+        Unlighthouse({}),
     ],
     resolve: {
         alias: {
