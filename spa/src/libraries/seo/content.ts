@@ -44,8 +44,8 @@ export const Content = z.discriminatedUnion(
         ContentWebsite,
         ContentArticle,
         ContentBook,
-        ContentProfile
-    ]
+        ContentProfile,
+    ],
 );
 
 type Content = z.infer<typeof Content>;
@@ -91,7 +91,7 @@ export function content(entry: Content) {
             bookIsbn: entry.isbn,
             bookTag: entry.tags,
             bookReleaseDate: entry.dateReleased,
-        })
+        });
     }
     // profile
     if (entry.type === "profile") {
@@ -100,6 +100,6 @@ export function content(entry: Content) {
             profileLastName: entry.lastName,
             profileUsername: entry.username,
             profileGender: entry.gender,
-        })
+        });
     }
 }

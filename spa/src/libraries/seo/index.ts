@@ -6,7 +6,7 @@ import { content } from "./content";
 
 type VideoImport = Promise<typeof import("*.mp4")> | typeof import("*.mp4");
 
-type ImageImport = | 
+type ImageImport = |
     Promise<typeof import("*.jpeg")> | typeof import("*.jpeg")  |
     Promise<typeof import("*.jpg")> | typeof import("*.jpg")    |
     Promise<typeof import("*.gif")> | typeof import("*.gif")    |
@@ -20,7 +20,7 @@ type AudioImport = |
 function allowIndex() {
     useSeoMeta({
         robots: "index, follow",
-    })
+    });
 }
 
 function getFileExtensionFromUrl(url: string) {
@@ -70,14 +70,14 @@ async function image(src: ImageImport | string, alt: string, enlargedPreview?: b
         if (src instanceof Promise) {
             src = await src;
         }
-        _src = getAssetUrl(src.default);    
+        _src = getAssetUrl(src.default);
     } else {
         _src = src;
     }
     const fileExtension = getFileExtensionFromUrl(_src);
     let type : "image/jpeg" | "image/gif" | "image/png";
     if (["jpeg", "jpg"].includes(fileExtension)) {
-        type = "image/jpeg"
+        type = "image/jpeg";
     } else if (["gif"].includes(fileExtension)) {
         type = "image/gif";
     } else if (["png"].includes(fileExtension)) {
@@ -104,8 +104,8 @@ async function image(src: ImageImport | string, alt: string, enlargedPreview?: b
                 alt,
             },
             twitterCard: enlargedPreview ? "summary_large_image" : "summary",
-        })
-    })
+        });
+    });
     image.src = _src;
 }
 
@@ -136,8 +136,8 @@ async function audio(src: AudioImport | string) {
             url: _src,
             secureUrl: _src,
             type: type,
-        }
-    })
+        },
+    });
 }
 
 // apply base SEO tags from app config
@@ -197,4 +197,4 @@ export default {
     featureAudio: audio,
     setContent: content,
     allowIndex,
-}
+};
