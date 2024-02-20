@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import LogoSymbol from './LogoSymbol.vue';
-import configs from '@/configs';
+import LogoSymbol from "./LogoSymbol.vue";
+import configs from "@/configs";
 
 defineProps<{
     colourClass?: string,

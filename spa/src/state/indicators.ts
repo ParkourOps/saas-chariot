@@ -1,6 +1,6 @@
 import uniqueId from "@/_shared_/libraries/unique-id";
 import { defineStore } from "pinia";
-import { computed, readonly, ref } from "vue";
+import { computed, ref } from "vue";
 
 type PendingAction = {
     id: string
@@ -24,8 +24,8 @@ export const useIndicators = defineStore("Indicators", () => {
         return {
             unregisterPendingAction() {
                 pendingActions.value = pendingActions.value.filter((a)=>a.id !== id);
-            }
-        }
+            },
+        };
     }
 
     const isBusy = computed(() => pendingActions.value.length > 0);

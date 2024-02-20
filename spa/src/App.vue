@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { watch } from "vue";
 
-import {useAnalytics} from "@/libraries/analytics";
-const analytics = useAnalytics();
+// import {useAnalytics} from "@/libraries/analytics";
+// const analytics = useAnalytics();
 
 // import useAuth from "@/libraries/firebase/use-auth";
 import { useModalStack } from "@/plugins/modal-stack";

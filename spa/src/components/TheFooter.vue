@@ -10,7 +10,7 @@ const props = defineProps<{
 }>();
 
 function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: number, minutes: number, seconds: number = 0, timeZone: TimeZone = "UTC", format: string = "h:mma") {
-    let nearestDate = getNextDateByDayOfWeek(timeZone === 'UTC' ? dayjs().utc() : dayjs().tz(timeZone), dayOfWeek);
+    let nearestDate = getNextDateByDayOfWeek(timeZone === "UTC" ? dayjs().utc() : dayjs().tz(timeZone), dayOfWeek);
     nearestDate = nearestDate.set("hours", hours).set("minutes", minutes).set("seconds", seconds);
     return nearestDate.format(format);
 }

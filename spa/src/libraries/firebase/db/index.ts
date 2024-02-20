@@ -5,5 +5,5 @@ export function useDb() {
     return {
         subscribeToCollection,
         subscribeToDoc,
-    }
+    };
 };

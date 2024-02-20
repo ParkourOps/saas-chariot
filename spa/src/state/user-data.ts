@@ -13,4 +13,4 @@ export default {
         base: "customer",
         path: "purchase",
     }),
-}
+};

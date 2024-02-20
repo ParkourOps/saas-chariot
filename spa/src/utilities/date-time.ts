@@ -40,7 +40,7 @@ export function getDayOfWeekAsNumber(dayOfWeek: DayOfWeek, startDay: "Monday" | 
 // }
 
 export function getNextDateByDayOfWeek(startDate: dayjs.Dayjs, targetDayOfWeek: DayOfWeek) {
-    const _targetDayOfWeek = getDayOfWeekAsNumber(targetDayOfWeek, "Sunday", 0)
+    const _targetDayOfWeek = getDayOfWeekAsNumber(targetDayOfWeek, "Sunday", 0);
     const targetDate = startDate.day(_targetDayOfWeek).hour(0).minute(0).second(0);
 
     // console.debug({
@@ -71,6 +71,6 @@ export function getNextDateByDayOfWeek(startDate: dayjs.Dayjs, targetDayOfWeek: 
     // console.debug({
     //     nearestDate: nearestDate.toISOString(),
     // })
-    
+
     return nearestDate;
 }
