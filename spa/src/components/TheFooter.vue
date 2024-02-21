@@ -266,8 +266,8 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
                 { 'lg:row-span-2': !configs.contact.officeHours && !configs.social },
             ]"
         >
-            <RouterLink :to="{ name: '/PrivacyPolicy' }">Privacy Policy</RouterLink>
-            <RouterLink :to="{ name: '/TermsAndConditions' }">Terms and Conditions</RouterLink>
+            <RouterLink :to="{ name: '/privacy-policy' }">Privacy Policy</RouterLink>
+            <RouterLink :to="{ name: '/terms-and-conditions' }">Terms and Conditions</RouterLink>
         </div>
 
         <!-- Social Media Icons -->
