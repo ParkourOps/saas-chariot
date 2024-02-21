@@ -17,8 +17,6 @@ interface ImportMetaEnv {
     // User Feedback
     readonly VITE_TAWK_PROPERTY_ID: string
     readonly VITE_TAWK_WIDGET_ID: string
-    // Billing
-    readonly VITE_STRIPE_PUBLISHABLE_KEY: string
 }
 
 interface ImportMeta {
