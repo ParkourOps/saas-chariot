@@ -6,82 +6,98 @@ import {
     type User,
     isSignInWithEmailLink,
     onAuthStateChanged,
-    sendSignInLinkToEmail,
     signInWithEmailLink,
     signOut,
     getAuth,
     // signInWithEmailAndPassword,
-    // sendPasswordResetEmail,
     // createUserWithEmailAndPassword,
-    // sendEmailVerification,
-    // applyActionCode as _applyActionCode,
 } from "firebase/auth";
 import {app} from "./firebase";
+import { useFuncs } from "./funcs";
+import SendSignInLink from "@/_shared_/models/features/user-authentication/api/SendSignInLink";
 
-export const useAuth = defineStore("Auth", () => {
-    const auth = getAuth(app);
+const auth = getAuth(app);
+const functions = useFuncs();
 
-    const activeUser = ref<User>();
-    const LOCAL_STORAGE_KEY_EMAIL = "emailForSignIn";
+const errors = {
+    signInFromDifferentDeviceNotAllowed: Error("Signing in from a different device is not allowed!"),
+    failedToGetSignInLink: Error("Failed to get sign in link."),
+    invalidSignInLink: Error("Invalid sign in link."),
+} as const;
 
-    async function sendLoginLink(email: string, linkRedirect: RouteLocationRaw) {
-        // store email for future use
-        window.localStorage.setItem(LOCAL_STORAGE_KEY_EMAIL, email);
-        // get route path
-        const redirectURL = getRouteUrl(linkRedirect);
-        // send the link
-        await sendSignInLinkToEmail(auth, email, {
-            url: redirectURL,
-            // this must always be true:
-            handleCodeInApp: true,
-        });
+const LOCAL_STORAGE_KEY__EMAIL = "emailForSignIn";
+function getStoredSignInEmail() {
+    return window.localStorage.getItem(LOCAL_STORAGE_KEY__EMAIL) ?? undefined;
+}
+function setStoredSignInEmail(email?: string) {
+    if (email) {
+        window.localStorage.setItem(LOCAL_STORAGE_KEY__EMAIL, email);
+    } else {
+        window.localStorage.removeItem(LOCAL_STORAGE_KEY__EMAIL);
     }
+}
 
-    async function catchLoginAttempt() {
-        // get address of current page as login link
-        const signInLink = window.location.href;
-        // try login if link is valid
-        if (isSignInWithEmailLink(auth, signInLink)) {
-            console.debug("Sign in attempt detected...");
-            const email = window.localStorage.getItem(LOCAL_STORAGE_KEY_EMAIL);
-            if (!email) {
-                console.debug("Signing in from different device is not allowed or supported (yet).");
-                // TODO: user signing in from different device, should confirm email to prevent session fixation attacks
-                return;
-            }
+async function sendSignInLink(email: string, redirect: RouteLocationRaw) {
+    const sendSignInLink = functions.createCaller(SendSignInLink);
+    // store email for future use
+    setStoredSignInEmail(email);
+    // get route path
+    const redirectUrl = getRouteUrl(redirect);
+    // send the link
+    try {
+        await sendSignInLink({
+            email,
+            redirectUrl,
+        });
+    } catch (e) {
+        console.error(e);
+        throw errors.failedToGetSignInLink;
+    }
+}
+
+async function catchSignInWithLinkAttempt() {
+    // get address of current page as login link
+    const signInLink = window.location.href;
+    // try login if link is valid
+    if (isSignInWithEmailLink(auth, signInLink)) {
+        console.debug("Sign in attempt detected...");
+        const email = getStoredSignInEmail();
+        if (!email) {
+            // TODO: user signing in from different device, should confirm email to prevent session fixation attacks
+            throw errors.signInFromDifferentDeviceNotAllowed;
+        }
+        try {
             await signInWithEmailLink(auth, email, signInLink);
+        } catch (e) {
+            console.error(e);
+            throw errors.invalidSignInLink;
         }
     }
+}
 
-    async function logout() {
-        await signOut(auth);
-    }
+async function logout() {
+    setStoredSignInEmail();
+    await signOut(auth);
+}
 
-    // async function signInWithPassword(email: string, password: string) {
-    //     await signInWithEmailAndPassword(auth, email, password);
-    // }
+// async function signInWithPassword(email: string, password: string) {
+//     await signInWithEmailAndPassword(auth, email, password);
+// }
 
-    // async function sendPasswordResetLink(email: string) {
-    //     await sendPasswordResetEmail(auth, email);
-    // }
+// async function sendPasswordResetLink(email: string) {
+// // TO DO
+// }
 
-    // async function createUserWithPassword(email: string, password: string) {
-    //     await createUserWithEmailAndPassword(auth, email, password);
-    // }
+// async function createUserWithPassword(email: string, password: string) {
+//     await createUserWithEmailAndPassword(auth, email, password);
+// }
 
-    // async function sendEmailVerificationLink(route: RouteLocationRaw) {
-    //     if (!activeUser.value) {
-    //         console.error("User must be signed in to send email verification link.");
-    //         return;
-    //     }
-    //     await sendEmailVerification(activeUser.value, {
-    //         url: getRouteUrl(route),
-    //     });
-    // }
+// async function sendEmailVerificationLink(route: RouteLocationRaw) {
+// // TODO
+// }
 
-    // async function applyActionCode(actionCode: string) {
-    //     return await _applyActionCode(auth, actionCode);
-    // }
+export const useAuth = defineStore("Auth", () => {
+    const activeUser = ref<User>();
 
     // Subscribe to changes
     onAuthStateChanged(auth, (user) => {
@@ -97,16 +113,11 @@ export const useAuth = defineStore("Auth", () => {
     return {
         activeUser,
         signInWithLink: {
-            sendLoginLink,
-            catchLoginAttempt,
+            sendLink: sendSignInLink,
+            getStoredEmail: getStoredSignInEmail,
+            catchAttempt: catchSignInWithLinkAttempt,
         },
-        // signInWithPassword: {
-        //     createUserWithPassword,
-        //     signInWithPassword,
-        //     sendPasswordResetLink,
-        // },
+        errors,
         logout,
-        // sendEmailVerificationLink,
-        // applyActionCode,
     };
 });
