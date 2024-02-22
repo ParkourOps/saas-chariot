@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ControlVariants, HorizontalAlign } from "@/types";
 import { ref } from "vue";
 import { computed, watch } from "vue";
 import { type ZodString } from "zod";
@@ -12,6 +13,10 @@ const props = defineProps<{
     autocomplete?: string;
 
     size?: "xs" | "sm" | "md" | "lg";
+    variant?: ControlVariants | "ghost";
+    horizontalAlign?: HorizontalAlign,
+
+    block?: boolean,
 
     modelValue?: string;
     schema?: ZodString;
@@ -74,7 +79,26 @@ defineExpose({
         :readonly="readonly"
         :autocomplete="autocomplete"
         class="input input-bordered transition-all ease-in"
-        :class="[{ 'input-xs': size === 'xs' }, { 'input-sm': size === 'sm' }, { 'input-md': size === 'md' }, { 'input-lg': size === 'lg' }, { 'input-error border-2': touched && !valid }]"
+        :class="[
+                { 'input-xs': size === 'xs' },
+                { 'input-sm': size === 'sm' },
+                { 'input-md': size === 'md' },
+                { 'input-lg': size === 'lg' },
+                { 'input-error border-2': touched && !valid },
+                {'input-neutral': variant === 'neutral'},
+                {'input-primary': variant === 'primary'},
+                {'input-secondary': variant === 'secondary'},
+                {'input-accent': variant === 'accent'},
+                {'input-info': variant === 'info'},
+                {'input-success': variant === 'success'},
+                {'input-warning': variant === 'warning'},
+                {'input-error': variant === 'error'},
+                {'input-ghost': variant === 'ghost'},
+                {'w-full': block},
+                {'text-left': horizontalAlign === 'left'},
+                {'text-center': horizontalAlign === 'centre'},
+                {'text-right': horizontalAlign === 'right'},
+            ]"
         v-model="value"
         @focusout="touched = true"
     />
