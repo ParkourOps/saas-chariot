@@ -1,6 +1,5 @@
-import { createRouter, createWebHistory } from "vue-router/auto";
-// import userOnly from './guards/user-only'
-// import guestOnly from './guards/guest-only'
+import { useAuth } from "@/libraries/firebase/auth";
+import { useIndicators } from "@/state/indicators";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,4 +18,34 @@ const router = createRouter({
     },
 });
 
+router.beforeEach(async (to, from)=>{
+    const auth = useAuth();
+    const indicators = useIndicators();
+
+    const getSignInStatus = new Promise((resolve) => {
+        const token = indicators.registerPendingAction();
+        setTimeout(()=>{
+            const isSignedIn = !!auth.activeUser;
+            token.unregisterPendingAction();
+            resolve(isSignedIn);
+        }, 500);
+    });
+
+    if (to.meta.requiresAuth) {
+        const signInStatus = await getSignInStatus;
+        if (!signInStatus) {
+            return {
+                path: "/app/sign-in/"
+            };
+        }
+    }
+});
+
 export default router;
+
+declare module 'vue-router' {
+    interface RouteMeta {
+        // must be declared by every route
+        requiresAuth?: boolean
+    }
+};
