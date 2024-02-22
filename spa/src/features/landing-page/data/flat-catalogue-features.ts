@@ -1,8 +1,6 @@
-import { ref } from "vue";
 import type { TieredCatalogue } from "../types/catalogue";
-import instantiateObject from "@/_shared_/utilities/instantiate-object";
 
-export default ref(instantiateObject<TieredCatalogue>([
+export default [
     {
         title: "Infrastructure",
         description: "Leverage foundational tried-and-tested infrastructure for developing and operating your digital product or service.",
@@ -292,4 +290,4 @@ export default ref(instantiateObject<TieredCatalogue>([
     // {
 
     // },
-]));
+] satisfies TieredCatalogue;
