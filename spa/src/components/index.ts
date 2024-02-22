@@ -3,6 +3,7 @@ import type { App } from "vue";
 // indicators
 import BusySpinner from "./indicators/BusySpinner.vue";
 // controls
+import Button from "./controls/Button.vue";
 import KeyboardButton from "./controls/KeyboardButton.vue";
 import InputWrap from "./controls/InputWrap.vue";
 import TextBox from "./controls/TextBox.vue";
@@ -23,6 +24,7 @@ export function registerComponents(app: App) {
     // indicators
     app.component("BusySpinner", BusySpinner)
         // controls
+        .component("Button", Button)
         .component("KeyboardButton", KeyboardButton)
         .component("InputWrap", InputWrap)
         .component("TextBox", TextBox)
@@ -46,6 +48,7 @@ declare module "vue" {
         // indicators
         BusySpinner: typeof BusySpinner;
         // controls
+        Button: typeof Button;
         KeyboardButton: typeof KeyboardButton;
         InputWrap: typeof InputWrap;
         TextBox: typeof TextBox;
