@@ -25,7 +25,7 @@ export default internalApiCall.implement(SendActionLink)(async (request) => {
     const secretKey = secretKeyResult.data;
 
     // 3. Create a record for the request so it can be handled by the endpoint.
-    const actionLinkRecord = withSchema.declareConst(ActionLinkRecord, {
+    const actionLinkRecord = withSchema(ActionLinkRecord).createConst({
         id: actionLinkId,
         email,
         actionSequence: request.data.actionSequence,

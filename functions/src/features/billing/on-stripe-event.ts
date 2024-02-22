@@ -101,7 +101,7 @@ async function handleCheckoutSessionCompleted(correlationId: string, event: Stri
     for (const item of items) {
         const price = item.price;
         const product = item.product;
-        const documentData = withSchema.declareConst(PurchasedItem, {
+        const documentData = withSchema(PurchasedItem).createConst({
             // customer information:
             customer: {
                 id: checkoutSession.customer,

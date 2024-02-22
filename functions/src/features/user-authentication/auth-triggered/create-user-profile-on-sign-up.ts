@@ -7,9 +7,9 @@ import ServerlessFunctionError from "@/libraries/serverless-function-error";
 
 export default user().onCreate(async (user/* , context */)=>{
     // create User Profile object
-    let userProfile = withSchema.declareVar(UserProfile);
+    let userProfile = withSchema(UserProfile).createVar();
     try {
-        userProfile = withSchema.declareConst(UserProfile, {
+        userProfile = withSchema(UserProfile).createConst({
             userId: user.uid,
             signedUpAt: DateTime.utcFromDate(new Date(user.metadata.creationTime)).toJSON(),
             email: user.email ?? "",
