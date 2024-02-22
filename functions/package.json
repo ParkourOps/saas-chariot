@@ -3,7 +3,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "lint:fix": "npm run lint -- --fix",
-    "build": "tsc && cp -r src/data/static lib/data/static",
+    "build": "tsc && cp -r src/data/static/* lib/data/static",
     "check": "tsc --noEmit",
     "build:watch": "tsc --watch",
     "serve": "npm run build && GOOGLE_APPLICATION_CREDENTIALS='service-account.json' firebase emulators:start --only functions",

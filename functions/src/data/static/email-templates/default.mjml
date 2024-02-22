@@ -22,11 +22,11 @@
     <mj-section background-color="#F5F8FF">
       <mj-column>
         {{#if heading}}
-          <mj-text font-size="20px" line-height="150%" color="#153243">
+          <mj-text font-size="20px" line-height="150%" color="#153243" align="center">
             {{ heading }}
           </mj-text>
         {{/if}}
-        <mj-text font-size="16px" line-height="160%">
+        <mj-text font-size="16px" line-height="160%" align="center">
           {{ paragraph }}
         </mj-text>
         {{#if ctaText }}
