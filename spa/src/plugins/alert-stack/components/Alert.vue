@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { NotificationType } from "../../types/notification-type";
+import type { NotificationType } from "@/types";
 import InfoIcon from "../assets/icons/IconInfo.vue";
 import SuccessIcon from "../assets/icons/IconSuccess.vue";
 import WarningIcon from "../assets/icons/IconWarning.vue";
 import ErrorIcon from "../assets/icons/IconError.vue";
 
 defineProps<{
-    type: NotificationType;
+    type?: NotificationType;
     show?: boolean;
 }>();
 
@@ -36,16 +36,16 @@ const emits = defineEmits<{
         <ErrorIcon v-else-if="type === 'error'" />
         <InfoIcon v-else />
 
-        <p>
+        <div>
             <!-- alert title -->
-            <span class="font-semibold" v-if="type === 'error'"> Error! </span>
-            <span class="font-semibold" v-else-if="type === 'warning'"> Warning! </span>
-            <span class="font-semibold" v-else-if="type === 'success'"> Success! </span>
+            <p class="font-semibold block sm:inline-block sm:mr-2" v-if="type === 'error'"> Error! </p>
+            <p class="font-semibold block sm:inline-block sm:mr-2" v-else-if="type === 'warning'"> Warning! </p>
+            <p class="font-semibold block sm:inline-block sm:mr-2" v-else-if="type === 'success'"> Success! </p>
             <!-- alert message -->
             <slot />
-        </p>
-        <div class="flex w-full justify-center sm:justify-end" v-if="onDismiss">
-            <button class="btn btn-ghost" @click="emits('dismiss')">Dismiss</button>
+        </div>
+        <div class="flex w-full justify-center sm:justify-end">
+            <Button size="sm" variant="ghost" block :action="()=>emits('dismiss')">DISMISS</Button>
         </div>
     </div>
 </template>

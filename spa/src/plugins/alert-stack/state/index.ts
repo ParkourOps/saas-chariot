@@ -1,4 +1,4 @@
-import type { NotificationType } from "../../types/notification-type";
+import type { NotificationType } from "@/types";
 import uniqueId from "@/_shared_/libraries/unique-id";
 import { defineStore } from "pinia";
 import { ref } from "vue";
