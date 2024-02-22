@@ -7,12 +7,12 @@ type PendingAction = {
 }
 
 export const useIndicators = defineStore("Indicators", () => {
-    const _forceOverlay = ref(false);
-    function forceOverlay() {
-        _forceOverlay.value = true;
+    const _showOverlay = ref(false);
+    function showOverlay() {
+        _showOverlay.value = true;
     }
-    function unforceOverlay() {
-        _forceOverlay.value = false;
+    function hideOverlay() {
+        _showOverlay.value = false;
     }
 
     const pendingActions = ref<Array<PendingAction>>([]);
@@ -29,12 +29,12 @@ export const useIndicators = defineStore("Indicators", () => {
     }
 
     const isBusy = computed(() => pendingActions.value.length > 0);
-    const showOverlay = computed(() => isBusy.value || _forceOverlay.value);
+    const isOverlayVisible = computed(() => isBusy.value || _showOverlay.value);
     return {
-        forceOverlay,
-        unforceOverlay,
-        registerPendingAction,
         showOverlay,
+        hideOverlay,
+        registerPendingAction,
+        isOverlayVisible,
         isBusy,
     };
 });
