@@ -7,7 +7,7 @@ export default z.object({
     paid: Boolean,
     receipt: z.object({
         number: NonEmptyString,
-        url: Url,
+        webpageUrl: Url,
     }).nullish(),
     created: DateTime,
     metadata: Metadata,

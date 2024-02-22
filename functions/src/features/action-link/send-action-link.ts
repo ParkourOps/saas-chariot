@@ -46,7 +46,7 @@ export default internalApiCall.implement(SendActionLink)(async (request) => {
     // 5. Send the email.
     const sendTemplatedEmailResult = await sendTemplatedEmail(request.correlationId, {
         to: {
-            address: email,
+            email,
         },
         from: appConfig.application.email,
         subject: "Action Required",

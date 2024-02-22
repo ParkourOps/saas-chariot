@@ -15,7 +15,7 @@ export const AlphaColour = NonEmptyString.regex(/^#(?:[0-9a-fA-F]{3,4}){1,2}$/);
 export const Url = z.string().url();
 export const EmailAddress= z.string().email();
 export const ExpandedEmailAddress = z.object({
-    address: EmailAddress,
+    email: EmailAddress,
     displayName: NonEmptyString.nullish(),
 });
 

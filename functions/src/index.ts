@@ -32,9 +32,12 @@ import "module-alias/register";
 import {initializeApp} from "firebase-admin/app";
 initializeApp();
 
-// user-profile, auth-triggered
-import createUserProfileOnSignup from "@/features/user-profile/auth-triggered/create-user-profile-on-signup";
-export {createUserProfileOnSignup};
+// user authentication, auth-triggered
+import createUserProfileOnSignUp from "@/features/user-authentication/auth-triggered/create-user-profile-on-sign-up";
+export {createUserProfileOnSignUp};
+// user authentication, callable
+import sendSignInLink from "@/features/user-authentication/send-sign-in-link";
+export {sendSignInLink};
 
 // email messaging, callable
 import sendTextOnlyEmail from "@/features/email-messaging/send-text-only-email";

@@ -13,10 +13,10 @@ function parseEmailAddress(input: z.infer<typeof ExpandedEmailAddress>) {
     if (input.displayName) {
         return {
             name: input.displayName,
-            email: input.address,
+            email: input.email,
         };
     } else {
-        return input.address;
+        return input.email;
     }
 }
 

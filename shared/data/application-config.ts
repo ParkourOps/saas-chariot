@@ -8,7 +8,7 @@ export default withSchema.declareConst(ApplicationConfig, {
         description: "Rapidly Build and Launch Digital Products and Services...",
         email: {
             displayName: "SaaS Chariot",
-            address: "no_reply@saaschariot.com",
+            email: "no_reply@saaschariot.com",
         },
         themeColour: "#153243",
         preferredColourScheme: "light",
@@ -83,7 +83,7 @@ export default withSchema.declareConst(ApplicationConfig, {
         // },
         email: {
             displayName: "SaaS Chariot: Front Desk",
-            address: "front_desk@saaschariot.com",
+            email: "front_desk@saaschariot.com",
         },
         // phone: "+44 000 000 0000",
         timeZone: "Europe/London",
