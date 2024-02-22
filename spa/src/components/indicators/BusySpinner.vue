@@ -1,5 +1,13 @@
+<script setup lang="ts">
+    import type { ThemeColours } from '@/types';
+
+    defineProps<{
+        colour: ThemeColours
+    }>();
+</script>
+
 <template>
-    <div class="spinner border-[7px] border-[#00000000] border-r-white"></div>
+    <div class="spinner border-[7px] border-[#00000000]" :class="[`border-r-${colour}`]"></div>
 </template>
 
 <style scoped lang="scss">
