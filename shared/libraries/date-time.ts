@@ -53,7 +53,7 @@ class DateTime implements IDateTime {
         this.timeZone = tz;
     }
     toJSON() {
-        return withSchema.declareConst(DateTimeSchema, {
+        return withSchema(DateTimeSchema).createConst({
             dayOfMonth: this.dayOfMonth,
             month: this.month,
             year: this.year,
