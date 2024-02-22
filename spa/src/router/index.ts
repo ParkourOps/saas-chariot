@@ -1,5 +1,6 @@
 import { useAuth } from "@/libraries/firebase/auth";
 import { useIndicators } from "@/state/indicators";
+import { createRouter, createWebHistory } from "vue-router/auto";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,21 +22,27 @@ const router = createRouter({
 router.beforeEach(async (to, from)=>{
     const auth = useAuth();
     const indicators = useIndicators();
+    const token = indicators.registerPendingAction();
 
     const getSignInStatus = new Promise((resolve) => {
-        const token = indicators.registerPendingAction();
-        setTimeout(()=>{
-            const isSignedIn = !!auth.activeUser;
-            token.unregisterPendingAction();
-            resolve(isSignedIn);
-        }, 500);
+        setInterval(()=>{
+            if (auth.activeUser === null) {
+                token.unregisterPendingAction();
+                resolve(false);
+            } else if (typeof auth.activeUser === "object") {
+                token.unregisterPendingAction();
+                resolve(true);
+            }
+        }, 100);
+
     });
 
     if (to.meta.requiresAuth) {
         const signInStatus = await getSignInStatus;
         if (!signInStatus) {
+            console.debug("UNAUTHORISED");
             return {
-                path: "/app/sign-in/"
+                path: "/app/sign-in/",
             };
         }
     }
@@ -45,7 +52,9 @@ export default router;
 
 declare module 'vue-router' {
     interface RouteMeta {
-        // must be declared by every route
-        requiresAuth?: boolean
+        requiresAuth?: boolean,
+    }
+    interface RouteQuery {
+
     }
 };

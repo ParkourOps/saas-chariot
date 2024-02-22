@@ -20,9 +20,9 @@ const auth = getAuth(app);
 const functions = useFuncs();
 
 const errors = {
-    signInFromDifferentDeviceNotAllowed: Error("Signing in from a different device is not allowed!"),
-    failedToGetSignInLink: Error("Failed to get sign in link."),
-    invalidSignInLink: Error("Invalid sign in link."),
+    signInFromDifferentDeviceNotAllowed: Error("Sign-in link is invalid. Please ensure you are signing in from the same device that requested the link."),
+    failedToGetSignInLink: Error("Failed to get sign-in link."),
+    invalidSignInLink: Error("Sign-in link is invalid."),
 } as const;
 
 const LOCAL_STORAGE_KEY__EMAIL = "emailForSignIn";
@@ -97,13 +97,15 @@ async function logout() {
 // }
 
 export const useAuth = defineStore("Auth", () => {
-    const activeUser = ref<User>();
-
-    // Subscribe to changes
+    const activeUser = ref<User|null|undefined>(undefined);
+    
+    // Listen on internal Firebase Auth's changes to reflect in active user state.
     onAuthStateChanged(auth, (user) => {
         if (!user) {
-            activeUser.value = undefined;
-            console.debug("Logged out.");
+            if (activeUser.value) {
+                console.debug("Logged out.");
+            }
+            activeUser.value = null;
         } else {
             activeUser.value = user;
             console.debug("Logged in: " + user.email);

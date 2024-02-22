@@ -1,39 +1,31 @@
 <script setup lang="ts">
 import { watch } from "vue";
-
-// import {useAnalytics} from "@/libraries/analytics";
-// const analytics = useAnalytics();
-
-// import useAuth from "@/libraries/firebase/use-auth";
+import {useAuth} from "@/libraries/firebase/auth";
+import {useAnalytics} from "@/libraries/analytics";
 import { useModalStack } from "@/plugins/modal-stack";
-// const router = useRouter();
-// const route = useRoute();
-// const auth = useAuth();
 
+const auth = useAuth();
+const analytics = useAnalytics();
+const router = useRouter();
+const route = useRoute();
 const modalStack = useModalStack();
-// watch(
-//     () => auth.activeUser,
-//     async (user) => {
-//         if (!user) {
-//             analytics.resetIdentity();
-//             await router.push({ name: "signIn" });
-//         } else {
-//             analytics.setIdentity(user.uid);
-//             // show modal if email address not verified
-//             if (!user.emailVerified) {
-//                 modalStack.showModal(() => import("./components/modals/ModalAwaitAction.vue"), {
-//                     title: "Email Verification Required",
-//                     instruction: "Please check your inbox for a verification link.",
-//                     async mountAction() {
-//                         await auth.sendEmailVerificationLink(route);
-//                     },
-//                 });
-//             }
-//         }
-//     },
-// );
 
-/* Disable the entire page (prevent user actions) if busy. */
+/* Handle application-wide actions that are triggered by change in auth status: */
+watch(
+    () => auth.activeUser,
+    async (user) => {
+        if (user === null) {
+            analytics.resetIdentity();
+            if (route.meta.requiresAuth) {
+                router.push("/app/sign-in");
+            }
+        } else if (typeof user === "object") {
+            analytics.setIdentity(user.uid);
+        }
+    }
+);
+
+/* When busy, disable the entire page using overlay to prevent user activity: */
 import { useIndicators } from "./state/indicators";
 const indicators = useIndicators();
 watch(()=>indicators.isBusy, (isBusy)=>{
@@ -42,35 +34,9 @@ watch(()=>indicators.isBusy, (isBusy)=>{
     } else {
         document.getElementsByTagName("html")[0].classList.remove("overflow-hidden", "pointer-events-none");
     }
-} /*, { immediate: true }*/ );
+});
 
-
-// react to global query params
-// const route = useRoute();
-// watch(route, (to)=>{
-//   // get query params
-//   //
-//   const mode = to.query.mode;
-//   const actionCode = to.query.oobCode;
-//   const continueUrl = to.query.continueUrl;
-//   // const lang = to.query.lang;
-//   switch (mode) {
-//     case "resetPassword":
-//       break;
-//     case "verifyEmail":
-//       if (actionCode && typeof actionCode === "string") {
-//         auth.applyActionCode(actionCode)
-//           .then(()=>{
-//             toasts.push({
-//               type: "success",
-//               message: "Email address has been verified."
-//             })
-//           });
-//       }
-//       break;
-//   }
-// });
-
+/* Append initial SEO tags: */
 seo.initialise();
 </script>
 
@@ -98,8 +64,8 @@ seo.initialise();
         leave-from-class="opacity-1"
         leave-to-class="opacity-0"
     >
-        <div class="fixed top-0 flex h-screen w-screen flex-col items-center justify-center bg-black/80 pb-16" v-if="indicators.showOverlay || indicators.isBusy || modalStack.numModals.value > 0">
-            <BusySpinner v-if="indicators.isBusy" />
+        <div class="fixed top-0 flex h-screen w-screen flex-col items-center justify-center bg-black/80 pb-16" v-if="indicators.isOverlayVisible || modalStack.numModals.value > 0">
+            <BusySpinner colour="base-100" v-if="indicators.isBusy" />
         </div>
     </Transition>
 
