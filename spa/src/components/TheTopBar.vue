@@ -7,9 +7,9 @@ const auth = useAuth();
 
 <template>
     <div class="flex flex-row items-center justify-between bg-primary p-4 shadow">
-        <p class="cursor-pointer text-3xl font-bold text-white" @click="$router.push({ name: 'user' })">
+        <p class="cursor-pointer text-3xl font-bold text-white" @click="$router.push({ name: '/app' })">
             {{ configs.application.title }}
         </p>
-        <button class="btn btn-ghost text-white" @click="auth.logout">SIGN OUT</button>
+        <Button size="sm" :action="auth.logout" class="opacity-70 hover:opacity-100" icon-left-class="fi fi-ss-leave">SIGN OUT</Button>
     </div>
 </template>
