@@ -99,7 +99,7 @@ export const sendTemplatedEmail = sendgridService.instantiateServiceFunction(
     ) => {
         const substitutionResult = await substitutePreinstalledTemplate(
             correlationId,
-            `data/static/email-templates/${messageSpecification.templateName}.mjml`,
+            `data/email-templates/${messageSpecification.templateName}.mjml`,
             messageSpecification.templateSubstitutions
         );
         if (!substitutionResult.success) {

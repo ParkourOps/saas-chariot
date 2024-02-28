@@ -2,6 +2,7 @@ import service from "@/libraries/service";
 import admin from "firebase-admin";
 import DateTime from "@/_shared_/libraries/date-time";
 import ServiceFunctionError from "@/libraries/service/service-function-error";
+import serverlessConfig from "@/serverless-config";
 
 const resourceDelivery = service.instantiate(
     "Resource Delivery",
@@ -13,13 +14,12 @@ export const getDownloadLink = resourceDelivery.instantiateServiceFunction(async
     provider,
     correlationId,
     path: string,
-    activeForMins: number,
 )=>{
     const storagePath = `deliverable-resources/${path}`;
     try {
         const url = (await provider().file(storagePath).getSignedUrl({
             action: "read",
-            expires: DateTime.utcNow().add(activeForMins, "minutes").toDate(),
+            expires: DateTime.utcNow().add(serverlessConfig.services.resourceDelivery.downloadLink.activeForMins, "minutes").toDate(),
         }))[0];
         return {
             success: true,
