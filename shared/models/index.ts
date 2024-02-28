@@ -13,6 +13,7 @@ export const NonEmptyString = z.string().min(1);
 export const Colour = NonEmptyString.regex(/^#(?:[0-9a-fA-F]{3}){1,2}$/);
 export const AlphaColour = NonEmptyString.regex(/^#(?:[0-9a-fA-F]{3,4}){1,2}$/);
 export const Url = z.string().url();
+export const Uuid = z.string().uuid();
 export const EmailAddress= z.string().email();
 export const ExpandedEmailAddress = z.object({
     email: EmailAddress,
