@@ -6,11 +6,11 @@ export default <
     Input
 >(schema: ZodType<Output, Def, Input>) => ({
 
-    createConst(input: z.infer<ZodType<Output, Def, Input>>) {
+    instantiateConst(input: z.infer<ZodType<Output, Def, Input>>) {
         return Object.freeze(schema.parse(input));
     },
 
-    createVar(input?: z.infer<ZodType<Output, Def>>) {
+    instantiateVar(input?: z.infer<ZodType<Output, Def>>) {
         if (input) {
             return schema.parse(input);
         } else {

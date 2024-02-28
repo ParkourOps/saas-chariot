@@ -1,7 +1,7 @@
 import withSchema from "../libraries/with-schema";
 import ApplicationConfig from "../models/ApplicationConfiguration";
 
-export default withSchema(ApplicationConfig).createConst({
+export default withSchema(ApplicationConfig).instantiateConst({
     application: {
         title: "SaaS Chariot",
         subtitle: "Rapidly Build and Launch Digital Products and Services",
