@@ -5,7 +5,7 @@ import withSchema from "@/_shared_/libraries/with-schema";
 import DateTime from "@/_shared_/libraries/date-time";
 import ServerlessFunctionError from "@/libraries/serverless-function-error";
 import webhookEndpoint from "@/libraries/webhook-endpoint";
-import firestore from "@/libraries/firestore";
+import {customerPurchase} from "@/document-collections";
 
 // async function handleChargeRefunded(correlationId: string, event: Stripe.ChargeRefundedEvent) {
 //         if (typeof event.data.object.invoice === "object") {
@@ -15,6 +15,7 @@ import firestore from "@/libraries/firestore";
 
 async function handleCheckoutSessionCompleted(correlationId: string, event: Stripe.CheckoutSessionCompletedEvent) {
     const checkoutSession = event.data.object;
+
     // Validate checkout session
     if (
         typeof checkoutSession.customer_details?.email !== "string" ||
@@ -96,12 +97,11 @@ async function handleCheckoutSessionCompleted(correlationId: string, event: Stri
     // };
 
     // Create an entry for each item
-    const db = firestore.get();
     const items = getCheckoutSessionItemsResult.data;
     for (const item of items) {
         const price = item.price;
         const product = item.product;
-        const documentData = withSchema(PurchasedItem).createConst({
+        const documentData = withSchema(PurchasedItem).instantiateConst({
             // customer information:
             customer: {
                 id: checkoutSession.customer,
@@ -165,8 +165,9 @@ async function handleCheckoutSessionCompleted(correlationId: string, event: Stri
                 },
             },
         });
+
         // Create the document
-        await db.doc(`customer/${documentData.customer.email}/purchase/`).set(documentData);
+        customerPurchase.setDoc(correlationId, [documentData.customer.email], documentData);
     }
 }
 

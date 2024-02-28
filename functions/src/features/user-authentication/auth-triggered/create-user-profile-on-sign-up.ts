@@ -1,15 +1,15 @@
 import {user} from "firebase-functions/v1/auth";
-import {firestore} from "firebase-admin";
 import UserProfile from "@/_shared_/models/features/user-authentication/UserProfile";
 import DateTime from "@/_shared_/libraries/date-time";
 import withSchema from "@/_shared_/libraries/with-schema";
 import ServerlessFunctionError from "@/libraries/serverless-function-error";
+import {customer} from "@/document-collections";
 
 export default user().onCreate(async (user/* , context */)=>{
     // create User Profile object
-    let userProfile = withSchema(UserProfile).createVar();
+    let userProfile = withSchema(UserProfile).instantiateVar();
     try {
-        userProfile = withSchema(UserProfile).createConst({
+        userProfile = withSchema(UserProfile).instantiateConst({
             userId: user.uid,
             signedUpAt: DateTime.utcFromDate(new Date(user.metadata.creationTime)).toJSON(),
             email: user.email ?? "",
@@ -29,9 +29,8 @@ export default user().onCreate(async (user/* , context */)=>{
         ).log();
     }
     // store User Profile object
-    const documentPath = `customer/${userProfile.email}`;
     try {
-        return firestore().doc(documentPath).set(userProfile);
+        await customer.setDoc(undefined, [userProfile.email], userProfile);
     } catch (e) {
         return ServerlessFunctionError.createFromException(
             undefined,
@@ -43,7 +42,6 @@ export default user().onCreate(async (user/* , context */)=>{
                     user,
                 },
                 intermediateVariables: {
-                    documentPath,
                     userProfile,
                 },
             }

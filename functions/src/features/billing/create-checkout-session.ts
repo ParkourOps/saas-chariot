@@ -1,10 +1,6 @@
 import CreateCheckoutSession from "@/_shared_/models/features/billing/api/CreateCheckoutSession";
 import {getCheckoutUrl, getCustomerByEmail} from "../../services/stripe";
 import internalApiCall from "@/libraries/internal-api-call";
-// import {z} from "zod";
-// import UserProfile from "@/models/user/Profile";
-// import {getFirestore} from "firebase-admin/firestore";
-// import {FunctionError} from "@/libraries/error-handling";
 
 export default internalApiCall.implement(CreateCheckoutSession)(async (request)=>{
     const customerId = await (async ()=>{
