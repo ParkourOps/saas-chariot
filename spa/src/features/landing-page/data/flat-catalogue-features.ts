@@ -2,12 +2,12 @@ import type { TieredCatalogue } from "../types/catalogue";
 
 export default [
     {
-        title: "Infrastructure",
-        description: "Leverage foundational tried-and-tested infrastructure for developing and operating your digital product or service.",
+        title: "Robust Application Infrastructure",
+        description: "Build your digital product or service on proven infrastructure, for rapid development and dependable operations.",
         items: [
             {
-                title: "Serverless Architecture",
-                description: "No need to maintain (real or virtual) machines, containers, or clusters.",
+                title: "Hassle-Free Serverless Architecture",
+                description: "No need to maintain (physical or virtual) servers, containers, or clusters.",
                 features: [
                     {
                         text: "Scalable",
@@ -22,29 +22,23 @@ export default [
             },
             {
                 title: "Single Codebase",
-                description: "By default, all code resides in a single cohesive fully-typed codebase.",
-                // features: [
-                //     {
-                //         text: "Single-Page Application (SPA)",
-                //     },
-                //     {
-                //         text: "Serverless Functions (SFs)",
-                //     },
-                //     {
-                //         text: "Shared Code"
-                //     }
-                // ]
+                description: "Ensure code coherence with a single fully-typed codebase in Git.",
+                features: [
+                    {
+                        text: "Single-Page Application (SPA)",
+                    },
+                    {
+                        text: "Serverless Functions (SFs)",
+                    },
+                    {
+                        text: "Shared Code"
+                    }
+                ]
             },
             {
                 title: "Continuous Integration & Deployment",
-                description: "Develop application entirely on a local environment ∴ no resource bottlenecks. Detect bugs early and release frequently.",
+                description: "Systematically detect bugs early on in the development process; release frequently.",
                 features: [
-                    {
-                        text: "Local Dev Environment (emulated)",
-                    },
-                    {
-                        text: "Local Dev Environment (on Staging)",
-                    },
                     {
                         text: "Staging Environment",
                     },
@@ -52,19 +46,28 @@ export default [
                         text: "Production Environment",
                     },
                     {
-                        text: "Code Review",
+                        text: "Code Review"
                     },
                     {
-                        text: "Release Management",
-                    },
-                    {
-                        text: "Faster Dev Cycle & Time to Market",
-                    },
+                        text: "Release Management"
+                    }
                 ],
             },
             {
+                title: "Fully-Local Development",
+                description: "Develop end-to-end application entirely on local machine; no cloud resource bottlenecks.",
+                features: [
+                    {
+                        text: "Local Dev Environment (Emulated Backend)",
+                    },
+                    {
+                        text: "Local Dev Environment (on Staging Backend)",
+                    },
+                ]
+            },            
+            {
                 title: "Automated Testing",
-                description: "Ensure thorough, consistent, and repeatable testability of modules, features, and the application as a whole. Confirm every release satisfies requirements.",
+                description: "Systematically corroborate requirements with thorough, consistent, and repeatable testability.",
                 features: [
                     {
                         text: "Unit Tests",
@@ -84,12 +87,12 @@ export default [
                 ],
             },
             {
-                title: "Automated Reporting",
-                description: "Audit application for performance, accessibility, and SEO issues.",
+                title: "Automated Web Reporting",
+                description: "Audit web application for performance, accessibility, and SEO issues.",
             },
             {
-                title: "Real-Time Event Logging",
-                description: "Access a centralised log of all application events for effortless debugging.",
+                title: "Real-Time Monitoring",
+                description: "Effortlessly debug application using a centralised log of all application events.",
                 features: [
                     {
                         text: "Staging Log",
@@ -97,197 +100,256 @@ export default [
                     {
                         text: "Production Log",
                     },
+                    {
+                        text: "Event Tracing"
+                    }
                 ],
             },
+            {
+                title: "Security",
+                description: "Be confident that your application is supported by a foundation of consistent security audits and software updates.",
+                features: [
+                    {
+                        text: "Served over HTTPS"
+                    },
+                    {
+                        text: "Discreet Error Handling"
+                    },
+                    {
+                        text: "Automatic Input Validation"
+                    },
+                    {
+                        text: "Guarded by Allowlist and Rate Limiting"
+                    },
+                ]
+            }
         ],
     },
 
     {
-        title: "Brand Expression",
-        description: "Enliven your digital product of service by baking in an exceptional experience of your brand essence.",
+        title: "Exceptional Brand Expression",
+        description: "Invigorate your digital product or service by integrating an outstanding brand experience that engages users.",
         items: [
             {
-                title: "Themes",
-                description: "Define colour scheme(s), fonts, and visual properties. Add icon packs, icons, and other brand assets.",
+                title: "Theming",
+                description: "Showcase your brand by defining themes that project your brand essence.",
+                features: [
+                    {
+                        text: "Colour Scheme"
+                    },
+                    {
+                        text: "Visual Style"
+                    },
+                    {
+                        text: "Fonts & Font Families"
+                    },
+                    {
+                        text: "Icon Packs"
+                    },
+                ],
             },
             {
                 title: "Animations",
-                description: "Add visual effects to almost every element on the user interface.",
+                description: "Animate almost any visual element.",
                 features: [
                     {
-                        text: "Transition-Triggered",
+                        text: "Transition Trigger",
                     },
                     {
-                        text: "Scroll-Triggered",
+                        text: "Scroll Trigger",
                     },
                     {
-                        text: "Reactive Data-Triggered",
+                        text: "Reactive Data Trigger",
                     },
                     {
-                        text: "Event-Triggered",
+                        text: "Event Trigger",
                     },
                 ],
             },
             {
-                title: "Email Templates",
-                description: "Transactional emails may use templates. Adjust the default template to match brand. If required, add additional templates.",
+                title: "Templated Emails",
+                description: "Expand your brand awareness by sending MJML-templated emails aligned with your brand identity.",
                 features: [
                     {
-                        text: "Responsive",
+                        text: "Flexible"
                     },
                     {
-                        text: "Email Client-Friendly",
+                        text: "Responsive"
                     },
                     {
-                        text: "MJML Syntax",
+                        text: "Email Client Friendly"
                     },
-                ],
+                    {
+                        text: "Highly Customisable"
+                    }
+                ]
             },
             {
                 title: "Search Engine Optimisation",
-                description: "Use built-in library to optimise pages for search engine indexing, crawling; and social media sharing.",
+                description: "Optimise pages for search engine indexing, crawling, and social media sharing, using the built-in SEO library.",
             },
         ],
     },
 
     {
-        title: "Commerce",
-        description: "",
-        items: [
-
-        ],
-    },
-
-    {
-        title: "Business Logic",
-        description: "sd",
+        title: "Intuitive User Workflows",
+        description: "Build exceptional user workflows using common UI components and UX patterns.",
         items: [
             {
-                title: "Scrupulous Data Validation",
-                description: "Ensure all data used throughout the application conform to predefined schema definitions.",
+                title: "Responsive Layouts",
+                description: "Ensure optimal user experience regardless of device size."
+            },
+            {
+                title: "Passwordless Sign In",
+                description: "Allow users to sign in or create an account by entering only their email address.",
+            },
+            {
+                title: "Social Media Sign In",
+                description: "Allow users to sign in or create an account using their social media account."
+            },
+            {
+                title: "Automatic User Profile Creation",
+                description: "Define default user profile to be created automatically on user sign up."
+            },
+            {
+                title: "Role-Based Access Control",
+                description: "Restrict access to user workflows and resources using defined roles."
+            },
+            {
+                title: "Pop-Up Notifications and Alerts",
+                description: "Update users with customisable pop-up notifications and alerts."
+            },
+            {
+                title: "Transactional Emails",
+                description: "Send emails from anywhere in the web application.",
                 features: [
                     {
-                        text: "Development-Time Data Type Suggestions",
+                        text: "Templated Emails"
                     },
                     {
-                        text: "Compile-Time Data Type Validation",
-                    },
-                    {
-                        text: "Run-Time Data Validation",
-                    },
-                ],
+                        text: "Text-Only Emails"
+                    }
+                ]
             },
             {
-                title: "NoSQL Database",
-                description: "Store schema-validated data as documents in (nestable) document collections.",
+                title: "Email Action Links",
+                description: "Verify user email address and perform (one or more) actions on behalf of the user."
             },
             {
-                title: "Object Storage",
-                description: "Manually or programmatically upload, download, and delete files in cloud object storage.",
-            },
-            {
-                title: "Real-Time Data Sync",
-                description: "Use real-time data synchronisation to ensure data inside application is always up-to-date.",
+                title: "Schema-Enforced Data",
+                description: "Store data in NoSQL document collections; ensure all documents match specific schema.",
                 features: [
                     {
-                        text: "One-Way Subscription (Read-Only)",
+                        text: "Type Suggestions"
                     },
                     {
-                        text: "Two-Way Subscription (Read-and-Write)",
+                        text: "Compile-Time Type Checking"
                     },
-                ],
+                    {
+                        text: "Runtime Input Validation"
+                    }
+                ]
             },
             {
-                title: "",
-                description: "",
+                title: "Real-Time Data Synchronisation",
+                description: "Ensure data is always up to date by subscribing to real-time updates on individual documents and queried document collections."
             },
             {
-                title: "User Authentication & Authorisation",
-                description: "",
+                title: "On-Demand Modals",
+                description: "Create clean, responsive, and reusable modal-based workflows."
+            },
+            {
+                title: "Markdown Content",
+                description: "Serve static (*.md) and dynamic (*.mdx) Markdown content.",
+            },
+            {
+                title: "Mailing Lists",
+                description: "Create any number of mailing lists for customers to subscribe to."
+            },
+            {
+                title: "Deliverable Resources",
+                description: "Serve files from cloud storage using temporary download links."
             },
         ],
     },
 
     {
-        title: "User Workflows",
-        description: "sd",
+        title: "Deep User Empathy",
+        description: "Gain comprehensive insight into the needs and requirements of your customers.",
         items: [
             {
-                title: "Schema-Enforced",
-                description: "Ensure all data used by the application conforms to predefined schemas.",
+                title: "Live Chat",
+                description: "Interact and engage with customers through live chat.",
+            },
+            {
+                title: "Feedback Capture",
+                description: "Present pop-up forms to capture feedback, ratings, and conduct surveys."
+            },
+            {
+                title: "User Analytics and Reporting",
+                description: "Gain insight into how your users interact with and perceive your product or service.",
+                features: [
+                    {
+                        text: "Recording-Based"
+                    },
+                    {
+                        text: "Event-Based"
+                    }
+                ]
+            },
+            {
+                title: "Localisation",
+                description: "Offer users a tailored experience that reflects their local region, spoken language, and cultural norms.",
+                features: [
+                    {
+                        text: "Language"
+                    },
+                    {
+                        text: "Time Zone"
+                    },
+                    {
+                        text: "Currency"
+                    },
+                    {
+                        text: "Right-to-Left Layout"
+                    },
+                    {
+                        text: "Automatic Locale Detection"
+                    }
+                ]
+            },
+
+        ]
+    },
+
+    {
+        title: "Prolific Digital Commerce",
+        description: "Reify your business model by implementing a dependable payment system that facilitates revenue generation and profitability.",
+        items: [
+            {
+                title: "Secure Payment Processing",
+                description: "Process international payments securely with Stripe."
+            },
+            {
+                title: "Products & Services Catalogue",
+                description: "Present customers with (optionally) categorised, detailed, searchable, and filterable product and service listings.",
+                features: [
+                    {
+                        text: "One-Time Pricing"
+                    },
+                    {
+                        text: "Recurring Pricing"
+                    },
+                ]
+            },
+            {
+                title: "Billing and Subscription Management",
+                description: "Provide customers the ability to retrieve past receipts and customize their own subscription preferences."
+            },
+            {
+                title: "Shopping Cart and Checkout",
+                description: "Allow customers to add products and services to a shopping cart before they checkout.",
             },
         ],
     },
-
-    // {
-    //     title: "Customer Understading",
-    //     description: ""
-    // }
-    // {
-    //     title: "Automated Testing"
-    // },
-
-    // {
-
-    // },
-
-    // {
-    //     title: "Brand Expression",
-    // },
-    // {
-    //     title: "User Authentication and Authorisation"
-    // },
-    // {
-    //     title: "User Analytics"
-    // },
-
-    // {
-    //     title: "User Conversations and Feedback Capturing"
-    // },
-    // {
-    //     title: "Data Storage and Validation"
-    // },
-    // {
-    //     title: "File Storage and Validation"
-    // },
-
-    // {
-    //     title: "Search Engine Optimisation (SEO)"
-    // },
-    // {
-    //     title: "Modal-Based Workflows"
-    // },
-    // {
-    //     title: "Transactional Emails",
-    //     features: [
-    //         "Templated",
-    //         "Text-Only"
-    //     ]
-    // },
-
-    // {
-    //     title: ""
-    // },
-    // {
-    //     title: "In-App Notifications"
-    // },
-    // {
-    //     title: "Billing and Subscription Management"
-    // },
-
-
-    // {
-    //     title: "Advanced Reporting"
-    // },
-    // {},
-
-    // {
-
-    // },
-    // {
-
-    // },
-    // {
-
-    // },
 ] satisfies TieredCatalogue;

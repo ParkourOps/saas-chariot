@@ -43,7 +43,7 @@ const selectedIndex = ref(0);
             'collapse-content': !expanded,
             'pb-10': expanded,
         }">
-            <p class="mx-auto mb-8 mt-6 max-w-prose px-4 text-center text-sm leading-tight tracking-tight text-primary sm:text-base">
+            <p class="mx-auto mt-10 mb-12 px-4 text-center text-sm text-primary sm:text-base max-w-xl font-semibold">
                 {{ tier.description }}
             </p>
             <FlatCatalogue :catalogue="tier.items" />

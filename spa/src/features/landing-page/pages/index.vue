@@ -22,7 +22,9 @@ seo.allowIndex();
 <template>
     <div class="flex flex-col items-center justify-center bg-primary px-4 py-14 font-serif sm:py-28">
         <LogoStamp class="mb-2" colour-class="fill-base-100 text-base-100" show-title/>
-        <p class="smallcaps max-w-sm text-center text-2xl text-accent font-semibold sm:font-bold sm:max-w-screen-sm sm:text-4xl">Transform Ideas into Reality: Rapidly Build and Launch Digital Products and Services</p>
+        <p class="smallcaps max-w-sm text-center text-2xl text-accent font-semibold sm:font-bold sm:max-w-screen-md sm:text-5xl">
+            Transform Ideas into Reality: Rapidly Build and Launch Digital Products and Services
+        </p>
 
         <div class="mt-12 flex flex-col gap-6 sm:flex-row">
             <KeyboardButton
@@ -62,7 +64,7 @@ seo.allowIndex();
 
             <p class="mb-6 text-lg tracking-tighter sm:text-xl text-center">
                 SaaS Chariot is a comprehensive product development system that streamlines
-                the development of MVPs by harnessing a framework that implements cutting-edge industry best practices,
+                the development of MVPs through a framework that implements cutting-edge industry best practices,
                 so you can focus on creating exceptional value for your customers.
             </p>
 
@@ -102,23 +104,23 @@ seo.allowIndex();
     </div>
 
     <SectionDivider id="how-it-works" title="How It Works"/>
-    <p class="text-xl text-center w-3/4 sm:max-w-prose mx-auto text-secondary sm:mt-24 font-semibold">
-        Implement your product or service in <span class="text-nowrap">10 steps:</span>
+    <p class="text-xl sm:text-2xl text-center w-3/4 sm:max-w-prose mx-auto text-secondary sm:mt-24 font-semibold tracking-wide sm:tracking-wider">
+        Implement your product or service in <span class="text-nowrap">9 simple steps:</span>
     </p>
     <NumberedList
         text-size="lg"
         :items="[
             `<mark>Initiate project codebase</mark> by cloning the template.`,
             '<mark>Create a configuration file</mark> with information about your company, the application, and necessary third-party accounts (e.g. billing and analytics).',
-            '<mark>Bring your brand to life</mark> by defining colour scheme(s), visual properties, typefaces, icon sets, transitions, and more. Add brand assets such as photographs, videos, animations, and illustrations. <mark>Implement any animation logic.</mark>',
-            '<mark>Implement static content layouts.</mark> Add functional tests to verify layout consistency.',
-            '<mark>Model and implement dynamic content layouts.</mark> Add functional tests to verify layout consistency.',
+            '<mark>Bring your brand to life</mark> by defining colour scheme(s), visual properties, typefaces, icon sets, transitions, and more. Add brand assets such as photographs, videos, animations, and illustrations.',
+            // '<mark>Implement static content layouts.</mark> Add functional tests to verify layout consistency.',
             '<mark>Model and implement business logic;</mark> add unit tests to verify logical consistency.',
-            '<mark>Build user workflows</mark> by leveraging common application elements such as modals, pop-up alerts, notifications, transactional emails, action links, and more. Add functional tests and end-to-end tests to corroborate requirements.',
+            // '<mark>Implement content layouts and user workflows.</mark> Add functional tests to verify layout consistency.',
+            '<mark>Build user workflows and content layouts</mark> by leveraging common application elements such as modals, pop-up alerts, notifications, transactional emails, action links, and more. Define functional tests and end-to-end tests to corroborate requirements.',
             '<mark>Optimise project for SEO</mark> using built-in library; Make sure to <mark>check audit report</mark> for issues and possible improvements.',
-            `<mark>Deploy to staging environment;</mark> check thoroughly.`,
+            `<mark>Deploy to staging environment.</mark> Execute manual and automated test suites.`,
             `<mark>Approve for release</mark> to production environment.`,
-            'Iterate as necessary from step 3 onwards.'
+            `Repeat as necessary from step 3 or beyond.`
         ]"
         class="mt-12 sm:my-24"
     />
@@ -131,7 +133,9 @@ seo.allowIndex();
 
 
     <SectionDivider id="features" title="Features" />
-    <TieredCatalogue :catalogue="featuresCatalogue" expanded="" />
+    <div class="max-w-screen-xl mx-auto">
+        <TieredCatalogue :catalogue="featuresCatalogue" />
+    </div>
     <!-- <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto w-fit gap-6 px-2">
         <CatalogueItemCard v-for="feature in featuresCatalogue" :item="feature" />
     </div> -->

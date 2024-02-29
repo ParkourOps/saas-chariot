@@ -9,7 +9,7 @@ defineProps<{
 <template>
     <div class="card card-compact min-h-[15rem] w-full max-w-[24rem] overflow-hidden border bg-neutral shadow-md sm:max-w-96">
         <div class="smallcaps bg-accent fill-primary p-3 font-serif font-extrabold text-primary">
-            <div class="mx-auto flex h-[3rem] w-fit items-center">
+            <div class="mx-auto flex h-[3rem] w-fit items-center text-center text-xl">
                 <component v-if="item.icon" :is="item.icon" class="mr-3 w-auto" />
                 <h1>{{ item.title }}</h1>
             </div>

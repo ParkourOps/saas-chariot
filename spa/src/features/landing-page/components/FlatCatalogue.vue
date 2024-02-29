@@ -37,9 +37,6 @@ const gridColumnsClass = computed(()=>{
 </script>
 
 <template>
-    <p class="text-primary">
-        {{ gridColumnsClass }}
-    </p>
     <div class="grid gap-12 px-2 justify-items-center" :class="[gridColumnsClass]">
         <CatalogueItemCard v-for="(item, idx) in catalogue" :key="`item-#${idx}`" :item="item" />
     </div>
