@@ -40,7 +40,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <dialog ref="dialog" class="modal modal-top sm:modal-middle overflow-y-scroll">
+    <dialog ref="dialog" class="modal modal-top sm:modal-middle overflow-y-scroll" @close="done()">
         <div class="modal-box max-h-none mb-4 sm:my-4 overflow-visible" :class="modalClass">
                 <slot :done="done" />
         </div>
