@@ -141,7 +141,7 @@ export class DocumentCollection<
                     },
                     intermediateVariables: {
                         parseResult: {
-                            error: parseResult.error,
+                            error: parseResult.error.errors,
                         },
                     },
                 }
@@ -164,7 +164,7 @@ export class DocumentCollection<
                     },
                     intermediateVariables: {
                         parseResult: {
-                            error: parseResult.error,
+                            error: parseResult.error.errors,
                         },
                     },
                 }
@@ -308,9 +308,21 @@ export class DocumentCollection<
     public async readDoc(correlationId: string | undefined, ids: string[]) {
         const docRef = this.getDocumentRef(correlationId, ids);
         // read data
-        let rawDocumentData : FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>;
+        let rawDocumentData : FirebaseFirestore.DocumentData | undefined;
         try {
-            rawDocumentData = await docRef.get();
+            rawDocumentData = (await docRef.get()).data();
+            if (!rawDocumentData) {
+                throw ServerlessFunctionError.create(
+                    correlationId,
+                    "not-found",
+                    "Could not read document from collection. Document does not exist.",
+                    {
+                        inputVariables: {
+                            docPath: docRef.path,
+                        },
+                    }
+                );
+            }
         } catch (e) {
             throw ServerlessFunctionError.createFromException(
                 correlationId,
