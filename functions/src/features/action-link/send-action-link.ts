@@ -8,8 +8,8 @@ import withSchema from "@/_shared_/libraries/with-schema";
 import hash from "@/_shared_/libraries/hash";
 import getFunctionUrl from "@/utilities/get-function-url";
 import internalApiCall from "@/libraries/internal-api-call";
-import firestore from "@/libraries/firestore";
 import uniqueId from "@/_shared_/libraries/unique-id";
+import {actionLink} from "@/document-collections";
 
 export default internalApiCall.implement(SendActionLink)(async (request) => {
     const email = request.data.email;
@@ -25,7 +25,7 @@ export default internalApiCall.implement(SendActionLink)(async (request) => {
     const secretKey = secretKeyResult.data;
 
     // 3. Create a record for the request so it can be handled by the endpoint.
-    const actionLinkRecord = withSchema(ActionLinkRecord).createConst({
+    const actionLinkRecord = withSchema(ActionLinkRecord).instantiateConst({
         id: actionLinkId,
         email,
         actionSequence: request.data.actionSequence,
@@ -35,8 +35,7 @@ export default internalApiCall.implement(SendActionLink)(async (request) => {
         failUrl: request.data.failUrl,
         status: "pending",
     });
-    const db = firestore.get();
-    await db.doc(`action-link/${actionLinkRecord.id}`).set(actionLinkRecord);
+    await actionLink.setDoc(request.correlationId, [actionLinkRecord.id], actionLinkRecord);
 
     // 4. Produce the link.
     const url = new URL(getFunctionUrl("handleActionLink"));

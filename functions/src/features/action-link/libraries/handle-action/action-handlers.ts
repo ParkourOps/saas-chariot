@@ -1,139 +1,113 @@
 import {getDownloadLink} from "@/services/resource-delivery";
-import serverlessConfig from "@/serverless-config";
 import {ActionHandler, ActionType} from "../../types";
-import firestore from "@/libraries/firestore";
 import ServerlessFunctionError from "@/libraries/serverless-function-error";
-import deliverableResources from "@/data/deliverable-resources";
-import mailingLists from "@/data/mailing-lists";
+import deliverableResources from "@/features/resource-delivery/data/deliverable-resources";
+import mailingLists from "@/features/mailing-list/data/mailing-lists";
+import {mailingList} from "@/document-collections";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const instantiateActionHandler = <T extends ActionType>(type: T) => (handler: ActionHandler<T>) => handler;
 
-export const actionHandlerIssueResource = instantiateActionHandler("issueResource")(async (correlationId, email, action)=>{
-    const resourceEntry = deliverableResources[action.resourceKey];
-    if (!resourceEntry) {
+export const actionHandlerIssueResource = instantiateActionHandler("issueResource")(
+    async (correlationId, email, action)=>{
+        const resourceEntry = deliverableResources[action.resourceKey];
+        if (!resourceEntry) {
+            return {
+                success: false,
+                error: ServerlessFunctionError.create(
+                    correlationId,
+                    "not-found",
+                    "Could not issue resource. Could not find requested resource.",
+                    {
+                        inputVariables: {
+                            email,
+                            action,
+                        },
+                    }
+                ),
+            };
+        }
+        const getDownloadLinkResult = await getDownloadLink(
+            correlationId,
+            resourceEntry.path,
+        );
+        if (!getDownloadLinkResult.success) {
+            return {
+                success: false,
+                error: getDownloadLinkResult.error,
+            };
+        }
         return {
-            success: false,
-            error: ServerlessFunctionError.create(
-                correlationId,
-                "not-found",
-                "Could not find requested resource.",
-                {
-                    inputVariables: {
-                        email,
-                        action,
-                    },
-                }
-            ),
+            success: true,
+            redirectUrl: getDownloadLinkResult.data,
         };
-    }
-    const getDownloadLinkResult = await getDownloadLink(
-        correlationId,
-        resourceEntry.path,
-        serverlessConfig.services.resourceDelivery.downloadLink.activeForMins
-    );
-    if (!getDownloadLinkResult.success) {
-        return {
-            success: false,
-            error: getDownloadLinkResult.error,
-        };
-    }
-    return {
-        success: true,
-        redirectUrl: getDownloadLinkResult.data,
-    };
-});
+    });
 
-export const actionHandlerSubscribeToMailingList = instantiateActionHandler("subscribeToMailingList")(async (correlationId, email, action)=>{
-    const mailingListEntry = mailingLists[action.mailingListKey];
-    if (!mailingListEntry) {
-        return {
-            success: false,
-            error: ServerlessFunctionError.create(
+export const actionHandlerSubscribeToMailingList = instantiateActionHandler("subscribeToMailingList")(
+    async (correlationId, email, action)=>{
+        const mailingListKey = action.mailingListKey;
+        // find mailing list spec
+        const mailingListSpec = mailingLists[mailingListKey];
+        if (!mailingListSpec) {
+            return {
+                success: false,
+                error: ServerlessFunctionError.create(
+                    correlationId,
+                    "not-found",
+                    "Could not subscribe to mailing list. Could not find requested mailing list.",
+                    {
+                        inputVariables: {
+                            email,
+                            action,
+                        },
+                    }
+                ),
+            };
+        }
+        //
+        const mailingListExists = mailingList.docExists(correlationId, [mailingListKey]);
+        if (!mailingListExists) {
+            await mailingList.createDoc(
                 correlationId,
-                "not-found",
-                "Could not find requested mailing list.",
+                [mailingListKey],
                 {
-                    inputVariables: {
-                        email,
-                        action,
-                    },
+                    title: mailingListSpec.title,
+                    description: mailingListSpec.description,
+                    subscriberEmails: [email],
                 }
-            ),
-        };
-    }
-    const db = firestore.get();
-    const docPath = `mailing-list/${action.mailingListKey}`;
-    const doc = await db.doc(docPath).get();
-    try {
-        if (doc.exists) {
-            await db.doc(docPath).update({
-                subscriberEmails: firestore.FieldValue.arrayUnion(email),
-            });
+            );
         } else {
-            await db.doc(docPath).create({
-                title: mailingListEntry.title,
-                description: mailingListEntry.description,
-                subscriberEmails: [email],
+            await mailingList.appendToArrayInDoc(correlationId, [mailingListKey], {
+                subscriberEmails: {
+                    type: "union",
+                    elements: [
+                        email,
+                    ],
+                },
             });
         }
         return {
             success: true,
         };
-    } catch (e) {
-        return {
-            success: false,
-            error: ServerlessFunctionError.createFromException(
-                correlationId,
-                e,
-                "internal",
-                "Could not subscribe customer to mailing list.",
-                {
-                    inputVariables: {
-                        email,
-                        action,
-                    },
-                    intermediateVariables: {
-                        docPath,
-                    },
-                }
-            ),
-        };
-    }
-});
+    });
 
-export const actionHandlerUnsubscribeFromMailingList = instantiateActionHandler("unsubscribeFromMailingList")(async (correlationId, email, action)=>{
-    const db = firestore.get();
-    const docPath = `mailing-list/${action.mailingListKey}`;
-    const doc = await db.doc(docPath).get();
-    try {
-        if (doc.exists) {
-            await db.doc(docPath).update({
-                subscriberEmails: firestore.FieldValue.arrayRemove(email),
+export const actionHandlerUnsubscribeFromMailingList = instantiateActionHandler("unsubscribeFromMailingList")(
+    async (correlationId, email, action)=>{
+        const mailingListKey = action.mailingListKey;
+        const mailingListExists = mailingList.docExists(correlationId, [mailingListKey]);
+        if (!mailingListExists) {
+            return {
+                success: true,
+            };
+        } else {
+            await mailingList.appendToArrayInDoc(correlationId, [mailingListKey], {
+                "subscriberEmails": {
+                    type: "remove",
+                    elements: [email],
+                },
             });
+            return {
+                success: true,
+            };
         }
-        return {
-            success: true,
-        };
-    } catch (e) {
-        return {
-            success: false,
-            error: ServerlessFunctionError.createFromException(
-                correlationId,
-                e,
-                "internal",
-                "Could not subscribe customer to mailing list.",
-                {
-                    inputVariables: {
-                        email,
-                        action,
-                    },
-                    intermediateVariables: {
-                        docPath,
-                    },
-                }
-            ),
-        };
-    }
-});
-
+    });
