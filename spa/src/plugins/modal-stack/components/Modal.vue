@@ -40,9 +40,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <dialog ref="dialog" class="modal modal-top sm:modal-middle">
-        <div class="modal-box overflow-visible" :class="modalClass">
-            <slot :done="done" />
+    <dialog ref="dialog" class="modal modal-top sm:modal-middle overflow-y-scroll">
+        <div class="modal-box max-h-none mb-4 sm:my-4 overflow-visible" :class="modalClass">
+                <slot :done="done" />
         </div>
     </dialog>
 </template>
