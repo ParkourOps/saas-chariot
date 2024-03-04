@@ -19,10 +19,13 @@ import SlidingDrawerLayout from "./layouts/SlidingDrawerLayout.vue";
 import MarkdownContent from "./layouts/MarkdownContent.vue";
 import PagePaddedContent from "./layouts/PagePaddedContent.vue";
 import PageHeader from "./layouts/PageHeader.vue";
+import ErrorAlert from "./indicators/ErrorAlert.vue";
 
 export function registerComponents(app: App) {
     // indicators
-    app.component("BusySpinner", BusySpinner)
+    app
+        .component("BusySpinner", BusySpinner)
+        .component("ErrorAlert", ErrorAlert)
         // controls
         .component("Button", Button)
         .component("KeyboardButton", KeyboardButton)
@@ -47,6 +50,7 @@ declare module "vue" {
     interface GlobalComponents {
         // indicators
         BusySpinner: typeof BusySpinner;
+        ErrorAlert: typeof ErrorAlert;
         // controls
         Button: typeof Button;
         KeyboardButton: typeof KeyboardButton;
