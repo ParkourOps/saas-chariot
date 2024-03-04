@@ -56,3 +56,7 @@ export {onStripeEvent};
 import sendActionLink from "@/features/action-link/send-action-link";
 import handleActionLink from "./features/action-link/handle-action-link";
 export {sendActionLink, handleActionLink};
+
+// deliverable resources, callable
+import getResourceInfo from "./features/resource-delivery/get-resource-info";
+export {getResourceInfo};
