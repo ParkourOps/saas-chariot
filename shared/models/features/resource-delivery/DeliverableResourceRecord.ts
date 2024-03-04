@@ -3,13 +3,22 @@
     Mailing List Records are stored in the collection: mailing-list/{}
 */
 import {z} from "zod";
-import {NonEmptyString} from "../..";
+import {NonEmptyString, Url} from "../..";
 
-export default z.object({
-    path: NonEmptyString,
-    title: NonEmptyString.nullish(),
-    description: NonEmptyString.nullish(),
-});
+export default z.discriminatedUnion("type", [
+    z.object({
+        type: z.literal("cloud"),
+        path: NonEmptyString,
+        title: NonEmptyString,
+        description: NonEmptyString.nullish(),
+    }),
+    z.object({
+        type: z.literal("external"),
+        url: Url,
+        title: NonEmptyString,
+        description: NonEmptyString.nullish(),
+    }),
+]);
 
 // import {z} from "zod";
 // import MailingListRecord from "@/_shared_/models/features/mailing-list/MailingListRecord";

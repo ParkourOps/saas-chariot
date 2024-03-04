@@ -27,20 +27,42 @@ export const actionHandlerIssueResource = instantiateActionHandler("issueResourc
                 ),
             };
         }
-        const getDownloadLinkResult = await getDownloadLink(
-            correlationId,
-            resourceEntry.path,
-        );
-        if (!getDownloadLinkResult.success) {
+        if (resourceEntry.type === "cloud") {
+            const getDownloadLinkResult = await getDownloadLink(
+                correlationId,
+                resourceEntry.path,
+            );
+            if (!getDownloadLinkResult.success) {
+                return {
+                    success: false,
+                    error: getDownloadLinkResult.error,
+                };
+            }
+            return {
+                success: true,
+                redirectUrl: getDownloadLinkResult.data,
+            };
+        } else if (resourceEntry.type === "external") {
+            return {
+                success: true,
+                redirectUrl: resourceEntry.url,
+            };
+        } else {
             return {
                 success: false,
-                error: getDownloadLinkResult.error,
+                error: ServerlessFunctionError.create(
+                    correlationId,
+                    "invalid-argument",
+                    "Could not issue resource. Invalid resource type.",
+                    {
+                        inputVariables: {
+                            email,
+                            action,
+                        },
+                    },
+                ),
             };
         }
-        return {
-            success: true,
-            redirectUrl: getDownloadLinkResult.data,
-        };
     });
 
 export const actionHandlerSubscribeToMailingList = instantiateActionHandler("subscribeToMailingList")(

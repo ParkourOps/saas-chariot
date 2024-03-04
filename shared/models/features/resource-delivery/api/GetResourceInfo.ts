@@ -1,15 +1,16 @@
 import {z} from "zod";
 import internalApiCall from "../../../../libraries/internal-api-call";
-import {Url, NonEmptyString} from "../../../";
+import {NonEmptyString} from "../../../";
 
 export default internalApiCall.declare(
-    "getResource",
-    "Get a registered deliverable resource from cloud storage via a temporary download link.",
+    "getResourceInfo",
+    "Get information about a registered deliverable resource.",
     "NO_AUTH",
     z.object({
         resourceKey: NonEmptyString,
     }),
     z.object({
-        url: Url,
-    })
+        title: NonEmptyString,
+        description: NonEmptyString.nullish(),
+    }),
 );
