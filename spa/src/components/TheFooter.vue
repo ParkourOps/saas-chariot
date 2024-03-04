@@ -24,12 +24,12 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
         </div>
 
         <!-- Company, Address -->
-        <div v-if="configs.contact?.address" class="text-center text-sm leading-tight sm:self-center lg:col-start-3 lg:self-end lg:text-right">
+        <div v-if="configs.contact?.address" class="text-center text-sm sm:self-center lg:col-start-3 lg:self-end lg:text-right">
             <p v-if="configs.contact?.company?.name" class="font-bold">
                 {{ configs.contact.company.name }}
             </p>
             <div v-else class="mb-2 inline-flex flex-row items-center text-base sm:mb-4 sm:text-sm sm:font-semibold lg:mb-2 lg:text-base lg:font-normal">
-                <i class="fi fi-ss-home mr-2 leading-none"></i>
+                <i class="fi fi-ss-home mr-2"></i>
                 Address
             </div>
             <p v-if="configs.contact?.company?.number" class="-mt-1 mb-1 opacity-70">Company # {{ configs.contact.company.number }}</p>
@@ -42,8 +42,8 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
         <div v-if="configs.contact?.officeHours" class="flex flex-col items-center justify-center sm:col-start-2 sm:row-start-2 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:justify-start lg:justify-self-start">
             <div tabindex="0" class="collapse collapse-arrow w-fit bg-secondary text-neutral sm:collapse-open sm:mx-auto sm:bg-transparent sm:text-secondary">
                 <div class="collapse-title min-h-0 rounded-box py-2 font-semibold sm:rounded-b-none sm:after:text-transparent">
-                    <div class="flex flex-row items-center justify-center text-sm leading-none">
-                        <i class="fi fi-ss-clock mr-2 leading-none"></i>
+                    <div class="flex flex-row items-center justify-center text-sm">
+                        <i class="fi fi-ss-clock mr-2"></i>
                         <span class="hidden sm:inline-block">Office Hours</span>
                         <span class="sm:hidden">View Office Hours</span>
                     </div>
@@ -248,7 +248,7 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
             </p>
             <p v-if="configs.contact?.email && props.showEmail === 'text'">
                 <i class="fi fi-ss-envelope"></i>
-                {{ configs.contact.email.address }}
+                {{ configs.contact.email.email }}
             </p>
             <button v-if="configs.contact?.email && props.showEmail === 'button'" class="btn btn-secondary lg:btn-sm" @click="$showModal(() => import('./modals/ModalContactForm.vue'), {})">
                 <i class="fi fi-ss-envelope"></i>

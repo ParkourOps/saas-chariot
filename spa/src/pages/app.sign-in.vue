@@ -90,7 +90,7 @@
       <div class="mb-4 flex flex-col gap-4">
         <!-- <TabSelect :options="signInOptions" tab-class="font-bold" v-model="signInOption" /> -->
 
-        <p class="mx-auto my-4 max-w-xs text-center leading-snug">
+        <p class="mx-auto my-4 max-w-xs text-center">
           {{
             signInOption.key === 'link'
               ? "Please enter your email address and we'll send you a sign-in link."
