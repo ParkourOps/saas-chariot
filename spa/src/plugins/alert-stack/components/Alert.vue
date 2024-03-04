@@ -8,6 +8,7 @@ import ErrorIcon from "../assets/icons/IconError.vue";
 defineProps<{
     type?: NotificationType;
     show?: boolean;
+    dismissable?: boolean
 }>();
 
 const emits = defineEmits<{
@@ -19,7 +20,7 @@ const emits = defineEmits<{
     <div
         role="alert"
         :class="[
-            `alert shadow-2xl transition-all`,
+            `alert transition-all`,
             { 'alert-info': type === 'info' },
             { 'alert-success': type === 'success' },
             { 'alert-warning': type === 'warning' },
@@ -44,7 +45,7 @@ const emits = defineEmits<{
             <!-- alert message -->
             <slot />
         </div>
-        <div class="flex w-full justify-center sm:justify-end">
+        <div class="flex w-full justify-center sm:justify-end" v-if="dismissable">
             <Button size="sm" variant="ghost" block :action="()=>emits('dismiss')">DISMISS</Button>
         </div>
     </div>
