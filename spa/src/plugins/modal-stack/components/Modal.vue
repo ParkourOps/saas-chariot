@@ -46,3 +46,14 @@ onMounted(() => {
         </div>
     </dialog>
 </template>
+
+<style>
+    .modal:not(dialog:not(.modal-open)),
+    .modal::backdrop {
+        background-color: transparent;
+    }
+    .modal:not(dialog:not(.modal-open)),
+    .modal::backdrop {
+        background-color: transparent;
+    }
+</style>
