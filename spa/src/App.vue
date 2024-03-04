@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { watch } from "vue";
+import {watch} from "vue";
 import {useAuth} from "@/libraries/firebase/auth";
 import {useAnalytics} from "@/libraries/analytics";
-import { useModalStack } from "@/plugins/modal-stack";
+import {useModalStack} from "@/plugins/modal-stack";
 
 const auth = useAuth();
 const analytics = useAnalytics();
@@ -43,17 +43,11 @@ seo.initialise();
 <template>
     <!-- Foreground Layer -->
     <div class="flex flex-col min-h-screen">
-        <div class="grow">
+        <div class="grow overflow-x-clip">
             <RouterView/>
         </div>
         <TheFooter class="grow-0" show-email="button" />
     </div>
-
-    <!-- Toast Notifications -->
-    <ToastStack />
-
-    <!-- Popup Alerts -->
-    <AlertStack />
 
     <!-- Overlay -->
     <Transition
@@ -68,6 +62,12 @@ seo.initialise();
             <BusySpinner colour="base-100" v-if="indicators.isBusy" />
         </div>
     </Transition>
+
+    <!-- Toast Notifications -->
+    <ToastStack />
+
+    <!-- Popup Alerts -->
+    <AlertStack />
 
     <!-- Modal Manager -->
     <ModalStack />
