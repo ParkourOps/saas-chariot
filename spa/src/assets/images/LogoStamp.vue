@@ -1,21 +1,34 @@
 <script setup lang="ts">
-import LogoSymbol from "./LogoSymbol.vue";
 import configs from "@/configs";
+import { computed } from "vue";
+import logoSymbolDark from "./logo-symbol-base-100.png";
+import logoSymbolLight from "./logo-symbol-secondary.png";
 
-defineProps<{
-    colourClass?: string,
-    showTitle?: boolean,
-    showSubtitle?: boolean,
+const props = defineProps<{
+    dark?: boolean
+    hideTitle?: boolean,
+    hideSubtitle?: boolean,
 }>();
+
+const imgSrc = computed(()=>{
+    if (props.dark) {
+        return logoSymbolDark;
+    } else {
+        return logoSymbolLight;
+    }
+});
 </script>
 
 <template>
-    <div class="flex flex-col items-center">
-        <LogoSymbol class="mb-1 max-h-20" :class="[colourClass]"/>
-        <p v-if="showTitle" class="text-center text-2xl font-black tracking-wide font-serif" :class="[colourClass]">
+    <div class="flex flex-col items-center" :class="[
+        {'text-base-100' : dark},
+        {'text-secondary': !dark}
+    ]">
+        <img :src="imgSrc" :alt="configs.application.title" height="100" width="182" class="mb-1" />
+        <p v-if="!hideTitle" class="text-center text-2xl font-black tracking-wide font-serif">
             {{ configs.application.title }}
         </p>
-        <p v-if="showSubtitle && configs.application.subtitle" class="mt-1 text-center max-w-[15rem] text-sm leading-tight tracking-tight font-mono" :class="colourClass">
+        <p v-if="!hideSubtitle && configs.application.subtitle" class="mt-1 text-center max-w-[15rem] text-sm leading-tight tracking-tight font-mono" :class="colourClass">
             {{ configs.application.subtitle }}
         </p>
     </div>
