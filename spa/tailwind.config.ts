@@ -102,7 +102,7 @@ export default {
                 ...defaultTheme.fontFamily.sans,
             ],
             serif: [
-                "Shippori Mincho",
+                "Merriweather",
                 ...defaultTheme.fontFamily.serif,
             ],
             mono: [
