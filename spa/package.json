@@ -17,8 +17,8 @@
     "prettier": "prettier --check src/",
     "prettier:fix": "prettier --write src/",
     "deploy": "firebase deploy --only hosting",
-    "visualise-bundle": "vite-bundle-visualizer",
-    "visualise-bundle:network": "vite-bundle-visualizer -t network",
+    "audit:bundle": "vite-bundle-visualizer",
+    "audit:bundle:network": "vite-bundle-visualizer -t network",
     "audit": "unlighthouse --site localhost:4173"
   },
   "dependencies": {
