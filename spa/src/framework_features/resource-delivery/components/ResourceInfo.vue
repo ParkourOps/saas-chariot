@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { getResourceInfo } from "@/libraries/deliverable-resources";
+import { getResourceInfo } from "../index";
 import { watch } from 'vue';
 
     const props = defineProps<{

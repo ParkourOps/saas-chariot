@@ -64,7 +64,7 @@ export default defineConfig({
             imports: [
                 VueRouterAutoImports,
                 {
-                    "@/libraries/seo": [
+                    "@/framework_features/seo": [
                         ["default", "seo"],
                     ],
                 },
@@ -76,6 +76,8 @@ export default defineConfig({
     resolve: {
         alias: {
             "@": fileURLToPath(new URL("./src", import.meta.url)),
+            "framework": fileURLToPath(new URL("./src/framework_features", import.meta.url)),
+            "shared": fileURLToPath(new URL("./src/_shared_", import.meta.url)),
         },
     },
     build: {

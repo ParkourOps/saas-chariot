@@ -4,7 +4,7 @@ import configs from "@/configs";
 import { NonEmptyString, EmailAddress } from "@/_shared_/models";
 import {useIndicators} from "@/state/indicators";
 import userData from "@/state/user-data";
-import {sendTextOnlyEmail} from "@/libraries/email-messaging";
+import {sendTextOnlyEmail} from "framework/email-messaging";
 import { useToastStack } from "@/plugins/toast-stack";
 import dayjs from "@/libraries/dayjs";
 
@@ -104,3 +104,4 @@ async function sendMessage(done: () => void) {
         </template>
     </Modal>
 </template>
+@/framework_features/email-messaging

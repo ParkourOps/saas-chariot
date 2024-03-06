@@ -13,3 +13,4 @@ const auth = useAuth();
         <Button size="sm" :action="auth.logout" class="opacity-70 hover:opacity-100" icon-left-class="fi fi-ss-leave">SIGN OUT</Button>
     </div>
 </template>
+@/framework_features/firebase/auth

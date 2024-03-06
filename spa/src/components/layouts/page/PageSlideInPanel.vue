@@ -60,17 +60,17 @@ const panelWidth = computed(()=>{
     >
         <div v-if="show" class="fixed inset-y-0 z-50 bg-base-100 shadow-2xl w-fit" :class="[{ 'left-0': position === 'left' }, { 'right-0': position === 'right' }]" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
             <!-- close button -->
-            <Button
-                shape="circle"
-                size="sm"
-                class="absolute top-0 mt-2"
-                :class="[{ 'right-0': position === 'left' }, { '-mr-10': position === 'left' }, { '-ml-10': position === 'right' }, { 'left-0': position === 'right' }]"
-                :action="() => show = false"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </Button>
+            <div class="absolute top-0 mt-2" :class="[{ 'right-0': position === 'left' }, { '-mr-10': position === 'left' }, { '-ml-10': position === 'right' }, { 'left-0': position === 'right' }]">
+                <Button
+                    shape="circle"
+                    size="sm"
+                    :action="() => show = false"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </Button>
+            </div>
             <div :style="{ width: panelWidth }">
                 <slot />
             </div>

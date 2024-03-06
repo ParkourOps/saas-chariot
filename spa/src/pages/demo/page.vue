@@ -53,7 +53,7 @@ import { ref } from 'vue';
                         </StaticAlert>
                     </div>
                 </PageSlideInPanel>
-                <Button :action="() => showRightSlideInContent = !showRightSlideInContent">Toggle</Button>
+                <Button :action="() => showRightSlideInContent = !showRightSlideInContent" label="Toggle" />
             </CenteredColumn>
         </section>
     

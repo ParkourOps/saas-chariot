@@ -19,7 +19,7 @@ const indicators = useIndicators();
         block?: boolean,
         action?: Action,
         variant?: ControlVariant | "ghost" | "link" | "glass",
-        label: string,
+        label?: string,
         iconLeftClass?: string | string[]
         iconRightClass?: string | string[]
     }>();
@@ -73,7 +73,9 @@ const indicators = useIndicators();
     >
         <span class="loading loading-spinner mr-2" v-if="_loading"></span>
         <i :class="iconLeftClass" v-if="iconLeftClass" />
-        {{ label }}
+        <slot>
+            {{ label }}
+        </slot>
         <i :class="iconRightClass" v-if="iconRightClass" />
     </button>
 </template>

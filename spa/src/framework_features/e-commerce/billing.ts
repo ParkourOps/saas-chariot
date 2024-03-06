@@ -1,4 +1,4 @@
-import {useFuncs} from "./firebase/funcs";
+import {useFuncs} from "@/libraries/firebase/funcs";
 import CreateCatalogue from "@/_shared_/models/features/billing/api/CreateCatalogue";
 import CreateCheckoutSession from "@/_shared_/models/features/billing/api/CreateCheckoutSession";
 

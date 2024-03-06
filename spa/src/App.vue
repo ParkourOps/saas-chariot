@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {watch} from "vue";
 import {useAuth} from "@/libraries/firebase/auth";
-import {useAnalytics} from "@/libraries/analytics";
+import {useAnalytics} from "framework/analytics";
 import {useModalStack} from "@/plugins/modal-stack";
 
 const auth = useAuth();
@@ -72,3 +72,4 @@ seo.initialise();
     <!-- Modal Manager -->
     <ModalStack />
 </template>
+@/framework_features/firebase/auth

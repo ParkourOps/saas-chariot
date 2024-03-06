@@ -37,7 +37,7 @@
       }
       try {
         await auth.signInWithLink.sendLink(email.value, route);
-        modals.showModal(()=>import("@/components/modals/ModalAwaitAction.vue"), {
+        modals.showModal(()=>import("@/components/modals/ModalAwaitUserAction.vue"), {
           instruction: "Please check your inbox for a sign-in link."
         });
       } catch (e) {
@@ -128,7 +128,7 @@
       </div>
 
       <template #actions v-if="signInOption.key === 'link'">
-        <Button variant="primary" block :action="getSignInLink">GET SIGN-IN LINK</Button>
+        <Button variant="primary" block :action="getSignInLink" label="GET SIGN-IN LINK" />
       </template>
 
       <template #actions v-else-if="signInOption.key === 'password'">
@@ -140,3 +140,4 @@
     </CardLayout>
 </PagePaddedContent>
 </template>
+@/framework_features/firebase/auth
