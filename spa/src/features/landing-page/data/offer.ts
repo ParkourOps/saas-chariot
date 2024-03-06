@@ -1,6 +1,11 @@
 import Offer from "../types/offer";
 
 export default new Offer({
+    descriptionParagraphs: [
+        "Startup Package",
+        "(covers up to 10 users)",
+        "Please get in touch if your team is larger."
+    ],
     items:     [
         {
             title: "SaaS Development Kit",
@@ -8,33 +13,30 @@ export default new Offer({
                 "Frontend",
                 "Backend",
                 "DevOps",
-                "Developer Documentation",
-                "Video Walkthroughs & Tutorials",
+                "Extensive Developer Documentation",
+                "Video Walkthroughs/Tutorials",
+                "Video 'Deep Dives'",
+                "Live Workshop Recordings"
             ],
             price: {
                 oneTime: 499.99,
-                recurring: {
-                    monthly: 49.99,
-                }
-                // recurring: {}
             },
             overridePrice: {
-                recurring: {
-                    monthly: 9.99
-                },
-            },
+                oneTime: 399.99
+            }
         },
         {
-            title: "Complete SaaS Knowledge Base",
-            alert: "*** Ends Soon ***",
+            title: "SaaS Knowledge Base (Updated Weekly)",
             price: {
                 recurring: {
                     monthly: 39.99
                 }
             },
             features: [
-                "Notion Workspace (Updated Daily)",
-                "Content Library (Updated Daily)",
+                "Notion Workspace: SaaS Business Development",
+                "Content Library: SaaS Business Development",
+                "Notion Workspace: Product Engineering",
+                "Content Library: Product Engineering",
             ],
         },
         {
@@ -42,11 +44,10 @@ export default new Offer({
             features: [
                 "30-Minute Video Call",
             ],
-            alert: "*** Ends Soon ***",
+            alert: "*** LIMITED TIME ***",
             price: {
                 oneTime: 99.99
             },
-            // overridePrice: {},
         },
         {
             title: "SaaS Engineering Community",
@@ -63,9 +64,10 @@ export default new Offer({
         },
     ],
     currencySymbol: "$",
-    // overridePrice: {
-    //     recurring: {
-    //         yearly: 449.99,
-    //     }
-    // }
+    overridePrice: {
+        oneTime: 199.99,
+        recurring: {
+            monthly: 39.99,
+        }
+    }
 });
