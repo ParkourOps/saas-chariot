@@ -9,6 +9,7 @@ import { useToastStack } from "@/plugins/toast-stack";
 import { useAlertStack } from "@/plugins/alert-stack";
 import dayjs from "@/libraries/dayjs";
 import { useAnalytics } from "@/framework_features/analytics";
+import type BusySpinnerVue from "@/components/indicators/BusySpinner.vue";
 
     const props = defineProps<{
         mailingListKey: string
@@ -132,6 +133,10 @@ import { useAnalytics } from "@/framework_features/analytics";
                             <Button :action="()=>sendLink(done, title, thumbnails?.[0])" :disabled="!emailValid" size="lg" variant="primary" icon-left-class="fi fi-ss-square-plus" label="Join" />
                         </ModalActions>
                     </div>             
+                </template>
+
+                <template #loading>
+                    <BusySpinner colour="secondary" class="my-16 mx-auto" />
                 </template>
 
                 <template #error>
