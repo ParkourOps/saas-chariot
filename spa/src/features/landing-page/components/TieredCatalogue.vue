@@ -21,8 +21,9 @@ const selectedIndex = ref(0);
             }
         ]"
     >
-        <input type="radio" v-model="selectedIndex" :value="tierIdx" v-if="!expanded" />
+        <input type="radio" v-model="selectedIndex" :value="tierIdx" v-if="!expanded"/>
         <div
+            :name="`tier-${tierIdx}`"
             class="collapse-title flex rounded-btn bg-primary shadow-xl"
             :class="[
                 { 'opacity-80': expanded || selectedIndex !== tierIdx },
@@ -34,19 +35,23 @@ const selectedIndex = ref(0);
                 }
             ]"
         >
-            <h1 class="mx-auto font-serif text-lg font-semibold text-base-100 sm:text-xl">
+            <p class="heading text-center mx-auto text-xl font-semibold text-base-100">
                 {{ tier.title }}
-            </h1>
+            </p>
         </div>
 
         <div class="p-0" :class="{
             'collapse-content': !expanded,
             'pb-10': expanded,
         }">
-            <p class="mx-auto mt-10 mb-12 px-4 text-center text-sm text-primary sm:text-base max-w-xl font-semibold">
+            <p class="mx-auto mt-10 mb-12 px-4 text-center text-base sm:text-lg text-primary max-w-lg font-semibold leading-snug">
                 {{ tier.description }}
             </p>
             <FlatCatalogue :catalogue="tier.items" />
+            <div class="text-primary pt-20" v-if="$slots['tier-footer']">
+                
+                <slot name="tier-footer" />
+            </div>
         </div>
     </div>
 </template>
