@@ -30,6 +30,7 @@ type OfferItem = {
 };
 
 type OfferData = {
+    descriptionParagraphs?: string[],
     items: OfferItem[];
     overridePrice?: PriceProperty, 
     currencySymbol: string;
@@ -39,10 +40,12 @@ export default class Offer implements OfferData {
     public readonly items;
     public readonly currencySymbol;
     public readonly overridePrice;
-    constructor(offer: OfferData) {
+    public readonly descriptionParagraphs;
+    constructor(offer: Readonly<OfferData>) {
         this.items = offer.items;
         this.currencySymbol = offer.currencySymbol;
         this.overridePrice = offer.overridePrice;
+        this.descriptionParagraphs = offer.descriptionParagraphs;
     }
     get prices() {
         let itemsOriginalTotal = emptyPrice;
@@ -58,10 +61,13 @@ export default class Offer implements OfferData {
             itemsOverrideTotal,
             final : (this.overridePrice && !Offer.priceIsZero(this.overridePrice)) ? this.overridePrice : 
                     (itemsOverrideTotal && !Offer.priceIsZero(itemsOverrideTotal)) ? itemsOverrideTotal :
-                    itemsOriginalTotal
+                    itemsOriginalTotal,
+            // finalPriceType: (this.overridePrice && !Offer.priceIsZero(this.overridePrice)) ? "overall offer override price" : 
+            //                 (itemsOverrideTotal && !Offer.priceIsZero(itemsOverrideTotal)) && (!Offer.priceIsEqual(itemsOriginalTotal, itemsOverrideTotal)) ? "items total with overrides applied" :
+            //                 "items total without any overrides applied"
         };
     }
-    priceToStrings(price?: PriceProperty) {
+    priceToStrings(price?: Readonly<PriceProperty>) {
         const toString = (n?: number) => n ? this.currencySymbol + n.toFixed(2) : undefined;
         return {
             oneTime: toString(price?.oneTime),
@@ -73,7 +79,7 @@ export default class Offer implements OfferData {
             }
         }
     }
-    priceToString(price: PriceProperty) {
+    priceToString(price: Readonly<PriceProperty>) {
         const prices = this.priceToStrings(price);
         let string = "";
         if (prices.oneTime) {
@@ -122,11 +128,20 @@ export default class Offer implements OfferData {
             final: this.priceToString(price.final),
         }
     }
-    static priceIsZero(price?: PriceProperty) {
+    static priceIsZero(price?: Readonly<PriceProperty>) {
         const flatSum = (price?.oneTime ?? 0) + (price?.recurring?.daily ?? 0) + (price?.recurring?.weekly ?? 0) + (price?.recurring?.monthly ?? 0) + (price?.recurring?.yearly ?? 0);
         return flatSum === 0;
     }
-    private static addPrice(a: PriceProperty, b?: PriceProperty) {
+    static priceIsEqual(a: Readonly<PriceProperty>, b: Readonly<PriceProperty>) {
+        return (
+            a.oneTime === b.oneTime &&
+            a.recurring?.daily === b.recurring?.daily &&
+            a.recurring?.weekly === b.recurring?.weekly &&
+            a.recurring?.monthly === b.recurring?.monthly &&
+            a.recurring?.yearly === b.recurring?.yearly
+        )
+    }
+    private static addPrice(a: Readonly<PriceProperty>, b?: Readonly<PriceProperty>) {
         const _a = JSON.parse(JSON.stringify(a));
         if (b && !Offer.priceIsZero(b)) {
             if (b.oneTime) {
