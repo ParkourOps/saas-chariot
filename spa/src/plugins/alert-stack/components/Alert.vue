@@ -43,7 +43,9 @@ const emits = defineEmits<{
             <p class="font-semibold block sm:inline-block sm:mr-2" v-else-if="type === 'warning'"> Warning! </p>
             <p class="font-semibold block sm:inline-block sm:mr-2" v-else-if="type === 'success'"> Success! </p>
             <!-- alert message -->
-            <slot />
+            <div class="leading-tight mt-1">
+                <slot />
+            </div>
         </div>
         <div class="flex w-full justify-center sm:justify-end" v-if="dismissable">
             <Button size="sm" variant="ghost" block :action="()=>emits('dismiss')">DISMISS</Button>
