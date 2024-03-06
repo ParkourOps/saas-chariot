@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useReactiveUserInterface } from '@/plugins/reactive-user-interface';
+// import { useReactiveUserInterface } from '@/plugins/reactive-user-interface';
 import type { ThemeColour } from '@/types';
 
 defineProps<{
@@ -7,7 +7,7 @@ defineProps<{
     colour?: ThemeColour
 }>();
 
-const ui = useReactiveUserInterface();
+// const ui = useReactiveUserInterface();
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const ui = useReactiveUserInterface();
             {[`divider-${colour} text-${colour}`] : colour}
         ]"
     >
-            <h2 class="mb-1.5 font-semibold text-center text-2xl" v-if="ui.activeBreakpoint.value">
+            <h2 class="mb-1.5 text-center text-base text-black sm:text-2xl sm:font-semibold" >
                 <a :href="`#${$attrs.id}`" v-if="$attrs.id" class="border-b-2 border-b-primary/0 hover:border-b-primary/80 transition-all">
                     {{ title }}
                 </a>
