@@ -53,9 +53,10 @@ export default internalApiCall.implement(SendActionLink)(async (request) => {
         templateSubstitutions: {
             title: "Action Required",
             heading: request.data.prompt.heading,
-            paragraph: request.data.prompt.paragraph,
-            ctaText: request.data.callToActionText,
+            paragraphs: request.data.prompt.paragraphs,
+            ctaText: request.data.callToAction.text,
             ctaLink: url.toString(),
+            ctaCaption: request.data.callToAction.caption,
             appName: appConfig.application.title,
         },
         text:
@@ -64,7 +65,7 @@ export default internalApiCall.implement(SendActionLink)(async (request) => {
 
 ** ${ request.data.prompt.heading } **
 
-${ request.data.prompt.paragraph }
+${ request.data.prompt.paragraphs.join("\n\n") }
 
 ${ url }
 

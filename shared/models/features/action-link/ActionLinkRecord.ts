@@ -5,7 +5,7 @@ import ActionLinkRequest from "./ActionLinkRequest";
 export default ActionLinkRequest
     .omit({
         prompt: true,
-        callToActionText: true,
+        callToAction: true,
     })
     .merge(z.object({
         // id of the generated action link

@@ -8,7 +8,7 @@ import {mailingList} from "@/document-collections";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const instantiateActionHandler = <T extends ActionType>(type: T) => (handler: ActionHandler<T>) => handler;
 
-export const actionHandlerIssueResource = instantiateActionHandler("issueResource")(
+export const actionHandlerIssueResource = instantiateActionHandler("issue_resource")(
     async (correlationId, email, action)=>{
         const resourceEntry = deliverableResources[action.resourceKey];
         if (!resourceEntry) {
@@ -65,7 +65,7 @@ export const actionHandlerIssueResource = instantiateActionHandler("issueResourc
         }
     });
 
-export const actionHandlerSubscribeToMailingList = instantiateActionHandler("subscribeToMailingList")(
+export const actionHandlerSubscribeToMailingList = instantiateActionHandler("subscribe_to_mailing_list")(
     async (correlationId, email, action)=>{
         const mailingListKey = action.mailingListKey;
         // find mailing list spec
@@ -113,7 +113,7 @@ export const actionHandlerSubscribeToMailingList = instantiateActionHandler("sub
         };
     });
 
-export const actionHandlerUnsubscribeFromMailingList = instantiateActionHandler("unsubscribeFromMailingList")(
+export const actionHandlerUnsubscribeFromMailingList = instantiateActionHandler("unsubscribe_from_mailing_list")(
     async (correlationId, email, action)=>{
         const mailingListKey = action.mailingListKey;
         const mailingListExists = mailingList.docExists(correlationId, [mailingListKey]);

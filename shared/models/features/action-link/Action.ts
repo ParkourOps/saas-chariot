@@ -5,15 +5,15 @@ export default z.discriminatedUnion(
     "type",
     [
         z.object({
-            type: z.literal("issueResource"),
+            type: z.literal("issue_resource"),
             resourceKey: NonEmptyString,
         }),
         z.object({
-            type: z.literal("subscribeToMailingList"),
+            type: z.literal("subscribe_to_mailing_list"),
             mailingListKey: NonEmptyString,
         }),
         z.object({
-            type: z.literal("unsubscribeFromMailingList"),
+            type: z.literal("unsubscribe_from_mailing_list"),
             mailingListKey: NonEmptyString,
         }),
     ]

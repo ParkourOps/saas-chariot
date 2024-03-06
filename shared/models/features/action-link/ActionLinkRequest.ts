@@ -10,9 +10,12 @@ export default z.object({
     // prompt and call-to-action text to display in the email
     prompt: z.object({
         heading: NonEmptyString.nullish(),
-        paragraph: NonEmptyString,
+        paragraphs: NonEmptyString.array(),
     }),
-    callToActionText: NonEmptyString,
+    callToAction: z.object({
+        text: NonEmptyString,
+        caption: NonEmptyString.nullish(),
+    }),
     // redirect URLs
     successUrl: Url,
     failUrl: Url,

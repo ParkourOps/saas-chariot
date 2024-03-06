@@ -8,11 +8,11 @@ export default async function(
     action: Action,
 ) : Promise<ActionHandlerResult> {
     switch (action.type) {
-    case "issueResource":
+    case "issue_resource":
         return actionHandlerIssueResource(correlationId, email, action);
-    case "subscribeToMailingList":
+    case "subscribe_to_mailing_list":
         return actionHandlerSubscribeToMailingList(correlationId, email, action);
-    case "unsubscribeFromMailingList":
+    case "unsubscribe_from_mailing_list":
         return actionHandlerUnsubscribeFromMailingList(correlationId, email, action);
     default:
         return {
