@@ -8,7 +8,9 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "framework/*": ["./src/framework_features/*"],
+      "shared/*": ["./src/__shared_/*"]
     },
     // "types": ["vite/client"]
   }
