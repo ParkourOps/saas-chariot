@@ -1,8 +1,8 @@
 <script setup lang="ts">
-    import type { ControlSize, ThemeColours } from '@/types';
+    import type { ControlSize, ThemeColour } from '@/types';
 
     defineProps<{
-        colour?: ThemeColours,
+        colour?: ThemeColour,
         size?: ControlSize
     }>();
 </script>
