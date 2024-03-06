@@ -1,19 +1,25 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
 import { useIndicators } from '@/state/indicators';
-import type { ControlVariants } from '@/types';
+import type { Action, ControlSize, ControlVariant } from '@/types';
+
+defineOptions({
+    inheritAttrs: false,
+});
 
 const indicators = useIndicators();
 
     const props = defineProps<{
+        name?: string,
         disabled?: boolean,
         loading?: boolean,
         shape?: "square" | "circle",
         outline?: boolean,
-        size?: "xs" | "sm" | "md" | "lg",
+        size?: Exclude<ControlSize,"xl">,
         block?: boolean,
-        action?: ((()=>void) | (()=>Promise<void>)),
-        variant?: ControlVariants | "ghost" | "link" | "glass",
+        action?: Action,
+        variant?: ControlVariant | "ghost" | "link" | "glass",
+        label: string,
         iconLeftClass?: string | string[]
         iconRightClass?: string | string[]
     }>();
@@ -39,6 +45,7 @@ const indicators = useIndicators();
 
 <template>
     <button
+        :name="name"
         class="btn"
         :disabled="_disabled"
         :class="[
@@ -62,11 +69,11 @@ const indicators = useIndicators();
             {'btn-link': variant === 'link'},
             {'glass': variant === 'glass'},
         ]"
-        @click="handleAction"
+        @click.prevent.stop="handleAction"
     >
         <span class="loading loading-spinner mr-2" v-if="_loading"></span>
         <i :class="iconLeftClass" v-if="iconLeftClass" />
-        <slot />
+        {{ label }}
         <i :class="iconRightClass" v-if="iconRightClass" />
     </button>
 </template>

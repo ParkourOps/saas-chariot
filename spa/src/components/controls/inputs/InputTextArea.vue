@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import type { ControlSize } from "@/types";
 import { ref } from "vue";
 import { computed, watch } from "vue";
 import { type ZodString } from "zod";
+
+defineOptions({
+    inheritAttrs: false,
+});
 
 const props = defineProps<{
     name?: string;
@@ -13,7 +18,7 @@ const props = defineProps<{
     cols?: number;
     rows?: number;
 
-    size?: "xs" | "sm" | "md" | "lg";
+    size?: Exclude<ControlSize,"xl">;
 
     modelValue?: string;
     schema?: ZodString;
@@ -77,7 +82,7 @@ defineExpose({
         :wrap="wrap"
         :cols="cols"
         :rows="rows"
-        class="textarea textarea-bordered"
+        class="textarea textarea-bordered leading-snug w-full"
         :class="[{ 'textarea-xs': size === 'xs' }, { 'textarea-sm': size === 'sm' }, { 'textarea-md': size === 'md' }, { 'textarea-lg': size === 'lg' }, { 'textarea-error border-2': touched && !valid }]"
         v-model="value"
         @focusout="touched = true"

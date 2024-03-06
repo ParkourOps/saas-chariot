@@ -72,9 +72,9 @@ const backSegment = computed(() => {
         </div>
         <div class="mt-2 md:flex md:items-center md:justify-between">
             <div class="min-w-0 flex-1">
-                <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-ellipsis sm:text-3xl">
+                <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:text-ellipsis sm:text-3xl">
                     {{ title }}
-                </h2>
+                </h1>
             </div>
             <div class="mt-4 flex flex-shrink-0 flex-wrap gap-3 md:ml-4 md:mt-0 md:gap-4" v-if="actions">
                 <button v-for="(action, actionIdx) in actions" :key="`page-action-${actionIdx}`" class="btn btn-sm shadow-sm sm:btn-md" :class="[{ 'bg-white hover:bg-gray-50': !action.main }, { 'btn-primary': action.main }]">

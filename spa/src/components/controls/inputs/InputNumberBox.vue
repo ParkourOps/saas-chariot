@@ -1,11 +1,17 @@
 <script setup lang="ts">
+import type { ControlSize } from "@/types";
 import { computed, watch } from "vue";
 import { ZodNumber } from "zod";
 
+defineOptions({
+    inheritAttrs: false,
+});
+
 const props = defineProps<{
+    name?: string,
     placeholder?: string;
     centered?: boolean;
-    size?: "xs" | "sm" | "md" | "lg";
+    size?: Exclude<ControlSize,"xl">;
     disabled?: boolean;
     modelValue?: number;
     schema?: ZodNumber;
@@ -55,6 +61,7 @@ defineExpose({
 
 <template>
     <input
+        :name="name"
         type="number"
         :min="min"
         :max="max"

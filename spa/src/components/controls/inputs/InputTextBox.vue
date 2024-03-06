@@ -1,19 +1,25 @@
 <script setup lang="ts">
-import type { ControlVariants, HorizontalAlign } from "@/types";
+import type { ControlSize, ControlVariant, HorizontalAlign } from "@/types";
 import { ref } from "vue";
 import { computed, watch } from "vue";
 import { type ZodString } from "zod";
 
+defineOptions({
+    inheritAttrs: false,
+});
+
 const props = defineProps<{
-    name: string;
+    name?: string;
+    autocomplete?: string;
+    
     type?: "text" | "password";
     placeholder?: string;
     disabled?: boolean;
     readonly?: boolean;
-    autocomplete?: string;
+    
 
-    size?: "xs" | "sm" | "md" | "lg";
-    variant?: ControlVariants | "ghost";
+    size?: Exclude<ControlSize,"xl">;
+    variant?: ControlVariant | "ghost";
     horizontalAlign?: HorizontalAlign,
 
     block?: boolean,
@@ -73,12 +79,12 @@ defineExpose({
 <template>
     <input
         :name="name"
+        :autocomplete="autocomplete"
         :type="type ?? 'text'"
         :placeholder="placeholder"
         :disabled="disabled"
         :readonly="readonly"
-        :autocomplete="autocomplete"
-        class="input input-bordered transition-all ease-in"
+        class="input input-bordered transition-all ease-in w-full"
         :class="[
                 { 'input-xs': size === 'xs' },
                 { 'input-sm': size === 'sm' },

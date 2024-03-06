@@ -2,6 +2,10 @@
 import { watch } from "vue";
 import { ref } from "vue";
 
+defineOptions({
+    inheritAttrs: false,
+});
+
 type Key = string;
 type TabOption = {
     key: Key;

@@ -1,11 +1,15 @@
 <script setup lang="ts" generic="T">
-import { ref } from "vue";
-import { computed } from "vue";
+import type { ClassList } from "@/types";
+import { ref, computed } from "vue";
+
+defineOptions({
+    inheritAttrs: false,
+});
 
 const props = defineProps<{
-    options: Array<T>;
+    options: T[];
     modelValue?: T;
-    buttonClass?: string | Array<string>;
+    buttonClass?: ClassList;
 }>();
 
 const emits = defineEmits<{

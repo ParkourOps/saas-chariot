@@ -1,11 +1,20 @@
 <script setup lang="ts">
+import type { Action, ControlSize, ThemeColour } from "@/types";
+import { useIndicators } from "@/state/indicators";
+import { ref } from "vue";
 import { computed } from "vue";
 
+defineOptions({
+    inheritAttrs: false,
+});
+
 const props = defineProps<{
-    backgroundColourClass?: string,
-    textBackgroundColourClass?: string,
-    size?: "xs" | "sm" | "base" | "lg" | "xl";
-    fontWeight?: "medium" | "semibold" | "bold" | "extrabold" | "black";
+    name?: string,
+    backgroundColour?: ThemeColour,
+    foregroundColour?: ThemeColour,
+    size?: ControlSize,
+    fontWeight?: "medium" | "semibold" | "bold" | "extrabold" | "black",
+    action?: Action,
 }>();
 
 const sizeClass = computed(() => {
@@ -18,17 +27,39 @@ const sizeClass = computed(() => {
         return "text-[1.55rem] p-2";
     case "xl":
         return "text-[1.85rem] p-3";
-    case "base":
+    case "md":
     default:
         return "text-[1.3rem] p-1.5";
     }
 });
+
+const indicators = useIndicators();
+const _loading = ref();
+
+async function handleAction() {
+    if (!props.action) return;
+    const token = indicators.registerPendingAction();
+    _loading.value = true;
+    await props.action();
+    _loading.value = false;
+    token.unregisterPendingAction();
+}
 </script>
 
 <template>
-    <button class="button" :class="[backgroundColourClass]">
+    <button class="button"
+        :class="[
+            {[`bg-${backgroundColour}`] : backgroundColour}
+        ]" 
+        @click="handleAction"
+    >
         <div class="button__content">
-            <p class="button__text font-bold" :class="[textBackgroundColourClass, sizeClass]">
+            <p class="button__text" 
+            :class="[
+                {[`bg-${foregroundColour} fill-${foregroundColour}`] : foregroundColour},
+                sizeClass
+            ]"
+            >
                 <slot />
             </p>
         </div>

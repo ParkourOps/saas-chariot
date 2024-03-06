@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed, watch } from "vue";
 import { useIndicators } from "@/state/indicators";
+import { useReactiveUserInterface } from "@/plugins/reactive-user-interface";
 
 const props = defineProps<{
     modelValue?: boolean;
     position: "left" | "right";
-    width: string;
+    width: string; // must be in px, rem, vw; not %!
+    notResponsive?: boolean,
 }>();
 
 const emits = defineEmits<{
@@ -26,13 +28,25 @@ watch(
     show,
     (val) => {
         if (val) {
-            indicators.forceOverlay();
+            indicators.showOverlay();
         } else {
-            indicators.unforceOverlay();
+            indicators.hideOverlay();
         }
     },
     { immediate: true },
 );
+
+const ui = useReactiveUserInterface();
+const panelWidth = computed(()=>{
+    if (props.notResponsive) {
+        return props.width;
+    }
+    if (ui.activeBreakpoint.value) {
+        return props.width;
+    } else {
+        return "82vw";
+    }
+});
 </script>
 
 <template>
@@ -44,18 +58,20 @@ watch(
         leave-from-class="translate-x-0"
         :leave-to-class="position === 'left' ? 'translate-x-[-100%]' : 'translate-x-[100%]'"
     >
-        <div v-if="show" class="fixed inset-y-0 z-50 bg-base-100 shadow-2xl" :class="[{ 'left-0': position === 'left' }, { 'right-0': position === 'right' }]" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <div v-if="show" class="fixed inset-y-0 z-50 bg-base-100 shadow-2xl w-fit" :class="[{ 'left-0': position === 'left' }, { 'right-0': position === 'right' }]" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
             <!-- close button -->
-            <button
-                class="btn btn-circle btn-secondary btn-sm absolute top-0 mt-2"
+            <Button
+                shape="circle"
+                size="sm"
+                class="absolute top-0 mt-2"
                 :class="[{ 'right-0': position === 'left' }, { '-mr-10': position === 'left' }, { '-ml-10': position === 'right' }, { 'left-0': position === 'right' }]"
-                @click="show = false"
+                :action="() => show = false"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-            </button>
-            <div :style="{ width }">
+            </Button>
+            <div :style="{ width: panelWidth }">
                 <slot />
             </div>
         </div>
