@@ -17,9 +17,11 @@ html {
 }
 
 /* Adjust font (family) kerning: */
-.font-mono {
-    @apply tracking-tighter sm:tracking-tight;
-}
+/* @at-root {
+    .font-mono {
+        @apply font-mono tracking-tighter sm:tracking-tight;
+    }
+} */
 
 /* Set default font (family) and style: */
 html {
