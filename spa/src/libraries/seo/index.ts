@@ -2,7 +2,7 @@ import {useSeoMeta} from "unhead";
 import getAssetUrl from "@/utilities/get-asset-url";
 import configs from "@/configs";
 import getRouteUrl from "@/utilities/get-route-url";
-import { content } from "./content";
+import { content } from "./libraries/content";
 
 type VideoImport = Promise<typeof import("*.mp4")> | typeof import("*.mp4");
 

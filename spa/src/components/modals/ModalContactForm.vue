@@ -4,7 +4,7 @@ import configs from "@/configs";
 import { NonEmptyString, EmailAddress } from "@/_shared_/models";
 import {useIndicators} from "@/state/indicators";
 import userData from "@/state/user-data";
-import {sendTextOnlyEmail} from "@/libraries/messaging";
+import {sendTextOnlyEmail} from "@/libraries/email-messaging";
 import { useToastStack } from "@/plugins/toast-stack";
 import dayjs from "@/libraries/dayjs";
 
@@ -82,15 +82,15 @@ async function sendMessage(done: () => void) {
 
             <div class="flex flex-col gap-4">
                 <InputWrap label="Email" align="start" label-class="text-sm sm:text-base">
-                    <TextBox name="email" autocomplete="email" class="w-full" :schema="EmailAddress" v-model:valid="emailValid" v-model="email" :disabled="!!userProfile.document" />
+                    <InputTextBox name="email" autocomplete="email" class="w-full" :schema="EmailAddress" v-model:valid="emailValid" v-model="email" :disabled="!!userProfile.document" />
                 </InputWrap>
 
                 <InputWrap label="Subject" align="start" label-class="text-sm sm:text-base">
-                    <TextBox name="subject" autocomplete="off" class="w-full" :schema="NonEmptyString" v-model:valid="subjectValid" v-model="subject" />
+                    <InputTextBox name="subject" autocomplete="off" class="w-full" :schema="NonEmptyString" v-model:valid="subjectValid" v-model="subject" />
                 </InputWrap>
 
                 <InputWrap label="Message" align="start" label-class="text-sm sm:text-base">
-                    <TextArea name="message" class="w-full" :schema="NonEmptyString" v-model:valid="messageValid" v-model="message" :rows="10" />
+                    <InputTextArea name="message" class="w-full" :schema="NonEmptyString" v-model:valid="messageValid" v-model="message" :rows="10" />
                 </InputWrap>
             </div>
 
