@@ -23,8 +23,8 @@ defineProps<{
                 <span class="absolute bottom-0 right-0 -mb-[15rem] -mr-10 font-serif text-[20rem] opacity-10">”</span>
             </div>
         </div>
-        <div class="text-center sm:text-left">
-            <p class="-mb-1 font-serif text-xl font-medium">
+        <div class="text-center sm:text-left leading-none">
+            <p class="font-serif text-xl font-medium sm:-mb-1">
                 {{ testimonial.name }}
             </p>
             <p class="-ml-1 opacity-75">

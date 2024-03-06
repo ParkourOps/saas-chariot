@@ -16,10 +16,10 @@ defineProps<{
             </div>
         </div>
 
-        <div class="card-body text-secondary">
+        <div class="card-body text-primary">
 
             <div class="flex h-full items-center justify-center mb-4">
-                <p class="text-center text-sm md:text-base/tight text-secondary">
+                <p class="text-center text-base/none py-4 tracking-tighter">
                     {{ item.description }}
                 </p>
             </div>
