@@ -3,45 +3,56 @@ import LogoStamp from "@/assets/images/LogoStamp.vue";
 
 import valuePropCatalogue from "../data/flat-catalogue-value-props";
 // import syllabusCatalogue from "../data/tiered-catalogue-syllabus";
-import featuresCatalogue from "../data/flat-catalogue-features";
-import customerTestimonials from "../data/customer-testimonials";
-import offerData from "../data/offer-data";
+import featuresCatalogue from "../data/tiered-catalogue-features";
+import foundersMessage from "../data/founders-message";
+import offer from "../data/offer";
 
 import TieredCatalogue from "../components/TieredCatalogue.vue";
-import SectionDivider from "../components/SectionDivider.vue";
 import NumberedList from "../components/NumberedList.vue";
 import TestimonialsLayout from "../components/TestimonialsLayout.vue";
 import OfferCountdown from "../components/OfferCountdown.vue";
 
-import DiamondIcon from "../assets/icons/IconDiamond.vue";
-import TypeScriptIcon from "../assets/icons/IconTypeScript.vue";
+import CallToActionButton from "../components/CallToActionButton.vue";
+
+const finalPrice = offer.priceStrings.final;
 
 seo.allowIndex();
 </script>
 
 <template>
     <div class="flex flex-col items-center justify-center bg-primary px-4 py-14 font-serif sm:py-28">
-        <LogoStamp class="mb-2" colour-class="fill-base-100 text-base-100" show-title/>
-        <p class="smallcaps max-w-sm text-center text-2xl text-accent font-semibold sm:font-bold sm:max-w-screen-md sm:text-5xl">
-            Transform Ideas into Reality: Rapidly Build and Launch Digital Products and Services
-        </p>
+
+        <!-- Logo and Subtitle -->
+        <LogoStamp class="mb-2" colour-class="fill-base-100 text-base-100" show-title dark hide-subtitle/>
+        <div class="text-center text-accent text-xl max-w-80 sm:max-w-xl sm:text-4xl font-bold">
+            <p class="whitespace-nowrap smallcaps w-fit mx-auto mb-2 sm:mb-4">
+                <span class=" border-b-accent border-b sm:border-b-2">Transform Ideas into Reality</span>
+            </p>
+            <p class="">Rapidly Build and Launch Digital Products and Services</p>
+        </div>
+        <div class="max-w-sm text-center text-accent sm:max-w-screen-md text-2xl sm:text-5xl">
+            <p class="whitespace-nowrap text-xl sm:text-4xl smallcaps"></p>
+            
+        </div>
 
         <div class="mt-12 flex flex-col gap-6 sm:flex-row">
             <KeyboardButton
-                class="font-mono"
-                background-colour-class="bg-neutral"
-                text-background-colour-class="bg-secondary"
-                @click="$router.push({name: '/', hash: '#how-it-works'})"
+                background-colour="neutral"
+                foreground-colour="secondary"
+                :action="() => $router.push({name: '/', hash: '#how-it-works', force: true})"
             >
-                Learn More
+                <span class="font-black font-mono">Learn More</span>
             </KeyboardButton>
-            <!-- <KeyboardButton>View Demo</KeyboardButton> -->
+
             <KeyboardButton
-                class="font-mono"
-                background-colour-class="bg-accent"
-                text-background-colour-class="bg-neutral"
+                background-colour="accent"
+                foreground-colour="neutral"
+                :action="() => $showModal(() => import('../components/modals/ModalJoinWaitingList.vue'), {
+                    lockInPrice: finalPrice,
+                    leadMagnetResourceKey: 'xrbmvnmbqagf'
+                })"
             >
-                Buy Now
+                <span class="font-black font-mono">Buy Now</span>
             </KeyboardButton>
         </div>
     </div>
@@ -52,19 +63,19 @@ seo.allowIndex();
             <div
                 class="mb-8 w-fit mx-auto fill-neutral text-neutral border-4 border-neutral/20 p-4 rounded-xl flex flex-col sm:grid sm:grid-cols-6 items-center"
             >
-                <TypeScriptIcon class="h-10 mb-3 mt-1 sm:m-0" />
-                <p class="text-center sm:text-left sm:col-span-5 leading-tight max-w-sm font-semibold">
-                    Designed for individuals and teams with (elementary) knowledge of TypeScript.
+                <SvgIcon name="typescript" class="w-auto h-12 mb-2 sm:mb-0 mx-auto" />
+                <p class="text-center sm:text-left sm:col-span-5 max-w-sm font-semibold leading-snug">
+                    Designed for individuals and teams with basic working knowledge of TypeScript.
                 </p>
             </div>
 
-            <p class="mb-6 text-2xl font-bold sm:text-xl text-center">
+            <p class="mb-6 text-2xl font-bold sm:text-xl text-center leading-tight">
                 Stop wasting time building products from the ground up.
             </p>
 
-            <p class="mb-6 text-lg tracking-tighter sm:text-xl text-center">
-                SaaS Chariot is a comprehensive product development system that streamlines
-                the development of MVPs through a framework that implements cutting-edge industry best practices,
+            <p class="mb-6 text-lg sm:text-xl text-center">
+                SaaS Chariot is a comprehensive product development system for TypeScript programmers that streamlines
+                the development of MVPs using a framework that implements cutting-edge industry best practices,
                 so you can focus on creating exceptional value for your customers.
             </p>
 
@@ -77,15 +88,15 @@ seo.allowIndex();
         </div>
     </div>
 
-    <div class="lg:py-18 mb-10 bg-neutral px-2 py-16 shadow-xl sm:px-10 sm:py-24 lg:mb-0" style="border-bottom-left-radius: calc(var(--rounded-box) * 1.5); border-bottom-right-radius: calc(var(--rounded-box) * 1.5)">
+    <div class="mb-10 bg-neutral px-2 py-20 shadow-xl sm:px-10 sm:py-24 lg:mb-0" style="border-bottom-left-radius: calc(var(--rounded-box) * 1.5); border-bottom-right-radius: calc(var(--rounded-box) * 1.5)">
         <div class="mx-4 flex flex-col gap-10 fill-accent/70 text-center text-secondary lg:flex-row">
-            <div v-for="(item, idx) in valuePropCatalogue($router)" :key="`value-prop#${idx}`" class="mx-auto my-10 flex max-w-sm flex-col first:mt-0 last:mb-0 lg:my-0">
-                <component :is="item.icon" class="mx-auto mb-4 h-auto w-32" />
-                <h1 class="mb-2 font-serif text-xl font-semibold text-accent">
+            <div v-for="(item, idx) in valuePropCatalogue($router)" :key="`value-prop#${idx}`" class="flex text-center flex-col first:mt-0 last:mb-0 my-6 lg:my-0 max-w-lg mx-auto">
+                <SvgIcon v-if="item.icon" :name="item.icon" class="mx-auto mb-4 h-auto w-32"/>
+                <p class="mb-2 font-serif text-xl font-semibold text-accent text-center">
                     {{ item.title }}
-                </h1>
+                </p>
                 <div class="flex flex-grow flex-col items-center justify-center">
-                    <p class="leading-tighter text-base font-medium tracking-tight">
+                    <p class="text-base font-medium">
                         {{ item.description }}
                     </p>
                 </div>
@@ -103,11 +114,17 @@ seo.allowIndex();
         </div>
     </div>
 
-    <SectionDivider id="how-it-works" title="How It Works"/>
-    <p class="text-xl sm:text-2xl text-center w-3/4 sm:max-w-prose mx-auto text-secondary sm:mt-24 font-semibold tracking-wide sm:tracking-wider">
-        Implement your product or service in <span class="text-nowrap">9 simple steps:</span>
-    </p>
+    <PageDivider id="how-it-works" title="How It Works"/>
+    <div class="px-2">
+        <div class="flex justify-center items-center bg-primary text-base-100 p-4 rounded-btn text-center font-semibold text-xl w-fit mx-auto">
+            <p class="mx-4">👇</p>
+            <p class="leading-tight">Build a product or service in <span class="whitespace-nowrap">9 simple steps!</span></p>
+            <p class="mx-4">👇</p>
+        </div>
+    </div>
+
     <NumberedList
+        class="mt-12 mb-12"
         text-size="lg"
         :items="[
             `<mark>Initiate project codebase</mark> by cloning the template.`,
@@ -117,54 +134,39 @@ seo.allowIndex();
             '<mark>Model and implement business logic;</mark> add unit tests to verify logical consistency.',
             // '<mark>Implement content layouts and user workflows.</mark> Add functional tests to verify layout consistency.',
             '<mark>Build user workflows and content layouts</mark> by leveraging common application elements such as modals, pop-up alerts, notifications, transactional emails, action links, and more. Define functional tests and end-to-end tests to corroborate requirements.',
-            '<mark>Optimise project for SEO</mark> using built-in library; Make sure to <mark>check audit report</mark> for issues and possible improvements.',
+            '<mark>Optimise application for search engine indexing, crawling, and social media sharing</mark> using the built-in SEO library.',
+            '<mark>Check auto-generated audit report</mark> for issues and possible improvements.',
             `<mark>Deploy to staging environment.</mark> Execute manual and automated test suites.`,
             `<mark>Approve for release</mark> to production environment.`,
             `Repeat as necessary from step 3 or beyond.`
         ]"
-        class="mt-12 sm:my-24"
     />
-
+    <CallToActionButton :price="finalPrice" class="sm:mb-24" />
 
     <!--
     <SectionDivider id="syllabus" title="Syllabus" />
     <TieredCatalogue :catalogue="syllabusCatalogue" />
     -->
 
-
-    <SectionDivider id="features" title="Features" />
+    <PageDivider id="features" title="Features" />
     <div class="max-w-screen-xl mx-auto">
-        <TieredCatalogue :catalogue="featuresCatalogue" />
+        <TieredCatalogue :catalogue="featuresCatalogue">
+            <template #tier-footer>
+                <CallToActionButton :price="finalPrice" />
+            </template>
+        </TieredCatalogue>
     </div>
-    <!-- <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto w-fit gap-6 px-2">
-        <CatalogueItemCard v-for="feature in featuresCatalogue" :item="feature" />
-    </div> -->
 
+    <PageDivider id="founders-message" title="Founder's Message" />
+    <TestimonialsLayout :testimonials="foundersMessage" />
 
-    <SectionDivider id="what-users-say" title="What Users Say" />
-    <TestimonialsLayout :testimonials="customerTestimonials" />
+    <PageDivider title="In The Offer" />
+    <OfferCountdown :offer="offer" class="mb-12" />
 
-    <SectionDivider title="In The Offer" />
-    <OfferCountdown :offer="offerData" class="mb-12" />
-
-    <KeyboardButton
-        class="mx-auto"
-        size="xl"
-        background-colour-class="bg-accent"
-        text-background-colour-class="bg-neutral"
-        @click="$showModal(() => import('../components/modals/ModalJoinWaitingList.vue'), {})"
-    >
-        <div class="flex items-center ">
-            <p class="whitespace-nowrap mr-6 -mb-1">ACCESS NOW</p>
-            <DiamondIcon class="h-12 -mb-1 fill-[#ECE6DF]" />
-        </div>
-    </KeyboardButton>
-
-    <p class="mx-auto mt-1 max-w-prose text-center font-serif text-primary font-semibold">One-time purchase of <span class="font-bold">{{ offerData.currencySymbol }}{{ offerData.total.final }}</span></p>
-    <p class="mx-auto -mt-1 max-w-prose text-center font-serif text-sm text-primary/80 font-medium">30-day money-back guarantee.</p>
+    <CallToActionButton :price="finalPrice" />
 
     <div class="h-12 sm:h-24" />
-    <img src="../assets/images/money-back-guarantee-large.webp" alt="30-day money-back guarantee." class="h-28 mx-auto"/>
+    <!-- <img src="../assets/images/money-back-guarantee-large.webp" alt="30-day money-back guarantee." class="mx-auto" /> -->
 </template>
 
 <style scoped>
