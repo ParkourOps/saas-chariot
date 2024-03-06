@@ -10,6 +10,14 @@ export default internalApiCall.declare(
         resourceKey: NonEmptyString,
     }),
     z.object({
-        url: Url,
+        result: z.discriminatedUnion("type", [
+            z.object({
+                type: z.literal("not_found"),
+            }),
+            z.object({
+                type: z.literal("found"),
+                accessUrl: Url,
+            }),
+        ]),
     })
 );

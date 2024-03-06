@@ -1,6 +1,6 @@
 import {z} from "zod";
 import internalApiCall from "../../../../libraries/internal-api-call";
-import {NonEmptyString} from "../../../";
+import {NonEmptyString, Url} from "../../../";
 
 export default internalApiCall.declare(
     "getResourceInfo",
@@ -10,7 +10,16 @@ export default internalApiCall.declare(
         resourceKey: NonEmptyString,
     }),
     z.object({
-        title: NonEmptyString,
-        description: NonEmptyString.nullish(),
-    }),
+        result: z.discriminatedUnion("type", [
+            z.object({
+                type: z.literal("not_found"),
+            }),
+            z.object({
+                type: z.literal("found"),
+                title: NonEmptyString,
+                description: NonEmptyString.nullish(),
+                thumbnails: Url.array().nullish(),
+            }),
+        ]),
+    })
 );

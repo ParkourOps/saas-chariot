@@ -11,12 +11,14 @@ export default z.discriminatedUnion("type", [
         path: NonEmptyString,
         title: NonEmptyString,
         description: NonEmptyString.nullish(),
+        thumbnails: Url.array().nullish(),
     }),
     z.object({
         type: z.literal("external"),
         url: Url,
         title: NonEmptyString,
         description: NonEmptyString.nullish(),
+        thumbnails: Url.array().nullish(),
     }),
 ]);
 
