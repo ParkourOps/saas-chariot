@@ -5,15 +5,16 @@ import { NonEmptyString, EmailAddress } from "@/_shared_/models";
 import {useIndicators} from "@/state/indicators";
 import userData from "@/state/user-data";
 import {sendTextOnlyEmail} from "@/libraries/messaging";
-import { useToastNotifications } from "@/plugins/toast-notifications";
+import { useToastStack } from "@/plugins/toast-stack";
+import dayjs from "@/libraries/dayjs";
 
 const indicators = useIndicators();
 
-const subject = ref("");
-const subjectValid = ref(false);
-
 const email = ref("");
 const emailValid = ref(false);
+
+const subject = ref("");
+const subjectValid = ref(false);
 
 const message = ref("");
 const messageValid = ref(false);
@@ -30,7 +31,9 @@ watch(
 
 const valid = computed(() => subjectValid.value && emailValid.value && messageValid.value);
 
-const toastNotifications = useToastNotifications();
+const toastStack = useToastStack();
+
+const sentDateTimeString = dayjs().format("ddd Do MMM @ h:mma");
 
 async function sendMessage(done: () => void) {
     const token = indicators.registerPendingAction();
@@ -41,7 +44,7 @@ async function sendMessage(done: () => void) {
                 from: configs.application.email, // send from no-reply email
                 to: configs.contact.email, // to front-desk email
                 replyTo: {
-                    address: email.value, // set reply address to user's email
+                    email: email.value, // set reply address to user's email
                 },
                 subject: `${email.value}: ${subject.value}`,
                 text: message.value,
@@ -49,20 +52,20 @@ async function sendMessage(done: () => void) {
             sendTextOnlyEmail({
                 from: configs.application.email,
                 to: {
-                    address: email.value,
+                    email: email.value,
                 },
                 subject: `[Message Receipt] ${subject.value}`,
-                text: `Thank you for reaching out to ${configs.application.title}.\n` + "Please find a copy of your message below:\n\n\n" + message.value,
+                text: `Thank you for reaching out to ${configs.application.title}.\n` + "Please find a copy of your message below:\n\n\n" + message.value + "\n\n\n" + `Sent: ${sentDateTimeString}`
             }),
         ]);
         done();
-        toastNotifications.show({
+        toastStack.show({
             type: "success",
             message: "Message sent.",
         });
     } catch (e) {
         console.error(e);
-        toastNotifications.show({
+        toastStack.show({
             type: "error",
             message: "Failed to send message.",
         });
@@ -78,16 +81,16 @@ async function sendMessage(done: () => void) {
             <ModalHeader title="Get in Touch" icon-class="fi fi-ss-envelope" />
 
             <div class="flex flex-col gap-4">
-                <InputWrap label="Email" align="start">
+                <InputWrap label="Email" align="start" label-class="text-sm sm:text-base">
                     <TextBox name="email" autocomplete="email" class="w-full" :schema="EmailAddress" v-model:valid="emailValid" v-model="email" :disabled="!!userProfile.document" />
                 </InputWrap>
 
-                <InputWrap label="Subject" align="start">
+                <InputWrap label="Subject" align="start" label-class="text-sm sm:text-base">
                     <TextBox name="subject" autocomplete="off" class="w-full" :schema="NonEmptyString" v-model:valid="subjectValid" v-model="subject" />
                 </InputWrap>
 
-                <InputWrap label="Message" align="start">
-                    <TextArea class="w-full leading-none tracking-tighter" :schema="NonEmptyString" v-model:valid="messageValid" v-model="message" :rows="10" />
+                <InputWrap label="Message" align="start" label-class="text-sm sm:text-base">
+                    <TextArea name="message" class="w-full" :schema="NonEmptyString" v-model:valid="messageValid" v-model="message" :rows="10" />
                 </InputWrap>
             </div>
 
