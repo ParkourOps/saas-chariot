@@ -73,8 +73,8 @@ onMounted(()=>{
 
                     <!-- total -->
                     <div>
-                        <div class="border-primary/30 border-b-4 sm:border-b-8 border-double my-1" />    
-                        <p class="text-base sm:text-xl font-bold text-right">{{ offer.priceStrings.final }}</p>
+                        <div class="border-primary/50 border-b-4 sm:border-b-8 border-double mt-1 mb-4" />    
+                        <p class="text-base sm:text-2xl font-bold text-right">{{ offer.priceStrings.final }}</p>
                     </div>
 
                 </div>
