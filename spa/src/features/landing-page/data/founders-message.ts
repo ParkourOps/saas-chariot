@@ -1,5 +1,5 @@
 import type { Testimonial } from "../types/testimonial";
-import avatar from "../assets/images/avatars/tej.png";
+import avatar from "../assets/images/avatars/tej.jpg";
 
 export default <Testimonial[]>([
     {
