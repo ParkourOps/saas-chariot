@@ -22,7 +22,7 @@ export const themeColours = {
     "base-content": "#153243", // optional
 
     "info": "#91FAFF",
-    "info-content": "#2D6286", // optional
+    "info-content": "#153243", // optional
 
     "success": "#C3F48A",
     "success-content": "#43572C", // optional
