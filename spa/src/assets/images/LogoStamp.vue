@@ -28,7 +28,7 @@ const imgSrc = computed(()=>{
         <p v-if="!hideTitle" class="text-center text-2xl font-black tracking-wide font-serif">
             {{ configs.application.title }}
         </p>
-        <p v-if="!hideSubtitle && configs.application.subtitle" class="mt-1 text-center max-w-[15rem] text-sm leading-tight tracking-tight font-mono" :class="colourClass">
+        <p v-if="!hideSubtitle && configs.application.subtitle" class="mt-1 text-center max-w-[15rem] text-sm leading-tight tracking-tight font-mono">
             {{ configs.application.subtitle }}
         </p>
     </div>
