@@ -1,23 +1,32 @@
 <script setup lang="ts">
-    import type { ThemeColours } from '@/types';
+    import type { ControlSize, ThemeColours } from '@/types';
 
     defineProps<{
-        colour: ThemeColours
+        colour?: ThemeColours,
+        size?: ControlSize
     }>();
 </script>
 
 <template>
-    <div class="spinner border-[7px] border-[#00000000]" :class="[`border-r-${colour}`]"></div>
+    <div 
+        class="spinner border-[7px] border-[#00000000]"
+        :class="[
+            {[`border-r-${colour}`]: colour},
+            {[`border-r-primary`]: !colour},
+            {'size-14': size === 'xs'},
+            {'size-16': size === 'sm'},
+            {'size-20': !size || size === 'md'},
+            {'size-28': size === 'lg'},
+            {'size-36': size === 'xl'},
+        ]"
+    />
 </template>
 
 <style scoped lang="scss">
 .spinner {
-    width: 88px;
-    height: 88px;
     display: grid;
     // border: 7px solid;
     border-radius: 50%;
-    // border-right-color: ; // oklch(var(--p));
     animation: spinner-a4dj62 1s infinite linear;
 }
 

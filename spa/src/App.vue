@@ -59,7 +59,7 @@ seo.initialise();
         leave-to-class="opacity-0"
     >
         <div class="fixed top-0 flex h-screen w-screen flex-col items-center justify-center bg-black/80 pb-16" v-if="indicators.isOverlayVisible || modalStack.numModals.value > 0">
-            <BusySpinner colour="base-100" v-if="indicators.isBusy" />
+            <BusySpinner colour="base-100" v-if="indicators.isBusy" size="xl" />
         </div>
     </Transition>
 
