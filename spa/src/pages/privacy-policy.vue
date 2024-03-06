@@ -4,9 +4,9 @@ import PrivacyPolicy from "@/data/markdown/privacy-policy.mdx";
 
 <template>
     <PageHeader title="Privacy Policy" :base-route="{ name: '/' }" />
-    <PagePaddedContent>
-        <MarkdownContent hide-title>
+    <PagePaddedWrapper end-of-page>
+        <Markdown hide-title>
             <PrivacyPolicy />
-        </MarkdownContent>
-    </PagePaddedContent>
+        </Markdown>
+    </PagePaddedWrapper>
 </template>

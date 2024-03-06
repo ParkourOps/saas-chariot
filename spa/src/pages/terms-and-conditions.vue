@@ -4,9 +4,9 @@ import TermsAndConditions from "@/data/markdown/terms-and-conditions.mdx";
 
 <template>
     <PageHeader title="Terms and Conditions" :base-route="{ name: '/' }" />
-    <PagePaddedContent>
-        <MarkdownContent hide-title>
+    <PagePaddedWrapper end-of-page>
+        <Markdown hide-title>
             <TermsAndConditions />
-        </MarkdownContent>
-    </PagePaddedContent>
+        </Markdown>
+    </PagePaddedWrapper>
 </template>

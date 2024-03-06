@@ -2,7 +2,7 @@
     import { ref, watch } from 'vue';
     import configs from '@/configs';
     import Logo from "@/assets/images/logo.png";
-    import { EmailAddress } from '@/_shared_/models';
+    import { EmailAddress } from 'shared/models';
     import { onMounted } from 'vue';
     import { useAuth } from '@/libraries/firebase/auth';
     import { useAlertStack } from '@/plugins/alert-stack';
