@@ -3,6 +3,8 @@ import mixpanel, { type Dict } from "mixpanel-browser";
 import configs from "@/configs";
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import type { TrackableEventName, TrackableEventProps, TrackableEvents } from "./data/trackable-events";
+import trackableEvents from "./data/trackable-events";
 
 export const useAnalytics = defineStore("Analytics", () => {
     const initialised = ref(false);
@@ -36,10 +38,15 @@ export const useAnalytics = defineStore("Analytics", () => {
         }
     }
 
-    function trackEvent(eventName: string, properties?: Dict) {
+    function _trackEvent(eventName: string, properties?: Dict) {
         mixpanel.track(eventName, properties);
         hotjar.event(eventName);
     }
+
+    const trackEvent = <TName extends TrackableEventName>(eventName: TName) => (...eventArgs: Parameters<TrackableEvents[TName]>) => {
+        const eventProps = (trackableEvents[eventName] as (...args: unknown[])=>TrackableEventProps<TName>)(...(eventArgs as unknown[]));
+        _trackEvent(eventName, eventProps);
+    };
 
     return {
         setIdentity: (userId: string) => setIdentity(userId),
