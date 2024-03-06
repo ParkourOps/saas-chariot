@@ -78,7 +78,7 @@ const daisyUiThemeColoursExtension = () => {
 const tailwindSafelistPattern = () => {
     const colours = {...themeColours, ...additionalThemeColours};
     const keys = Object.keys(colours);
-    const regExp = RegExp(`(text|bg|border(-.)?)-(${keys.join("|")})`);
+    const regExp = RegExp(`(divider|text|bg|border(-.)?)-(${keys.join("|")})`);
     return regExp;
 }
 
