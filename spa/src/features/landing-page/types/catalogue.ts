@@ -1,6 +1,6 @@
 import type { Component } from "vue";
 
-type Icon = Component | string;
+type Icon = string;
 
 type Badge = "coming-soon" | "new";
 
