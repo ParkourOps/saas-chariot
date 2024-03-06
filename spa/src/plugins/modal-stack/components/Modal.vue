@@ -1,10 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts" generic="ReturnType">
+import type { ScreenSize } from "@/types";
 import { onMounted } from "vue";
 import { ref } from "vue";
 
 defineProps<{
     modalClass?: string | string[];
+    size?: ScreenSize
 }>();
 
 const emits = defineEmits<{
@@ -41,17 +43,22 @@ onMounted(() => {
 
 <template>
     <dialog ref="dialog" class="modal modal-top sm:modal-middle overflow-y-scroll" @close="done()">
-        <div class="modal-box max-h-none mb-4 sm:my-4 overflow-visible" :class="modalClass">
+        <div class="modal-box max-h-none mb-4 sm:my-4 overflow-visible"
+        :class="[
+            modalClass,
+            {'sm:max-w-screen-sm': size === 'sm'},
+            {'sm:max-w-screen-md': size === 'md'},
+            {'sm:max-w-screen-lg': size === 'lg'},
+            {'sm:max-w-screen-xl': size === 'xl'},
+            {'sm:max-w-screen-2xl': size === '2xl'},
+        ]"
+    >
                 <slot :done="done" />
         </div>
     </dialog>
 </template>
 
 <style>
-    .modal:not(dialog:not(.modal-open)),
-    .modal::backdrop {
-        background-color: transparent;
-    }
     .modal:not(dialog:not(.modal-open)),
     .modal::backdrop {
         background-color: transparent;
