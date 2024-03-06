@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { createLogger, defineConfig, Plugin } from "vite";
 import { fileURLToPath, URL } from "node:url";
 
 import vueRouter from "unplugin-vue-router/vite";
@@ -14,6 +14,22 @@ import AutoImport from "unplugin-auto-import/vite";
 import { VueRouterAutoImports } from "unplugin-vue-router";
 // import { unheadVueComposablesImports } from '@unhead/vue'
 
+import svgLoader from 'vite-svg-loader'
+
+// export const disableAttributeInheritance = (disable = true): Plugin => ({
+//   name: 'DisableInheritAttributesPlugin',
+//   transform: (src, id) => ({
+//     code: (()=>{
+//         if (id.endsWith(".vue") && disable) {
+//             return src + `\n\n\n<script lang="ts">\nexport default { inheritAttrs: false };\n</script>\n`;
+//         } else {
+//             return src;
+//         }
+//     })(),
+//     map: null
+//   })
+// });
+
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
@@ -27,6 +43,7 @@ export default defineConfig({
                 },
             ],
         }),
+        // disableAttributeInheritance(true),
         vue(),
         vueJsx({}),
         mdx({
@@ -54,6 +71,7 @@ export default defineConfig({
                 // unheadVueComposablesImports,
             ],
         }),
+        svgLoader()
     ],
     resolve: {
         alias: {
