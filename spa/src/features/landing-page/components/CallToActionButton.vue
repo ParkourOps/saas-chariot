@@ -24,7 +24,7 @@
         </KeyboardButton>
 
         <div class="px-4">
-            <p class="mx-auto mt-2 max-w-prose text-center font-serif text-primary font-semibold text-lg/tight sm:text-xl/tight">One-time purchase of <span class="font-bold">{{ price }}</span></p>
+            <p class="mx-auto mt-2 max-w-prose text-center font-serif text-primary font-semibold text-lg/tight sm:text-xl/tight">One-time purchase of {{ price }}</p>
             <p class="mx-auto max-w-prose text-center font-serif text-primary/60 text-base sm:text-lg/snug">(30-day money-back guarantee)</p>
         </div>
         
