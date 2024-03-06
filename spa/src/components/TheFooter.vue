@@ -20,11 +20,11 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
     <div class="grid grid-cols-1 gap-8 bg-base-300 fill-secondary px-6 pb-6 pt-8 text-secondary sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:px-12">
         <!-- App Logo, Name, Slogan -->
         <div class="lg:col-start-2" :class="[{ 'sm:col-span-full lg:col-span-1': !configs.contact.officeHours }, { 'lg:row-span-2': configs.contact.officeHours }]">
-            <LogoStamp show-title show-subtitle />
+            <LogoStamp show-title show-subtitle @click="$router.push({name:'/'})" class="cursor-pointer" />
         </div>
 
         <!-- Company, Address -->
-        <div v-if="configs.contact?.address" class="text-center text-sm sm:self-center lg:col-start-3 lg:self-end lg:text-right">
+        <div v-if="configs.contact?.address" class="text-center text-sm sm:self-center lg:col-start-3 lg:self-end lg:text-right leading-tight">
             <p v-if="configs.contact?.company?.name" class="font-bold">
                 {{ configs.contact.company.name }}
             </p>
@@ -250,15 +250,18 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
                 <i class="fi fi-ss-envelope"></i>
                 {{ configs.contact.email.email }}
             </p>
-            <button v-if="configs.contact?.email && props.showEmail === 'button'" class="btn btn-secondary lg:btn-sm" @click="$showModal(() => import('./modals/ModalContactForm.vue'), {})">
-                <i class="fi fi-ss-envelope"></i>
-                Get in Touch
-            </button>
+            <Button 
+                v-if="configs.contact?.email && props.showEmail === 'button'" 
+                icon-left-class="fi fi-ss-envelope"
+                label="Get in Touch"
+                variant="secondary"
+                :action="() => $showModal(() => import('./modals/ModalContactForm.vue'), {})"
+            />
         </div>
 
         <!-- Internal Links -->
         <div
-            class="col-span-full mb-1 flex flex-col items-center justify-center gap-4 text-sm font-semibold underline sm:mt-3 sm:flex-row sm:gap-8"
+            class="col-span-full mb-1 flex flex-col items-center justify-center gap-4 text-sm font-semibold underline sm:mt-3 sm:flex-row sm:gap-8 leading-none"
             :class="[
                 {
                     'lg:col-span-1 lg:row-start-1 lg:flex-col lg:items-start lg:justify-end lg:gap-4': !configs.contact.officeHours,
@@ -280,7 +283,7 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
                 },
             ]"
         >
-            <button v-if="configs.social?.gitHub" class="btn btn-circle btn-secondary btn-sm">
+            <!-- <button v-if="configs.social?.gitHub" class="btn btn-circle btn-secondary btn-sm">
                 <i class="fi fi-brands-github text-[1.34rem]"></i>
             </button>
             <button v-if="configs.social?.linkedIn" class="btn btn-circle btn-secondary btn-sm">
@@ -312,7 +315,7 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
             </button>
             <button v-if="configs.social?.discord" class="btn btn-circle btn-secondary btn-sm">
                 <i class="fi fi-brands-discord text-[1.34rem]"></i>
-            </button>
+            </button> -->
         </div>
     </div>
 </template>
