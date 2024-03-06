@@ -10,7 +10,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "framework/*": ["./src/framework_features/*"],
-      "shared/*": ["./src/__shared_/*"]
+      "shared/*": ["./src/_shared_/*"]
     },
     // "types": ["vite/client"]
   }
