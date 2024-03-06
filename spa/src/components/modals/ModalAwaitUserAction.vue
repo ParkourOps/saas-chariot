@@ -29,7 +29,7 @@
             <p class="text-center text-base-content/80" :class="[{ 'mt-2': !title }]">
                 {{ instruction }}
             </p>
-            <BusySpinner class="mx-auto mb-8 mt-14" colour="base-content/80" />
+            <BusySpinner class="mx-auto mb-8 mt-14" colour="base-content" />
         </template>
     </Modal>
 </template>
