@@ -13,7 +13,8 @@
             foreground-colour="neutral"
             :action="()=>$showModal(() => import('../components/modals/ModalJoinWaitingList.vue'), {
                 lockInPrice: price,
-                leadMagnetResourceKey: 'xrbmvnmbqagf'
+                leadMagnetResourceKey: 'xrbmvnmbqagf',
+                mailingListKey: 'kbozgt'
             })"
         >
             <div class="flex items-center -mb-1 font-bold">

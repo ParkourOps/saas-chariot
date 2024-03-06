@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import uniqueId from "@/_shared_/libraries/unique-id";
+import uniqueId from "shared/libraries/unique-id";
 import { ref } from "vue";
 import type { TieredCatalogue } from "../types/catalogue";
 import FlatCatalogue from "./FlatCatalogue.vue";

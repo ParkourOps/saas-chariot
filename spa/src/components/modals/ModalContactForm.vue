@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, computed } from "vue";
 import configs from "@/configs";
-import { NonEmptyString, EmailAddress } from "@/_shared_/models";
+import { NonEmptyString, EmailAddress } from "shared/models";
 import {useIndicators} from "@/state/indicators";
 import userData from "@/state/user-data";
 import {sendTextOnlyEmail} from "framework/email-messaging";

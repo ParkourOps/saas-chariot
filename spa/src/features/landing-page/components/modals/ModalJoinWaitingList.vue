@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { EmailAddress } from "@/_shared_/models";
+import { EmailAddress } from "shared/models";
 import {sendActionLink} from "framework/action-links";
 import getRouteUrl from "@/utilities/get-route-url";
 import ResourceInfo from "framework/resource-delivery/components/ResourceInfo.vue";
@@ -8,14 +8,12 @@ import { useIndicators } from "@/state/indicators";
 import { useToastStack } from "@/plugins/toast-stack";
 import { useAlertStack } from "@/plugins/alert-stack";
 import dayjs from "@/libraries/dayjs";
+import { useAnalytics } from "@/framework_features/analytics";
 
     const props = defineProps<{
-        lockInPrice: string,
+        mailingListKey: string
         leadMagnetResourceKey: string,
-        leadMagnetImage?: {
-            src: string,
-            alt: string,
-        }
+        lockInPrice: string,
     }>();
 
     const email = ref("");
@@ -26,7 +24,9 @@ import dayjs from "@/libraries/dayjs";
     const alertStack = useAlertStack();
     const toastStack = useToastStack();
 
-    function sendLink(done: () => void, title: string) {
+    const analytics = useAnalytics();
+
+    function sendLink(done: () => void, title: string, thumbnailUrl?: string) {
         if (!emailValid.value) {
             return;
         }
@@ -40,7 +40,7 @@ import dayjs from "@/libraries/dayjs";
             actionSequence: [
                 {
                     type: "subscribe_to_mailing_list",
-                    mailingListKey: "kbozgt",
+                    mailingListKey: props.mailingListKey,
                 },
                 {
                     type: "issue_resource",
@@ -63,6 +63,14 @@ import dayjs from "@/libraries/dayjs";
             failUrl: getRouteUrl({ name: "/" }),
         })
             .then(() => {
+                analytics.trackEvent("join-mailing-list")({
+                    mailingListKey: props.mailingListKey,
+                    leadMagnet: {
+                        key: props.leadMagnetResourceKey,
+                        title,
+                        thumbnailUrl,
+                    }
+                })
                 done();
                 alertStack.show({
                     type: "success",
@@ -121,7 +129,7 @@ import dayjs from "@/libraries/dayjs";
 
                         <ModalActions justify="space-between">
                             <Button :action="()=>done()" size="lg" variant="ghost" label="Cancel" />
-                            <Button :action="()=>sendLink(done, title)" :disabled="!emailValid" size="lg" variant="primary" icon-left-class="fi fi-ss-square-plus" label="Join" />
+                            <Button :action="()=>sendLink(done, title, thumbnails?.[0])" :disabled="!emailValid" size="lg" variant="primary" icon-left-class="fi fi-ss-square-plus" label="Join" />
                         </ModalActions>
                     </div>             
                 </template>

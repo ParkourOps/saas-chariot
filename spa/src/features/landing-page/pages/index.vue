@@ -47,10 +47,7 @@ seo.allowIndex();
             <KeyboardButton
                 background-colour="accent"
                 foreground-colour="neutral"
-                :action="() => $showModal(() => import('../components/modals/ModalJoinWaitingList.vue'), {
-                    lockInPrice: finalPrice,
-                    leadMagnetResourceKey: 'xrbmvnmbqagf'
-                })"
+                :action="() => $router.push({name: '/', hash: '#the-offer', force: true})"
             >
                 <span class="font-black font-mono">Buy Now</span>
             </KeyboardButton>
@@ -160,7 +157,7 @@ seo.allowIndex();
     <PageDivider id="founders-message" title="Founder's Message" />
     <TestimonialsLayout :testimonials="foundersMessage" />
 
-    <PageDivider title="In The Offer" />
+    <PageDivider id="the-offer" title="The Offer" />
     <OfferCountdown :offer="offer" class="mb-12" />
 
     <CallToActionButton :price="finalPrice" />
