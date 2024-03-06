@@ -17,8 +17,8 @@
                 mailingListKey: 'kbozgt'
             })"
         >
-            <div class="flex items-center -mb-1 font-bold">
-                <p class="whitespace-nowrap mr-6">ACCESS NOW</p>
+            <div class="flex items-center -mb-1 font-bold font-serif">
+                <p class="whitespace-nowrap mr-6">Access Now</p>
                 <SvgIcon name="diamond" class="h-12" />
             </div>
         </KeyboardButton>

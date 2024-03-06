@@ -49,7 +49,8 @@ seo.allowIndex();
                 foreground-colour="neutral"
                 :action="() => $router.push({name: '/', hash: '#the-offer', force: true})"
             >
-                <span class="font-black font-mono">Buy Now</span>
+                <span class="font-black font-mono mr-4">Access Now</span>
+                <SvgIcon name="diamond" class="h-8 inline" />
             </KeyboardButton>
         </div>
     </div>
