@@ -9,13 +9,11 @@
     <!-- Title Header -->
     <mj-section background-color="#F26419">
       <mj-column>
-        <mj-text align="center" color="#153243" font-size="20px" font-weight="bold">
-          {{#if title}}
+        {{#if title}}
+          <mj-text align="center" color="#153243" font-size="20px" font-weight="bold">
             {{ title }}
-          {{ else }}
-            Notification
-          {{/if}}
-        </mj-text>
+          </mj-text>
+        {{/if}}
       </mj-column>
     </mj-section>
     <!-- Content-->
@@ -26,14 +24,21 @@
             {{ heading }}
           </mj-text>
         {{/if}}
-        <mj-text font-size="16px" line-height="160%" align="center">
-          {{ paragraph }}
-        </mj-text>
+        {{#each paragraphs}}
+          <mj-text font-size="16px" line-height="160%" align="center">
+            {{ this }}
+          </mj-text>
+        {{/each}}
         {{#if ctaText }}
           {{#if ctaLink}}
             <mj-button inner-padding="20px" font-size="15px" background-color="#153243" href="{{ ctaLink }}">
                 {{ ctaText }}
             </mj-button>
+            {{#if ctaCaption}}
+              <mj-text font-size="12px" align="center">
+                {{ ctaCaption }}
+              </mj-text>
+            {{/if}}
           {{/if}}
         {{/if}}
       </mj-column>
@@ -42,7 +47,7 @@
     <mj-section>
       <mj-column padding-top="20px">
         <mj-text align="center" color="#2D6286" font-size="13px">
-          Thank you for choosing {{ appName }}.
+          Thank you for choosing <strong>{{ appName }}</strong>.
         </mj-text>
       </mj-column>
     </mj-section>
