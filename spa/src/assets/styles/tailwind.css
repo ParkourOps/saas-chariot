@@ -8,36 +8,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Adjust Tailwind CSS styles: */
-@at-root {
-    /* Adjust font tracking: */
-    .font-mono {
-        @apply tracking-tighter;
-        @apply sm:tracking-tight;
-    }
-    .font-serif {
-        @apply tracking-normal;
-    }
-}
 
 /* Apply Tailwind CSS styles: */
 
+/* Always smooth scroll: */
 html {
-    /* Always smooth scroll. */
     @apply scroll-smooth;
+}
 
-    /* Default line height: */
-    @apply leading-none;
-    input, .textarea {
-        @apply leading-none;
-    }
-    i {
-        @apply leading-none;
-    }
+/* Adjust font (family) kerning: */
+.font-mono {
+    @apply tracking-tighter sm:tracking-tight;
+}
 
-    /* Default font family: */
+/* Set default font (family) and style: */
+html {
     @apply font-mono;
-    .title,
+    
+    .title {
+        @apply font-serif font-bold;
+    }
+
     .subtitle,
     .heading,
     h1,
@@ -46,6 +37,6 @@ html {
     h4,
     h5,
     h6 {
-        @apply font-serif;
+        @apply font-serif font-semibold;
     }
 }
