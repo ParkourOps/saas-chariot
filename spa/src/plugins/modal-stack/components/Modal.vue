@@ -1,25 +1,28 @@
 <!-- eslint-disable vue/multi-word-component-names -->
-<script setup lang="ts" generic="ReturnType">
+<script setup lang="ts" generic="T">
 import type { ScreenSize } from "@/types";
-import { onMounted } from "vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+
+defineOptions({
+    inheritAttrs: false
+});
 
 defineProps<{
-    modalClass?: string | string[];
     size?: ScreenSize
 }>();
 
 const emits = defineEmits<{
-    done: [value?: ReturnType];
+    done: [value?: T];
     hidden: [];
     visible: [];
 }>();
 
 const dialog = ref<HTMLDialogElement>();
 
-function done(value?: ReturnType) {
-    emits("done", value);
-    hide();
+const returnValue = ref<T>();
+
+function conclude() {
+    emits("done", returnValue.value);
 }
 
 function show() {
@@ -36,16 +39,21 @@ function hide() {
     }
 }
 
+function setReturnValue(value?: T) {
+    returnValue.value = value;
+    hide(); // will trigger close event on the dialog.
+}
+
 onMounted(() => {
     show();
 });
 </script>
 
 <template>
-    <dialog ref="dialog" class="modal modal-top sm:modal-middle overflow-y-scroll" @close="done()">
+    <dialog ref="dialog" class="modal modal-top sm:modal-middle overflow-y-scroll" @close="conclude">
         <div class="modal-box max-h-none mb-4 sm:my-4 overflow-visible"
         :class="[
-            modalClass,
+            $attrs.class,
             {'sm:max-w-screen-sm': size === 'sm'},
             {'sm:max-w-screen-md': size === 'md'},
             {'sm:max-w-screen-lg': size === 'lg'},
@@ -53,7 +61,7 @@ onMounted(() => {
             {'sm:max-w-screen-2xl': size === '2xl'},
         ]"
     >
-                <slot :done="done" />
+                <slot :done="setReturnValue" />
         </div>
     </dialog>
 </template>

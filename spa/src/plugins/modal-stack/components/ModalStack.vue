@@ -3,6 +3,7 @@
 
 <script setup lang="ts">
 import { modalStack, concludeModal } from "../";
+
 </script>
 
 <template>

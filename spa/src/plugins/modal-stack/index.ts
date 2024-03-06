@@ -34,21 +34,24 @@ async function showModal<C extends Modal>(component: ComponentArg<C>, props: Com
     }
 
     return new Promise((resolve) => {
-        modalStack.set(uniqueId.create(), {
+        const id = uniqueId.create();
+        modalStack.set(id, {
             component: _component,
             props,
             resolve: (value?: unknown) => resolve(value),
         });
+        console.debug(`Showing modal: ${id}`)
     });
 }
 
 export function concludeModal(id: string, value?: any) {
     const modalContext = modalStack.get(id);
     if (!modalContext) {
-        console.error(`Could not conclude modal; did not find: ${id}`);
+        console.error(`Could not conclude modal; could not find modal: ${id}`);
         return;
     }
     modalContext.resolve(value);
+    console.debug(`Concluding modal '${id}' with value: ${value}`);
     modalStack.delete(id);
 }
 
