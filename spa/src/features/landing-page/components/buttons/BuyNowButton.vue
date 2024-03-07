@@ -2,6 +2,8 @@
     defineProps<{
         price: string,
     }>();
+
+    const analytics = useAnalytics();
 </script>
 
 <template>
@@ -11,11 +13,14 @@
             size="xl"
             background-colour="accent"
             foreground-colour="neutral"
-            :action="()=>$showModal(() => import('../../components/modals/ModalJoinWaitingList.vue'), {
-                lockInPrice: price,
-                leadMagnetResourceKey: 'xrbmvnmbqagf',
-                mailingListKey: 'kbozgt'
-            })"
+            :action="[
+                ()=>$showModal(() => import('../../components/modals/ModalJoinWaitingList.vue'), {
+                    lockInPrice: price,
+                    leadMagnetResourceKey: 'xrbmvnmbqagf',
+                    mailingListKey: 'kbozgt'
+                }),
+                () => analytics.trackEvent('buy-now-clicked')()
+            ]"
         >
             <div class="flex items-center -mb-1 font-bold font-serif">
                 <p class="whitespace-nowrap mr-6">Buy Now</p>

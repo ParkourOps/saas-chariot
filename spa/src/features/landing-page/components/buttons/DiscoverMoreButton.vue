@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const analytics = useAnalytics();
 </script>
 
 <template>
@@ -8,7 +9,10 @@
             size="xl"
             background-colour="secondary"
             foreground-colour="neutral"
-            :action="()=>$router.push({name:'/discover', hash: '#list-of-features', force: true})"
+            :action="[
+                ()=>$router.push({name:'/discover', hash: '#list-of-features', force: true}),
+                () => analytics.trackEvent('discover-more-clicked')()
+            ]"
         >
             <div class="flex items-center -mb-1 font-bold font-serif">
                 <p class="whitespace-nowrap mr-6">Discover More</p>
