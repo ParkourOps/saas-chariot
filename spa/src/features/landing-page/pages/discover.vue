@@ -9,7 +9,9 @@
 
     import LogoStamp from "@/assets/images/LogoStamp.vue";
     import ViewOfferButton from "../components/buttons/ViewOfferButton.vue";
+    import { useReactiveUserInterface } from "@/plugins/reactive-user-interface";
 
+    const ui = useReactiveUserInterface();
     seo.allowIndex();
 </script>
 
@@ -80,7 +82,7 @@
         </div>
 
         <div class="max-w-screen-lg mx-auto">
-            <TieredCatalogue :catalogue="featuresCatalogue" expanded>
+            <TieredCatalogue :catalogue="featuresCatalogue" :expanded="!ui.activeBreakpoint.value">
                 <template #tier-footer>
                     <ViewOfferButton class="mt-16" />
                 </template>
