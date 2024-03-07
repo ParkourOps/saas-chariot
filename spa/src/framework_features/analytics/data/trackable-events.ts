@@ -9,6 +9,9 @@ const trackableEvents = {
             thumbnailUrl?: string
         }
     }) => (properties),
+    ["buy-now-clicked"] : () => ({}),
+    ["discover-more-clicked"] : () => ({}),
+    ["view-offer-clicked"] : () => ({}),
 } satisfies TrackableEventsDictionary;
 
 export type TrackableEvents = typeof trackableEvents;
