@@ -205,3 +205,9 @@ npm run test:e2e -- --debug
 ```sh
 npm run lint
 ```
+
+## Things To Do
+
+* Move `plugins` to `framework_features`
+* Auto-import all plugin features
+* Update docs
