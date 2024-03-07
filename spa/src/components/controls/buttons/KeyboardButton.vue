@@ -14,7 +14,7 @@ const props = defineProps<{
     foregroundColour?: ThemeColour,
     size?: ControlSize,
     fontWeight?: "medium" | "semibold" | "bold" | "extrabold" | "black",
-    action?: Action,
+    action?: Action | Action[],
 }>();
 
 const sizeClass = computed(() => {
@@ -40,7 +40,13 @@ async function handleAction() {
     if (!props.action) return;
     const token = indicators.registerPendingAction();
     _loading.value = true;
-    await props.action();
+    if (Array.isArray(props.action)) {
+        for (const p of props.action) {
+            await p();
+        }
+    } else {
+        await props.action();
+    }
     _loading.value = false;
     token.unregisterPendingAction();
 }
@@ -76,7 +82,6 @@ async function handleAction() {
     display: block;
     position: relative;
     flex-shrink: 0;
-    outline: none;
 
     // base shadow
     border: 2px solid #888888;

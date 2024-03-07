@@ -17,7 +17,7 @@ const indicators = useIndicators();
         outline?: boolean,
         size?: Exclude<ControlSize,"xl">,
         block?: boolean,
-        action?: Action,
+        action?: Action | Action[],
         variant?: ControlVariant | "ghost" | "link" | "glass",
         label?: string,
         iconLeftClass?: string | string[]
@@ -37,7 +37,13 @@ const indicators = useIndicators();
         if (!props.action) return;
         const token = indicators.registerPendingAction();
         _loading.value = true;
-        await props.action();
+        if (Array.isArray(props.action)) {
+            for (const p of props.action) {
+                await p();
+            }
+        } else {
+            await props.action();
+        }
         _loading.value = false;
         token.unregisterPendingAction();
     }
