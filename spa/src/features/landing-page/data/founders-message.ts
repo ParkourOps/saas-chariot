@@ -10,7 +10,7 @@ export default <Testimonial[]>([
         quote: [
             "As a software engineer and entrepreneur, I often found myself reinventing the wheel when building new products. Frustratingly, core capabilities like user management, payments, and notifications had to be rebuilt from scratch each time. I dreamt of a platform that could provide these universal SaaS building blocks straight out of the box.",
 
-            "I built SaaS Chariot to empower makers and founders, like you and I. SaaS Chariot aims to handle the heavy lifting of core infrastructure so you can focus on creating exceptional user experiences. With just a few clicks, you can spin up a production-ready application with authentication, schema-validated database, secure internal APIs, and more. In SaaS Chariot, almost everything is designed to be customisable and extensible.",
+            "I built SaaS Chariot to empower makers and founders, like you and I. SaaS Chariot aims to handle the heavy lifting of core infrastructure so you can focus on creating exceptional user experiences. With just a few clicks, you can spin up a production-ready application with authentication, schema-validated database, secure internal APIs, and more. With SaaS Chariot, almost everything is designed to be customisable and extensible.",
 
             "My goal is to shave months off the development time of your most important projects, so you can test assumptions faster and hone in on the much sought-after product-market fit. I want to empower the next generation of technical entrepreneurs and product engineers to cost-effectively transform ideas into thriving digital businesses.",
 
