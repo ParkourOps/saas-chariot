@@ -42,8 +42,8 @@ seo.initialise();
 
 <template>
     <!-- Foreground Layer -->
-    <div class="flex flex-col min-h-screen">
-        <div class="grow overflow-x-clip">
+    <div class="flex flex-col min-h-screen overflow-x-clip">
+        <div class="grow">
             <RouterView/>
         </div>
         <TheFooter class="grow-0" show-email="button" />
