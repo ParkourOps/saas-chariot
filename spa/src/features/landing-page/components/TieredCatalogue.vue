@@ -14,7 +14,7 @@ const selectedIndex = ref(0);
 </script>
 
 <template>
-    <div v-for="(tier, tierIdx) in catalogue" :key="`${catalogueId}:tier-${tierIdx}`" class="mt-4 px-2 text-neutral first:mt-0 sm:px-10"
+    <div v-for="(tier, tierIdx) in catalogue" :key="`${catalogueId}:tier-${tierIdx}`" class="mt-4 text-neutral first:mt-0 sm:px-10"
         :class="[
             {
                 'collapse collapse-arrow': !expanded,
@@ -48,7 +48,7 @@ const selectedIndex = ref(0);
                 {{ tier.description }}
             </p>
             <FlatCatalogue :catalogue="tier.items" />
-            <div class="text-primary pt-20" v-if="$slots['tier-footer']">
+            <div v-if="$slots['tier-footer']">
                 
                 <slot name="tier-footer" />
             </div>
