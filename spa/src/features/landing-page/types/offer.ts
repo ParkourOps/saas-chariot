@@ -30,6 +30,7 @@ type OfferItem = {
 };
 
 type OfferData = {
+    title?: string,
     descriptionParagraphs?: string[],
     items: OfferItem[];
     overridePrice?: PriceProperty, 
@@ -40,11 +41,13 @@ export default class Offer implements OfferData {
     public readonly items;
     public readonly currencySymbol;
     public readonly overridePrice;
+    public readonly title;
     public readonly descriptionParagraphs;
     constructor(offer: Readonly<OfferData>) {
         this.items = offer.items;
         this.currencySymbol = offer.currencySymbol;
         this.overridePrice = offer.overridePrice;
+        this.title = offer.title;
         this.descriptionParagraphs = offer.descriptionParagraphs;
     }
     get prices() {

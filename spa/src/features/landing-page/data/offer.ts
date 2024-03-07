@@ -1,10 +1,10 @@
 import Offer from "../types/offer";
 
 export default new Offer({
+    title: "Startup Plan",
     descriptionParagraphs: [
-        "Startup Package",
-        "(covers up to 10 users)",
-        "Please get in touch if your team is larger."
+        "1-10 users",
+        "(Please get in touch if your team is larger.)"
     ],
     items:     [
         {
