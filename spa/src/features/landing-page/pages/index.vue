@@ -12,8 +12,12 @@ import NumberedList from "../components/NumberedList.vue";
 import TestimonialsLayout from "../components/TestimonialsLayout.vue";
 import OfferCountdown from "../components/OfferCountdown.vue";
 
-import CallToActionButton from "../components/CallToActionButton.vue";
+import BuyNowButton from "../components/buttons/BuyNowButton.vue";
+import { useReactiveUserInterface } from "@/plugins/reactive-user-interface";
+import DiscoverMoreButton from "../components/buttons/DiscoverMoreButton.vue";
+import ViewOfferButton from "../components/buttons/ViewOfferButton.vue";
 
+const ui = useReactiveUserInterface();
 const finalPrice = offer.priceStrings.final;
 
 seo.allowIndex();
@@ -23,7 +27,7 @@ seo.allowIndex();
     <div class="flex flex-col items-center justify-center bg-primary px-4 py-14 font-serif sm:py-28">
 
         <!-- Logo and Subtitle -->
-        <LogoStamp class="mb-2" colour-class="fill-base-100 text-base-100" show-title dark hide-subtitle/>
+        <LogoStamp class="mb-2" show-title dark hide-subtitle/>
         <div class="text-center text-accent text-xl max-w-80 sm:max-w-xl sm:text-4xl font-bold">
             <p class="whitespace-nowrap smallcaps w-fit mx-auto mb-2 sm:mb-4">
                 <span class=" border-b-accent border-b sm:border-b-2">Transform Ideas into Reality</span>
@@ -35,7 +39,7 @@ seo.allowIndex();
             
         </div>
 
-        <div class="mt-12 flex flex-col gap-6 sm:flex-row">
+        <div class="mt-12 flex flex-col gap-8 sm:flex-row mx-auto w-fit">
             <KeyboardButton
                 background-colour="neutral"
                 foreground-colour="secondary"
@@ -47,9 +51,9 @@ seo.allowIndex();
             <KeyboardButton
                 background-colour="accent"
                 foreground-colour="neutral"
-                :action="() => $router.push({name: '/', hash: '#the-offer', force: true})"
+                :action="() => $router.push({name: '/', hash: '#offer', force: true})"
             >
-                <span class="font-black font-mono mr-4">Access Now</span>
+                <span class="font-black font-mono mr-4">View Offer</span>
                 <SvgIcon name="diamond" class="h-8 inline" />
             </KeyboardButton>
         </div>
@@ -132,38 +136,42 @@ seo.allowIndex();
             '<mark>Model and implement business logic;</mark> add unit tests to verify logical consistency.',
             // '<mark>Implement content layouts and user workflows.</mark> Add functional tests to verify layout consistency.',
             '<mark>Build user workflows and content layouts</mark> by leveraging common application elements such as modals, pop-up alerts, notifications, transactional emails, action links, and more. Define functional tests and end-to-end tests to corroborate requirements.',
-            '<mark>Optimise application for search engine indexing, crawling, and social media sharing</mark> using the built-in SEO library.',
+            '<mark>Optimise application for search engine indexing, crawling, and social media sharing,</mark> using the built-in SEO library.',
             '<mark>Check auto-generated audit report</mark> for issues and possible improvements.',
             `<mark>Deploy to staging environment.</mark> Execute manual and automated test suites.`,
             `<mark>Approve for release</mark> to production environment.`,
             `Repeat as necessary from step 3 or beyond.`
         ]"
     />
-    <CallToActionButton :price="finalPrice" class="sm:mb-24" />
+
+    <div class="sm:mb-24">
+        <DiscoverMoreButton />
+        <!-- <ViewOfferButton /> -->
+    </div>
 
     <!--
     <SectionDivider id="syllabus" title="Syllabus" />
     <TieredCatalogue :catalogue="syllabusCatalogue" />
     -->
 
-    <PageDivider id="features" title="Features" />
+    <!-- <PageDivider id="features" title="Features" />
     <div class="max-w-screen-xl mx-auto">
-        <TieredCatalogue :catalogue="featuresCatalogue">
+        <TieredCatalogue :catalogue="featuresCatalogue" :expanded="!ui.activeBreakpoint.value">
             <template #tier-footer>
-                <CallToActionButton :price="finalPrice" />
+                <BuyNowButton :price="finalPrice" class="mt-16" />
             </template>
         </TieredCatalogue>
-    </div>
+    </div> -->
+
+    <PageDivider id="offer" title="The Offer" />
+    <OfferCountdown :offer="offer" class="mb-12" />
+    <BuyNowButton :price="finalPrice" class="mb-20" />
 
     <PageDivider id="founders-message" title="Founder's Message" />
     <TestimonialsLayout :testimonials="foundersMessage" />
+    <BuyNowButton :price="finalPrice" class="my-24" />
 
-    <PageDivider id="the-offer" title="The Offer" />
-    <OfferCountdown :offer="offer" class="mb-12" />
-
-    <CallToActionButton :price="finalPrice" />
-
-    <div class="h-12 sm:h-24" />
+    <!-- <PageEndSpacer/> -->
     <!-- <img src="../assets/images/money-back-guarantee-large.webp" alt="30-day money-back guarantee." class="mx-auto" /> -->
 </template>
 
