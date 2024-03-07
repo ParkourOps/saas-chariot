@@ -3,23 +3,21 @@ import LogoStamp from "@/assets/images/LogoStamp.vue";
 
 import valuePropCatalogue from "../data/flat-catalogue-value-props";
 // import syllabusCatalogue from "../data/tiered-catalogue-syllabus";
-import featuresCatalogue from "../data/tiered-catalogue-features";
+// import featuresCatalogue from "../data/tiered-catalogue-features";
 import foundersMessage from "../data/founders-message";
 import offer from "../data/offer";
 
-import TieredCatalogue from "../components/TieredCatalogue.vue";
 import NumberedList from "../components/NumberedList.vue";
 import TestimonialsLayout from "../components/TestimonialsLayout.vue";
 import OfferCountdown from "../components/OfferCountdown.vue";
 
 import BuyNowButton from "../components/buttons/BuyNowButton.vue";
-import { useReactiveUserInterface } from "@/plugins/reactive-user-interface";
 import DiscoverMoreButton from "../components/buttons/DiscoverMoreButton.vue";
-import ViewOfferButton from "../components/buttons/ViewOfferButton.vue";
+// import ViewOfferButton from "../components/buttons/ViewOfferButton.vue";
 
-const ui = useReactiveUserInterface();
 const finalPrice = offer.priceStrings.final;
 
+const analytics = useAnalytics();
 seo.allowIndex();
 </script>
 
@@ -51,7 +49,10 @@ seo.allowIndex();
             <KeyboardButton
                 background-colour="accent"
                 foreground-colour="neutral"
-                :action="() => $router.push({name: '/', hash: '#offer', force: true})"
+                :action="[
+                    () => $router.push({name: '/', hash: '#offer', force: true}),
+                    () => analytics.trackEvent('view-offer-clicked')()
+                ]"
             >
                 <span class="font-black font-mono mr-4">View Offer</span>
                 <SvgIcon name="diamond" class="h-8 inline" />
@@ -118,7 +119,7 @@ seo.allowIndex();
 
     <PageDivider id="how-it-works" title="How It Works"/>
     <div class="px-2">
-        <div class="flex justify-center items-center bg-primary text-base-100 p-4 rounded-btn text-center font-semibold text-xl w-fit mx-auto">
+        <div class="flex justify-center items-center bg-primary text-base-100 p-4 rounded-btn text-center font-semibold text-xl w-fit mx-auto shadow-xl">
             <p class="mx-4">👇</p>
             <p class="leading-tight">Build a product or service in <span class="whitespace-nowrap">9 simple steps!</span></p>
             <p class="mx-4">👇</p>
@@ -146,7 +147,6 @@ seo.allowIndex();
 
     <div class="sm:mb-24">
         <DiscoverMoreButton />
-        <!-- <ViewOfferButton /> -->
     </div>
 
     <!--
@@ -169,7 +169,14 @@ seo.allowIndex();
 
     <PageDivider id="founders-message" title="Founder's Message" />
     <TestimonialsLayout :testimonials="foundersMessage" />
-    <BuyNowButton :price="finalPrice" class="my-24" />
+
+    <div class="sm:mb-24">
+        <DiscoverMoreButton />
+        <!-- <ViewOfferButton hide-countdown />     -->
+        <BuyNowButton :price="finalPrice" />
+    </div>
+    
+    
 
     <!-- <PageEndSpacer/> -->
     <!-- <img src="../assets/images/money-back-guarantee-large.webp" alt="30-day money-back guarantee." class="mx-auto" /> -->

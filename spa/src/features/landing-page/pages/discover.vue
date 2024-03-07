@@ -21,7 +21,7 @@
         <LogoStamp show-title dark hide-subtitle/>
 
         <div
-            class="mt-2 mb-8 w-fit mx-auto fill-neutral text-neutral border-4 border-neutral/20 p-4 rounded-xl flex flex-col sm:grid sm:grid-cols-6 items-center"
+            class="mt-8 sm:mt-1 mb-8 w-fit mx-auto fill-neutral text-neutral border-4 border-neutral/20 p-4 rounded-xl flex flex-col sm:grid sm:grid-cols-6 items-center"
         >
             <SvgIcon name="typescript" class="w-auto h-12 mb-2 sm:mb-0 mx-auto" />
             <p class="text-center sm:text-left sm:col-span-5 max-w-sm font-semibold leading-snug">
@@ -43,11 +43,11 @@
             <KeyboardButton
                 background-colour="neutral"
                 foreground-colour="secondary"
-                :action="() => $router.push({name: '/', hash: '#how-it-works', force: true})"
+                :action="() => $router.push({name: '/', force: true})"
             >
                 <div class="flex justify-center items-center">
                     <span class="font-black font-mono mr-3">Home</span>
-                    <i class="fi fi-ss-home leading-none" />
+                    <SvgIcon name="home" class="h-8 inline" />
                 </div>
             </KeyboardButton>
             <KeyboardButton
@@ -73,10 +73,10 @@
     
     <PagePaddedWrapper class="pt-0 sm:pt-0">
         <div class="flex justify-center items-center bg-accent shadow-xl text-base-100 p-6 rounded-btn text-center font-semibold text-xl max-w-screen-sm mx-auto mb-14">
-            <p class="mx-4">👇🏿</p>
+            <p class="mx-4">👇</p>
             <!-- <p class="leading-tight">Here's how SaaS Chariot accelerates your <span class="whitespace-nowrap">time to market</span>, <span class="whitespace-nowrap">reduces engineering risk</span>, <span class="whitespace-nowrap">and <mark class="p-0.5">↑↑↑ your margins</mark></span>.</p> -->
             <p class="leading-tight">Here's how <span class="whitespace-nowrap">SaaS Chariot</span> accelerates your time to market, reduces engineering risk, and <mark class="p-0.5 whitespace-nowrap">↑↑↑ your margins</mark>.</p>
-            <p class="mx-4">👇🏿</p>
+            <p class="mx-4">👇</p>
         </div>
 
         <div class="max-w-screen-lg mx-auto">
