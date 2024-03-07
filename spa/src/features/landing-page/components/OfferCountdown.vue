@@ -1,19 +1,13 @@
 <script setup lang="ts">
-
 import Offer from "../types/offer";
-import createCountdownToNextDateByDayOfWeek from "../utilities/create-countdown-to-next-date-by-day-of-week";
-import configs from "@/configs";
-import { onMounted } from "vue";
+import { computed } from "vue";
+import countdown from "../libraries/offer-countdown"
 
 defineProps<{
     offer: Offer;
 }>();
 
-// initialise and start the countdown
-const countdown = createCountdownToNextDateByDayOfWeek("Friday", configs.contact.timeZone);
-onMounted(()=>{
-    countdown.begin();
-});
+const countdownDate = computed(()=>countdown.target.format("dddd Do of MMMM"))
 </script>
 
 <template>
@@ -21,8 +15,7 @@ onMounted(()=>{
             <!-- Countdown -->
             <div class="alert alert-error mx-auto mb-6 flex max-w-prose flex-col pb-5 pt-6 shadow-md">
                 <p class="max-w-[20rem] text-center font-bold">
-                    Prices scheduled to increase on
-                    {{ countdown.target.format("dddd Do of MMMM") }}.
+                    Prices scheduled to increase on {{ countdownDate }}.
                 </p>
                 <div class="text-red-800">
                     <p class="mb-2 text-center text-base font-bold sm:text-xl">Time till price update:</p>
@@ -49,9 +42,14 @@ onMounted(()=>{
 
             <div class="card card-compact mx-auto mb-6 max-w-prose bg-neutral text-primary shadow-md sm:card-normal sm:p-4">
                 <div class="card-body mx-2 my-4 sm:mx-0 sm:my-4 gap-8 sm:gap-12">
-                    <!-- description -->
-                    <div class="text-center text-sm sm:text-base leading-tight w-10/12 mx-auto">
-                        <p v-for="l in offer.descriptionParagraphs" class="mb-4">
+                    
+                    
+                    
+                    <div class="text-center w-10/12 mx-auto">
+                        <!-- title -->
+                        <p v-if="offer.title" class="font-bold mb-8 text-base sm:text-lg">{{ offer.title }}</p>
+                        <!-- description -->
+                        <p v-for="l in offer.descriptionParagraphs" class="mb-4 text-sm sm:text-base leading-none">
                             {{  l }}
                         </p>
                     </div>
