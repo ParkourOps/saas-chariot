@@ -1,15 +1,15 @@
-// Fonts:
-// @import url("../fonts/ShipporiMincho/font.css");
+/* Fonts: */
+/* @import url("../fonts/ShipporiMincho/font.css"); */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
 @import url("../fonts/SometypeMono/font.css");
 
-// Icons:
+/* Icons: */
 @import "../icons/packs/uicons-solid-straight/css/uicons-solid-straight.css";
 
-// Tailwind CSS:
+/* Tailwind CSS: */
 @import url("./tailwind.css");
 
-// Definition of classes independent of Tailwind CSS:
+/* Definition of classes independent of Tailwind CSS: */
 .no-select {
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -28,13 +28,18 @@
     font-variant: small-caps;
 }
 
-// Application of styles independent of Tailwind CSS:
-html {
-    // Disable select and drag by default for cleaner look and feel.
-    @extend .no-select;
-    @extend .no-drag;
+/* Global: */
+:root * {
     * {
+        /* Disable select and drag by default for cleaner look and feel. */
         @extend .no-select;
         @extend .no-drag;
+        /* Don't show outlines unless specifically defined. */
+        outline: none;
     }
+}
+
+/* always show vertical scrollbar */
+body {
+    overflow-y: scroll;
 }
