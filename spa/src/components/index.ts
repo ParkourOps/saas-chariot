@@ -23,6 +23,7 @@ import CenteredColumn from "./layouts/CenteredColumn.vue";
 import PageHeader from "./layouts/page/PageHeader.vue";
 import PageDivider from "./layouts/page/PageDivider.vue";
 import PagePaddedWrapper from "./layouts/page/PagePaddedWrapper.vue";
+import PageEndSpacer from "./layouts/page/PageEndSpacer.vue";
 import PageSlideInPanel from "./layouts/page/PageSlideInPanel.vue";
 // card
 import Card from "./layouts/card/Card.vue";
@@ -58,6 +59,7 @@ export function registerComponents(app: App) {
         .component("PageHeader", PageHeader)
         .component("PageDivider", PageDivider)
         .component("PagePaddedWrapper", PagePaddedWrapper)
+        .component("PageEndSpacer", PageEndSpacer)
         .component("PageSlideInPanel", PageSlideInPanel)
         // card
         .component("Card", Card)
@@ -92,6 +94,7 @@ declare module "vue" {
         PageHeader: typeof PageHeader;
         PageDivider: typeof PageDivider;
         PagePaddedWrapper: typeof PagePaddedWrapper;
+        PageEndSpacer: typeof PageEndSpacer;
         PageSlideInPanel: typeof PageSlideInPanel;
         // card
         Card: typeof Card;

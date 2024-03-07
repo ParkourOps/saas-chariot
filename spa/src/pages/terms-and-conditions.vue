@@ -9,4 +9,5 @@ import TermsAndConditions from "@/data/markdown/terms-and-conditions.mdx";
             <TermsAndConditions />
         </Markdown>
     </PagePaddedWrapper>
+    <PageEndSpacer/>
 </template>

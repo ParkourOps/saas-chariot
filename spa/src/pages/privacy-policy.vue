@@ -9,4 +9,5 @@ import PrivacyPolicy from "@/data/markdown/privacy-policy.mdx";
             <PrivacyPolicy />
         </Markdown>
     </PagePaddedWrapper>
+    <PageEndSpacer/>
 </template>

@@ -58,6 +58,7 @@ import { ref } from 'vue';
         </section>
     
     </PagePaddedWrapper>
+    <PageEndSpacer/>
 </template>
 
 <style scoped></style>

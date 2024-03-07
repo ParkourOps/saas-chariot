@@ -1,11 +1,13 @@
 <template>
-    <PagePaddedContent>
-        <div class="flex flex-col justify-center items-center">
-            <h1 class="text-2xl mb-8 text-center w-72 sm:w-auto font-light">
-                The resource you have requested does not exist.
-            </h1>
+    <PagePaddedWrapper>
+        <div class="flex flex-col justify-center items-center gap-6 my-6">
+            <h1 class="text-4xl text-center font-bold title">404</h1>
+            <h2 class="text-2xl text-center w-80 sm:w-auto font-light pb-5">
+                The resource you requested does not exist.
+            </h2>
             <Button variant="primary" size="lg" icon-left-class="fi fi-ss-home" :action="()=>$router.push({name:'/'})">Home</Button>
         </div>
         
-    </PagePaddedContent>
+    </PagePaddedWrapper>
+    <PageEndSpacer />
 </template>
