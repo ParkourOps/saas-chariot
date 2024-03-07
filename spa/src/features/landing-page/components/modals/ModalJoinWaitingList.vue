@@ -140,7 +140,7 @@ import type BusySpinnerVue from "@/components/indicators/BusySpinner.vue";
                 </template>
 
                 <template #error>
-                    <ModalActions>
+                    <ModalActions justify="centre">
                         <Button :action="()=>done()" size="lg" variant="ghost" label="Close" />
                     </ModalActions>
                 </template>
