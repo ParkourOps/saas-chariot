@@ -67,6 +67,9 @@ export default defineConfig({
                     "@/framework_features/seo": [
                         ["default", "seo"],
                     ],
+                    "@/framework_features/analytics": [
+                        "useAnalytics"
+                    ]
                 },
                 // unheadVueComposablesImports,
             ],
