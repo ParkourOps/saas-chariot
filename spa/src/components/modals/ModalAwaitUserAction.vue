@@ -1,13 +1,14 @@
 <script setup lang="ts">
     import { onMounted } from "vue";
     import { useIndicators } from "@/state/indicators";
+import type { Action } from "@/types";
 
     const indicators = useIndicators();
 
     const props = defineProps<{
         title?: string;
         instruction: string;
-        action?: (() => void | (()=>Promise<void>));
+        action?: Action | Action[];
     }>();
 
     onMounted(async ()=>{
@@ -15,7 +16,13 @@
             return;
         }
         const token = indicators.registerPendingAction();
-        await props.action;
+        if (Array.isArray(props.action)) {
+            for (const p of props.action) {
+                await p();
+            }
+        } else {
+            await props.action();
+        }
         token.unregisterPendingAction();
     });
 </script>
