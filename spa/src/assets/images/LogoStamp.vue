@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import configs from "@/configs";
 import { computed } from "vue";
-import logoSymbolDark from "./logo-symbol-base-100.png";
-import logoSymbolLight from "./logo-symbol-secondary.png";
+import logoSymbolDark from "./logo-symbol-base-100.webp";
+import logoSymbolLight from "./logo-symbol-secondary.webp";
 
 const props = defineProps<{
     dark?: boolean
@@ -24,7 +24,7 @@ const imgSrc = computed(()=>{
         {'text-base-100' : dark},
         {'text-secondary': !dark}
     ]">
-        <img :src="imgSrc" :alt="configs.application.title" height="100" width="182" class="mb-1" />
+        <img :src="imgSrc" :alt="configs.application.title" class="mb-1" width="182" height="100" />
         <p v-if="!hideTitle" class="text-center text-2xl font-black tracking-wide font-serif">
             {{ configs.application.title }}
         </p>
