@@ -8,7 +8,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Apply Tailwind CSS styles: */
 
 /* Always smooth scroll: */
@@ -16,23 +15,11 @@ html {
     @apply scroll-smooth;
 }
 
-/* Adjust font (family) kerning: */
-/* @at-root {
-    .font-mono {
-        @apply font-mono tracking-tighter sm:tracking-tight;
-    }
-} */
-
-/* Set default font (family) and style: */
+/* Set default style: */
 html {
     @apply font-mono;
+    @apply fill-primary;
     
-    .title {
-        @apply font-serif font-bold;
-    }
-
-    .subtitle,
-    .heading,
     h1,
     h2,
     h3,
