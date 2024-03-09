@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["tailwind.config.ts", "env.d.ts", "mdx.d.ts", "src/**/*.ts", "src/**/*.vue", "src/**/*.mdx", "auto-imports.d.ts", "typed-router.d.ts"],
+  "include": ["tailwind.config.ts", "env.d.ts", "mdx.d.ts", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.mdx", "auto-imports.d.ts", "typed-router.d.ts"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "jsx": "preserve",
