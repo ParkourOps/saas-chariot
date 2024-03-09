@@ -5,7 +5,7 @@
             <h2 class="text-2xl text-center w-80 sm:w-auto font-light pb-5">
                 The resource you requested does not exist.
             </h2>
-            <Button variant="primary" size="lg" icon-left-class="fi fi-ss-home" :action="()=>$router.push({name:'/'})">Home</Button>
+            <Button variant="primary" size="lg" icon-left="fi-ss-home" :action="()=>$router.push({name:'/'})">Home</Button>
         </div>
         
     </PagePaddedWrapper>

@@ -76,32 +76,28 @@ async function sendMessage(done: () => void) {
 </script>
 
 <template>
-    <Modal>
+<Modal>
         <template #default="{ done }">
-            <ModalHeader title="Get in Touch" icon-class="fi fi-ss-envelope" />
+            <ModalHeader title="Get in Touch" icon="fi-ss-envelope" />
 
             <div class="flex flex-col gap-4">
-                <InputWrap label="Email" align="start" label-class="text-sm sm:text-base">
+                <InputWrap label="Email" align="start">
                     <InputTextBox name="email" autocomplete="email" class="w-full" :schema="EmailAddress" v-model:valid="emailValid" v-model="email" :disabled="!!userProfile.document" />
                 </InputWrap>
 
-                <InputWrap label="Subject" align="start" label-class="text-sm sm:text-base">
+                <InputWrap label="Subject" align="start">
                     <InputTextBox name="subject" autocomplete="off" class="w-full" :schema="NonEmptyString" v-model:valid="subjectValid" v-model="subject" />
                 </InputWrap>
 
-                <InputWrap label="Message" align="start" label-class="text-sm sm:text-base">
+                <InputWrap label="Message" align="start">
                     <InputTextArea name="message" class="w-full" :schema="NonEmptyString" v-model:valid="messageValid" v-model="message" :rows="10" />
                 </InputWrap>
             </div>
 
             <ModalActions>
-                <button class="btn" @click="done">Cancel</button>
-                <button class="btn btn-primary" @click="sendMessage(done)" :disabled="!valid">
-                    <i class="fi fi-ss-paper-plane" />
-                    Send
-                </button>
+                <Button :action="()=>done()" label="Cancel" />
+                <Button variant="primary" :action="()=>sendMessage(done)" :disabled="!valid" icon-left="fi-ss-paper-plane" label="Send" />
             </ModalActions>
         </template>
     </Modal>
 </template>
-@/framework_features/email-messaging

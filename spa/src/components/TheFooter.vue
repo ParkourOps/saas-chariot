@@ -29,7 +29,7 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
                 {{ configs.contact.company.name }}
             </p>
             <div v-else class="mb-2 inline-flex flex-row items-center text-base sm:mb-4 sm:text-sm sm:font-semibold lg:mb-2 lg:text-base lg:font-normal">
-                <i class="fi fi-ss-home mr-2"></i>
+                <SvgIcon name="fi-ss-home" class="mr-2 h-4" />
                 Address
             </div>
             <p v-if="configs.contact?.company?.number" class="-mt-1 mb-1 opacity-70">Company # {{ configs.contact.company.number }}</p>
@@ -44,6 +44,7 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
                 <div class="collapse-title min-h-0 rounded-box py-2 font-semibold sm:rounded-b-none sm:after:text-transparent">
                     <div class="flex flex-row items-center justify-center text-sm">
                         <i class="fi fi-ss-clock mr-2"></i>
+                        <SvgIcon name="" />
                         <span class="hidden sm:inline-block">Office Hours</span>
                         <span class="sm:hidden">View Office Hours</span>
                     </div>
@@ -243,7 +244,7 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
             :class="[{ 'sm:col-start-1': configs.contact.officeHours }, { 'sm:col-start-2': !configs.contact.officeHours }]"
         >
             <p v-if="configs.contact?.phone && props.showPhone">
-                <i class="fi fi-ss-phone-rotary"></i>
+                <i class="fi "></i>
                 {{ configs.contact.phone }}
             </p>
             <p v-if="configs.contact?.email && props.showEmail === 'text'">
@@ -252,7 +253,7 @@ function getFormattedTimeForNextDateByDayOfWeek(dayOfWeek: DayOfWeek, hours: num
             </p>
             <Button 
                 v-if="configs.contact?.email && props.showEmail === 'button'" 
-                icon-left-class="fi fi-ss-envelope"
+                icon-left="fi-ss-envelope"
                 label="Get in Touch"
                 variant="secondary"
                 :action="() => $showModal(() => import('./modals/ModalContactForm.vue'), {})"

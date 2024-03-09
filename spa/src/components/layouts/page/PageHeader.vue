@@ -12,7 +12,7 @@ type PathSegment = {
 type PageAction = {
     label: string;
     action: (...args: unknown[]) => unknown | Promise<unknown>;
-    iconClass?: string;
+    icon?: string;
     main?: boolean;
 };
 
@@ -78,7 +78,7 @@ const backSegment = computed(() => {
             </div>
             <div class="mt-4 flex flex-shrink-0 flex-wrap gap-3 md:ml-4 md:mt-0 md:gap-4" v-if="actions">
                 <button v-for="(action, actionIdx) in actions" :key="`page-action-${actionIdx}`" class="btn btn-sm shadow-sm sm:btn-md" :class="[{ 'bg-white hover:bg-gray-50': !action.main }, { 'btn-primary': action.main }]">
-                    <i v-if="action.iconClass" :class="action.iconClass" />
+                    <SvgIcon v-if="action.icon" :name="action.icon" />
                     {{ action.label }}
                 </button>
             </div>

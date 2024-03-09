@@ -49,7 +49,7 @@
             >
                 <div class="flex justify-center items-center">
                     <span class="font-black font-mono mr-3">Home</span>
-                    <SvgIcon name="home" class="h-8 inline" />
+                    <SvgIcon name="home" class="h-8" />
                 </div>
             </KeyboardButton>
             <KeyboardButton
@@ -58,7 +58,7 @@
                 :action="() => $router.push({name: '/', hash: '#offer', force: true})"
             >
                 <span class="font-black font-mono mr-3">View Offer</span>
-                <SvgIcon name="diamond" class="h-8 inline" />
+                <SvgIcon name="diamond" class="h-8" />
             </KeyboardButton>
         </div>
         

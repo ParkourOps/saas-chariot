@@ -20,8 +20,8 @@ const indicators = useIndicators();
         action?: Action | Action[],
         variant?: ControlVariant | "ghost" | "link" | "glass",
         label?: string,
-        iconLeftClass?: string | string[]
-        iconRightClass?: string | string[]
+        iconLeft?: string,
+        iconRight?: string,
     }>();
 
     const _loading = ref(false);
@@ -52,36 +52,48 @@ const indicators = useIndicators();
 <template>
     <button
         :name="name"
-        class="btn"
+        class="btn leading-none"
         :disabled="_disabled"
         :class="[
             {'btn-xs': size === 'xs'},
             {'btn-sm': size === 'sm'},
-            {'btn-md': size === 'md'},
+            {'btn-md': !size || (size === 'md')},
             {'btn-lg': size === 'lg'},
             {'btn-square': shape === 'square'},
             {'btn-circle': shape === 'circle'},
             {'btn-outline': outline},
             {'btn-block': block},
-            {'btn-neutral': variant === 'neutral'},
-            {'btn-primary': variant === 'primary'},
-            {'btn-secondary': variant === 'secondary'},
-            {'btn-accent': variant === 'accent'},
-            {'btn-info': variant === 'info'},
-            {'btn-success': variant === 'success'},
-            {'btn-warning': variant === 'warning'},
-            {'btn-error': variant === 'error'},
-            {'btn-ghost': variant === 'ghost'},
-            {'btn-link': variant === 'link'},
+            {'btn-neutral fill-neutral-content': variant === 'neutral'},
+            {'btn-primary fill-primary-content': variant === 'primary'},
+            {'btn-secondary fill-secondary-content': variant === 'secondary'},
+            {'btn-accent fill-accent-content': variant === 'accent'},
+            {'btn-info fill-info-content': variant === 'info'},
+            {'btn-success fill-success-content': variant === 'success'},
+            {'btn-warning fill-warning-content': variant === 'warning'},
+            {'btn-error fill-error-content': variant === 'error'},
+            {'btn-ghost fill-primary': variant === 'ghost'},
+            {'btn-link fill-primary': variant === 'link'},
             {'glass': variant === 'glass'},
         ]"
         @click.prevent.stop="handleAction"
     >
         <span class="loading loading-spinner mr-2" v-if="_loading"></span>
-        <i :class="iconLeftClass" v-if="iconLeftClass" />
+        <SvgIcon v-if="iconLeft" :name="iconLeft" class="mr-2" :class="[
+            {'h-2': size === 'xs'},
+            {'h-3': size === 'sm'},
+            {'h-4': !size || (size === 'md')},
+            {'h-6': size === 'lg'},
+            {'fill-primary/10': disabled}
+        ]"/>
         <slot>
             {{ label }}
         </slot>
-        <i :class="iconRightClass" v-if="iconRightClass" />
+        <SvgIcon v-if="iconRight" :name="iconRight" class="ml-2" :class="[
+            {'h-2': size === 'xs'},
+            {'h-3': size === 'sm'},
+            {'h-4': !size || (size === 'md')},
+            {'h-6': size === 'lg'},
+            {'fill-primary/10': disabled}
+        ]"/>
     </button>
 </template>

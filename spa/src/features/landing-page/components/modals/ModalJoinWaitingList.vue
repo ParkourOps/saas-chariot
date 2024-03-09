@@ -103,7 +103,7 @@ import type BusySpinnerVue from "@/components/indicators/BusySpinner.vue";
                             Please join the waiting list.
                         </p>
 
-                        <InputWrap label="Email" horizontal-align="centre" icon-left="fi fi-ss-envelope" width="md">
+                        <InputWrap label="Email" horizontal-align="centre" icon-left="fi-ss-envelope" width="md">
                             <InputTextBox
                                 block
                                 name="email"
@@ -130,7 +130,7 @@ import type BusySpinnerVue from "@/components/indicators/BusySpinner.vue";
 
                         <ModalActions justify="space-between">
                             <Button :action="()=>done()" size="lg" variant="ghost" label="Cancel" />
-                            <Button :action="()=>sendLink(done, title, thumbnails?.[0])" :disabled="!emailValid" size="lg" variant="primary" icon-left-class="fi fi-ss-square-plus" label="Join" />
+                            <Button :action="()=>sendLink(done, title, thumbnails?.[0])" :disabled="!emailValid" size="lg" variant="primary" icon-left="fi-ss-square-plus" label="Join" />
                         </ModalActions>
                     </div>             
                 </template>

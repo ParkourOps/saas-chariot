@@ -45,6 +45,7 @@ export default defineConfig({
         }),
         // disableAttributeInheritance(true),
         vue(),
+        svgLoader(),
         vueJsx({}),
         mdx({
             jsxImportSource: "vue",
@@ -74,7 +75,6 @@ export default defineConfig({
                 // unheadVueComposablesImports,
             ],
         }),
-        svgLoader()
     ],
     resolve: {
         alias: {
