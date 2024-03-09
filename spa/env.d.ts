@@ -1,6 +1,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
+    // Site Title (before SEO plugin kicks in)
+    readonly VITE_DEFAULT_TITLE: string
     // Firebase
     readonly VITE_FIREBASE_API_KEY: string
     readonly VITE_FIREBASE_AUTH_DOMAIN: string
